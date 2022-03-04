@@ -31,9 +31,9 @@ void assert_failed(const uint8_t* expr, const uint8_t* file, uint32_t line)
  */
 int main(void)
 {
-    float tweithValue;
+   
     uint8_t keydata;
-	static uint8_t pwr=0;
+	
 	/*SystemInit() function has been called by startup file startup_n32l40x.s*/
 
 	 //  SetSysClockToHSI();
@@ -62,7 +62,9 @@ int main(void)
     {
 		// tweithValue= Sensor_Read();//GetHX720Data();//HX711_Read()	;//Sensor_Read(void)
         Get_Weight();
-		Weigt_DisSmg(Weight_Real) ;
+		//HX720_Buffer= Sensor_Read();//GetHX720Data();
+		//HX720_Buffer=GetHX720Data();
+		Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 		//LED_Fun();
 	  //GetHX720Data();
 	

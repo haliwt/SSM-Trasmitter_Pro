@@ -2,7 +2,7 @@
 
 #define HX720_CLK_H()   (GPIO_SetBits(CLK_GPIO,CLK))
 #define HX720_CLK_L()   (GPIO_ResetBits(CLK_GPIO,CLK))
-#define GetDataPinState()    (GPIO_ReadInputDataBit(GPIOA,DATA))
+#define GetDataPinState()    (GPIO_ReadInputDataBit(DATA_GPIO,DATA))
 
 uint8_t HX720_ReadDataFlag=0;
 
@@ -60,7 +60,7 @@ void Sensor_Init(void)
 	GPIO_InitStructure.Pin = DATA;	
 	GPIO_InitStructure.Pin = GPIO_Mode_Input;//GPIO_Mode_IN_FLOATING;
 	GPIO_InitStructure.GPIO_Current = GPIO_DC_4mA; 
-	GPIO_InitPeripheral(GPIOA,&GPIO_InitStructure);
+	GPIO_InitPeripheral(DATA_GPIO,&GPIO_InitStructure);
 
 }
 
@@ -76,15 +76,15 @@ uint32_t Sensor_Read(void)
 	
 	//为了等待输出电平稳定
 	//在每次一操作电平时加微小延时
-	SysTick_Delay_us(1);//delay_us(2);
+	SysTick_Delay_us(2);//delay_us(2);
 	
 	//时钟线拉低 空闲时时钟线保持低电位
 	 GPIO_ResetBits(CLK_GPIO, CLK); //1//GPIO_ResetBits(Sensor_Gpio,CLK);
 	
-	SysTick_Delay_us(1);//delay_us(2);	
+	SysTick_Delay_us(2);//delay_us(2);	
 	
 	//等待AD转换结束
-	while(GPIO_ReadInputDataBit(GPIOA,DATA));
+	while(GPIO_ReadInputDataBit(DATA_GPIO,DATA));
 	
 	for(i=0;i<24;i++)
 	{
@@ -99,10 +99,10 @@ uint32_t Sensor_Read(void)
 		//时钟线拉低
 		GPIO_ResetBits(CLK_GPIO,CLK);
 		
-		SysTick_Delay_us(1);//delay_us(2);
+		SysTick_Delay_us(2);//delay_us(2);
 		
 		//读取一位数据
-		if(GPIO_ReadInputDataBit(GPIOA,DATA))
+		if(GPIO_ReadInputDataBit(DATA_GPIO,DATA))
 			value ++;
 	}
 	
@@ -241,13 +241,13 @@ unsigned long HX711_Read(void)	//??128
 	unsigned char i = 0; 
 
 	//DATA
-	while(GPIO_ReadInputDataBit(GPIOA,DATA));
+	while(GPIO_ReadInputDataBit(DATA_GPIO,DATA));
 	
 	SysTick_Delay_us(1);
 	//sck ??
 	GPIO_ResetBits(CLK_GPIO,CLK);
 	//read data 
-	while(!GPIO_ReadInputDataBit(GPIOA,DATA));
+	while(!GPIO_ReadInputDataBit(DATA_GPIO,DATA));
 	
 	
   
@@ -258,7 +258,7 @@ unsigned long HX711_Read(void)	//??128
 		val=val<<1; 
 		SysTick_Delay_us(1);//delay_us(1);  
 		GPIO_ResetBits(CLK_GPIO,CLK);	   
-		if(GPIO_ReadInputDataBit(GPIOA,DATA))  //
+		if(GPIO_ReadInputDataBit(DATA_GPIO,DATA))  //
 		val++; 
 		SysTick_Delay_us(1);//delay_us(1); 
 	} 

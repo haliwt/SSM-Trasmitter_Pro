@@ -2,9 +2,10 @@
 #define __HX720_H_
 #include "main.h"
 
-#define CLK_GPIO   GPIOB 
+#define CLK_GPIO   			GPIOB 
+#define DATA_GPIO     		GPIOB
 
-#define DATA      GPIO_PIN_0  //input Port
+#define DATA      GPIO_PIN_9  //input Port
 #define CLK       GPIO_PIN_0 //Output  Port
 
 extern int8_t  No_Load_Flag;

@@ -68,7 +68,7 @@ void TIM1_NVIC_Configuration(void)
 
     NVIC_Init(&NVIC_InitStructure);
 }
-#if 1
+#if 0
 /**
  * @brief  Configure the GPIO Pins.
  */

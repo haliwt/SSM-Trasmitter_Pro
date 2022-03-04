@@ -8,13 +8,13 @@
 #define LED1_PORT   		PORT_GROUP2
 #define LED2_PORT   		PORT_GROUP2
 #define LED3_PORT   		PORT_GROUP2
-#define LED4_PORT   		PORT_GROUP2
+//#define LED4_PORT   		PORT_GROUP2
 
 
 #define LED1_PIN    		GPIO_PIN_6
 #define LED2_PIN    		GPIO_PIN_7
 #define LED3_PIN    		GPIO_PIN_8
-#define LED4_PIN    		GPIO_PIN_9
+//#define LED4_PIN    		GPIO_PIN_9
 
 
 

@@ -2,7 +2,7 @@
 #define __TIM_H_
 #include "main.h"
 
-void GPIO_Configuration(void);
+//void GPIO_Configuration(void);
 
 void Timer1_Configuration(void);
 
