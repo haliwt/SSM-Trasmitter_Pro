@@ -145,7 +145,7 @@ void DMA_IRQ_HANDLER(void)
  */
 void TIM1_UP_IRQHandler(void)
 {
-    static uint32_t i;
+    static uint32_t i,k;
     
     if (TIM_GetIntStatus(TIM1, TIM_INT_UPDATE) != RESET)
     {
@@ -157,7 +157,17 @@ void TIM1_UP_IRQHandler(void)
             i++;
             if(i>999){ //1s
                 i=0;
+				k++;
                 key_t.keyTimes_2s++;
+				if(k>10){
+					//LED_Fun();
+					k=0;
+					//Weigt_DisSmg( HX720_Buffer) ;
+					//key_t.keyTimes=0;
+					//HX720_ReadDataFlag=0;
+					//HX720_Buffer=GetHX720Data();
+				}
+		        
             }
            
            

@@ -31,8 +31,9 @@ void assert_failed(const uint8_t* expr, const uint8_t* file, uint32_t line)
  */
 int main(void)
 {
-    float weithValue;
+    float tweithValue;
     uint8_t keydata;
+	static uint8_t pwr=0;
 	/*SystemInit() function has been called by startup file startup_n32l40x.s*/
 
 	 //  SetSysClockToHSI();
@@ -40,15 +41,15 @@ int main(void)
 	
 	SetSysClockToPLL(8000000, SYSCLK_PLLSRC_HSIDIV2_PLLDIV2);
     //DumpClock("HSI/2->PLL/2, 8M");
-	 RCC_EnableClockSecuritySystem(ENABLE);
+	// RCC_EnableClockSecuritySystem(ENABLE);
 	
 	RCC_Configuration();
     /* Initialize Led1~Led2 as output pushpull mode*/
-	Sensor_Init();
+	  Sensor_Init();
 	  LED_Init();
      GPIO_OutputInit(I2C_SCL_PORT, I2C_SCL_PIN);
      GPIO_OutputInit(I2C_SDA_PORT, I2C_SDA_PIN);
-	 GPIO_OutputInit(GPIOA ,CLK);
+	 
 	  Timer1_Configuration();
 	   
 	 
@@ -56,24 +57,15 @@ int main(void)
 	  
 	  TIM1_NVIC_Configuration();
 	  GetKeyValua_Init();
-	
+	HX720_ReadDataFlag=0;
     while (1)
     {
-     //  LED_Fun();
-		
-		//GPIO_SetBits(GPIOA,CLK);
-		//GPIO_SetHigh(GPIOA,CLK);
-		
-	#if 1
-		//if(run_t.dispCmd == 0){
-           weithValue = Get_Maopi();//Get_Weight();
-            Weigt_DisSmg( weithValue) ;
-		    SysTick_Delay_Ms(2000);
-		    SmgDis_TurnOff_ALl();
-		    SysTick_Delay_Ms(500);
-		   
-        //}
-	#endif 
+		// tweithValue= Sensor_Read();//GetHX720Data();//HX711_Read()	;//Sensor_Read(void)
+        Get_Weight();
+		Weigt_DisSmg(Weight_Real) ;
+		//LED_Fun();
+	  //GetHX720Data();
+	
 	#if 0
 		keydata = ScanKey();
 			 if(keydata == 0xff)keydata=0;

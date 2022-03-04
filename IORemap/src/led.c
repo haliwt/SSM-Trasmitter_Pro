@@ -53,6 +53,7 @@ void LED_Init(void)
 	 GPIO_InitType GPIO_InitStructure;
 
 	 GPIO_InitStruct(&GPIO_InitStructure);
+	  RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
     /* GPIOC Configuration:Pin6, 7, 8 and 9 as alternate function push-pull */
     GPIO_InitStructure.Pin        = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9;
 	 GPIO_InitStructure.GPIO_Pull    = GPIO_Pull_Up;//GPIO_No_Pull;
@@ -67,12 +68,12 @@ void LED_Fun(void)
 {
   LedOn(GPIOB, GPIO_PIN_6);
   LedOn(GPIOB, GPIO_PIN_7);
-  SysTick_Delay_Ms(500);
+  SysTick_Delay_Ms(1000);
 	//SysTick_Delay_us(5000);
   LedOff(GPIOB, GPIO_PIN_6);
   LedOff(GPIOB, GPIO_PIN_7);
 	 // Delay(0x28FFFF);
-   SysTick_Delay_Ms(500);
+   SysTick_Delay_Ms(1000);
 	//SysTick_Delay_us(5000);
 
 }

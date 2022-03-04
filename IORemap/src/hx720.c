@@ -1,6 +1,11 @@
 #include "hx720.h"
 
-unsigned long HX711_Read(void);	//??128
+#define HX720_CLK_H()   (GPIO_SetBits(CLK_GPIO,CLK))
+#define HX720_CLK_L()   (GPIO_ResetBits(CLK_GPIO,CLK))
+#define GetDataPinState()    (GPIO_ReadInputDataBit(GPIOA,DATA))
+
+uint8_t HX720_ReadDataFlag=0;
+
 static uint32_t getIndexOfStings(char ch);
 static long hexToDec(char *source);
 //所用压力传感器型号：	HX711
@@ -31,23 +36,24 @@ int8_t  No_Load_Flag;
 
 float Get_Maopi(void);
 
+
+
 void Sensor_Init(void)
 {
     GPIO_InitType GPIO_InitStructure;
 	
 	RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
-	//RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
+	RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
     
     //output CLK
 	GPIO_InitStruct(&GPIO_InitStructure);
     /* GPIOC Configuration:Pin6, 7, 8 and 9 as alternate function push-pull */
     GPIO_InitStructure.Pin        = CLK;
-	//GPIO_InitStructure.GPIO_Pull    = GPIO_Pull_Up;//GPIO_No_Pull;
-    GPIO_InitStructure.Pin  = GPIO_Mode_Out_OD;//GPIO_Mode_Out_PP;
-	//GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_Current = GPIO_DC_4mA;
+	GPIO_InitStructure.GPIO_Pull    = GPIO_Pull_Up;//GPIO_No_Pull;
+    GPIO_InitStructure.Pin  = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Current = GPIO_DC_8mA;
 
-    GPIO_InitPeripheral(GPIOA, &GPIO_InitStructure);
+    GPIO_InitPeripheral(CLK_GPIO, &GPIO_InitStructure);
 	
 	
 	//数据线浮空输入
@@ -65,17 +71,17 @@ uint32_t Sensor_Read(void)
 	
 	//每次读取数据前保证数据线电平稳定
 	//此处只是为了稳定电平 拉高或拉低效果相同
-//	GPIO_ResetBits(Sensor_Gpio,DATA);
-	GPIO_SetBits(GPIOA,DATA);
+	//GPIO_ResetBits(Sensor_Gpio,DATA);
+	//GPIO_SetBits(GPIOA,DATA);
 	
 	//为了等待输出电平稳定
 	//在每次一操作电平时加微小延时
-	//SysTick_Delay_us(2);//delay_us(2);
+	SysTick_Delay_us(1);//delay_us(2);
 	
 	//时钟线拉低 空闲时时钟线保持低电位
-	 GPIO_ResetBits(GPIOA, CLK); //1//GPIO_ResetBits(Sensor_Gpio,CLK);
+	 GPIO_ResetBits(CLK_GPIO, CLK); //1//GPIO_ResetBits(Sensor_Gpio,CLK);
 	
-	SysTick_Delay_us(2);//delay_us(2);	
+	SysTick_Delay_us(1);//delay_us(2);	
 	
 	//等待AD转换结束
 	while(GPIO_ReadInputDataBit(GPIOA,DATA));
@@ -83,17 +89,17 @@ uint32_t Sensor_Read(void)
 	for(i=0;i<24;i++)
 	{
 		//时钟线拉高 开始发送时钟脉冲
-		GPIO_SetBits(GPIOA,CLK);
+		GPIO_SetBits(CLK_GPIO,CLK);
 		
-		SysTick_Delay_us(2);//delay_us(2);
+		SysTick_Delay_us(1);//delay_us(2);
 		
 		//左移位 右侧补零 等待接收数据
 		value = value << 1;
 		
 		//时钟线拉低
-		GPIO_ResetBits(GPIOA,CLK);
+		GPIO_ResetBits(CLK_GPIO,CLK);
 		
-		SysTick_Delay_us(2);//delay_us(2);
+		SysTick_Delay_us(1);//delay_us(2);
 		
 		//读取一位数据
 		if(GPIO_ReadInputDataBit(GPIOA,DATA))
@@ -101,9 +107,9 @@ uint32_t Sensor_Read(void)
 	}
 	
 	//第25个脉冲
-	GPIO_SetBits(GPIOA,CLK);
+	GPIO_SetBits(CLK_GPIO,CLK);
 	
-	SysTick_Delay_us(2);//delay_us(2);
+	//SysTick_Delay_us(2);//delay_us(2);
 
 	//第25个脉冲下降沿到来时 转换数据
 	//此处说明：
@@ -129,12 +135,13 @@ uint32_t Sensor_Read(void)
 	//			这样数据会一直往上增长 
 	//			我们可以直接拿来进行使用
 	value = value^0x800000;
-//	value = value&0x7FFFFF;
-	value = value >> 2; 
+	//value = value&0x7FFFFF;
+	value = value >> 8; 
 	//第25个脉冲结束
-	GPIO_ResetBits(GPIOA,CLK);
+	GPIO_ResetBits(CLK_GPIO,CLK);
 	
-	SysTick_Delay_us(2);//delay_us(2);
+	//SysTick_Delay_us(2);//delay_us(2);
+	//HX720_ReadDataFlag=1;
 	
 	return value;
 
@@ -143,17 +150,20 @@ uint32_t Sensor_Read(void)
 
 void Get_No_Lode(void)
 {
-	HX720_Buffer = Sensor_Read();
+	//HX720_Buffer = Sensor_Read();
 	
 	Weight_No_Lode = HX720_Buffer;
+	
 	
 	No_Load_Flag = 1;
 }
 
 float Get_Weight(void)
 {
-	//HX720_Buffer = Sensor_Read();
-	HX720_Buffer=  HX711_Read();	//??128
+	HX720_Buffer = Sensor_Read();
+	//HX720_Buffer=  HX711_Read();	//??128
+	
+	//HX720_Buffer= GetHX720Data();
 	
 	Weight_Lode = HX720_Buffer;
 		
@@ -176,134 +186,47 @@ float Get_Weight(void)
 
 void Weigt_DisSmg(float weightValue) 
 {
-	static uint8_t tenthousand_bit,thousand_bit,hundred_bit,ten_bit,unit_bit,decimals_bit; 
+	
 	
 	uint32_t unitPlace,tenPlace,hundredPlace,thousandPlace,tenthousandPlace;
-    uint32_t DecValue_high,DecValue_low,DecValue_total;
-	
-	char temp1,temp2;
-	uint8_t bithigh,bitlow;
-	char *pchar_h,*pchar_l;
-	
-	uint32_t  temp;// =0xabcd,
-	
-	temp = (uint32_t)weightValue;
-	
-	
-	
-	
-	bithigh=temp>>8; //0xab
-	
-	bitlow= temp & 0x00FF; //0xcd
-	
-	temp1 = (char)bithigh;
-	temp2 = (char)bitlow;
-	
-	
-	
-	pchar_h = &temp1;
-	pchar_l = &temp2;
-	
 
-	
-	//char *pinter ;
-	
-	
-	
-	#if 0
-	if(weightValue < 1){
-		weightValue = weightValue *100;
-		if(weightValue >= 1) {
-			unitPlace =(uint32_t)(weightValue/1)%10; 
-			tenPlace =(uint32_t)(weightValue/10)%10;
-			hundred_bit = 0;
-		    decimals_bit = 0x0A; //decimals point
-			
-			SmgDisplay(digital_1,0x0b); //"NULL"
-	        SmgDisplay(digital_2,0x0b);// NULL
-			SmgDisplay(digital_3,hundred_bit);  //'0'
-			SmgDisplay(digital_3,decimals_bit); //'.'
-			SmgDisplay(digital_4,ten_bit);
-			SmgDisplay(digital_5,unit_bit);
-		}
-		else{
-		
-		    SmgDisplay(digital_1,0x0b); //"NULL"
-	        SmgDisplay(digital_2,0x0b);// NULL
-			SmgDisplay(digital_3,0x0b);  //NULL
-			//SmgDisplay(digital_3,decimals_bit); //NULL
-			SmgDisplay(digital_4,0x0b);  //NULL
-			SmgDisplay(digital_5,0);
-		
-		}
-		
-		// unitPlace =(float)((((weightValue + 0.05)*10))/10);
-	
-	}
-    else{
-	#endif 
-	
-	  DecValue_high = hexToDec(pchar_h);
-	  DecValue_low = hexToDec(pchar_l);
-	  
-	  DecValue_total = DecValue_high *256 + DecValue_low;
 	 
 	  
-	//  DecValue = 20;
+	 tenthousandPlace =(uint32_t) (weightValue/10000);
+	 
+	 thousandPlace =(uint32_t) (weightValue /1000)%10;//(weightValue/1000)%10;
 	  
-	 unitPlace =(uint32_t) (DecValue_total/1)%10; 
-	
-	 tenPlace =(uint32_t)(DecValue_total/10)%10;
-
-	 hundredPlace =(uint32_t) (DecValue_total/100)%10;
-	 thousandPlace =(uint32_t) (DecValue_total/1000)%10;
-	 tenthousandPlace =(uint32_t) (DecValue_total/10000)%10;
+	 hundredPlace =(uint32_t) (weightValue/100)%10;
+	 
+	 tenPlace =(uint32_t)(weightValue/10)%10;
+	 
+	 unitPlace =(uint32_t) (weightValue/1)%10; 
 	 
 	 
 	 
 	  
 	 if(tenthousandPlace == 0){ 
-		tenthousand_bit = 0x0b;
+		tenthousandPlace  = 0x0b;
 	  }
-     else{
-	  
-	   tenthousand_bit =tenthousandPlace;
-	 }	 
-      
-		 
-	 	
-	 if(thousandPlace ==0){
-		 if(tenthousand_bit==0x0b)
-		    thousand_bit = 0x0b;
+     else if(thousandPlace ==0){
+		 if(tenthousandPlace ==0x0b)
+		   thousandPlace = 0x0b;
 	 }
-	 else{
-		thousand_bit=thousandPlace;
+	else if(hundredPlace ==0){
+		  if(thousandPlace ==0x0b)
+		      hundredPlace = 0x0b;
+	}
+	else if(tenPlace ==0){
+		  if( hundredPlace == 0x0b)
+		     tenPlace =0x0b;
 	 }
+	
 	  
-	 if(hundredPlace ==0){
-		  if(thousand_bit ==0x0b)
-		      hundred_bit = 0x0b;
-	  }
-	  else{
-	  
-	     hundred_bit =hundredPlace;
-	  }
-	  
-	  if(tenPlace ==0){
-		  if( hundred_bit == 0x0b)
-		     ten_bit =0x0b;
-	  }
-	  else ten_bit =tenPlace;
-	  
-	   unit_bit=unitPlace;
-	   
-	  
-	  
-	   SmgDisplay(digital_1,tenthousand_bit); //"F"
-	   SmgDisplay(digital_2,thousand_bit);//'1'
-	   SmgDisplay(digital_3,hundred_bit);
-	   SmgDisplay(digital_4,ten_bit);
-	   SmgDisplay(digital_5,unit_bit);
+	   SmgDisplay(digital_1,tenthousandPlace); //"10000"
+	   SmgDisplay(digital_2,thousandPlace);//'1000'
+	   SmgDisplay(digital_3,hundredPlace); //
+	   SmgDisplay(digital_4,tenPlace);
+	   SmgDisplay(digital_5,unitPlace);
  }
 	
 
@@ -320,32 +243,34 @@ unsigned long HX711_Read(void)	//??128
 	//DATA
 	while(GPIO_ReadInputDataBit(GPIOA,DATA));
 	
-	SysTick_Delay_Ms(1);
+	SysTick_Delay_us(1);
 	//sck ??
-	GPIO_ResetBits(GPIOA,CLK);
+	GPIO_ResetBits(CLK_GPIO,CLK);
 	//read data 
-	//while(!GPIO_ReadInputDataBit(GPIOA,DATA)){
+	while(!GPIO_ReadInputDataBit(GPIOA,DATA));
 	
-		//LED_Fun();
 	
-	//};
   
 	for(i=0;i<24;i++) 
 	{ 
-		SysTick_Delay_Ms(100);//delay_us(100); 
-		GPIO_SetBits(GPIOA,CLK);	   
+		
+		GPIO_SetBits(CLK_GPIO,CLK);	   
 		val=val<<1; 
-		SysTick_Delay_Ms(1);//delay_us(1);  
-		GPIO_ResetBits(GPIOA,CLK);	   
+		SysTick_Delay_us(1);//delay_us(1);  
+		GPIO_ResetBits(CLK_GPIO,CLK);	   
 		if(GPIO_ReadInputDataBit(GPIOA,DATA))  //
 		val++; 
-		SysTick_Delay_Ms(1);//delay_us(1); 
+		SysTick_Delay_us(1);//delay_us(1); 
 	} 
-	GPIO_SetBits(GPIOA,CLK); 
+	GPIO_SetBits(CLK_GPIO,CLK);
+	
 	val = val^0x800000; 
-	SysTick_Delay_Ms(1);//delay_us(1); 
-	GPIO_ResetBits(GPIOA,CLK); 
-	SysTick_Delay_Ms(1);//delay_us(1);  
+	
+	val = val >> 8; //WT.EDIT 2022.03.03
+	SysTick_Delay_us(1);//delay_us(1); 
+	GPIO_ResetBits(CLK_GPIO,CLK); 
+	SysTick_Delay_us(1);//delay_us(1);  
+	HX720_ReadDataFlag=1;
 	return val; 
 }
 #if 1
@@ -424,3 +349,34 @@ int main(int argc, char *argv[]) {
 
 }
 #endif 
+uint32_t GetHX720Data(void)
+{
+	volatile uint32_t Count=0;
+	uint8_t i;
+	HX720_CLK_L();//SCLK is low
+	
+	Count =0;
+	while(GetDataPinState());
+	
+	for(i=0;i<24;i++)
+	{
+	   HX720_CLK_H();
+	   
+	   Count =Count <<1;
+	   
+	   HX720_CLK_L(); //PD_SCK low
+	   
+	   if(GetDataPinState())
+	     Count++;
+	
+	}
+	
+	HX720_CLK_H();
+	Count = Count ^ 0x800000;
+	
+	Count = Count >>8 ;
+    HX720_CLK_L();
+    
+    return (Count);
+
+}
