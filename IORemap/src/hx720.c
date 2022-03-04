@@ -136,7 +136,7 @@ uint32_t Sensor_Read(void)
 	//			我们可以直接拿来进行使用
 	value = value^0x800000;
 	//value = value&0x7FFFFF;
-	value = value >> 8; 
+	
 	//第25个脉冲结束
 	GPIO_ResetBits(CLK_GPIO,CLK);
 	
@@ -187,12 +187,14 @@ float Get_Weight(void)
 void Weigt_DisSmg(float weightValue) 
 {
 	
-	
-	uint32_t unitPlace,tenPlace,hundredPlace,thousandPlace,tenthousandPlace;
+	uint32_t unitPlace,tenPlace,hundredPlace,thousandPlace,onethousandPlace,hundredthousandPlace,tenthousandPlace;
 
 	 
-	  
-	 tenthousandPlace =(uint32_t) (weightValue/10000);
+    hundredthousandPlace = (uint32_t) (weightValue/1000000)%10;
+	
+	tenthousandPlace = (uint32_t) (weightValue/100000)%10;
+	
+	onethousandPlace =(uint32_t) (weightValue/10000)%10;
 	 
 	 thousandPlace =(uint32_t) (weightValue /1000)%10;//(weightValue/1000)%10;
 	  
@@ -201,15 +203,24 @@ void Weigt_DisSmg(float weightValue)
 	 tenPlace =(uint32_t)(weightValue/10)%10;
 	 
 	 unitPlace =(uint32_t) (weightValue/1)%10; 
+	
 	 
-	 
-	 
+	 if(hundredthousandPlace ==0){
+		 
+		 hundredthousandPlace=0x0b;
+	
+	 }
+	 else if(tenthousandPlace == 0){
+	    if(hundredthousandPlace==0x0b)
+			tenthousandPlace =0x0b;
 	  
-	 if(tenthousandPlace == 0){ 
-		tenthousandPlace  = 0x0b;
+	 }
+	 else if(onethousandPlace == 0){ 
+		 if(tenthousandPlace == 0x0b)
+		     onethousandPlace  = 0x0b;
 	  }
      else if(thousandPlace ==0){
-		 if(tenthousandPlace ==0x0b)
+		 if(onethousandPlace ==0x0b)
 		   thousandPlace = 0x0b;
 	 }
 	else if(hundredPlace ==0){
@@ -221,12 +232,30 @@ void Weigt_DisSmg(float weightValue)
 		     tenPlace =0x0b;
 	 }
 	
+	 if(hundredthousandPlace==0x0b && tenthousandPlace ==0x0b ){
 	  
-	   SmgDisplay(digital_1,tenthousandPlace); //"10000"
+	   SmgDisplay(digital_1,onethousandPlace); //"10000"
 	   SmgDisplay(digital_2,thousandPlace);//'1000'
 	   SmgDisplay(digital_3,hundredPlace); //
 	   SmgDisplay(digital_4,tenPlace);
 	   SmgDisplay(digital_5,unitPlace);
+	 }
+     else if(hundredthousandPlace ==0x0b && tenthousandPlace !=0x0b){
+	   SmgDisplay(digital_1,tenthousandPlace); //"10000"
+	   SmgDisplay(digital_2,onethousandPlace);//'1000'
+	   SmgDisplay(digital_3,thousandPlace); //
+	   SmgDisplay(digital_4,hundredPlace);
+	   SmgDisplay(digital_5,tenPlace);
+	 
+	  }
+	  else if(hundredthousandPlace !=0x0b){
+	 
+	   SmgDisplay(digital_1,hundredthousandPlace); //"10000"
+	   SmgDisplay(digital_2,tenthousandPlace);//'1000'
+	   SmgDisplay(digital_3,onethousandPlace); //
+	   SmgDisplay(digital_4,thousandPlace);
+	   SmgDisplay(digital_5,hundredPlace);
+	  }
  }
 	
 
@@ -266,7 +295,7 @@ unsigned long HX711_Read(void)	//??128
 	
 	val = val^0x800000; 
 	
-	val = val >> 8; //WT.EDIT 2022.03.03
+
 	SysTick_Delay_us(1);//delay_us(1); 
 	GPIO_ResetBits(CLK_GPIO,CLK); 
 	SysTick_Delay_us(1);//delay_us(1);  
@@ -374,7 +403,7 @@ uint32_t GetHX720Data(void)
 	HX720_CLK_H();
 	Count = Count ^ 0x800000;
 	
-	Count = Count >>8 ;
+
     HX720_CLK_L();
     
     return (Count);
