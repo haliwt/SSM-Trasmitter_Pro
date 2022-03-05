@@ -164,7 +164,7 @@ static void	KEY4_SET_ENTER_Fun(void)
 ***************************************************/           
 static void KEY_SubMenuFun_Enter(void)
 {
-      static int8_t temp=0;
+      static int8_t temp=0,KEYF1;
       switch(menu_t.menuId){
                
           case F1: //F1 - 01
@@ -180,25 +180,45 @@ static void KEY_SubMenuFun_Enter(void)
            
              }
              else{ //F1-01 ->next -> g ,H9,t,n,nonE
-                       menu_t.menuF1Sub_first=0;
-                       mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                       
+                                 mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
                           
                                //runKey fun
                                 menu_t.FxMainMenu_key =0xc0; 
                                 menu_t.FxSub_03_key=0xf10;
                             
                                 //runCmd menu
-                                menu_t.menuTitle=submenu_F1;
-                                 temp=SubMenu_03_Top();
-				                 if(temp==-1){
-								     menu_t.F1_Sub01_Top=0;
-								}
-								 else menu_t.F1_Sub01_Top =temp;
+                               
+                                
 								
-								if(menu_t.F101_03_SubMeng_flag ==0)menu_t.F1_Sub01_Top=0;
-								 
-                                menu_t.F1SubMenu_Sub_03_Id= menu_t.F1_Sub01_Top; //
-                                menu_t.menu_F1Sub_03_xx_key= menu_t.F1_Sub01_Top; 
+							   if(menu_t.F1SubMenu_Id ==F101){
+
+                                    temp=SubMenu_03_Top();
+				                    if(temp==-1){
+								       menu_t.F1_Sub01_Top=4;
+								    }
+								    else menu_t.F1_Sub01_Top =temp;
+                                    
+								    menu_t.F1SubMenu_Sub_03_Id= menu_t.F1_Sub01_Top; //
+                                    menu_t.menu_F1Sub_03_xx_key=00 ; 
+                                     menu_t.menuTitle=submenu_F1;
+                                }
+                                else if(menu_t.F1SubMenu_Id ==F102){
+
+                                     menu_t.menu_F1Sub_03_xx_key=01 ;
+                                      menu_t.menuTitle=submenu_F2; 
+                                }
+                                else if(menu_t.F1SubMenu_Id ==F103){
+
+                                      menu_t.menu_F1Sub_03_xx_key=02 ;
+                                       menu_t.menuTitle=submenu_F3; 
+                                }
+                                else if(menu_t.F1SubMenu_Id ==F103){
+
+                                      menu_t.menu_F1Sub_03_xx_key=02 ;
+                                       menu_t.menuTitle=submenu_F7; 
+                                }
+
                                
                           
                          

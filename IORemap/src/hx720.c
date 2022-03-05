@@ -42,9 +42,9 @@ void Sensor_Init(void)
 {
     GPIO_InitType GPIO_InitStructure;
 	
-	RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
+	//RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
 	RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
-    
+   // RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_GPIOB, ENABLE);
     //output CLK
 	GPIO_InitStruct(&GPIO_InitStructure);
     /* GPIOC Configuration:Pin6, 7, 8 and 9 as alternate function push-pull */
@@ -204,30 +204,34 @@ void Weigt_DisSmg(float weightValue)
 	 
 	 unitPlace =(uint32_t) (weightValue/1)%10; 
 	
-	 
+	 SysTick_Delay_Ms(5);
 	 if(hundredthousandPlace ==0){
 		 
 		 hundredthousandPlace=0x0b;
 	
 	 }
-	 else if(tenthousandPlace == 0){
+	 
+	 if(tenthousandPlace == 0){
 	    if(hundredthousandPlace==0x0b)
 			tenthousandPlace =0x0b;
 	  
 	 }
-	 else if(onethousandPlace == 0){ 
+	 
+	 if(onethousandPlace == 0){ 
 		 if(tenthousandPlace == 0x0b)
 		     onethousandPlace  = 0x0b;
 	  }
-     else if(thousandPlace ==0){
+     
+	  if(thousandPlace ==0){
 		 if(onethousandPlace ==0x0b)
 		   thousandPlace = 0x0b;
 	 }
-	else if(hundredPlace ==0){
+	
+	 if(hundredPlace ==0){
 		  if(thousandPlace ==0x0b)
 		      hundredPlace = 0x0b;
 	}
-	else if(tenPlace ==0){
+	 if(tenPlace ==0){
 		  if( hundredPlace == 0x0b)
 		     tenPlace =0x0b;
 	 }
