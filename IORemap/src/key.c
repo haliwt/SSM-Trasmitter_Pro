@@ -145,7 +145,7 @@ static void	KEY4_SET_ENTER_Fun(void)
           menuTop= -1;
           menu_t.active_Submenu=0;
           menu_t.menuTitle=mainmenuItem;
-          menu_t.F1Sub_subkey=0XFF;
+          menu_t.FxSub_subMenu_key=0XFF;
           menu_t.mainTop= PushMainMenu(); 
          
                                    
@@ -169,29 +169,101 @@ static void KEY_SubMenuFun_Enter(void)
                
           case F1: //F1 - 01
                
-		     if( menu_t.menuF1Sub_first== 0){ //F1- 01
+		     if( menu_t.menuF1Sub_first== 0){ //"F1- 01"
              
                menu_t.menuF1Sub_first++;
                menu_t.menuMain=0;
                menuFxSubTop=-1;
-               menu_t.F1SubMenu_Sub_Id=F101;
+               menu_t.F1SubMenu_Sub_02_Id=F101;
                menu_t.active_Submenu=F1; //the second menu
                menu_t.menuTitle=submenu_F1; //RunCommand()
-               menu_t.F1Sub_subkey=0XFF;
+               menu_t.FxSub_subMenu_key=0XFF;
                menu_t.F1_SubMenuTop= PushSub_Menu(F1Mnumbers);//subNumbers_TypedDef submenN;
            
                }
                else{ //F1-01 ->next -> g ,H9,t,n,nonE
-               
-                      menu_t.menuF1Sub_first=0;
-                      menu_t.active_Submenu=F1; //the first select F1-01->menu
-                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_Id);
-                      menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.F1Sub_subkey = menu_t.F1_Sub01_Top;
-                      menu_t.F1SubMenu_Sub_Id= F101_01 ;
+                       menu_t.menuF1Sub_first++;
+                      if( menu_t.menuF1Sub_first==2){ //the second input menu
+                          menu_t.menuTitle =submenu_F1;
+                          menu_t.F1SubMenu_Sub_02_Id =0xff;
+                          menu_t.F1SubMenu_Sub_03_Id=F101_01;
+                          menu_t.F1_Sub01_Top=0;
+                         menu_t.FxSub_subMenu_key=0XF1;      
+                      }
+                      else{ //the third 
+                          
+                          if(menu_t.F101_03_SubMeng_flag == 0x0){
+                             
+                              menu_t.menuF1Sub_first=0;
+                              menu_t.menuId=F1;
+                          }
+                          else{
+                              
+                              
+                            menu_t.menuTitle =submenu_F1;
+                            menu_t.F1SubMenu_Sub_02_Id =0xff;
+                            if(menu_t.F1SubMenu_Sub_03_Id ==F101_01){ //???
+                              menu_t.F1_Sub01_Top=SubMenu_03_Top();
+                              menu_t.menuF1Sub_first=0;
+                               menu_t.FxSub_subMenu_key=0XF101;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_02){
+                                menu_t.FxSub_subMenu_key=0XF102;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_03){
+                                menu_t.FxSub_subMenu_key=0XF103;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_04){
+                                menu_t.FxSub_subMenu_key=0XF104;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_05){
+                                menu_t.FxSub_subMenu_key=0XF105;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_06){
+                                menu_t.FxSub_subMenu_key=0XF106;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_07){
+                                menu_t.FxSub_subMenu_key=0XF107;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_08){
+                                menu_t.FxSub_subMenu_key=0XF108;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_09){
+                                menu_t.FxSub_subMenu_key=0XF109;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_10){
+                                menu_t.FxSub_subMenu_key=0XF110;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_11){
+                                menu_t.FxSub_subMenu_key=0XF111;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_12){
+                                menu_t.FxSub_subMenu_key=0XF112;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_13){
+                                menu_t.FxSub_subMenu_key=0XF113;
+                                menu_t.menuF1Sub_first=0;
+                            }
+                          }
+                          
+                          
+                          
+                      }
+                         
+                }
                      
-               }
-               menu_t.menuTitle=submenu_F1;
+           
           break;
          
           case F2:
@@ -204,13 +276,13 @@ static void KEY_SubMenuFun_Enter(void)
 				menu_t.menuTitle=submenu_F2; //RunCommand()
 				menu_t.F2_SubMenuTop= PushSub_Menu(F2Mnumbers);
 			}
-               else{
+            else{
                       menu_t.menuF2Sub_first=0;
                       menu_t.active_Submenu=F2; //the first select F1-01->menu
-                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_Id);
+                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.F1Sub_subkey =F101_02;
-                      menu_t.F1SubMenu_Sub_Id=menu_t.F1_Sub01_Top ;
+                      menu_t.FxSub_subMenu_key =F101_02;
+                      menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top ;
 
                }    
           break;
@@ -228,10 +300,10 @@ static void KEY_SubMenuFun_Enter(void)
             else{
                     menu_t.menuF2Sub_first=0;
                       menu_t.active_Submenu=F3; //the first select F1-01->menu
-                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_Id);
+                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.F1Sub_subkey =F101_03;
-                      menu_t.F1SubMenu_Sub_Id=menu_t.F1_Sub01_Top ;
+                      menu_t.FxSub_subMenu_key =F101_03;
+                      menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top ;
 
             }   
           break;
@@ -249,10 +321,10 @@ static void KEY_SubMenuFun_Enter(void)
             else{
                       menu_t.menuF7Sub_first=0;
                       menu_t.active_Submenu=F7; //the first select F1-01->menu
-                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_Id);
+                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.F1Sub_subkey =F101_07;
-                      menu_t.F1SubMenu_Sub_Id=menu_t.F1_Sub01_Top ;
+                      menu_t.FxSub_subMenu_key =F101_07;
+                      menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top ;
 
 
             } 
@@ -270,10 +342,10 @@ static void KEY_SubMenuFun_Enter(void)
             else{
                       menu_t.menuF8Sub_first=0;
                       menu_t.active_Submenu=F8; //the first select F1-01->menu
-                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_Id);
+                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.F1Sub_subkey =F101_08;
-                      menu_t.F1SubMenu_Sub_Id=menu_t.F1_Sub01_Top -1 ;
+                      menu_t.FxSub_subMenu_key =F101_08;
+                      menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top -1 ;
 
 
             }  
@@ -311,17 +383,16 @@ static void KEY1_ZERIO_UP_Fun(void)
                
                case F1: //F1 sub menu
                
-                    switch(menu_t.F1Sub_subkey){
+                    switch(menu_t.FxSub_subMenu_key){
                          
                     case 0xff:
                        menu_t.F1_SubMenuTop= PushSub_Menu(F1Mnumbers);
                     
                     break;
-                    case F101_01: 
-                       
-                       menu_t.F1_Sub01_Top = PushSub_03_Menu(5);
+                    case 0xf101:  //F101 
+                       menu_t.F1_Sub01_Top = PushSub_03_Menu(5);//
                     break;
-                    case F101_02:
+                    case 0xf102:
                         if(menu_t.inputNumber_Select==1){
                                 menu_t. F1_Sub02_unit++ ;
                                if(menu_t. F1_Sub02_unit >9){
@@ -343,7 +414,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                         }  
                        
                     break;
-                    case F101_03:
+                    case 0xf103:
                        if(menu_t.inputNumber_Select==1){
                                 menu_t. F1_Sub02_unit++ ;
                                if(menu_t. F1_Sub02_unit >9){
@@ -366,7 +437,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                    
                     break;
                     
-                    case F101_04:
+                    case 0xf104:
                          if(menu_t.inputNumber_Select==1){
                                 menu_t. F1_Sub02_unit++ ;
                                if(menu_t. F1_Sub02_unit >9){
@@ -389,7 +460,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                    
                     break;
                     
-                    case F101_05:
+                    case 0xf105:
                          if(menu_t.inputNumber_Select==1){
                                 menu_t. F1_Sub02_unit++ ;
                                if(menu_t. F1_Sub02_unit >9){
@@ -412,7 +483,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                    
                     break;
                     
-                    case F101_06:
+                    case 0xf106:
                     if(menu_t.inputNumber_Select==1){
                                 menu_t. F1_Sub02_unit++ ;
                                if(menu_t. F1_Sub02_unit >9){
@@ -646,16 +717,16 @@ static void KEY2_TRAE_DOWN_Fun(void)
               
             case F1: //F1 -SUB
                 
-               switch(menu_t.F1Sub_subkey){
+               switch(menu_t.FxSub_subMenu_key){
                     
                 case 0xff:
                
                     menu_t.F1_SubMenuTop = PopSub_Menu(F1Mnumbers);
                
-               case F101_01:
+               case 0XF1:
                      menu_t.F1_Sub01_Top = PopSub_03_Menu(5);
                
-               case F101_02:
+               case 0XF2:
 
                     if(menu_t.inputNumber_Select==1){
                          menu_t. F1_Sub02_unit--;
@@ -959,10 +1030,10 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 
           }
            
-          if(menu_t.F1SubMenu_Sub_Id==F101_01 || menu_t.F1SubMenu_Sub_Id==F101_02 || menu_t.F1SubMenu_Sub_Id==F101_02 || menu_t.F1SubMenu_Sub_Id==F101_03 \
-               || menu_t.F1SubMenu_Sub_Id==F101_04 || menu_t.F1SubMenu_Sub_Id==F101_05 || menu_t.F1SubMenu_Sub_Id==F101_06 || menu_t.F1SubMenu_Sub_Id==F101_07 \
-               || menu_t.F1SubMenu_Sub_Id==F101_08 || menu_t.F1SubMenu_Sub_Id==F101_09 || menu_t.F1SubMenu_Sub_Id==F101_09 || menu_t.F1SubMenu_Sub_Id==F101_10 \
-               || menu_t.F1SubMenu_Sub_Id==F101_11 || menu_t.F1SubMenu_Sub_Id==F101_12 || menu_t.F1SubMenu_Sub_Id==F101_13 ){
+          if(menu_t.F1SubMenu_Sub_02_Id==F101_01 || menu_t.F1SubMenu_Sub_02_Id==F101_02 || menu_t.F1SubMenu_Sub_02_Id==F101_02 || menu_t.F1SubMenu_Sub_02_Id==F101_03 \
+               || menu_t.F1SubMenu_Sub_02_Id==F101_04 || menu_t.F1SubMenu_Sub_02_Id==F101_05 || menu_t.F1SubMenu_Sub_02_Id==F101_06 || menu_t.F1SubMenu_Sub_02_Id==F101_07 \
+               || menu_t.F1SubMenu_Sub_02_Id==F101_08 || menu_t.F1SubMenu_Sub_02_Id==F101_09 || menu_t.F1SubMenu_Sub_02_Id==F101_09 || menu_t.F1SubMenu_Sub_02_Id==F101_10 \
+               || menu_t.F1SubMenu_Sub_02_Id==F101_11 || menu_t.F1SubMenu_Sub_02_Id==F101_12 || menu_t.F1SubMenu_Sub_02_Id==F101_13 ){
                 menu_t.inputNumber_Select ++;
              if(menu_t.inputNumber_Select == 4){
 				 menu_t.inputNumber_Select=0;
@@ -972,7 +1043,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
     
           
           //the third menu select digital numbers
-           if(menu_t.F1SubMenu_Sub_Id==F101){
+           if(menu_t.F1SubMenu_Sub_02_Id==F101){
 
              menu_t.menuTitle=mainmenuItem;
               

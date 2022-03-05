@@ -29,7 +29,7 @@ typedef struct _MENU{
 	   uint8_t F1_SubMenuTop;
 	   uint8_t menuF1Sub_first;
 	   uint8_t F1SubMenu_Id;
-	   uint8_t F1SubMenu_Sub_Id;
+	   uint8_t F1SubMenu_Sub_02_Id;
 	   uint8_t F1SubMenu_Sub_01_first;
 	   uint8_t F1SubMenu_Sub_02_first;
 	   uint8_t F1SubMenu_Sub_03_first;
@@ -44,7 +44,8 @@ typedef struct _MENU{
 	   uint8_t F1SubMenu_Sub_12_first;
 	   uint8_t F1SubMenu_Sub_13_first;
 	   
-	   uint8_t F1Sub_subkey;
+	   
+	   
 	   uint8_t F1_Sub01_Top;
 	   int8_t F1_Sub02_unit;
 	   int8_t F1_Sub02_decade;
@@ -52,7 +53,9 @@ typedef struct _MENU{
 
 	   uint8_t F1_Submenu_Check_flag;
 	   uint8_t inputNumber_Select;
-
+	   
+		uint8_t F1SubMenu_Sub_03_Id;
+		uint8_t F101_03_SubMeng_flag;
 	   uint8_t F1_Sub03_Top;
 	   uint8_t F1_Sub04_Top;
 	   uint8_t F1_Sub05_Top;
@@ -81,9 +84,17 @@ typedef struct _MENU{
 
 	   int8_t menuReturn_flag;
 	   int8_t menuReturn_Sub_flag;
-	  
+	  uint16_t FxSub_subMenu_key;
 	   
 }MENU;
+
+
+typedef  struct _F1_MENU{
+	 uint8_t F1_03_item_flag;
+	
+}F1_FUN;
+
+extern F1_FUN F1_menu;
 
 extern MENU menu_t;
 
@@ -128,7 +139,7 @@ typedef enum{
 }F1submenuList;
  
 typedef enum{
-     F101_01=0x01,
+     F101_01,
 	 F101_02,
 	 F101_03,
 	 F101_04,
@@ -165,6 +176,7 @@ extern subNumbers_TypedDef submenStruct;
 extern int8_t menuTop;
 extern int8_t menuFxSubTop;
 extern int8_t menuFxSub_03_Top;
+extern  int8_t F1_03_item_Top;
 
 //Main menu
 uint8_t PushMainMenu(void);
@@ -187,4 +199,10 @@ uint8_t SubMenu_03_Top(void);
 void F1SubMenu_F101_Select_DIS(uint8_t subm3);
 
 void F1SubMenu_F1_03_DIS(int8_t unit,int8_t decade,int8_t hundred);
+
+uint8_t F1_PushSub_03_Item(int8_t nsize);
+
+uint8_t F1_PopSub_03_Item_Top(void);
+
+uint8_t F1_PopSub_03_Item(int8_t nsize);
 #endif 

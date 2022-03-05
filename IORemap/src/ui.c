@@ -299,8 +299,8 @@ void F1SubMenu_Sub_13(void)
 void F2_SubMenu_01(void)
 {
    SmgDisplay_Character(digital_3,0x0f); //"-"
-   SmgDisplay(digital_4,0x01); //'0'
-   SmgDisplay(digital_5,0x01); //'11'
+   SmgDisplay(digital_4,0x01); //'1'
+   SmgDisplay(digital_5,0x01); //'1'
 
 }
 void F2_SubMenu_02(void)

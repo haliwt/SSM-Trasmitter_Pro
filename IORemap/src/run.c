@@ -1,5 +1,5 @@
 #include "run.h"
-
+ mainitem mainitem_t;
 void CheckMode(uint8_t mydata)
 {
     KEY_Function(mydata);
@@ -20,17 +20,19 @@ void RunCommand(void)
 
           case submenu_F1: //F1-01
             
-          if(menu_t.F1SubMenu_Sub_Id==F101){ //The second menu
+           
+          if(menu_t.F1SubMenu_Sub_02_Id==F101){ //The second menu
                 menu_t.F1_Submenu_Check_flag =10;
                 F1_DIS();
                 F1SubMenu(menu_t.F1_SubMenuTop); //"F1 - 01"
            }
-           else {
-                 switch(menu_t.F1SubMenu_Sub_Id){
+           else if(menu_t.F1SubMenu_Sub_02_Id ==0xff){
+          
+                 switch(menu_t.F1SubMenu_Sub_03_Id){
            
                     case  F101_01 :
                             
-                                menu_t.F1_Submenu_Check_flag =101;
+                                menu_t.F1_Submenu_Check_flag =101; //0x01
                                 F1SubMenu_F101_Select_DIS(menu_t.F1_Sub01_Top); //"---9"
                         break;
                     case F101_02 :
@@ -72,7 +74,7 @@ void RunCommand(void)
                     case F101_11 :
                                 menu_t.F1_Submenu_Check_flag =111;
                                  F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        }
+                        
                     case F101_12:
                                 menu_t.F1_Submenu_Check_flag =112;
                                  F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
@@ -125,3 +127,4 @@ void RunCommand(void)
 
 
 }
+	}

@@ -60,21 +60,21 @@ int main(void)
 	HX720_ReadDataFlag=0;
     while (1)
     {
-		// tweithValue= Sensor_Read();//GetHX720Data();//HX711_Read()	;//Sensor_Read(void)
-        Get_Weight();
-		//HX720_Buffer= Sensor_Read();//GetHX720Data();
-		//HX720_Buffer=GetHX720Data();
-		Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
-		//LED_Fun();
-	  //GetHX720Data();
-	
-	#if 0
-		keydata = ScanKey();
-			 if(keydata == 0xff)keydata=0;
+		 keydata = ScanKey();
+		 if(keydata == 0xff)keydata=0;
+		 if(keydata !=0)run_t.dispCmd=1;
+        
+		if(run_t.dispCmd==0){
+			Get_Weight();
+			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
+		}
+	    else{
+		    
 			
 		    CheckMode(keydata);//KEY_Function(keydata);
             RunCommand();
-		#endif 
+			
+		}
     
 				 
     }

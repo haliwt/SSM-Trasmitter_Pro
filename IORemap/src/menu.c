@@ -1,7 +1,7 @@
 #include "menu.h"
 
 MENU menu_t;
-
+F1_FUN F1_menu;
 uint8_t PushSu_bMenu(int8_t nsize);
 uint8_t PopSub_Menu(int8_t nsize);
 
@@ -11,7 +11,7 @@ uint8_t PopSub_Sub_Menu(int8_t msize);
 int8_t menuTop= -1;
 int8_t menuFxSubTop=-1;
 int8_t menuFxSub_03_Top = -1;
-
+int8_t F1_03_item_Top=-1;
 
 uint8_t PushMainMenu(void)
 {
@@ -144,11 +144,11 @@ int8_t SubMenu_02_Top(void)
 *************************************************/
 uint8_t PushSub_03_Menu(int8_t nsize)
 {
-	 if(menuFxSub_03_Top== (nsize +1)){
+	 if(menuFxSub_03_Top >= nsize){
 	     // printf("Error :stack overflow \n");
 	     //return ;
 	  
-	   menuFxSub_03_Top=1;
+	   menuFxSub_03_Top=0;
 	}
 	else{
 		menuFxSub_03_Top++;
@@ -158,18 +158,57 @@ uint8_t PushSub_03_Menu(int8_t nsize)
 }
 uint8_t PopSub_03_Menu(int8_t nsize)
 {
-	menuFxSub_03_Top--;
-	if(menuFxSub_03_Top == 0){
+	
+	if(menuFxSub_03_Top == -1){
 	    //printf("Error : no element to Pop \n");
 		//return;
-		menuFxSub_03_Top = nsize  ;
+		menuFxSub_03_Top = nsize -1 ;
 	}
-    //F1SubMenu(menuF1SubTop);
+    menuFxSub_03_Top--;
     return menuFxSub_03_Top ;
 }
 uint8_t SubMenu_03_Top(void)
 {
 	   return menuFxSub_03_Top ;
+	
+}
+/*************************************************
+*
+*The F1 ->F1-01-> F1-01-01,F1-01-02,F1-01-03
+*F1-01-04,F1-01-05,F1-01-06.....F1-01-13
+*
+*
+*
+
+*************************************************/
+uint8_t F1_PushSub_03_Item(int8_t nsize)
+{
+	 if(F1_03_item_Top >= nsize){
+	     // printf("Error :stack overflow \n");
+	     //return ;
+	  
+	   F1_03_item_Top=0;
+	}
+	else{
+		F1_03_item_Top++;
+	}
+	//F1SubMenu(menuF1SubTop);
+	return F1_03_item_Top;
+}
+uint8_t F1_PopSub_03_Item(int8_t nsize)
+{
+	
+	if(F1_03_item_Top == -1){
+	    //printf("Error : no element to Pop \n");
+		//return;
+		F1_03_item_Top = nsize -1 ;
+	}
+    F1_03_item_Top--;
+    return F1_03_item_Top ;
+}
+uint8_t F1_PopSub_03_Item_Top(void)
+{
+	   return F1_03_item_Top ;
 	
 }
 /***********************************************************
@@ -191,7 +230,7 @@ void F1SubMenu(int8_t f1sub)
 
 			case F102:
 			     menu_t.F1SubMenu_Id = F102;
-				F1SubMenu_02();
+				F1SubMenu_02(); //""
 			break;
 			
 			case F103:
@@ -263,22 +302,27 @@ void F1SubMenu_F101_Select_DIS(uint8_t subm3)
    switch(subm3){
      
 	   case 0:
+	        menu_t.F101_03_SubMeng_flag = 0x0;
             F1SubMenu_Sub_01_01();
 	   break;
 
 	   case 1:
+	   		menu_t.F101_03_SubMeng_flag = 0x01;
 			F1SubMenu_Sub_01_02();
 	   break;
 
 	   case 2:
+	   		menu_t.F101_03_SubMeng_flag = 0x02;
 			 F1SubMenu_Sub_01_03();
 	   break;
 
 	   case 3:
+	   		menu_t.F101_03_SubMeng_flag = 0x03;
              F1SubMenu_Sub_01_04();
 	   break;
 
 	   case 4:
+	   		menu_t.F101_03_SubMeng_flag = 0x04;
 			 F1SubMenu_Sub_01_05();
 	   break;
        default:
