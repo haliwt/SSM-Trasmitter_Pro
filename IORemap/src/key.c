@@ -181,19 +181,16 @@ static void KEY_SubMenuFun_Enter(void)
              }
              else{ //F1-01 ->next -> g ,H9,t,n,nonE
                        menu_t.menuF1Sub_first=0;
-                       
-                     
-                        //the first adjust 
-                        mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                       mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
                           
                                //runKey fun
                                 menu_t.FxMainMenu_key =0xc0; 
-                                menu_t.FxSub_03_key=0xf01;
+                                menu_t.FxSub_03_key=0xf10;
                             
                                 //runCmd menu
                                 menu_t.menuTitle=submenu_F1;
                                 menu_t.F1_Sub01_Top=SubMenu_03_Top();
-                                menu_t.F1SubMenu_Sub_03_Id=F101_01; //
+                                menu_t.F1SubMenu_Sub_03_Id= menu_t.F1_Sub01_Top; //
                                 menu_t.menu_F1Sub_03_xx_key= menu_t.F1_Sub01_Top; 
                                
                           
