@@ -1050,32 +1050,6 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           }
 
 }
-static void PushMenu_To_SubMenu(uint8_t submenuItem)
-{
-	if(Amenu_Top ==(MAZ_F1_SUBMENU_SIZE  -1)){
-		//printf("Error :stack overflow \n");
-		//return ;
-          Amenu[Amenu_Top]=submenuItem;
-	}
-     else{
-          Amenu_Top++;
-          Amenu[Amenu_Top]=submenuItem; //A[++top] =x;
-     }
-}
-static void PopMenu_To_SubMenu(void)
-{
-	 
-     if(Amenu_Top ==-1){
-	    //printf("Error : no element to Pop \n");
-		//return ;
-          Amenu_Top =0;	
-
-	}
-     else{
-         Amenu_Top --;
-     }
-    
-}
 
 int8_t ATop(void)
 {

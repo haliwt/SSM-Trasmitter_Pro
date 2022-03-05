@@ -6,8 +6,8 @@
 
 uint8_t HX720_ReadDataFlag=0;
 
-static uint32_t getIndexOfStings(char ch);
-static long hexToDec(char *source);
+//static uint32_t getIndexOfStings(char ch);
+//static long hexToDec(char *source);
 //所用压力传感器型号：	HX711
 
 //比例系数确定数据：
@@ -325,7 +325,7 @@ float Get_Weight_2(void)
 	return Weight_Shiwu;
 }
 #endif 
-
+#if 0
 /***********************************************************
 *
 *
@@ -367,7 +367,7 @@ static uint32_t getIndexOfStings(char  ch)
 	}
 	
 }
-#if 0
+
 int main(int argc, char *argv[]) {
 	
 		char *hex = "9a";

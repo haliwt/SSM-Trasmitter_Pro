@@ -34,19 +34,19 @@ static void LedOff(GPIO_Module* GPIOx, uint16_t Pin)
  *  @arg GPIO_PIN_0~GPIO_PIN_15: set related pin on
  *      @arg (GPIO_PIN_0<<16)~(GPIO_PIN_15<<16): clear related pin off
  */
-static void LedOnOff(GPIO_Module* GPIOx, uint32_t Pin)
-{
-    GPIOx->PBSC = Pin;
-}
+//static void LedOnOff(GPIO_Module* GPIOx, uint32_t Pin)
+//{
+//    GPIOx->PBSC = Pin;
+//}
 /**
  * @brief  Toggles the selected Led.
  * @param GPIOx x can be A to G to select the GPIO port.
  * @param Pin This parameter can be GPIO_PIN_0~GPIO_PIN_15.
  */
-static void LedBlink(GPIO_Module* GPIOx, uint16_t Pin)
-{
-    GPIOx->POD ^= Pin;
-}
+//static void LedBlink(GPIO_Module* GPIOx, uint16_t Pin)
+//{
+//    GPIOx->POD ^= Pin;
+//}
 
 void LED_Init(void)
 {
