@@ -225,12 +225,12 @@ void F1SubMenu(int8_t f1sub)
 
 			case F101:
 			    menu_t.F1SubMenu_Id = F101;
-				F1SubMenu_01(); //"F1 ---"
+				F1SubMenu_01(); //"F1 - 01"
 			break;
 
 			case F102:
 			     menu_t.F1SubMenu_Id = F102;
-				F1SubMenu_02(); //""
+				F1SubMenu_02(); //"F2-02"
 			break;
 			
 			case F103:

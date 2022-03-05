@@ -20,8 +20,7 @@ static void KEY3_SWITCH_LEFT_Fun(void);
 static void KEY4_SET_ENTER_Fun(void);
 static void KEY_SubMenuFun_Enter(void);
 
-static void PushMenu_To_SubMenu(uint8_t submenuItem);
-static void PopMenu_To_SubMenu(void);
+
 
 int8_t ATop(void);
 
@@ -51,7 +50,7 @@ void KEY_Function(uint8_t keydata)
                case 0xf4://KEY1-ZERO--up
                     run_t.dispCmd =1;
                     Net_KeyLed();
-                    Valley_KeyLed();
+                   
                     if(key_t.currkeyzero != key_t.keyzero){
                            key_t.currkeyzero = key_t.keyzero; 
                            KEY1_ZERIO_UP_Fun();
@@ -60,7 +59,7 @@ void KEY_Function(uint8_t keydata)
                     key_t.keyset++;
                     key_t.keyswitch++;
                     key_t.keytrae++;
-                    
+                     Valley_KeyLed();
                   
                break;
                    
@@ -143,9 +142,10 @@ static void	KEY4_SET_ENTER_Fun(void)
           menu_t.menuFirst++;
           menu_t.menuMain=1;
           menuTop= -1;
-          menu_t.active_Submenu=0;
-          menu_t.menuTitle=mainmenuItem;
-          menu_t.FxSub_subMenu_key=0XFF;
+          mainitem_t.task_MainMenu=TheFirst_Menu;
+          menu_t.FxMainMenu_key =0xA0;
+          menu_t.FxSub_02_key=0;
+          menu_t.FxSub_03_key=0;
           menu_t.mainTop= PushMainMenu(); 
          
                                    
@@ -172,99 +172,33 @@ static void KEY_SubMenuFun_Enter(void)
 		     if( menu_t.menuF1Sub_first== 0){ //"F1- 01"
              
                menu_t.menuF1Sub_first++;
-               menu_t.menuMain=0;
+               mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
                menuFxSubTop=-1;
-               menu_t.F1SubMenu_Sub_02_Id=F101;
-               menu_t.active_Submenu=F1; //the second menu
-               menu_t.menuTitle=submenu_F1; //RunCommand()
-               menu_t.FxSub_subMenu_key=0XFF;
+               menu_t.FxMainMenu_key =0xB0;
+               menu_t.FxSub_02_key=0xf01;
                menu_t.F1_SubMenuTop= PushSub_Menu(F1Mnumbers);//subNumbers_TypedDef submenN;
            
-               }
-               else{ //F1-01 ->next -> g ,H9,t,n,nonE
+             }
+             else{ //F1-01 ->next -> g ,H9,t,n,nonE
                        menu_t.menuF1Sub_first++;
-                      if( menu_t.menuF1Sub_first==2){ //the second input menu
-                          menu_t.menuTitle =submenu_F1;
-                          menu_t.F1SubMenu_Sub_02_Id =0xff;
-                          menu_t.F1SubMenu_Sub_03_Id=F101_01;
-                          menu_t.F1_Sub01_Top=0;
-                         menu_t.FxSub_subMenu_key=0XF1;      
-                      }
-                      else{ //the third 
+                      if( menu_t.menuF1Sub_first >1){ //the second input menu
+                               //the first adjust 
+                               mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
                           
-                          if(menu_t.F101_03_SubMeng_flag == 0x0){
-                             
-                              menu_t.menuF1Sub_first=0;
-                              menu_t.menuId=F1;
-                          }
-                          else{
-                              
-                              
-                            menu_t.menuTitle =submenu_F1;
-                            menu_t.F1SubMenu_Sub_02_Id =0xff;
-                            if(menu_t.F1SubMenu_Sub_03_Id ==F101_01){ //???
-                              menu_t.F1_Sub01_Top=SubMenu_03_Top();
-                              menu_t.menuF1Sub_first=0;
-                               menu_t.FxSub_subMenu_key=0XF101;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_02){
-                                menu_t.FxSub_subMenu_key=0XF102;
+                               //runKey fun
+                                menu_t.FxMainMenu_key =0xc0; 
+                                menu_t.FxSub_03_key=0xf01;
+                            
+                                //runCmd menu
+                                menu_t.menuTitle=submenu_F1;
+                                menu_t.F1_Sub01_Top=SubMenu_03_Top();
+                                menu_t.F1SubMenu_Sub_03_Id=menu_t.F1_Sub01_Top; //
+                                menu_t.menu_F1Sub_03_xx_key= menu_t.F1_Sub01_Top; 
                                 menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_03){
-                                menu_t.FxSub_subMenu_key=0XF103;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_04){
-                                menu_t.FxSub_subMenu_key=0XF104;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_05){
-                                menu_t.FxSub_subMenu_key=0XF105;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_06){
-                                menu_t.FxSub_subMenu_key=0XF106;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_07){
-                                menu_t.FxSub_subMenu_key=0XF107;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_08){
-                                menu_t.FxSub_subMenu_key=0XF108;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_09){
-                                menu_t.FxSub_subMenu_key=0XF109;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_10){
-                                menu_t.FxSub_subMenu_key=0XF110;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_11){
-                                menu_t.FxSub_subMenu_key=0XF111;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_12){
-                                menu_t.FxSub_subMenu_key=0XF112;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                            else if(menu_t.F1SubMenu_Sub_03_Id ==F101_13){
-                                menu_t.FxSub_subMenu_key=0XF113;
-                                menu_t.menuF1Sub_first=0;
-                            }
-                          }
                           
-                          
-                          
-                      }
-                         
+                         }
                 }
-                     
-           
-          break;
+            break;
          
           case F2:
             if(menu_t.menuF2Sub_first==0){  
@@ -281,7 +215,7 @@ static void KEY_SubMenuFun_Enter(void)
                       menu_t.active_Submenu=F2; //the first select F1-01->menu
                       //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.FxSub_subMenu_key =F101_02;
+                      menu_t.FxSub_02_key =F101_02;
                       menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top ;
 
                }    
@@ -302,7 +236,7 @@ static void KEY_SubMenuFun_Enter(void)
                       menu_t.active_Submenu=F3; //the first select F1-01->menu
                       //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.FxSub_subMenu_key =F101_03;
+                      menu_t.FxSub_02_key =F101_03;
                       menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top ;
 
             }   
@@ -323,7 +257,7 @@ static void KEY_SubMenuFun_Enter(void)
                       menu_t.active_Submenu=F7; //the first select F1-01->menu
                       //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.FxSub_subMenu_key =F101_07;
+                      menu_t.FxSub_02_key =F101_07;
                       menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top ;
 
 
@@ -344,7 +278,7 @@ static void KEY_SubMenuFun_Enter(void)
                       menu_t.active_Submenu=F8; //the first select F1-01->menu
                       //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
                       menu_t.F1_Sub01_Top = SubMenu_03_Top();
-                      menu_t.FxSub_subMenu_key =F101_08;
+                      menu_t.FxSub_02_key =F101_08;
                       menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top -1 ;
 
 
@@ -375,644 +309,174 @@ static void KEY_SubMenuFun_Enter(void)
 ********************************************************/
 static void KEY1_ZERIO_UP_Fun(void)
 {
-     if(menu_t.menuTitle ==mainmenuItem){
-          menu_t.mainTop= PushMainMenu(); 
-     }
-     else{
-          switch(menu_t.active_Submenu){
-               
-               case F1: //F1 sub menu
-               
-                    switch(menu_t.FxSub_subMenu_key){
-                         
-                    case 0xff:
-                       menu_t.F1_SubMenuTop= PushSub_Menu(F1Mnumbers);
-                    
-                    break;
-                    case 0xf101:  //F101 
-                       menu_t.F1_Sub01_Top = PushSub_03_Menu(5);//
-                    break;
-                    case 0xf102:
-                        if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                       
-                    break;
-                    case 0xf103:
-                       if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                    break;
-                    
-                    case 0xf104:
-                         if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                    break;
-                    
-                    case 0xf105:
-                         if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                    break;
-                    
-                    case 0xf106:
-                    if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                    break;
-                    
-                    case F101_07:
-                          if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                   
-                    break;
-                    
-                    case F101_08:
-                     if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                   
-                    break;
-                    
-                     case F101_09:
-                      if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                   
-                    break;
-                    
-                    case F101_10:
-                     if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                   
-                    break;
-                    
-                    case F101_11:
-                     if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                   
-                    break;
-                    case F101_12:
-                     if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                   
-                    break;
-                    
-                    case F101_13:
-                     if(menu_t.inputNumber_Select==1){
-                                menu_t. F1_Sub02_unit++ ;
-                               if(menu_t. F1_Sub02_unit >9){
-                                   menu_t. F1_Sub02_unit=0;
-                              
-                               }
-                         }
-                         else if(menu_t.inputNumber_Select==2){
-                              menu_t.F1_Sub02_decade++;
-                              if(menu_t.F1_Sub02_decade >9){
-                                  menu_t.F1_Sub02_decade=0;
-                         }
-                         }
-                        else if(menu_t.inputNumber_Select==3){
-                                 menu_t.F1_Sub02_hundred++;  
-                                 if(menu_t.F1_Sub02_hundred >9){
-                                    menu_t.F1_Sub02_hundred=0;
-                         }
-                        }  
-                   
-                   
-                    break;
-                    default :
-                    
-                    break;
-                    
-               }
-               break;
-               case F2: //F2 sub menu 
-                    menu_t.F2_SubMenuTop =PushSub_Menu(F2Mnumbers);
-               break;
-               
-               case F3: //F3 sub menu
-                    menu_t.F3_SubMenuTop =PushSub_Menu(F3Mnumbers);
-               break;
-               
-               case F7: //F7
-                    menu_t.F7_SubMenuTop =PushSub_Menu(7);
-               break;
-               
-               case F8: //F8
-                    menu_t.F8_SubMenuTop =PushSub_Menu(F8Mnumbers);
-               break;
-               
-               case F9: //F9 sub menu 
-                    menu_t.F9_SubMenuTop =PushSub_Menu(F9Mnumbers);
-               break;
-               
-               default:
-               
-               break;
-              }
-        }
-}
-  
+     
+     switch(menu_t.FxMainMenu_key){
 
+         case 0:
+
+         break;
+
+         case 0xA0:  //the first Menu 
+             
+               menu_t.mainTop= PushMainMenu(); 
+                 
+         break;
+
+         case 0xB0: //the second Menu
+               menu_t.F1_SubMenuTop = PushSub_Menu(F1Mnumbers);
+         break;
+
+         case 0xc0: //the third Menu
+            switch( menu_t.FxSub_03_key){
+
+                    
+                    case 0xf10:
+                          switch(menu_t.menu_F1Sub_03_xx_key){
+
+                              case 0x00:
+                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
+                              break;
+
+                              case 0x01:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_02);
+                              break;
+
+                               case 0x02:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_03);
+                              break;
+
+                               case 0x03:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_04);
+                              break;
+
+                                case 0x04:
+                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_05);
+                              break;
+
+                              case 0x05:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_06);
+                              break;
+
+                               case 0x06:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_07);
+                              break;
+
+                               case 0x07:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_08);
+                              break;
+
+                                case 0x08:
+                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_09);
+                              break;
+
+                              case 0x09:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_10);
+                              break;
+
+                               case 0x0A:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_11);
+                              break;
+
+                               case 0x0B:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_12);
+                              break;
+
+                               case 0x0C:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_13);
+                              break;
+
+                          }
+                    break;
+
+                    case 0xf20:
+
+                    break;
+
+                    case 0xf30:
+
+                    break;
+
+                    case 0xf40:
+
+                    break;
+
+                    case 0xf50:
+
+                    break;
+
+                    case 0xf60:
+
+                    break;
+
+                    case 0xf70:
+
+                    break;
+
+                    case 0xf80:
+
+                    break;
+
+                    case 0xf90:
+
+                    break;
+
+                    case 0xfa0:
+
+                    break;
+
+                    case 0xfb0:
+
+                    break;
+
+                    case 0xfc0:
+
+                    break;
+
+                    case 0xf13:
+
+                    break;
+
+                }
+                 
+         break;
+
+         default:
+             menu_t.FxMainMenu_key=0;
+         break;
+
+
+
+     }
+     
+}  
+
+/*****************************************************
+ * 
+ * KEY DOWN 
+ * 
+ * 
+ * 
+******************************************************/
 static void KEY2_TRAE_DOWN_Fun(void)
 {
      
-     if(menu_t.menuTitle ==mainmenuItem){
-               menu_t.mainTop=PopMainMenu();
-      } 
-      else{
-           switch(menu_t.active_Submenu){
-              
-            case F1: //F1 -SUB
-                
-               switch(menu_t.FxSub_subMenu_key){
-                    
-                case 0xff:
-               
-                    menu_t.F1_SubMenuTop = PopSub_Menu(F1Mnumbers);
-               
-               case 0XF1:
-                     menu_t.F1_Sub01_Top = PopSub_03_Menu(5);
-               
-               case 0XF2:
+    switch(menu_t.FxMainMenu_key){
+    
+    case 0xA0 :
+            menu_t.mainTop=PopMainMenu();
+     break;
+      
+     case 0xB0:
+             menu_t.F1_SubMenuTop = PopSub_Menu(F1Mnumbers);
+     break;   
 
-                    if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-               case F101_03:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-                case F101_04:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-                case F101_05:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-                case F101_06:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-               
-                case F101_07:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                break;
-                
-                case F101_08:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                break;
-                
-                case F101_09:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                break;
-                case F101_10:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-               
-                case F101_11:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-               
-                case F101_12:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-               
-                case F101_13:
-                     if(menu_t.inputNumber_Select==1){
-                         menu_t. F1_Sub02_unit--;
-                         if(menu_t. F1_Sub02_unit < 0){
-                             menu_t. F1_Sub02_unit=9;
-                         }
-                    } 
-                    else if(menu_t.inputNumber_Select==2){
-                          menu_t.F1_Sub02_decade--;
-                        if(menu_t.F1_Sub02_decade < 0){
-                            menu_t.F1_Sub02_decade=9;
-                         }
-                    }
-                    else if(menu_t.inputNumber_Select==3){
-                         menu_t.F1_Sub02_hundred--;
-                        if(menu_t.F1_Sub02_hundred < 0){ 
-                            menu_t.F1_Sub02_hundred=9;
-                        }
-                    }
-                 
-               break;
-                 
-              
-                    
-               }
-            break;
-            
-            case F2: //F2 sub menu
-                menu_t.F2_SubMenuTop = PopSub_Menu(F2Mnumbers);
-            break;
-            
-            case F3: //F3 -SUB
-               menu_t.F3_SubMenuTop = PopSub_Menu(F3Mnumbers);
-            break;
-            
-           case F7: //F7 -SUB
-               menu_t.F7_SubMenuTop = PopSub_Menu(7);
-            break;
-            
-            case F8://F8 sub menu
-                menu_t.F8_SubMenuTop = PopSub_Menu(F8Mnumbers);
-            break;
-            
-            case F9://F9 sub menu
-                menu_t.F9_SubMenuTop = PopSub_Menu(F9Mnumbers);
-            break;
-            
-            default :
-            
-            break;
-        }
-     }
-     
-   }
+     case 0xC0:
+
+     break; 
+          
+        
+    }
+}
 
 
 /**************************************************************

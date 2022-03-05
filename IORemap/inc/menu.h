@@ -80,11 +80,15 @@ typedef struct _MENU{
 	   
 	   uint8_t F9_SubMenuTop;
 	   uint8_t menuF9Sub_first;
-	   uint8_t F9SubMenu_Id;
+	 
 
-	   int8_t menuReturn_flag;
-	   int8_t menuReturn_Sub_flag;
-	  uint16_t FxSub_subMenu_key;
+	   
+
+	  uint8_t  FxMainMenu_key;
+	  uint8_t  menu_F1Sub_03_xx_key;
+	  uint16_t FxSub_02_key;
+      uint16_t FxSub_03_key;
+	
 	   
 }MENU;
 
@@ -165,6 +169,26 @@ typedef enum {
 	F9Mnumbers = 7
 	
 }submenuNumbers;
+
+typedef enum {
+	
+	F101_01_01 = 5 , //has 13 itme sub menues
+	F101_01_02 = 1,
+	F101_01_03 = 1,
+    F101_01_04 = 1,
+	F101_01_05= 1,
+	F101_01_06 = 1,
+	F101_01_07 = 1,
+	F101_01_08 = 1,
+    F101_01_09 = 1,
+	F101_01_10= 1,
+	F101_01_11 = 4,
+	F101_01_12= 11,
+	F101_01_13 = 1
+	
+	
+}submenuNumber_02;
+
 
 typedef struct _submenulist{
 	

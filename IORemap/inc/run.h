@@ -5,7 +5,7 @@
 typedef struct _RUN{
   
     uint8_t dispCmd;
-
+    
 
 }run;
 
@@ -13,9 +13,9 @@ extern run run_t;
 
 typedef enum{
    
-     TheFirst_Menu,
+     TheFirst_Menu =0x01,
      TheSecond_Menu,
-     Thethird_Menu
+     TheThird_Menu
   
 
 }MainMenuStructure;

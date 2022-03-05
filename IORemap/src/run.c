@@ -1,34 +1,60 @@
 #include "run.h"
  mainitem mainitem_t;
+
+static void TheThird_03_Menu(void);
 void CheckMode(uint8_t mydata)
 {
     KEY_Function(mydata);
 
 }
+
 void RunCommand(void)
+{
+     switch(mainitem_t.task_MainMenu){
+
+         case 0:
+
+         break;
+         
+         
+         case TheFirst_Menu:
+                 MainMenu(menu_t.mainTop);
+         break;
+
+         case TheSecond_Menu:
+                menu_t.F1_Submenu_Check_flag =10;
+                F1_DIS();
+                F1SubMenu(menu_t.F1_SubMenuTop); //"Fx - 01"
+
+         break;
+
+         case TheThird_Menu:
+              TheThird_03_Menu();
+
+         break;
+
+         default:
+           run_t.dispCmd =0;
+
+         break;
+
+
+
+     }
+
+
+}
+
+/************************************************
+ ***********************************************/
+static void TheThird_03_Menu(void)
 {
     switch(menu_t.menuTitle){
 
-          case 0xf0: //test mode
-              Get_Weight();
-            Weigt_DisSmg(Weight_Real) ;
-          break;
-          
-          case mainmenuItem:  //The first menu 
-             MainMenu(menu_t.mainTop);
-          break;
-
           case submenu_F1: //F1-01
             
-           
-          if(menu_t.F1SubMenu_Sub_02_Id==F101){ //The second menu
-                menu_t.F1_Submenu_Check_flag =10;
-                F1_DIS();
-                F1SubMenu(menu_t.F1_SubMenuTop); //"F1 - 01"
-           }
-           else if(menu_t.F1SubMenu_Sub_02_Id ==0xff){
-          
-                 switch(menu_t.F1SubMenu_Sub_03_Id){
+              
+          switch(menu_t.F1SubMenu_Sub_03_Id){
            
                     case  F101_01 :
                             
@@ -127,4 +153,4 @@ void RunCommand(void)
 
 
 }
-	}
+	
