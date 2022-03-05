@@ -169,6 +169,7 @@ uint8_t PopSub_03_Menu(int8_t nsize)
 }
 uint8_t SubMenu_03_Top(void)
 {
+	   if(menuFxSub_03_Top==-1)menuFxSub_03_Top=0;
 	   return menuFxSub_03_Top ;
 	
 }

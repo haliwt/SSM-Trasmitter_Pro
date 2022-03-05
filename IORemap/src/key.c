@@ -180,10 +180,11 @@ static void KEY_SubMenuFun_Enter(void)
            
              }
              else{ //F1-01 ->next -> g ,H9,t,n,nonE
-                       menu_t.menuF1Sub_first++;
-                      if( menu_t.menuF1Sub_first >1){ //the second input menu
-                               //the first adjust 
-                               mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                       menu_t.menuF1Sub_first=0;
+                       
+                     
+                        //the first adjust 
+                        mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
                           
                                //runKey fun
                                 menu_t.FxMainMenu_key =0xc0; 
@@ -192,11 +193,11 @@ static void KEY_SubMenuFun_Enter(void)
                                 //runCmd menu
                                 menu_t.menuTitle=submenu_F1;
                                 menu_t.F1_Sub01_Top=SubMenu_03_Top();
-                                menu_t.F1SubMenu_Sub_03_Id=menu_t.F1_Sub01_Top; //
+                                menu_t.F1SubMenu_Sub_03_Id=F101_01; //
                                 menu_t.menu_F1Sub_03_xx_key= menu_t.F1_Sub01_Top; 
-                                menu_t.menuF1Sub_first=0;
+                               
                           
-                         }
+                         
                 }
             break;
          
@@ -471,6 +472,116 @@ static void KEY2_TRAE_DOWN_Fun(void)
      break;   
 
      case 0xC0:
+             switch( menu_t.FxSub_03_key){
+
+                    
+                    case 0xf10:
+                          switch(menu_t.menu_F1Sub_03_xx_key){
+
+                              case 0x00:
+                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
+                              break;
+
+                              case 0x01:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_02);
+                              break;
+
+                               case 0x02:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_03);
+                              break;
+
+                               case 0x03:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_04);
+                              break;
+
+                                case 0x04:
+                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_05);
+                              break;
+
+                              case 0x05:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_06);
+                              break;
+
+                               case 0x06:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_07);
+                              break;
+
+                               case 0x07:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_08);
+                              break;
+
+                                case 0x08:
+                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_09);
+                              break;
+
+                              case 0x09:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_10);
+                              break;
+
+                               case 0x0A:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_11);
+                              break;
+
+                               case 0x0B:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_12);
+                              break;
+
+                               case 0x0C:
+                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_13);
+                              break;
+
+                          }
+                    break;
+
+                    case 0xf20:
+
+                    break;
+
+                    case 0xf30:
+
+                    break;
+
+                    case 0xf40:
+
+                    break;
+
+                    case 0xf50:
+
+                    break;
+
+                    case 0xf60:
+
+                    break;
+
+                    case 0xf70:
+
+                    break;
+
+                    case 0xf80:
+
+                    break;
+
+                    case 0xf90:
+
+                    break;
+
+                    case 0xfa0:
+
+                    break;
+
+                    case 0xfb0:
+
+                    break;
+
+                    case 0xfc0:
+
+                    break;
+
+                    case 0xf13:
+
+                    break;
+
+                }
 
      break; 
           
