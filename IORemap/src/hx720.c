@@ -44,6 +44,7 @@ void Sensor_Init(void)
 	
 	//RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
 	RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
+	 
    // RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_GPIOB, ENABLE);
     //output CLK
 	GPIO_InitStruct(&GPIO_InitStructure);
@@ -71,20 +72,24 @@ uint32_t Sensor_Read(void)
 	
 	//每次读取数据前保证数据线电平稳定
 	//此处只是为了稳定电平 拉高或拉低效果相同
-	//GPIO_ResetBits(Sensor_Gpio,DATA);
-	//GPIO_SetBits(GPIOA,DATA);
+	GPIO_OutputInit(DATA_GPIO, DATA);
+	 //GPIO_ResetBits(Sensor_Gpio,DATA);
+	GPIO_SetBits(DATA_GPIO,DATA);
 	
 	//为了等待输出电平稳定
 	//在每次一操作电平时加微小延时
 	SysTick_Delay_us(2);//delay_us(2);
-	
+	GPIO_OutputInit(CLK_GPIO, CLK);
 	//时钟线拉低 空闲时时钟线保持低电位
 	 GPIO_ResetBits(CLK_GPIO, CLK); //1//GPIO_ResetBits(Sensor_Gpio,CLK);
 	
 	SysTick_Delay_us(2);//delay_us(2);	
 	
 	//等待AD转换结束
+	GPIO_ResetBits(DATA_GPIO,DATA);
 	while(GPIO_ReadInputDataBit(DATA_GPIO,DATA));
+	GPIO_InputInit(DATA_GPIO, DATA);
+	GPIO_OutputInit(CLK_GPIO, CLK);
 	
 	for(i=0;i<24;i++)
 	{
@@ -260,6 +265,7 @@ void Weigt_DisSmg(float weightValue)
 	   SmgDisplay(digital_4,thousandPlace);
 	   SmgDisplay(digital_5,hundredPlace);
 	  }
+	 
  }
 	
 
@@ -392,8 +398,11 @@ uint32_t GetHX720Data(void)
 	HX720_CLK_L();//SCLK is low
 	
 	Count =0;
+	GPIO_OutputInit(DATA_GPIO, DATA);
+	GPIO_ResetBits(DATA_GPIO, DATA);
 	while(GetDataPinState());
-	
+	GPIO_InputInit(DATA_GPIO, DATA);
+	 GPIO_OutputInit(CLK_GPIO, CLK);
 	for(i=0;i<24;i++)
 	{
 	   HX720_CLK_H();
