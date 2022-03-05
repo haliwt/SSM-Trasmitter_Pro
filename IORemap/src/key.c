@@ -164,7 +164,7 @@ static void	KEY4_SET_ENTER_Fun(void)
 ***************************************************/           
 static void KEY_SubMenuFun_Enter(void)
 {
-    
+      static int8_t temp=0;
       switch(menu_t.menuId){
                
           case F1: //F1 - 01
@@ -189,7 +189,14 @@ static void KEY_SubMenuFun_Enter(void)
                             
                                 //runCmd menu
                                 menu_t.menuTitle=submenu_F1;
-                                menu_t.F1_Sub01_Top=SubMenu_03_Top();
+                                 temp=SubMenu_03_Top();
+				                 if(temp==-1){
+								     menu_t.F1_Sub01_Top=0;
+								}
+								 else menu_t.F1_Sub01_Top =temp;
+								
+								if(menu_t.F101_03_SubMeng_flag ==0)menu_t.F1_Sub01_Top=0;
+								 
                                 menu_t.F1SubMenu_Sub_03_Id= menu_t.F1_Sub01_Top; //
                                 menu_t.menu_F1Sub_03_xx_key= menu_t.F1_Sub01_Top; 
                                

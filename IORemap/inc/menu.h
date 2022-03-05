@@ -217,7 +217,7 @@ int8_t SubMenu_02_Top(void);
 //F1,F2,F3,F7,F8,F9 ->the third menu >F1 -01 -> g,H9,t,n,nonE
 extern uint8_t PushSub_03_Menu(int8_t msize);
 extern uint8_t PopSub_03_Menu(int8_t msize);
-uint8_t SubMenu_03_Top(void);
+int8_t SubMenu_03_Top(void);
 
 //F1 MENU the third menu 
 void F1SubMenu_F101_Select_DIS(uint8_t subm3);

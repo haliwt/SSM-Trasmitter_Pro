@@ -40,19 +40,7 @@ uint8_t PopMainMenu(void)
    // MainMenu(menuTop);
 	return menuTop;
 }
-int8_t PopMainMenu_Return(void)
-{
-    menuTop--;
-	if(menuTop == -1){
-	   // //printf("Error : no element to Pop \n");
-		//return;
-	   //menuTop = MAX_SIZE_MAINMENU -1 ;
-	   return -1;
-	}
-   // MainMenu(menuTop);
-	return menuTop;
 
-}
 
 void TopMainMenu(void)
 {
@@ -144,7 +132,7 @@ int8_t SubMenu_02_Top(void)
 *************************************************/
 uint8_t PushSub_03_Menu(int8_t nsize)
 {
-	 if(menuFxSub_03_Top >= nsize){
+	 if(menuFxSub_03_Top == (nsize -1)){
 	     // printf("Error :stack overflow \n");
 	     //return ;
 	  
@@ -158,18 +146,17 @@ uint8_t PushSub_03_Menu(int8_t nsize)
 }
 uint8_t PopSub_03_Menu(int8_t nsize)
 {
-	
+	 menuFxSub_03_Top--;
 	if(menuFxSub_03_Top == -1){
 	    //printf("Error : no element to Pop \n");
 		//return;
 		menuFxSub_03_Top = nsize -1 ;
 	}
-    menuFxSub_03_Top--;
+   
     return menuFxSub_03_Top ;
 }
-uint8_t SubMenu_03_Top(void)
+int8_t SubMenu_03_Top(void)
 {
-	   if(menuFxSub_03_Top==-1)menuFxSub_03_Top=0;
 	   return menuFxSub_03_Top ;
 	
 }
