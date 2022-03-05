@@ -32,7 +32,7 @@ void assert_failed(const uint8_t* expr, const uint8_t* file, uint32_t line)
 int main(void)
 {
    
-    uint8_t keydata;
+    uint8_t keydata,i;
 	
 	/*SystemInit() function has been called by startup file startup_n32l40x.s*/
 
@@ -60,17 +60,23 @@ int main(void)
 	HX720_ReadDataFlag=0;
     while (1)
     {
-			Get_Weight();
+	 
+		Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
 		//Weight_Real = 0x100;
 			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 		SysTick_Delay_Ms(1000);
-		keydata = ScanKey();
+		 keydata = ScanKey();
 		 if(keydata == 0xff)keydata=0;
 		 if(keydata !=0)run_t.dispCmd=1;
-		Get_Weight();
+		Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
 		//Weight_Real = 0x0A;
 			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
         SysTick_Delay_Ms(1000);
+		Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
+		//Weight_Real = 0x0A;
+			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
+		SysTick_Delay_Ms(1000);
+	  
 		if(run_t.dispCmd==0){
 			Get_Weight();
 			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;

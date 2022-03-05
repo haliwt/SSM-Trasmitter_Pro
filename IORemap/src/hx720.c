@@ -160,10 +160,10 @@ void Get_No_Lode(void)
 
 float Get_Weight(void)
 {
-	HX720_Buffer = Sensor_Read();
+	//HX720_Buffer = Sensor_Read();
 	//HX720_Buffer=  HX711_Read();	//??128
 	
-	//HX720_Buffer= GetHX720Data();
+	HX720_Buffer= GetHX720Data();
 	
 	Weight_Lode = HX720_Buffer;
 		
@@ -274,16 +274,19 @@ unsigned long HX711_Read(void)	//??128
 	unsigned char i = 0; 
 
 	//DATA
+	GPIO_OutputInit(DATA_GPIO, DATA);
+	GPIO_ResetBits(DATA_GPIO,DATA);
 	while(GPIO_ReadInputDataBit(DATA_GPIO,DATA));
 	
 	SysTick_Delay_us(1);
 	//sck ??
 	GPIO_ResetBits(CLK_GPIO,CLK);
+	GPIO_SetBits(DATA_GPIO,DATA);
 	//read data 
 	while(!GPIO_ReadInputDataBit(DATA_GPIO,DATA));
-	
-	
-  
+
+	GPIO_InputInit(DATA_GPIO, DATA);
+    GPIO_OutputInit(CLK_GPIO, CLK);
 	for(i=0;i<24;i++) 
 	{ 
 		
