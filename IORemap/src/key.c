@@ -177,15 +177,7 @@ static void KEY_SubMenuFun_Enter(void)
                menu_t.FxMainMenu_key =0xB0;
              //  menu_t.FxSub_02_key=0xf01;
                menu_t.F1_SubMenuTop= PushSub_Menu(F1Mnumbers);//subNumbers_TypedDef submenN;
-               temp0=  SubMenu_02_Top();
-               if(temp0==-1){
-                     temp0= 0;
-                        menu_t.F1_SubMenuTop=temp0;
-               }
-               else{
-
-                      menu_t.F1_SubMenuTop=temp0;
-               }
+             
              }
              else{ //F1-01 ->next -> g ,H9,t,n,nonE
                  
@@ -219,6 +211,10 @@ static void KEY_SubMenuFun_Enter(void)
                                     menu_t.F1_Sub03_Top=temp;
                            break;
 
+                           case F104:
+                                    menu_t.F1_Sub03_Top=temp;
+                           break;
+
 
                         }
                        
@@ -236,29 +232,12 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxSub_03_key=0xff;  
                         menu_t.menuTitle_03=0;
 
-                       /*  temp0=  SubMenu_02_Top();
-                        if(temp0==-1){
-                              temp0= 0;
-                             // menu_t.F1_SubMenuTop=temp0;
-                        } */
-                        switch(menu_t.F1SubMenu_Id){
+                     
 
-                           case F101:
-                                    menu_t.F1_Sub01_Top=temp0;
-                           break;
-
-                           case F102:
-                                    menu_t.F1_Sub02_Top=temp0;
-                           break;
-
-                           case F103:
-                                    menu_t.F1_Sub03_Top=temp0;
-                           break;
-
-
-                        }
+                        menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
+                     
                        
-                     //   menu_t.F1_SubMenuTop=temp0;
+                    
                        
                   }
 		}
