@@ -1,5 +1,7 @@
 #include "menusub.h"
 
+
+
 void StackStacksubmenu_03_Init(Stacksubmenu_03 *sm03)
 {
     sm03->submenuTop_03 =-1;
@@ -87,6 +89,27 @@ void TheThird_03_Menu(void)
                         key_t.keyReturn_flag=1;
                        
 				   break;
+
+                   case 0x02:
+                        menu_t.F1SubMenu_Sub_02_Id =0x02;
+					   F1SubMenu_F1_02_01(menu_t. F1_Sub03_unit,menu_t.F1_Sub03_decade,menu_t.F1_Sub03_hundred);
+                     //  printf("f1sub_02_03_Top = %d\n",menu_t.F1_Sub02_Top);
+                        key_t.keyReturn_flag=1;
+
+                   break;
+
+                   case 0x03:
+                        menu_t.F1SubMenu_Sub_02_Id =0x03;
+                        F1SubMenu_F104_01_Select_DIS(AF104);
+                        key_t.keyReturn_flag=1;
+                   break;
+
+                   break;
+
+                   case 0x04:
+                       
+
+                   break;
 
 				   
 				   case 0x0c:
@@ -200,3 +223,4 @@ void F1_TheBlinkMenu_03(void)
 	
 	
 }
+

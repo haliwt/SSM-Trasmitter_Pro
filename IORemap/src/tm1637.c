@@ -1,6 +1,29 @@
 #include "tm1637.h"
 #include "delay.h"
 
+
+
+
+const unsigned char segNumber_point[]={
+	
+     
+         seg_a+seg_b+seg_c+seg_d+seg_e+seg_f+seg_h,        		// char "0"  0x00
+         seg_b+seg_c+seg_h,                                       // char "1"  0x01
+         seg_a+seg_b+seg_d+seg_e+seg_g+seg_h,              		// char "2"  0x02
+         seg_a+seg_b+seg_c+seg_d+seg_g+seg_h,              		// char "3"  0x03
+         seg_b+seg_c+seg_f+seg_g+seg_h,                   	    // char "4"  0x04
+         seg_a+seg_c+seg_d+seg_f+seg_g+seg_h,              		// char "5"  0x05
+         seg_a+seg_c+seg_d+seg_e+seg_f+seg_g+seg_h,              // char "6"  0x06
+         seg_a+seg_b+seg_c+seg_f+seg_h,                    		// char "7"  0x07
+         seg_a+seg_b+seg_c+seg_d+seg_e+seg_f+seg_g+seg_h,  		// char "8"  0x08
+         seg_a+seg_b+seg_c+seg_d+seg_f+seg_g+seg_h,        		// char "9"  0x09
+         seg_h,                                             // char "."  0x0A
+         0x00                                               // Dont't display 0x0B
+       
+};
+
+
+
 const unsigned char segNumber[]={
 	
      
@@ -169,6 +192,31 @@ void SmgDisplay(disreg dg,uint8_t data)
 	  pointer = segNumber;
 	
 	
+	  I2CStart();
+	  I2CWrByte(0x44);  //siginal address
+	
+	  I2Cask();
+	  I2CStop();
+	
+	  I2CStart();
+	  I2CWrByte(dg); // display address of digit One byte
+	  I2Cask();
+	
+	  I2CWrByte(*(pointer+data));//I2CWrByte(0xf0);//I2CWrByte(0xff);
+	  I2Cask();
+		I2CStop();
+		
+		I2CStart(); //EDIT 
+		I2CWrByte(0x8f); //open display ,brightness max
+		I2Cask();
+		I2CStop();
+}
+
+void SmgDisplay_Point(disreg dg,uint8_t data)
+{
+    
+	  const uint8_t *pointer;
+	  pointer = segNumber_point;
 	  I2CStart();
 	  I2CWrByte(0x44);  //siginal address
 	

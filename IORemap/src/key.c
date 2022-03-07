@@ -4,18 +4,21 @@
 #define MAZ_F1_SUBMENU_SIZE   13
 
 KEY key_t;
-
 run run_t;
 subNumbers_TypedDef submenStruct;
+int8_t AF104[4]={0,0,0,0};
 
 int8_t Amenu_Top = -1;
 
 uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 
-
+int8_t one,two,three,four; 
 void(*DispDigital_3BitSmg)(void);
-void Number_Digital_3bit_DecSelect(void);
-void Number_Digital_3bit_AddSelect(void);
+static void Number_Digital_3bit_DecSelect(void);
+static void Number_Digital_3bit_AddSelect(void);
+static void Number_Digital_4bit_DecSelect(int8_t *ap);
+static void Number_Digital_4bit_AddSelect(int8_t *ap);
+
 
 //void RunDispDigital_Fun(void(*DisSmg)(void));
 static void KEY1_ZERIO_UP_Fun(void);
@@ -24,6 +27,7 @@ static void KEY3_SWITCH_LEFT_Fun(void);
 static void KEY4_SET_ENTER_Fun(void);
 static void KEY_SubMenuFun_Enter(void);
 static void F1_01_xx_SelectCmd(void);
+
 
 
 int8_t ATop(void);
@@ -352,46 +356,31 @@ static void KEY1_ZERIO_UP_Fun(void)
                     case 0xf10:
                           switch(menu_t.menu_F1Sub_03_xx_key){
 
-                              case 0x00:
+                              case 0x00: //F1-01-01
                                   menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
                                   printf("f1sub_01_n_Top = %d\n",menu_t.F1_Sub01_Top);
                                    key_t.keyReturn_flag=1;
                               break;
 
-                              case 0x01:
-                                  RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                              case 0x01: //F1-02-01
+                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
                                    menu_t. F1_Sub02_unit= menu_t.unit;
                                     menu_t.F1_Sub02_decade=menu_t.decade;
                                    menu_t.F1_Sub02_hundred =menu_t.hundred;
-                                 /*  if(menu_t.inputNumber_Select==0){
-                                          menu_t. F1_Sub02_unit++ ;
-                                          if(menu_t. F1_Sub02_unit >9){
-                                          menu_t. F1_Sub02_unit=0;
-
-                                    }
-                                    }
-                                    else if(menu_t.inputNumber_Select==1){
-                                          menu_t.F1_Sub02_decade++;
-                                          if(menu_t.F1_Sub02_decade >9){
-                                          menu_t.F1_Sub02_decade=0;
-                                    }
-                                    }
-                                    else if(menu_t.inputNumber_Select==2){
-                                          menu_t.F1_Sub02_hundred++;  
-                                          if(menu_t.F1_Sub02_hundred >9){
-                                          menu_t.F1_Sub02_hundred=0;
-                                    }
-                                    }   */
+                                
                                     printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);
                                     key_t.keyReturn_flag=1;
                               break;
 
-                               case 0x02:
-                                    menu_t.F1_Sub03_Top=  PushSub_03_Menu(F101_01_03);
+                               case 0x02: //F1-03-01
+                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                                   menu_t. F1_Sub03_unit= menu_t.unit;
+                                    menu_t.F1_Sub03_decade=menu_t.decade;
+                                   menu_t.F1_Sub03_hundred =menu_t.hundred;
                               break;
 
-                               case 0x03:
-                                    menu_t.F1_Sub04_Top=  PushSub_03_Menu(F101_01_04);
+                               case 0x03: //F1-04-01
+                                    Number_Digital_4bit_DecSelect(AF104);
                               break;
 
                                 case 0x04:
@@ -540,11 +529,16 @@ static void KEY2_TRAE_DOWN_Fun(void)
                               break;
 
                                case 0x02:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_03);
+                                RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+                                  menu_t. F1_Sub03_unit= menu_t.unit;
+                                  menu_t.F1_Sub03_decade=menu_t.decade;
+                                  menu_t.F1_Sub03_hundred =menu_t.hundred;
+                              
+                              key_t.keyReturn_flag=1;
                               break;
 
                                case 0x03:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_04);
+                                    Number_Digital_4bit_DecSelect(AF104);
                               break;
 
                                 case 0x04:
@@ -653,7 +647,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 { 
      
       
-      if(menu_t.F1SubMenu_Sub_02_Id ==0x01){
+      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02){
                
             menu_t.inputNumber_Select ++;
             if(menu_t.inputNumber_Select > 2){
@@ -662,7 +656,13 @@ static void KEY3_SWITCH_LEFT_Fun(void)
               
        }
       printf("numbers = %d\n",menu_t.inputNumber_Select);
-    
+    if(menu_t.F1SubMenu_Sub_02_Id ==0x03){
+          menu_t.inputNumber_Select ++;
+        if(menu_t.inputNumber_Select > 3){
+                  menu_t.inputNumber_Select =0;
+          }
+    }
+      
 }
 
 int8_t ATop(void)
@@ -786,5 +786,80 @@ void RunDispDigital_Fun(void(*DisSmg)(void))
 
           DispDigital_3BitSmg();
     }
+
+}
+/*******************************************************
+********************************************************/
+void Number_Digital_4bit_DecSelect(int8_t *ap)
+{
+     
+	if(menu_t.inputNumber_Select==0){
+             one--;
+            if(one < 0){
+               one=9;
+            }
+			*ap= one;
+            printf("s_1 = %d\n",one);
+      }
+      else if(menu_t.inputNumber_Select==1){
+            two--;
+            if(two< 0){
+               two=9;
+            }
+			*(ap+1) = two;
+            printf("s_2 = %d\n",*(ap+1));
+      
+      }
+      else if(menu_t.inputNumber_Select==2){
+            three--;
+            if(three< 0){ 
+               three=9;
+            }
+			*(ap+2) = three;
+            printf("s_3 = %d\n",*(ap+2));
+          
+      }
+      else if(menu_t.inputNumber_Select==3){
+             four--;
+            if( four < 0){ 
+               four=9;
+            }
+			*(ap+3) = four;
+            printf("s_4 = %d\n", *(ap+3));
+          
+      }
+
+}
+void Number_Digital_4bit_AddSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+            one++ ;
+            if(one >9){
+               one=0;
+            }
+			*ap = one;
+      }
+      else if(menu_t.inputNumber_Select==1){
+                  two++;
+                  if(two >9){
+                        two=0;
+                  }
+				  *(ap+1) = two;
+       }
+      else if(menu_t.inputNumber_Select==2){
+                  three++;  
+                  if(three >9){
+                      three=0;
+                   }
+				  *(ap+2)=three;
+      } 
+      else if(menu_t.inputNumber_Select==3){
+                  four++;  
+                  if(four >9){
+                      four=0;
+                    }
+				  *(ap+3) = four; 
+      } 
+      
 
 }

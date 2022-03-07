@@ -67,6 +67,10 @@ typedef struct _MENU{
 	   int8_t F1_Sub02_unit;
 	   int8_t F1_Sub02_decade;
 	   int8_t F1_Sub02_hundred;
+	   
+	   int8_t F1_Sub03_unit;
+	   int8_t F1_Sub03_decade;
+	   int8_t F1_Sub03_hundred;
 
 	   uint8_t F1_Submenu_Check_flag;
 	   uint8_t inputNumber_Select;
@@ -102,9 +106,10 @@ typedef struct _MENU{
 	  uint8_t  FxMainMenu_key;
 	  uint8_t  menu_F1Sub_03_xx_key;
 
-	  	int8_t unit;
+	int8_t unit;
 	int8_t decade;
 	int8_t hundred;
+	int8_t thousand;
 	  uint16_t FxSub_02_key;
       uint16_t FxSub_03_key;
 	

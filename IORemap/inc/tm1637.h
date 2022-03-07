@@ -63,6 +63,7 @@ void SmgDisplay(disreg dg,uint8_t dat);
 void SmgDisplay_All(void);
 
 void SmgDisplay_Character(disreg dg,uint8_t chdat);
+void SmgDisplay_Point(disreg dg,uint8_t pdata);
 
 uint8_t ScanKey(void);
 

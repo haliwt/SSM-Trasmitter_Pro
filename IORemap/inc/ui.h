@@ -38,6 +38,8 @@ void F1SubMenu_Sub_01_05(void);
 //F1 the third menu 02 list
 void F1SubMenu_F1_02_01(int8_t unit,int8_t decade,int8_t hundred);
 
+void F1SubMenu_F104_01_Select_DIS(int8_t *p);
+
 //F1 the third menu 03 list
 void F1SubMenu_Sub_03(void);
 void F1SubMenu_Sub_04(void);
@@ -72,6 +74,7 @@ void F8SubMenu_Master_01(void);
 
 //F9 SubMenu List 
 void F9SubMenu_Master_01(void);
+
 
 #endif 
 

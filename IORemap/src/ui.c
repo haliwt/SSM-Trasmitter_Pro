@@ -245,50 +245,7 @@ void F1SubMenu_F1_02_01(int8_t unit,int8_t decade,int8_t hundred)
  * 
  * 
 ***********************************************************/
-void F1SubMenu_Sub_03(void)
-{
 
-}
-void F1SubMenu_Sub_04(void)
-{
-
-}
-void F1SubMenu_Sub_05(void)
-{
-
-}
-void F1SubMenu_Sub_06(void)
-{
-
-}
-void F1SubMenu_Sub_07(void)
-{
-
-}
-void F1SubMenu_Sub_08(void)
-{
-
-}
-void F1SubMenu_Sub_09(void)
-{
-
-}
-void F1SubMenu_Sub_10(void)
-{
-
-}
-void F1SubMenu_Sub_11(void)
-{
-
-}
-void F1SubMenu_Sub_12(void)
-{
-
-}
-void F1SubMenu_Sub_13(void)
-{
-
-}
 /***********************************************************
  * 
  * Function Name: void F2_SubMenu_01(void)
@@ -370,6 +327,18 @@ void F9SubMenu_Master_01(void)
 {
    SmgDisplay_Character(digital_1,0x04); //"F"
    SmgDisplay(digital_2,0x09); //'9'
+  
+
+}
+
+void F1SubMenu_F104_01_Select_DIS(int8_t *p)
+{
+   
+   SmgDisplay(digital_1,0x0b); // 0~100
+   SmgDisplay(digital_2,*(p+3)); // 0~100
+   SmgDisplay_Point(digital_3,*(p+2)); // pointer "."
+   SmgDisplay(digital_4,*(p+1)); // 0~100
+   SmgDisplay(digital_5,*p); // 0~100
   
 
 }
