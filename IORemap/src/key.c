@@ -164,7 +164,7 @@ static void	KEY4_SET_ENTER_Fun(void)
 ***************************************************/           
 static void KEY_SubMenuFun_Enter(void)
 {
-      static int8_t temp=0,temp0,F1currkey= 0xff;
+      static int8_t temp=0,temp0,F1currkey= 0XFF;
       switch(menu_t.menuId){
                
           case F1: //F1 - 01
@@ -175,7 +175,7 @@ static void KEY_SubMenuFun_Enter(void)
                mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
               // menuFxSubTop=-1;
                menu_t.FxMainMenu_key =0xB0;
-               menu_t.FxSub_02_key=0xf01;
+             //  menu_t.FxSub_02_key=0xf01;
                //menu_t.F1_SubMenuTop= PushSub_Menu(F1Mnumbers);//subNumbers_TypedDef submenN;
                temp0=  SubMenu_02_Top();
                if(temp0==-1){
@@ -186,40 +186,37 @@ static void KEY_SubMenuFun_Enter(void)
 
                       menu_t.F1_SubMenuTop=temp0;
                }
-
-
-
              }
              else{ //F1-01 ->next -> g ,H9,t,n,nonE
                  
                   menu_t.menuF1Sub_first++;
+                
                   //runCmd menu
-                  if(menu_t.F1SubMenu_Id !=F1currkey){
-                        F1currkey = menu_t.F1SubMenu_Id;
-                            
-                       
-                        mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
-
-                        //runKey fun
-                        menu_t.FxMainMenu_key =0xC0; //the third menu open 
-                        menu_t.FxSub_03_key=0xf10;  //the third sub open
-
-                        temp=submenu_03_Top();
-                        if(temp==-1){
-                              menu_t.F1_Sub01_Top=0;
+                  if(F1currkey !=menu_t.F1SubMenu_Id ){
+                              F1currkey = menu_t.F1SubMenu_Id;
+                              
+                        
+                              mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                              menu_t.menuTitle=submenu_F1;
+                              //runKey fun
+                              menu_t.FxMainMenu_key =0xC0; //the third menu open 
+                              menu_t.FxSub_03_key=0xf10;  //the third sub open
+                                    // menu_t.FxSub_02_key=0;
+                              temp=submenu_03_Top();
+                              if(temp==-1){
+                                    temp =0;
+                                    menu_t.F1_Sub01_Top=temp;
+                              }
+                              else 
+                                   menu_t.F1_Sub01_Top=temp;
+                              menu_t.menu_F1Sub_03_xx_key=menu_t.F1_Sub01_Top;
+                              
                         }
-                        menu_t.menu_F1Sub_03_xx_key=menu_t.F1_Sub01_Top;
-                             
-                  }
-			  
-              else{
-                        if(menu_t.menuF1Sub_first==2){
-
-                        }
-                        else{
+                  else{
+                        
                               menu_t.menuF1Sub_first=0;
                               menu_t.menuId= F1;
-                        }
+                        
                               
                   }
 		}

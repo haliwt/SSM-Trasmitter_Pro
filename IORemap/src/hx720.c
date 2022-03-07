@@ -426,16 +426,14 @@ uint32_t GetHX720Data(void)
 
 }
 
-void RunHX720Cmd(vodi)
+void RunHX720Cmd(void)
 {
 	
 		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
 		//Weight_Real = 0x100;
 			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 		SysTick_Delay_Ms(1000);
-		 keydata = ScanKey();
-		 if(keydata == 0xff)keydata=0;
-		 if(keydata !=0)run_t.dispCmd=1;
+		
 		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
 		//Weight_Real = 0x0A;
 			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
