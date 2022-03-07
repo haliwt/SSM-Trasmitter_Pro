@@ -98,7 +98,7 @@ void TheThird_03_Menu(void)
 
                    break;
 
-                   case 0x03:
+                   case 0x03://F1-04-01
                         menu_t.F1SubMenu_Sub_02_Id =0x03;
                         F1SubMenu_F104_01_Select_DIS(AF104);
                         key_t.keyReturn_flag=1;
@@ -106,17 +106,55 @@ void TheThird_03_Menu(void)
 
                    break;
 
-                   case 0x04://F1-01-05 
+                   case 0x04://F1-05-01 
                       menu_t.F1SubMenu_Sub_02_Id =0x04;
                        key_t.keyReturn_flag=1;
                        F1SubMenu_F105_01_Select_DIS(AF105);
 
                    break;
-
-				   
-				   case 0x0c:
-					   
+                   case 0x05 : //F1-06-01
+                       menu_t.F1SubMenu_Sub_02_Id =0x05;
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
 				   break;
+
+                   case 0x06 : //F1-07-01
+                        menu_t.F1SubMenu_Sub_02_Id =0x06;
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
+				   break;
+
+                  case 0x07 : //F1-08-01
+                        menu_t.F1SubMenu_Sub_02_Id =0x07;
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
+				   break;
+
+                  case 0x08 : //F1-09-01
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
+				   break;
+
+                   case 0x09 : //F1-10-01
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
+				   break;
+
+                   case 0x0A : //F1-11-01
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
+				   break;
+
+                   case 0x0B : //F1-12-01
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
+				   break;
+
+                   case 0x0C : //F1-13-01
+                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        key_t.keyReturn_flag=1;
+				   break;
+
 				   
 				   
 			   }
