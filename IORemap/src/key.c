@@ -83,16 +83,12 @@ void KEY_Function(uint8_t keydata)
                     // CH1_KeyLed();
                      CH3_KeyLed();
                      key_t.keyTimes=1;
-                     if(key_t.keyTimes_2s <=2){
-                      if(key_t.currkeyswitch !=key_t.keyswitch){
+                     if(key_t.currkeyswitch !=key_t.keyswitch){
                             key_t.currkeyswitch = key_t.keyswitch;
                             KEY3_SWITCH_LEFT_Fun();
                       }
-                     }
-                     else{
-
-
-                     }
+                    
+                  Valley_KeyLed();
                   key_t.keyset++;
                   key_t.keytrae++;
                   key_t.keyzero++; 
@@ -663,26 +659,18 @@ static void KEY2_TRAE_DOWN_Fun(void)
 **************************************************************/
 static void KEY3_SWITCH_LEFT_Fun(void)
 { 
-       static uint8_t i=0;
+     
       
       if(menu_t.F1SubMenu_Sub_02_Id ==0x01){
                
             menu_t.inputNumber_Select ++;
-            if(i==0){
-                   menu_t.inputNumber_Select =0;
-                        i++;
-            }
-            else{
-                  if(menu_t.inputNumber_Select > 2)  
-                        menu_t.inputNumber_Select =0;
+            if(menu_t.inputNumber_Select > 2){
+                  menu_t.inputNumber_Select =0;
              }
               
        }
-        printf("numbers = %d\n",menu_t.inputNumber_Select);
+      printf("numbers = %d\n",menu_t.inputNumber_Select);
     
-          
-        
-
 }
 
 int8_t ATop(void)

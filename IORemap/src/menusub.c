@@ -75,7 +75,7 @@ void TheThird_03_Menu(void)
 				   
 				   case 0:
 				       F1SubMenu_F101_01_Select_DIS(menu_t.F1_Sub01_Top);
-                       printf("f1sub_01_03_Top = %d\n",menu_t.F1_Sub01_Top);
+                     //  printf("f1sub_01_03_Top = %d\n",menu_t.F1_Sub01_Top);
                        key_t.keyReturn_flag=1;
                       
 				   break;
@@ -83,7 +83,7 @@ void TheThird_03_Menu(void)
 				   case 0x01:
                        menu_t.F1SubMenu_Sub_02_Id =0x01;
 					   F1SubMenu_F1_02_01(menu_t. F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                       printf("f1sub_02_03_Top = %d\n",menu_t.F1_Sub02_Top);
+                     //  printf("f1sub_02_03_Top = %d\n",menu_t.F1_Sub02_Top);
                         key_t.keyReturn_flag=1;
                        
 				   break;

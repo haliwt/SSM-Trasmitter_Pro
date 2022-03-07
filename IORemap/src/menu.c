@@ -20,6 +20,7 @@ menuTop= -1;
 menuFxSubTop=-1;
 menuFxSub_03_Top = -1;
  F1_03_item_Top=-1;
+ menu_t.inputNumber_Select=0;
 
 }
 
