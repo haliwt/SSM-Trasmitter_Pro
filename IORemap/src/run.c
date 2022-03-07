@@ -26,7 +26,7 @@ void RunCommand(void)
                 menu_t.F1_Submenu_Check_flag =0x02;
                 F1_DIS();
                 F1SubMenu(menu_t.F1_SubMenuTop); //"Fx - 01"
-
+                
          break;
 
          case TheThird_Menu:
