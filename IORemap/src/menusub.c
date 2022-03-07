@@ -81,7 +81,8 @@ void TheThird_03_Menu(void)
 				   break;
 				   
 				   case 0x01:
-					   F1SubMenu_F101_02_Select_DIS(menu_t.F1_Sub02_Top);
+                       menu_t.F1SubMenu_Sub_02_Id =0x01;
+					   F1SubMenu_F1_02_01(menu_t. F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
                        printf("f1sub_02_03_Top = %d\n",menu_t.F1_Sub02_Top);
                         key_t.keyReturn_flag=1;
                        

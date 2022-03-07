@@ -233,7 +233,7 @@ void F1SubMenu(int8_t f1sub)
 			
 			case F103:
 			     menu_t.F1SubMenu_Id = F103;
-				F1Stacksubmenu_03();
+				//F1SubMenu_03();
 			break;
 				
 			case F104:
@@ -306,6 +306,7 @@ void F1SubMenu_F101_01_Select_DIS(uint8_t subm3)
 
 	   case 1:
 	   		menu_t.F101_03_SubMeng_flag = 0x01;
+		  
 			F1SubMenu_Sub_01_02();
 	   break;
 
