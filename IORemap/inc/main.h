@@ -27,6 +27,7 @@ extern "C" {
 #include "hx720.h"
 #include "led.h"
 #include "menusub.h"
+#include "printf.h"
 
 /*Led1-PA0,Led2-PB1,Key-PA8*/
 

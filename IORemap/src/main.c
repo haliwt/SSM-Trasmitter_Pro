@@ -51,7 +51,7 @@ int main(void)
      GPIO_OutputInit(I2C_SDA_PORT, I2C_SDA_PIN);
 	 
 	  Timer1_Configuration();
-	   
+	  Printf_GPIO_Configuration();
 	 
 	//GPIO_Configuration(); //test Timer1 
 	  

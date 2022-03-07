@@ -212,7 +212,7 @@ static void KEY_SubMenuFun_Enter(void)
                            break;
 
                            case F104:
-                                    menu_t.F1_Sub03_Top=menu_t.F1SubMenu_Id;
+                                    menu_t.F1_Sub04_Top=menu_t.F1SubMenu_Id;
                            break;
 
 
