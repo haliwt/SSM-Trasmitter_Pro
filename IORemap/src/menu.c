@@ -234,7 +234,7 @@ void F1SubMenu(int8_t f1sub)
 			
 			case F103:
 			     menu_t.F1SubMenu_Id = F103;
-				//F1SubMenu_03();
+				 F1SubMenu_03();
 			break;
 				
 			case F104:

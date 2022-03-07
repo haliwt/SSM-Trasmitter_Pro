@@ -531,11 +531,10 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                               case 0x01:
                              
-        
-                                    RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
-                                   menu_t. F1_Sub02_unit= menu_t.unit;
-                                    menu_t.F1_Sub02_decade=menu_t.decade;
-                                   menu_t.F1_Sub02_hundred =menu_t.hundred;
+                                  RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+                                  menu_t. F1_Sub02_unit= menu_t.unit;
+                                  menu_t.F1_Sub02_decade=menu_t.decade;
+                                  menu_t.F1_Sub02_hundred =menu_t.hundred;
                               
                               key_t.keyReturn_flag=1;
                               break;
