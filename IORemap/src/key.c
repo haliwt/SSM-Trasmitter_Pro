@@ -210,7 +210,8 @@ static void KEY_SubMenuFun_Enter(void)
                   }
                   else 
                         menu_t.F1_Sub01_Top=temp;
-                        menu_t.menu_F1Sub_03_xx_key=00;
+                        if( menu_t.F1SubMenu_Id == temp)
+                                 menu_t.menu_F1Sub_03_xx_key=temp;
                               
                 //  }
                   }
