@@ -15,8 +15,8 @@ typedef enum{
    
      TheFirst_Menu =0x01,
      TheSecond_Menu,
-     TheThird_Menu
-  
+     TheThird_Menu,
+     TheFourth_Menu
 
 }MainMenuStructure;
 
@@ -40,7 +40,7 @@ typedef struct _MainItem{
    
      uint8_t task_MainMenu;
      uint8_t task_SubMenu_02;
-     uint8_t task_SubMenu_03;
+     uint8_t task_Stacksubmenu_03;
      
 
 }mainitem;
@@ -48,7 +48,7 @@ typedef struct _MainItem{
 extern mainitem mainitem_t;
 void CheckMode(uint8_t mydata);
 void RunCommand(void);
-
+void RunBlinkbMenuCmd(void);
 
 
 

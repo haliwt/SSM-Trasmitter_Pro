@@ -155,7 +155,7 @@ uint8_t PopSub_03_Menu(int8_t nsize)
    
     return menuFxSub_03_Top ;
 }
-int8_t SubMenu_03_Top(void)
+int8_t submenu_03_Top(void)
 {
 	   return menuFxSub_03_Top ;
 	
@@ -223,7 +223,7 @@ void F1SubMenu(int8_t f1sub)
 			
 			case F103:
 			     menu_t.F1SubMenu_Id = F103;
-				F1SubMenu_03();
+				F1Stacksubmenu_03();
 			break;
 				
 			case F104:
@@ -285,7 +285,7 @@ void F1SubMenu(int8_t f1sub)
 
 }
 //F1 MENU the third menu 
-void F1SubMenu_F101_Select_DIS(uint8_t subm3)
+void F1SubMenu_F101_01_Select_DIS(uint8_t subm3)
 {
    switch(subm3){
      
@@ -317,6 +317,11 @@ void F1SubMenu_F101_Select_DIS(uint8_t subm3)
 
 	   break;
 	}
+}
+void F1SubMenu_F101_02_Select_DIS(uint8_t subm3)
+{
+	F1SubMenu_F1_02_01(menu_t.unit,menu_t.decade,menu_t.hundred);
+	
 }
 //F1 menu the third menu 
 void F1SubMenu_F102_Select_DIS(int8_t unit,int8_t decade,int8_t hundred)

@@ -17,7 +17,7 @@ void Menu_F9(void);
 void F1_DIS(void);
 void F1SubMenu_01(void);
 void F1SubMenu_02(void);
-void F1SubMenu_03(void);
+void F1Stacksubmenu_03(void);
 void F1SubMenu_04(void);
 void F1SubMenu_05(void);
 void F1SubMenu_06(void);
@@ -56,7 +56,7 @@ void F2SubMenu_Master_01(void);
 
 void F2_SubMenu_01(void);
 void F2_SubMenu_02(void);
-void F2_SubMenu_03(void);
+void F2_Stacksubmenu_03(void);
 void F2_SubMenu_04(void);
 void F2_SubMenu_05(void);
 void F2_SubMenu_06(void);

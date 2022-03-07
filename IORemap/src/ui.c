@@ -100,7 +100,7 @@ void F1SubMenu_02(void)
    SmgDisplay(digital_5,0x02); //'2'
 
 }
-void F1SubMenu_03(void)
+void F1Stacksubmenu_03(void)
 {
    SmgDisplay_Character(digital_3,0x0f); //"-"
    SmgDisplay(digital_4,0x00); //'0'
@@ -309,7 +309,7 @@ void F2_SubMenu_02(void)
    SmgDisplay(digital_4,0x00); //'0'
    SmgDisplay(digital_5,0x02); //'2'
 }
-void F2_SubMenu_03(void)
+void F2_Stacksubmenu_03(void)
 {
    SmgDisplay_Character(digital_3,0x0f); //"-"
    SmgDisplay(digital_4,0x00); //'0'
