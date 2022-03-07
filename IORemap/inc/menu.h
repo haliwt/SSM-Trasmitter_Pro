@@ -87,7 +87,7 @@ typedef struct _MENU{
 	uint8_t hundred;
 
 	   
-
+	  uint8_t  menuTitle_03;
 	  uint8_t  FxMainMenu_key;
 	  uint8_t  menu_F1Sub_03_xx_key;
 	  uint16_t FxSub_02_key;

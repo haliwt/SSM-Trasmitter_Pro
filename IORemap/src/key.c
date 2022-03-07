@@ -164,7 +164,7 @@ static void	KEY4_SET_ENTER_Fun(void)
 ***************************************************/           
 static void KEY_SubMenuFun_Enter(void)
 {
-      static int8_t temp=0,temp0,F1currkey= 0XFF;
+      static int8_t temp=0,temp0,F1currkey= 0XFF,f1key=0;
       switch(menu_t.menuId){
                
           case F1: //F1 - 01
@@ -189,38 +189,47 @@ static void KEY_SubMenuFun_Enter(void)
              }
              else{ //F1-01 ->next -> g ,H9,t,n,nonE
                  
-                  menu_t.menuF1Sub_first++;
-                
+                  f1key = f1key ^ 0x01;
+                  if(f1key == 1){
                   //runCmd menu
-                  if(F1currkey !=menu_t.F1SubMenu_Id ){
-                              F1currkey = menu_t.F1SubMenu_Id;
-                              
-                        
-                              mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
-                              menu_t.menuTitle=submenu_F1;
-                              //runKey fun
-                              menu_t.FxMainMenu_key =0xC0; //the third menu open 
-                              menu_t.FxSub_03_key=0xf10;  //the third sub open
-                                    // menu_t.FxSub_02_key=0;
-                              temp=submenu_03_Top();
-                              if(temp==-1){
-                                    temp =0;
-                                    menu_t.F1_Sub01_Top=temp;
-                              }
-                              else 
-                                   menu_t.F1_Sub01_Top=temp;
-                              menu_t.menu_F1Sub_03_xx_key=menu_t.F1_Sub01_Top;
-                              
-                        }
-                  else{
-                        
-                              menu_t.menuF1Sub_first=0;
-                              menu_t.menuId= F1;
-                        
-                              
+                 // if(F1currkey !=menu_t.F1SubMenu_Id ){
+                  mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                  menu_t.menuTitle_03=submenu_F1;
+                  //runKey fun
+                  menu_t.FxMainMenu_key =0xC0; //the third menu open 
+                  menu_t.FxSub_03_key=0xf10;  //the third sub open
+                        // menu_t.FxSub_02_key=0;
+                  temp=submenu_03_Top();
+                  if(temp==-1){
+                        temp =0;
+                        menu_t.F1_Sub01_Top=temp;
                   }
-		}
+                  else if(temp > 4){
+                        temp =4;
+                        menu_t.F1_Sub01_Top=temp;
+                  }
+                  else 
+                        menu_t.F1_Sub01_Top=temp;
+                        menu_t.menu_F1Sub_03_xx_key=00;
+                              
+                //  }
+                  }
+                  else{
+                    
+                        menu_t.menuId= F1;
+                       
 
+                        mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
+                      
+                        menu_t.FxMainMenu_key =0xB0;
+                        menu_t.FxSub_03_key=0xff;  
+                         menu_t.menuTitle_03=0;
+                       
+                        menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
+                       
+                  
+		           }
+		}
             break;
          
           case F2:
@@ -230,7 +239,7 @@ static void KEY_SubMenuFun_Enter(void)
                     menuFxSubTop=-1;
 				menu_t.menuMain=0;
 				menu_t.active_Submenu=F2;//the second menu
-				menu_t.menuTitle=submenu_F2; //RunCommand()
+				menu_t.menuTitle_03=submenu_F2; //RunCommand()
 				menu_t.F2_SubMenuTop= PushSub_Menu(F2Mnumbers);
 			}
             else{
@@ -251,7 +260,7 @@ static void KEY_SubMenuFun_Enter(void)
                     menuTop= -1;
                     menuFxSubTop=-1;
 				menu_t.active_Submenu=F3;//the second menu
-				menu_t.menuTitle=submenu_F3; //RunCommand()
+				menu_t.menuTitle_03=submenu_F3; //RunCommand()
 				menu_t.F3_SubMenuTop= PushSub_Menu(F3Mnumbers);
 			} 
             else{
@@ -272,7 +281,7 @@ static void KEY_SubMenuFun_Enter(void)
                     menuTop= -1;
                     menuFxSubTop=-1;
 				menu_t.active_Submenu=F7;//the second menu
-				menu_t.menuTitle=submenu_F7; //RunCommand()
+				menu_t.menuTitle_03=submenu_F7; //RunCommand()
 				menu_t.F7_SubMenuTop = PushSub_Menu(7);
 			} 
             else{
@@ -293,7 +302,7 @@ static void KEY_SubMenuFun_Enter(void)
 				menuTop= -1;
 				menuFxSubTop=-1;
 				menu_t.active_Submenu=F8;//the second menu
-				menu_t.menuTitle=submenu_F8; //RunCommand()
+				menu_t.menuTitle_03=submenu_F8; //RunCommand()
 				menu_t.F8_SubMenuTop= PushSub_Menu(F8Mnumbers);
 			}  
             else{
@@ -315,7 +324,7 @@ static void KEY_SubMenuFun_Enter(void)
 				menuTop= -1;
 				menuFxSubTop=-1;
 				menu_t.active_Submenu=F9;//the second menu
-				menu_t.menuTitle=submenu_F9; //RunCommand()
+				menu_t.menuTitle_03=submenu_F9; //RunCommand()
 				menu_t.F9_SubMenuTop= PushSub_Menu(F9Mnumbers);
 			}    
           break; 
@@ -465,7 +474,7 @@ static void KEY1_ZERIO_UP_Fun(void)
          break;
 
          default:
-             menu_t.FxMainMenu_key=0;
+            
          break;
 
 
@@ -622,8 +631,8 @@ static void KEY2_TRAE_DOWN_Fun(void)
 static void KEY3_SWITCH_LEFT_Fun(void)
 { 
     
-        if(menu_t.menuTitle == mainmenuItem){
-                menu_t.menuTitle =0xf0;
+        if(menu_t.menuTitle_03 == mainmenuItem){
+                menu_t.menuTitle_03 =0xf0;
                 return ;
 
           }
@@ -643,7 +652,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           //the third menu select digital numbers
            if(menu_t.F1SubMenu_Sub_02_Id==F101){
 
-             menu_t.menuTitle=mainmenuItem;
+             menu_t.menuTitle_03=mainmenuItem;
               
           }
 
