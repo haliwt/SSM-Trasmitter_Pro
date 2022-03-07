@@ -199,11 +199,11 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf10;  //the third sub open
                   
-                        temp=submenu_03_Top();
-                       if(temp==-1){
-                              temp =0;
+                  //       temp=submenu_03_Top();
+                  //      if(temp==-1){
+                  //             temp =0;
                              
-                        }
+                  //       }
                         
                         switch(menu_t.F1SubMenu_Id){
 
@@ -236,11 +236,11 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxSub_03_key=0xff;  
                         menu_t.menuTitle_03=0;
 
-                        temp0=  SubMenu_02_Top();
+                       /*  temp0=  SubMenu_02_Top();
                         if(temp0==-1){
                               temp0= 0;
                              // menu_t.F1_SubMenuTop=temp0;
-                        }
+                        } */
                         switch(menu_t.F1SubMenu_Id){
 
                            case F101:
