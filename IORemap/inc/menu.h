@@ -95,14 +95,16 @@ typedef struct _MENU{
 	   uint8_t F9_SubMenuTop;
 	   uint8_t menuF9Sub_first;
 	 
-	uint8_t unit;
-	uint8_t decade;
-	uint8_t hundred;
+
 
 	   
 	  uint8_t  menuTitle_03;
 	  uint8_t  FxMainMenu_key;
 	  uint8_t  menu_F1Sub_03_xx_key;
+
+	  	int8_t unit;
+	int8_t decade;
+	int8_t hundred;
 	  uint16_t FxSub_02_key;
       uint16_t FxSub_03_key;
 	
