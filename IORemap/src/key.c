@@ -200,19 +200,19 @@ static void KEY_SubMenuFun_Enter(void)
                         switch(menu_t.F1SubMenu_Id){
 
                            case F101:
-                                    menu_t.F1_Sub01_Top=temp;
+                                    menu_t.F1_Sub01_Top=menu_t.F1SubMenu_Id;
                            break;
 
                            case F102:
-                                    menu_t.F1_Sub02_Top=temp;
+                                    menu_t.F1_Sub02_Top=menu_t.F1SubMenu_Id;
                            break;
 
                            case F103:
-                                    menu_t.F1_Sub03_Top=temp;
+                                    menu_t.F1_Sub03_Top=menu_t.F1SubMenu_Id;
                            break;
 
                            case F104:
-                                    menu_t.F1_Sub03_Top=temp;
+                                    menu_t.F1_Sub03_Top=menu_t.F1SubMenu_Id;
                            break;
 
 
@@ -232,14 +232,10 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxSub_03_key=0xff;  
                         menu_t.menuTitle_03=0;
 
-                     
-
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
                      
                        
-                    
-                       
-                  }
+                    }
 		}
 
 
