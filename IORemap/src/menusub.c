@@ -106,8 +106,10 @@ void TheThird_03_Menu(void)
 
                    break;
 
-                   case 0x04:
-                       
+                   case 0x04://F1-01-05 
+                      menu_t.F1SubMenu_Sub_02_Id =0x04;
+                       key_t.keyReturn_flag=1;
+                       F1SubMenu_F105_01_Select_DIS(AF105);
 
                    break;
 

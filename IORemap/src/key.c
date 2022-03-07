@@ -7,6 +7,7 @@ KEY key_t;
 run run_t;
 subNumbers_TypedDef submenStruct;
 int8_t AF104[4]={0,0,0,0};
+int8_t AF105[3]={0,0,0};
 
 int8_t Amenu_Top = -1;
 
@@ -14,6 +15,9 @@ uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 
 int8_t one,two,three,four; 
 void(*DispDigital_3BitSmg)(void);
+
+static void Number_Digital_3bit_PointDecSelect(int8_t *ap);
+static void Number_Digital_3bit_PointAddSelect(int8_t *ap);
 static void Number_Digital_3bit_DecSelect(void);
 static void Number_Digital_3bit_AddSelect(void);
 static void Number_Digital_4bit_DecSelect(int8_t *ap);
@@ -383,8 +387,8 @@ static void KEY1_ZERIO_UP_Fun(void)
                                     Number_Digital_4bit_DecSelect(AF104);
                               break;
 
-                                case 0x04:
-                                  menu_t.F1_Sub05_Top=  PushSub_03_Menu(F101_01_05);
+                                case 0x04://F1-05-01
+                                   Number_Digital_3bit_PointAddSelect(AF105);
                               break;
 
                               case 0x05:
@@ -542,7 +546,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
                               break;
 
                                 case 0x04:
-                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_05);
+                                  Number_Digital_3bit_PointDecSelect(AF105);
                               break;
 
                               case 0x05:
@@ -647,7 +651,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 { 
      
       
-      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02){
+      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02|| menu_t.F1SubMenu_Sub_02_Id ==0x04){
                
             menu_t.inputNumber_Select ++;
             if(menu_t.inputNumber_Select > 2){
@@ -655,20 +659,17 @@ static void KEY3_SWITCH_LEFT_Fun(void)
              }
               
        }
-      printf("numbers = %d\n",menu_t.inputNumber_Select);
+      
     if(menu_t.F1SubMenu_Sub_02_Id ==0x03){
           menu_t.inputNumber_Select ++;
         if(menu_t.inputNumber_Select > 3){
                   menu_t.inputNumber_Select =0;
           }
     }
+    printf("numbers = %d\n",menu_t.inputNumber_Select);
       
 }
 
-int8_t ATop(void)
-{
-	return  Amenu[Amenu_Top];
-}
 
 
 
@@ -830,6 +831,13 @@ void Number_Digital_4bit_DecSelect(int8_t *ap)
       }
 
 }
+/************************************************************
+ * 
+ * Function Name:static void Number_Digital_4bit_AddSelect(int8_t *ap)
+ * Function :display smg of digitial bits 
+ * 
+ * 
+*************************************************************/
 void Number_Digital_4bit_AddSelect(int8_t *ap)
 {
       if(menu_t.inputNumber_Select==0){
@@ -861,5 +869,65 @@ void Number_Digital_4bit_AddSelect(int8_t *ap)
 				  *(ap+3) = four; 
       } 
       
+
+}
+
+static void Number_Digital_3bit_PointDecSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+             one--;
+            if(one < 0){
+               one=9;
+            }
+			*ap= one;
+            printf("s_1 = %d\n",one);
+      }
+      else if(menu_t.inputNumber_Select==1){
+            two--;
+            if(two< 0){
+               two=9;
+            }
+			*(ap+1) = two;
+            printf("s_2 = %d\n",*(ap+1));
+      
+      }
+      else if(menu_t.inputNumber_Select==2){
+            three--;
+            if(three< 0){ 
+               three=9;
+            }
+			*(ap+2) = three;
+            printf("s_3 = %d\n",*(ap+2));
+          
+      }
+     
+
+}
+static void Number_Digital_3bit_PointAddSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+            one++ ;
+            if(one >9){
+               one=0;
+            }
+			*ap = one;
+      }
+      else if(menu_t.inputNumber_Select==1){
+                  two++;
+                  if(two >9){
+                        two=0;
+                  }
+			*(ap+1) = two;
+       }
+      else if(menu_t.inputNumber_Select==2){
+                  three++;  
+                  if(three >9){
+                      three=0;
+                   }
+			*(ap+2)=three;
+      } 
+    
+      
+
 
 }

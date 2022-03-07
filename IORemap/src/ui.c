@@ -342,3 +342,15 @@ void F1SubMenu_F104_01_Select_DIS(int8_t *p)
   
 
 }
+
+void F1SubMenu_F105_01_Select_DIS(int8_t *pA)
+{
+   
+   SmgDisplay(digital_1,0x0b); // 0~100
+   SmgDisplay(digital_2,0x0b); // 0~100
+   SmgDisplay_Point(digital_3,*(pA+2)); // pointer "."
+   SmgDisplay(digital_4,*(pA+1)); // 0~100
+   SmgDisplay(digital_5,*pA); // 0~100
+  
+
+}

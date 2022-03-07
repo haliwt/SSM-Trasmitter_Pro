@@ -26,7 +26,7 @@ typedef struct _KEY_{
 
 extern int8_t AF104[4];
 
-
+extern int8_t AF105[3];
 
 extern KEY key_t;
 
