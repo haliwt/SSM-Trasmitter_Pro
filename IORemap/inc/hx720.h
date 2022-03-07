@@ -30,5 +30,6 @@ float Get_Maopi(void);
 float Get_Weight_2(void);
 unsigned long HX711_Read(void)	;
 uint32_t GetHX720Data(void);
+void RunHX720Cmd(vodi);
 
 #endif 

@@ -13,6 +13,16 @@ int8_t menuFxSubTop=-1;
 int8_t menuFxSub_03_Top = -1;
 int8_t F1_03_item_Top=-1;
 
+void Menu_Init(void)
+{
+
+menuTop= -1;
+menuFxSubTop=-1;
+menuFxSub_03_Top = -1;
+ F1_03_item_Top=-1;
+
+}
+
 uint8_t PushMainMenu(void)
 {
     

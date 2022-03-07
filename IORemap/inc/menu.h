@@ -207,6 +207,7 @@ extern int8_t menuFxSub_03_Top;
 extern  int8_t F1_03_item_Top;
 
 //Main menu
+void Menu_Init(void);
 uint8_t PushMainMenu(void);
 uint8_t PopMainMenu(void);
 void TopMainMenu(void);

@@ -57,27 +57,13 @@ int main(void)
 	  
 	  TIM1_NVIC_Configuration();
 	  GetKeyValua_Init();
+	  Menu_Init();
+
 	HX720_ReadDataFlag=0;
     while (1)
     {
 	  
-		#if 0
-		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
-		//Weight_Real = 0x100;
-			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
-		SysTick_Delay_Ms(1000);
-		 keydata = ScanKey();
-		 if(keydata == 0xff)keydata=0;
-		 if(keydata !=0)run_t.dispCmd=1;
-		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
-		//Weight_Real = 0x0A;
-			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
-        SysTick_Delay_Ms(1000);
-		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
-		//Weight_Real = 0x0A;
-			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
-		SysTick_Delay_Ms(1000);
-	  #endif 
+		
 		 keydata = ScanKey();
 		 if(keydata == 0xff)keydata=0;
 		 if(keydata !=0)run_t.dispCmd=1;
