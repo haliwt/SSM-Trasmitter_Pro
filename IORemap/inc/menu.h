@@ -46,12 +46,24 @@ typedef struct _MENU{
 	   
 	    uint8_t F1SubMenu_Sub_03_Id;
 		uint8_t F101_03_SubMeng_flag;
-		uint8_t F1_Sub03_Top;
-		uint8_t F1_Sub04_Top;
-		uint8_t F1_Sub05_Top;
-	   
+	
 	   
 	   uint8_t F1_Sub01_Top;
+	   uint8_t F1_Sub02_Top;
+	    uint8_t F1_Sub03_Top;
+		uint8_t F1_Sub04_Top;
+	    uint8_t F1_Sub05_Top;
+	    uint8_t F1_Sub06_Top;
+       uint8_t F1_Sub07_Top;
+	   uint8_t F1_Sub08_Top;
+	    uint8_t F1_Sub09_Top;
+		uint8_t F1_Sub10_Top;
+	   uint8_t F1_Sub11_Top;
+	    uint8_t F1_Sub12_Top;
+		uint8_t F1_Sub13_Top;
+
+
+
 	   int8_t F1_Sub02_unit;
 	   int8_t F1_Sub02_decade;
 	   int8_t F1_Sub02_hundred;
@@ -60,13 +72,14 @@ typedef struct _MENU{
 	   uint8_t inputNumber_Select;
 	   
 	
-
+       uint8_t F2_Sub01_Top;
 	   uint8_t F2_SubMenuTop;
 	   uint8_t menuF2Sub_first;
 
 
 	   uint8_t F2SubMenu_Id;
 	   
+	 
 	   uint8_t F3_SubMenuTop;
 	   uint8_t menuF3Sub_first;
 	   uint8_t F3SubMenu_Id;

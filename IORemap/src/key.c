@@ -200,18 +200,29 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxSub_03_key=0xf10;  //the third sub open
                   
                         temp=submenu_03_Top();
-                        if(temp==-1){
+                       if(temp==-1){
                               temp =0;
-                              menu_t.F1_Sub01_Top=temp;
+                             
                         }
-                        else if(temp > 4){
-                              temp =4;
-                              menu_t.F1_Sub01_Top=temp;
+                        
+                        switch(menu_t.F1SubMenu_Id){
+
+                           case F101:
+                                    menu_t.F1_Sub01_Top=temp;
+                           break;
+
+                           case F102:
+                                    menu_t.F1_Sub02_Top=temp;
+                           break;
+
+                           case F103:
+                                    menu_t.F1_Sub03_Top=temp;
+                           break;
+
+
                         }
-                        else 
-                              menu_t.F1_Sub01_Top=temp;
-                              if( menu_t.F1SubMenu_Id == temp)
-                                    menu_t.menu_F1Sub_03_xx_key=temp;
+                       
+                        menu_t.menu_F1Sub_03_xx_key=menu_t.F1SubMenu_Id;
                     }    
                   
                   else{
@@ -228,25 +239,38 @@ static void KEY_SubMenuFun_Enter(void)
                         temp0=  SubMenu_02_Top();
                         if(temp0==-1){
                               temp0= 0;
-                              menu_t.F1_SubMenuTop=temp0;
+                             // menu_t.F1_SubMenuTop=temp0;
                         }
-                        else{
+                        switch(menu_t.F1SubMenu_Id){
 
-                              menu_t.F1_SubMenuTop=temp0;
+                           case F101:
+                                    menu_t.F1_Sub01_Top=temp0;
+                           break;
+
+                           case F102:
+                                    menu_t.F1_Sub02_Top=temp0;
+                           break;
+
+                           case F103:
+                                    menu_t.F1_Sub03_Top=temp0;
+                           break;
+
+
                         }
                        
-                        menu_t.F1_SubMenuTop=temp0;
+                     //   menu_t.F1_SubMenuTop=temp0;
                        
-                  
-		      }
+                  }
 		}
+
+
             break;
          
           case F2:
             if(menu_t.menuF2Sub_first==0){  
 				menu_t.menuF2Sub_first++;
-                    menuTop= -1;
-                    menuFxSubTop=-1;
+                        menuTop= -1;
+                        menuFxSubTop=-1;
 				menu_t.menuMain=0;
 				menu_t.active_Submenu=F2;//the second menu
 				menu_t.menuTitle_03=submenu_F2; //RunCommand()
@@ -381,51 +405,51 @@ static void KEY1_ZERIO_UP_Fun(void)
                               break;
 
                               case 0x01:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_02);
+                                    menu_t.F1_Sub02_Top=  PushSub_03_Menu(F101_01_02);
                               break;
 
                                case 0x02:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_03);
+                                    menu_t.F1_Sub03_Top=  PushSub_03_Menu(F101_01_03);
                               break;
 
                                case 0x03:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_04);
+                                    menu_t.F1_Sub04_Top=  PushSub_03_Menu(F101_01_04);
                               break;
 
                                 case 0x04:
-                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_05);
+                                  menu_t.F1_Sub05_Top=  PushSub_03_Menu(F101_01_05);
                               break;
 
                               case 0x05:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_06);
+                                    menu_t.F1_Sub06_Top=  PushSub_03_Menu(F101_01_06);
                               break;
 
                                case 0x06:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_07);
+                                    menu_t.F1_Sub07_Top=  PushSub_03_Menu(F101_01_07);
                               break;
 
                                case 0x07:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_08);
+                                    menu_t.F1_Sub08_Top=  PushSub_03_Menu(F101_01_08);
                               break;
 
                                 case 0x08:
-                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_09);
+                                  menu_t.F1_Sub09_Top=  PushSub_03_Menu(F101_01_09);
                               break;
 
                               case 0x09:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_10);
+                                    menu_t.F1_Sub10_Top=  PushSub_03_Menu(F101_01_10);
                               break;
 
                                case 0x0A:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_11);
+                                    menu_t.F1_Sub11_Top=  PushSub_03_Menu(F101_01_11);
                               break;
 
                                case 0x0B:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_12);
+                                    menu_t.F1_Sub12_Top=  PushSub_03_Menu(F101_01_12);
                               break;
 
                                case 0x0C:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_13);
+                                    menu_t.F1_Sub13_Top=  PushSub_03_Menu(F101_01_13);
                               break;
 
                           }
