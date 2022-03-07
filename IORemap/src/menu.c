@@ -142,7 +142,7 @@ int8_t SubMenu_02_Top(void)
 *************************************************/
 uint8_t PushSub_03_Menu(int8_t nsize)
 {
-	 if(menuFxSub_03_Top == (nsize -1)){
+	 if(menuFxSub_03_Top == (nsize -1) || menuFxSub_03_Top >= nsize){
 	     // printf("Error :stack overflow \n");
 	     //return ;
 	  

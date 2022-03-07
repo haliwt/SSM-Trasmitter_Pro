@@ -103,17 +103,13 @@ void KEY_Function(uint8_t keydata)
                     run_t.dispCmd =1;
                     CH2_KeyLed();
                      key_t.keyTimes =1;
-                     if(key_t.keyTimes_2s <= 2 ){
-                          if(key_t.keyset !=key_t.currkeyset){
-                               key_t.keyset = key_t.currkeyset;
+                     if(key_t.keyset !=key_t.currkeyset){
+                          key_t.keyset = key_t.currkeyset;
                               KEY4_SET_ENTER_Fun();
                              
-                         }
+                         
                     }
-                     else{ //be pressed over 2s times
-                          
-                          
-                     }
+                  
                      CH4_KeyLed();
                      
                  key_t.keyswitch++;
@@ -123,7 +119,11 @@ void KEY_Function(uint8_t keydata)
                break;
 
                default:     
-			//SmgDisplay_Character(digital_5,0);
+			 key_t.keyset++;
+                    key_t.keyswitch++;
+                    key_t.keytrae++;
+                    key_t.keyzero++; 
+                    key_t.keyTimes =0;
                break;
 
                
@@ -168,7 +168,7 @@ static void KEY_SubMenuFun_Enter(void)
       switch(menu_t.menuId){
                
           case F1: //F1 - 01
-               
+            
 		if( menu_t.menuF1Sub_first== 0){ //"F1- 01"
              
                menu_t.menuF1Sub_first++;
@@ -177,12 +177,13 @@ static void KEY_SubMenuFun_Enter(void)
                menu_t.FxMainMenu_key =0xB0;
              //  menu_t.FxSub_02_key=0xf01;
                menu_t.F1_SubMenuTop= PushSub_Menu(F1Mnumbers);//subNumbers_TypedDef submenN;
-             
+               printf("f1top = %d\n",menu_t.F1_SubMenuTop);
              }
              else{ //F1-01 ->next -> g ,H9,t,n,nonE
-                 
-                  f1key = f1key ^ 0x01;
-                  if(f1key == 1){
+                  
+                  key_t.keyReturn_flag = key_t.keyReturn_flag^ 0x01;
+                  printf("key_enter = %d\n",key_t.keyReturn_flag);
+                  if(key_t.keyReturn_flag== 1){
                  
                         /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
@@ -217,7 +218,7 @@ static void KEY_SubMenuFun_Enter(void)
 
 
                         }
-                       
+                       printf("f1sub_id = %d\n",menu_t.F1SubMenu_Id);
                         menu_t.menu_F1Sub_03_xx_key=menu_t.F1SubMenu_Id;
                     }    
                   
@@ -234,7 +235,7 @@ static void KEY_SubMenuFun_Enter(void)
 
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
                      
-                       
+                        printf("f1sub_top_return = %d\n",menu_t.F1_SubMenuTop);
                     }
 		}
 
@@ -366,6 +367,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 
          case 0xB0: //the second Menu
                menu_t.F1_SubMenuTop = PushSub_Menu(F1Mnumbers);
+              printf("f1sub_Top_keyu = %d\n",menu_t.F1_SubMenuTop);
          break;
 
          case 0xc0: //the third Menu
@@ -377,10 +379,14 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                               case 0x00:
                                   menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
+                                  printf("f1sub_01_n_Top = %d\n",menu_t.F1_Sub01_Top);
+                                   key_t.keyReturn_flag=1;
                               break;
 
                               case 0x01:
                                     menu_t.F1_Sub02_Top=  PushSub_03_Menu(F101_01_02);
+                                    printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);
+                                    key_t.keyReturn_flag=1;
                               break;
 
                                case 0x02:
@@ -510,6 +516,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
       
      case 0xB0:
              menu_t.F1_SubMenuTop = PopSub_Menu(F1Mnumbers);
+             printf("f1sub_Top_keyd = %d\n",menu_t.F1_SubMenuTop);
      break;   
 
      case 0xC0:
@@ -521,10 +528,14 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                               case 0x00:
                                   menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
+                                  printf("f1sub_01_n_Top- = %d\n",menu_t.F1_Sub01_Top);
+                                    key_t.keyReturn_flag=1;
                               break;
 
                               case 0x01:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_02);
+                                    menu_t.F1_Sub02_Top=  PushSub_03_Menu(F101_01_02);
+                                    printf("f1sub_02_n_Top- = %d\n",menu_t.F1_Sub02_Top);
+                                     key_t.keyReturn_flag=1;
                               break;
 
                                case 0x02:

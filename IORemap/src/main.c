@@ -65,7 +65,15 @@ int main(void)
 	  
 		
 		 keydata = ScanKey();
-		 if(keydata == 0xff)keydata=0;
+		 if(keydata == 0xff){
+			 
+			 keydata=0;
+			  key_t.keyset++;
+                    key_t.keyswitch++;
+                    key_t.keytrae++;
+                    key_t.keyzero++; 
+                    key_t.keyTimes =0;
+		 }
 		 if(keydata !=0)run_t.dispCmd=1;
 		if(run_t.dispCmd==0xff){
 			Get_Weight();

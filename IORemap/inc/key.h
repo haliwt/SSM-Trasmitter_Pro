@@ -20,6 +20,7 @@ typedef struct _KEY_{
 	   uint8_t keyswitch;
 	   uint8_t currkeyzero;
 	   uint8_t keyzero;
+	   uint8_t keyReturn_flag;
 	  
 }KEY;
 

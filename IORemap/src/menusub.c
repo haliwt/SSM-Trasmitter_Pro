@@ -75,10 +75,16 @@ void TheThird_03_Menu(void)
 				   
 				   case 0:
 				       F1SubMenu_F101_01_Select_DIS(menu_t.F1_Sub01_Top);
+                       printf("f1sub_01_03_Top = %d\n",menu_t.F1_Sub01_Top);
+                       key_t.keyReturn_flag=1;
+                      
 				   break;
 				   
 				   case 0x01:
 					   F1SubMenu_F101_02_Select_DIS(menu_t.F1_Sub02_Top);
+                       printf("f1sub_02_03_Top = %d\n",menu_t.F1_Sub02_Top);
+                        key_t.keyReturn_flag=1;
+                       
 				   break;
 
 				   
