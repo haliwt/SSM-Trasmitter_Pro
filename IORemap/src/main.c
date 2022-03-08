@@ -73,6 +73,7 @@ int main(void)
                     key_t.keytrae++;
                     key_t.keyzero++; 
                     key_t.keyTimes =0;
+					
 		 }
 		 if(keydata !=0)run_t.dispCmd=1;
 		if(run_t.dispCmd==0xff){

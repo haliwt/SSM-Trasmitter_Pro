@@ -6,10 +6,10 @@
 KEY key_t;
 run run_t;
 subNumbers_TypedDef submenStruct;
-int8_t AF104[4]={0,0,0,0};
-int8_t AF105[2]={0,0};
-int8_t AF106[5]={0,0,0,0,0};
-int8_t AF107[5]={0,0,0,0,0};
+int8_t AF104[4];
+int8_t AF105[2];
+int8_t AF106[5];
+int8_t AF107[5];
 int8_t AF108[2];
 int8_t AF109[5];
 int8_t AF110[4];
@@ -63,7 +63,7 @@ void GetKeyValua_Init(void)
    key_t.currkeyswitch = 0xff;
    key_t.currkeyzero = 0xff;   
    key_t.keyTimes=0;
-   menu_t.inputNumber_Select=1;
+   
 }
 
 void KEY_Function(uint8_t keydata)
@@ -76,7 +76,7 @@ void KEY_Function(uint8_t keydata)
                     key_t.keytrae++;
                     key_t.keyzero++; 
                     key_t.keyTimes =0;
-				
+	
 			break;
    
                case 0xf4://KEY1-ZERO--up
@@ -412,7 +412,8 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                                 case 0x04://F1-05-01
                                    Number_Digital_2bit_AddSelect(AF105);
-                                     key_t.keyReturn_flag=1;
+                                   printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
+                                 key_t.keyReturn_flag=1;
                               break;
 
                               case 0x05://F1-06-01
@@ -576,6 +577,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                                 case 0x04: //F1-05-01
                                   Number_Digital_2bit_DecSelect(AF105);
+                                  printf("F1_01_05_DecKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
                                   key_t.keyReturn_flag=1;
                               break;
 
@@ -676,32 +678,46 @@ static void KEY2_TRAE_DOWN_Fun(void)
 /**************************************************************
  * 
  * Function Name :static void KEY3_SWITCH_LEFT_Fun(void)
- * Function :return last menu 
+ * Function :return last menu select numbers of bits 
+ * Input Refer:No
+ * Return Refer:NO
  * 
 **************************************************************/
 static void KEY3_SWITCH_LEFT_Fun(void)
 { 
      
-      
-      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02|| menu_t.F1SubMenu_Sub_02_Id ==0x04){
+      //2BIT
+      if(menu_t.F1SubMenu_Sub_02_Id ==0x04|| menu_t.F1SubMenu_Sub_02_Id ==0x07){
                
             menu_t.inputNumber_Select ++;
-            if(menu_t.inputNumber_Select > 2){
+            if(menu_t.inputNumber_Select >1){
                   menu_t.inputNumber_Select =0;
-             }
+            }
+            
               
        }
       
+      //3BIT
+      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02){
+               
+            menu_t.inputNumber_Select ++;
+            if(menu_t.inputNumber_Select >2){
+                  menu_t.inputNumber_Select =0;
+            }
+            
+              
+       }
+    //3IBIT
     if(menu_t.F1SubMenu_Sub_02_Id ==0x03){
           menu_t.inputNumber_Select ++;
-        if(menu_t.inputNumber_Select > 3){
+        if(menu_t.inputNumber_Select >3){
                   menu_t.inputNumber_Select =0;
           }
     }
-
+    //4BIT
     if(menu_t.F1SubMenu_Sub_02_Id ==0x05 ||menu_t.F1SubMenu_Sub_02_Id ==0x06){
             menu_t.inputNumber_Select ++;
-           if(menu_t.inputNumber_Select > 4){
+           if(menu_t.inputNumber_Select >4){
               menu_t.inputNumber_Select =0;
           }
 
@@ -786,13 +802,15 @@ static void Number_Digital_2bit_DecSelect(int8_t *ap)
             if(menu_t.unit < 0){
                menu_t.unit=9;
             }
+            *ap =menu_t.unit;
             printf("s_1 = %d\n",menu_t.unit);
       }
-      else if(menu_t.inputNumber_Select==1){
+      else if(menu_t.inputNumber_Select ==1){
             menu_t.decade--;
             if(menu_t.decade< 0){
              menu_t.decade=9;
             }
+            *(ap+1)=menu_t.decade;
             printf("s_2 = %d\n",menu_t.decade);
       
       }    
@@ -804,13 +822,18 @@ static void Number_Digital_2bit_AddSelect(int8_t *ap)
             if(menu_t.unit >9){
                menu_t.unit=0;
             }
+            *ap =menu_t.unit;
+            printf("s_1 = %d\n",menu_t.unit);
       }
-      else if(menu_t.inputNumber_Select==1){
+      else if(menu_t.inputNumber_Select ==1){
                   menu_t.decade++;
                   if(menu_t.decade >9){
                         menu_t.decade=0;
                   }
+            *(ap+1)=menu_t.decade;
+            printf("s_2 = %d\n",menu_t.decade);
        }
+      
       
 }
 
@@ -821,18 +844,21 @@ void Number_Digital_3bit_AddSelect(void)
             if(menu_t.unit >9){
                menu_t.unit=0;
             }
+           
         }
         else if(menu_t.inputNumber_Select==1){
                   menu_t.decade++;
                   if(menu_t.decade >9){
                         menu_t.decade=0;
                   }
+                   
        }
-      else if(menu_t.inputNumber_Select==2){
+      else if(menu_t.inputNumber_Select >=2){
                   menu_t.hundred++;  
                   if(menu_t.hundred >9){
                   menu_t.hundred=0;
             }
+           
       }  
 }
 void Number_Digital_3bit_DecSelect(void)
@@ -849,14 +875,16 @@ void Number_Digital_3bit_DecSelect(void)
             if(menu_t.decade< 0){
              menu_t.decade=9;
             }
+            
             printf("s_2 = %d\n",menu_t.decade);
       
       }
-      else if(menu_t.inputNumber_Select==2){
+      else if(menu_t.inputNumber_Select >=2){
             menu_t.hundred--;
             if(menu_t.hundred < 0){ 
               menu_t.hundred=9;
             }
+         
             printf("s_3 = %d\n",menu_t.hundred);
           
       }
@@ -902,7 +930,7 @@ void Number_Digital_4bit_DecSelect(int8_t *ap)
             printf("s_3 = %d\n",*(ap+2));
           
       }
-      else if(menu_t.inputNumber_Select==3){
+      else if(menu_t.inputNumber_Select >=3){
              four--;
             if( four < 0){ 
                four=9;
@@ -943,7 +971,7 @@ void Number_Digital_4bit_AddSelect(int8_t *ap)
                    }
 				  *(ap+2)=three;
       } 
-      else if(menu_t.inputNumber_Select==3){
+      else if(menu_t.inputNumber_Select >=3){
                   four++;  
                   if(four >9){
                       four=0;
@@ -973,7 +1001,7 @@ static void Number_Digital_3bit_PointDecSelect(int8_t *ap)
             printf("s_2 = %d\n",*(ap+1));
       
       }
-      else if(menu_t.inputNumber_Select==2){
+      else if(menu_t.inputNumber_Select >=2){
             three--;
             if(three< 0){ 
                three=9;
@@ -1002,7 +1030,7 @@ static void Number_Digital_3bit_PointAddSelect(int8_t *ap)
                   }
 			*(ap+1) = two;
        }
-      else if(menu_t.inputNumber_Select==2){
+      else if(menu_t.inputNumber_Select >=2){
                   three++;  
                   if(three >9){
                       three=0;
@@ -1052,7 +1080,7 @@ static void Number_Digital_5bit_DecSelect(int8_t *ap)
             printf("s_4 = %d\n", *(ap+3));
           
       }
-      else if(menu_t.inputNumber_Select==4){
+      else if(menu_t.inputNumber_Select >=4){
              five--;
             if( five < 0){ 
                 five=9;
@@ -1093,7 +1121,7 @@ static void Number_Digital_5bit_AddSelect(int8_t *ap)
                     }
 				  *(ap+3) = four; 
       } 
-      else if(menu_t.inputNumber_Select==4){
+      else if(menu_t.inputNumber_Select >=4){
                   five++;  
                   if(five >9){
                       five=0;
