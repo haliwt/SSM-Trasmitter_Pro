@@ -733,28 +733,28 @@ static void KEY2_TRAE_DOWN_Fun(void)
                     case 0xf20:
                         switch(menu_t.menu_F1Sub_03_xx_key){
 
-                           case F201:
-                                Number_Digital_SetUp5bit_AddSelect(AF201,3);          
+                             case F201:
+                              Number_Digital_SetUp5bit_DecSelect(AF201,3);
                            break;
 
                            case F202:
-
+                              Number_Digital_5bit_DecSelect(AF202);
                            break;
 
                            case F203:
-
+                               Number_Digital_5bit_DecSelect(AF203);
                            break;
 
                            case F204:
-
+                               Number_Digital_SetUp5bit_DecSelect(AF204,3);
                            break;
 
                            case F205:
-
+                               Number_Digital_5bit_DecSelect(AF205);
                            break;
 
                            case F206:
-
+                               Number_Digital_5bit_DecSelect(AF206);
                            break;
 
 
@@ -826,9 +826,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
 static void KEY3_SWITCH_LEFT_Fun(void)
 { 
      
-    
-      
-      //2BIT
+     //2BIT
       if(menu_t.F1SubMenu_Sub_02_Id ==0x04|| menu_t.F1SubMenu_Sub_02_Id ==0x07||menu_t.F1SubMenu_Sub_02_Id ==0x0B\
          ||menu_t.F1SubMenu_Sub_02_Id ==0x0C){
                
