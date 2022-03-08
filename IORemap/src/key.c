@@ -242,8 +242,6 @@ static void KEY_SubMenuFun_Enter(void)
                   else{
                         
                         menu_t.menuId= F1;
-                       
-
                         mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
                         menu_t.FxMainMenu_key =0xB0;
                         menu_t.FxSub_03_key=0xff;  

@@ -48,9 +48,7 @@ void RunCommand(void)
          break;
 
          case TheThird_Menu:
-              menu_t.F1SubMenu_Id = 0xff;
-              
-              switch(menu_t.menuTitle_03){
+               switch(menu_t.menuTitle_03){
 
                    case 0:
                          mainitem_t.task_MainMenu=TheSecond_Menu;
