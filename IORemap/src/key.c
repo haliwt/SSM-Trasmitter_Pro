@@ -329,6 +329,7 @@ static void KEY_SubMenuFun_Enter(void)
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
                         menu_t.menuTitle_02=3;
                         menu_t.menuTitle_03=submenu_F3;
+                       
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf30;  //F2-01 -> the third sub open
@@ -676,7 +677,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
             menu_t.mainTop=PopMainMenu();
      break;
       
-     case 0xB0:
+     case 0xB0:  //the second mentu
       switch(menu_t.FxSub_02_key){
 
                 case 0xf10: //F1-01
@@ -826,9 +827,18 @@ static void KEY2_TRAE_DOWN_Fun(void)
                         }
 
                     break;
-
+                  //F3-1.1
                     case 0xf30:
+                        switch(menu_t.menu_F1Sub_03_xx_key){
+                        case F301:
+                              Number_Digital_Set5bit_DecSelect(AF301,7);
+                           break;
 
+                        case F302:
+                               Number_Digital_Set5bit_DecSelect(AF302,7);
+                         break;
+
+                        }
                     break;
 
                     case 0xf40:
@@ -1386,7 +1396,7 @@ void Number_Digital_F111_4bit_DecSelect(int8_t *ap)
 void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n)
 {
       uint8_t static i;
-        if(i>(n-1))i=0;
+        if(i>n)i=1;
          *ap =i;
          i++;
 
@@ -1396,7 +1406,7 @@ void Number_Digital_Set5bit_DecSelect(int8_t *ap,uint8_t n)
 {
       int8_t static i;
        i--;
-       if(i ==-1)i=(n-1);
+       if(i ==0)i=n;
        *ap =i;
         
 }
