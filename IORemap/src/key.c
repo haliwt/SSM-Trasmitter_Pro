@@ -841,7 +841,8 @@ static void KEY3_SWITCH_LEFT_Fun(void)
        }
       
       //3BIT
-      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02){
+      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02 || menu_t.F2SubMenu_Id==F201\
+          ||menu_t.F2SubMenu_Id==F204){
                
             menu_t.inputNumber_Select ++;
             if(menu_t.inputNumber_Select >2){
@@ -858,7 +859,8 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           }
     }
     //5BIT
-    if(menu_t.F1SubMenu_Sub_02_Id ==0x05 ||menu_t.F1SubMenu_Sub_02_Id ==0x06||menu_t.F1SubMenu_Sub_02_Id ==0x09){
+    if(menu_t.F1SubMenu_Sub_02_Id ==0x05 ||menu_t.F1SubMenu_Sub_02_Id ==0x06||menu_t.F1SubMenu_Sub_02_Id ==0x09\
+            ||menu_t.F2SubMenu_Id==F202||menu_t.F2SubMenu_Id==F203||menu_t.F2SubMenu_Id==F205||menu_t.F2SubMenu_Id==F206){
             menu_t.inputNumber_Select ++;
            if(menu_t.inputNumber_Select >4){
               menu_t.inputNumber_Select =0;
@@ -868,11 +870,11 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 
     }
 
-    if(menu_t.F1SubMenu_Id != 0xff){
-           mainitem_t.task_MainMenu =TheFirst_Menu;
-           menu_t.mainTop =  MainMenu_Top();
-           return ;
-   }
+//     if(menu_t.F1SubMenu_Id != 0xff){
+//            mainitem_t.task_MainMenu =TheFirst_Menu;
+//            menu_t.mainTop =  MainMenu_Top();
+//            return ;
+//    }
       
 
 
