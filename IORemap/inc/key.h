@@ -21,6 +21,7 @@ typedef struct _KEY_{
 	   uint8_t currkeyzero;
 	   uint8_t keyzero;
 	   uint8_t keyReturn_flag;
+	   uint8_t keyReturn_F2_flag;
 	  
 }KEY;
 
@@ -35,6 +36,13 @@ extern int8_t AF110[4];
 extern int8_t AF111[1];
 extern int8_t AF112[2];
 extern int8_t AF113[2];
+
+extern int8_t AF201[1];
+extern int8_t AF202[5];
+extern int8_t AF203[5];
+extern int8_t AF204[1];
+extern int8_t AF205[5];
+extern int8_t AF206[5];
 
 extern KEY key_t;
 

@@ -15,6 +15,8 @@ void Menu_F8(void);
 void Menu_F9(void);
 //F1 SubMenu list
 void F1_DIS(void);
+
+/***********************F1********************************/
 void F1SubMenu_01(void);
 void F1SubMenu_02(void);
 void F1SubMenu_03(void);
@@ -46,28 +48,15 @@ void F1SubMenu_F110_01_Select_DIS(int8_t *pA);
 void F1SubMenu_F111_01_Select_DIS(int8_t *pA);
 void F1SubMenu_F112_01_Select_DIS(int8_t *pA);
 
-//F1 the third menu 03 list
-void F1SubMenu_Sub_03(void);
-void F1SubMenu_Sub_04(void);
-void F1SubMenu_Sub_05(void);
-void F1SubMenu_Sub_06(void);
-void F1SubMenu_Sub_07(void);
-void F1SubMenu_Sub_08(void);
-void F1SubMenu_Sub_09(void);
-void F1SubMenu_Sub_10(void);
-void F1SubMenu_Sub_11(void);
-void F1SubMenu_Sub_12(void);
-void F1SubMenu_Sub_13(void);
-
+//F2 the third menu 03 list
 //F2 SubMenu list
 void F2SubMenu_Master_01(void);
-
-void F2_SubMenu_01(void);
-void F2_SubMenu_02(void);
-void F2_Stacksubmenu_03(void);
-void F2_SubMenu_04(void);
-void F2_SubMenu_05(void);
-void F2_SubMenu_06(void);
+void F2SubMenu_F201_01_Select_DIS(int8_t *pA);
+void F2SubMenu_F202_01_Select_DIS(int8_t *pA);
+void F2SubMenu_F203_01_Select_DIS(int8_t *pA);
+void F2SubMenu_F204_01_Select_DIS(int8_t *pA);
+void F2SubMenu_F205_01_Select_DIS(int8_t *pA);
+void F2SubMenu_F206_01_Select_DIS(int8_t *pA);
 
 //F3 SubMenu List
 void F3SubMenu_Master_01(void);

@@ -13,6 +13,8 @@ int8_t menuFxSubTop=-1;
 int8_t menuFxSub_03_Top = -1;
 int8_t F1_03_item_Top=-1;
 
+
+
 void Menu_Init(void)
 {
 
@@ -53,9 +55,9 @@ uint8_t PopMainMenu(void)
 }
 
 
-void TopMainMenu(void)
+uint8_t MainMenu_Top(void)
 {
-   MainMenu(menuTop);
+      return menuTop;
 }
 
 void MainMenu(int8_t mtop)
@@ -228,11 +230,12 @@ void F1SubMenu(int8_t f1sub)
 			break;
 
 			case F102:
+			  //  F2SubMenu_Master_01();
 			     menu_t.F1SubMenu_Id = F102;
-				F1SubMenu_02(); //"F2-02"
+				 F1SubMenu_02(); //"F1-02"
 			break;
 			
-			case F103:
+			case F103://
 			     menu_t.F1SubMenu_Id = F103;
 				 F1SubMenu_03();
 			break;
@@ -344,7 +347,51 @@ void F1SubMenu_F102_Select_DIS(int8_t unit,int8_t decade,int8_t hundred)
 }
 
 
+/***********************************************************
+ * 
+ * Function Name: void F2SubMenu_02(F1submenuList f1sub)
+ * Function :display nixie tube character
+ * Input Ref: F1 menu submenu item
+ * Retern Ref: No
+ * 
+************************************************************/
+void F2SubMenu_02(uint8_t mn)
+{
+        switch(mn){
 
+	        case F201:
+			    menu_t.F2SubMenu_Id = F201;
+				F1SubMenu_01(); //"F1 - 01"
+			break;
 
+			case F202:
+			  //  F2SubMenu_Master_01();
+			     menu_t.F2SubMenu_Id = F202;
+				 F1SubMenu_02(); //"F1-02"
+			break;
+			
+			case F203://
+			     menu_t.F2SubMenu_Id = F203;
+				 F1SubMenu_03();
+			break;
+				
+			case F204:
+				 menu_t.F2SubMenu_Id = F204;
+				F1SubMenu_04();
+			break;
+
+			case F205:
+				 menu_t.F2SubMenu_Id = F205;
+				F1SubMenu_05();
+			break;
+				
+			case F206:
+				 menu_t.F2SubMenu_Id = F206;
+				F1SubMenu_06();
+			break;
+
+		}
+
+}
 
 

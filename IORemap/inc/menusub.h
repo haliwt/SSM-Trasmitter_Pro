@@ -33,6 +33,19 @@ typedef enum{
      F9_BLINK_9
 }enumblinkmenu;
 
+
+typedef enum{
+  F201,
+  F202,
+  F203,
+  F204,
+  F205,
+  F206
+
+}F2SubMenuenum_02;
+
+
+
 void StackStacksubmenu_03_Init(Stacksubmenu_03 *sm03);
 int8_t Is_empty(Stacksubmenu_03 *sm03);
 int8_t Is_full(Stacksubmenu_03 *sm03);
@@ -40,10 +53,11 @@ int8_t subPush_03(Stacksubmenu_03 *sm03, uint8_t dat);
 int8_t subPop_03(Stacksubmenu_03 *sm03);
 int8_t subTop_03(Stacksubmenu_03 *sm03);
 
-void TheThird_03_Menu(void);
+void TheThird_F1_03_Menu(void);
+void TheThird_F2_03_Menu(void);
 void F1_TheBlinkMenu_03(void);
 
-
+void F2SubMenu_03_Item(void);
 
 
 

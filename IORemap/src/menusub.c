@@ -57,25 +57,17 @@ int8_t subTop_03(Stacksubmenu_03 *s)
 
 /************************************************
 *
-*Function Name :void TheThird_03_Menu(void)
+*Function Name :void TheThird_F1_03_Menu(void)
 *Function :selected the be going to run cmd
 *Input Refer:NO
 *Return Refer:NO
 *
 ************************************************/
-void TheThird_03_Menu(void)
+void TheThird_F1_03_Menu(void)
 {
-    switch(menu_t.menuTitle_03){
-
-           case 0:
-               mainitem_t.task_MainMenu=TheSecond_Menu;
-           break;
-           
-           case submenu_F1: //F1-01
-		      
-		       switch(menu_t.menu_F1Sub_03_xx_key){
+     switch(menu_t.menu_F1Sub_03_xx_key){
 				   
-				   case 0:
+				   case 0: //F1-01-01
                       menu_t.F1SubMenu_Sub_02_Id =0;
 				       F1SubMenu_F101_01_Select_DIS(menu_t.F1_Sub01_Top);
                      //  printf("f1sub_01_03_Top = %d\n",menu_t.F1_Sub01_Top);
@@ -83,7 +75,7 @@ void TheThird_03_Menu(void)
                       
 				   break;
 				   
-				   case 0x01:
+				   case 0x01: //F1-02-01 ->
                        menu_t.F1SubMenu_Sub_02_Id =0x01;
 					   F1SubMenu_F1_02_01(menu_t. F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
                      //  printf("f1sub_02_03_Top = %d\n",menu_t.F1_Sub02_Top);
@@ -161,50 +153,7 @@ void TheThird_03_Menu(void)
                         key_t.keyReturn_flag=1;
 				   break;
 
-				   
-				   
-			   }
-           break;
-
-          case submenu_F2:
-            F2SubMenu_Master_01();
-			F1SubMenu(menu_t.F2_SubMenuTop);
-            
-          break;
-
-          case submenu_F3:
-            F3SubMenu_Master_01();
-            F1SubMenu(menu_t.F3_SubMenuTop);
-           
-          break;
-
-       
-          case submenu_F7:
-             F7SubMenu_Master_01();
-             F1SubMenu(menu_t.F7_SubMenuTop);
-           
-          break;
-
-          case submenu_F8:
-              menu_t.menuSubId = submenu_F8;
-               F8SubMenu_Master_01();
-               F1SubMenu(menu_t.F8_SubMenuTop);
-            
-          break;
-
-          case submenu_F9:
-              menu_t.menuSubId = submenu_F9;
-              F9SubMenu_Master_01();
-              F1SubMenu(menu_t.F9_SubMenuTop);
-             
-          break;
-
-          default:
-
-          break;
-    }
-
-
+		}
 }
 
 void F1_TheBlinkMenu_03(void)
@@ -268,5 +217,51 @@ void F1_TheBlinkMenu_03(void)
          
 	
 	
+}
+
+
+void F2SubMenu_03_Item(void)
+{
+    switch(menu_t.menu_F1Sub_03_xx_key){
+                 
+                 case F201 : //display -> 3bit
+                        menu_t.F2SubMenu_Id=F201;
+                        F2SubMenu_F201_01_Select_DIS(AF201);
+                 break;
+
+                 case F202 : //"5BIT" has "-"
+                        menu_t.F2SubMenu_Id=F202;
+                        F2SubMenu_F202_01_Select_DIS(AF202);
+                 break;
+
+                 case F203 : //5BIT 
+                         menu_t.F2SubMenu_Id=F203;
+                         F2SubMenu_F203_01_Select_DIS(AF203);
+                 break;
+
+                 case F204 : //3bit
+                         menu_t.F2SubMenu_Id=F204;
+                         F2SubMenu_F201_01_Select_DIS(AF204);//F2SubMenu_F204_01_Select_DIS(AF204);
+                 break;
+                
+                case F205 : //"5BIT" has "-"
+                        menu_t.F2SubMenu_Id=F205;
+                        F2SubMenu_F202_01_Select_DIS(AF205); //F2SubMenu_F205_01_Select_DIS(AF205);
+                 break;
+
+                 case F206 ://"5BIT"
+                        menu_t.F2SubMenu_Id=F206;
+                        F2SubMenu_F203_01_Select_DIS(AF206);//F2SubMenu_F206_01_Select_DIS(AF206);
+                 break;
+                 default:
+
+                 break;
+
+
+            }
+			
+
+
+
 }
 

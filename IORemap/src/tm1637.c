@@ -53,12 +53,12 @@ const unsigned char segChar[]={
     seg_c+seg_e+seg_g,                          //'n'  ->7
     seg_c+seg_d+seg_e+seg_g,                    //'o'  ->8
     seg_a+seg_b+seg_e+seg_f+seg_g,              //'P'  ->9
-    seg_a+seg_b+seg_c+seg_f+seg_g,              //'q'  ->10
-    seg_e+seg_g,                                //'r'  ->11
-    seg_d+seg_e+seg_f+seg_g,                    //'t'  ->12
-    seg_b+seg_c+seg_d+seg_f+seg_g,              //'Y'  ->13
-    seg_a+seg_d+seg_e,                          //'C'-lack   ->14
-    seg_g										//'-'  ->15
+    seg_a+seg_b+seg_c+seg_f+seg_g,              //'q'  ->10->0X0A
+    seg_e+seg_g,                                //'r'  ->11->0X0B
+    seg_d+seg_e+seg_f+seg_g,                    //'t'  ->12->0X0C
+    seg_b+seg_c+seg_d+seg_f+seg_g,              //'Y'  ->13->0x0d
+    seg_a+seg_d+seg_e,                          //'C'-lack   ->14->0xe
+    seg_g										//'-'  ->15  ->0x0F
 };
 
 //static void Delay_us(uint8_t i);

@@ -1,6 +1,6 @@
 #include "ui.h"
-
-
+static void Symbol_HrL(void);
+static void Symbol_ECH(void);
 void DisplayMode_Normal(void)
 {
    SmgDisplay(digital_1,0x0b);//'NULL'
@@ -218,6 +218,26 @@ void F1SubMenu_Sub_01_05(void)
    SmgDisplay_Character(digital_2,0x07); //"n"
    SmgDisplay(digital_1,0x0B); // NULL
    
+}
+
+static void Symbol_HrL(void)
+{
+   SmgDisplay_Character(digital_5,0x06); //"L" 
+   SmgDisplay_Character(digital_4,0x0B); //"r"
+   SmgDisplay_Character(digital_3,0x05); //"H"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
+}
+
+static void Symbol_ECH(void)
+{
+   SmgDisplay_Character(digital_5,0x05); //"H" 
+   SmgDisplay_Character(digital_4,0x0E); //"C"
+   SmgDisplay_Character(digital_3,0x03); //"E"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
 }
 /***********************************************************
  * 
@@ -442,4 +462,46 @@ void F1SubMenu_F112_01_Select_DIS(int8_t *pA)
    SmgDisplay(digital_5,*pA); // 0~100
    
 }
+/**********************************************************
+ * 
+ * F2-01 /02/03/04/05/06 Sub menu 
+ * 
+ * 
+ * 
+***********************************************************/
+ void F2SubMenu_F201_01_Select_DIS(int8_t *pA)
+ {
+      if(*pA == 0){
+         F1SubMenu_Sub_01_05(); //"nonE"
+      }
+      else if(*pA==1){ //"HrL"
+         Symbol_HrL();
+
+      }
+      else if(*pA==2){
+
+          Symbol_ECH();
+      }
+
+ }
+
+void F2SubMenu_F202_01_Select_DIS(int8_t *pA)
+{
+   SmgDisplay_Character(digital_1,0x0f); //"-"
+   SmgDisplay(digital_1,*(pA+4)); // 0~100
+   SmgDisplay(digital_2,*(pA+3)); // 0~100
+   SmgDisplay(digital_3,*(pA+2)); // pointer "."
+   SmgDisplay(digital_4,*(pA+1)); // pointer "."
+   SmgDisplay(digital_5,*pA); // 0~100
+   
+
+}
+
+void F2SubMenu_F203_01_Select_DIS(int8_t *pA)
+{
+    F1SubMenu_F106_01_Select_DIS(pA);
+
+}
+
+ 
  

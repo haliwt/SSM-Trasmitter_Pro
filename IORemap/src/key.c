@@ -17,6 +17,14 @@ int8_t AF111[1];
 int8_t AF112[2];
 int8_t AF113[2];
 
+//*******************/
+int8_t AF201[1];
+int8_t AF202[5];
+int8_t AF203[5];
+int8_t AF204[1];
+int8_t AF205[5];
+int8_t AF206[5];
+
 
 
 
@@ -27,7 +35,8 @@ uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 int8_t one,two,three,four,five; 
 void(*DispDigital_3BitSmg)(void);
 
-
+static void Number_Digital_SetUp5bit_AddSelect(int8_t *ap ,uint8_t n);
+static void Number_Digital_SetUp5bit_AddSelect(int8_t *ap ,uint8_t n);
 
 static void Number_Digital_2bit_DecSelect(int8_t *ap);
 static void Number_Digital_2bit_AddSelect(int8_t *ap);
@@ -204,6 +213,7 @@ static void KEY_SubMenuFun_Enter(void)
              
                menu_t.menuF1Sub_first++;
                mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
+                menu_t.menuTitle_02=1;
                menuFxSubTop=-1;
                menu_t.FxMainMenu_key =0xB0;
              //  menu_t.FxSub_02_key=0xf01;
@@ -218,6 +228,7 @@ static void KEY_SubMenuFun_Enter(void)
                  
                         /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                        menu_t.menuTitle_02=1;
                         menu_t.menuTitle_03=submenu_F1;
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
@@ -234,11 +245,10 @@ static void KEY_SubMenuFun_Enter(void)
                        
 
                         mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
-                      
                         menu_t.FxMainMenu_key =0xB0;
                         menu_t.FxSub_03_key=0xff;  
                         menu_t.menuTitle_03=0;
-
+                        
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
                      
                         printf("f1sub_top_return = %d\n",menu_t.F1_SubMenuTop);
@@ -251,22 +261,51 @@ static void KEY_SubMenuFun_Enter(void)
           case F2:
             if(menu_t.menuF2Sub_first==0){  
 				menu_t.menuF2Sub_first++;
-                        menuTop= -1;
                         menuFxSubTop=-1;
-				menu_t.menuMain=0;
-				menu_t.active_Submenu=F2;//the second menu
+                        mainitem_t.task_MainMenu=TheSecond_Menu;
+                        menu_t.menuTitle_02=2;
+				menu_t.FxMainMenu_key =0xB0;
 				menu_t.menuTitle_03=submenu_F2; //RunCommand()
-				menu_t.F2_SubMenuTop= PushSub_Menu(F2Mnumbers);
-			}
-            else{
-                      menu_t.menuF2Sub_first=0;
-                      menu_t.active_Submenu=F2; //the first select F1-01->menu
-                      //PushMenu_To_SubMenu(menu_t.F1SubMenu_Sub_02_Id);
-                      menu_t.F1_Sub01_Top = submenu_03_Top();
-                      menu_t.FxSub_02_key =F101_02;
-                      menu_t.F1SubMenu_Sub_02_Id=menu_t.F1_Sub01_Top ;
 
-               }    
+				menu_t.F1_SubMenuTop= PushSub_Menu(F2Mnumbers);
+                         printf("f201top = %d\n",menu_t.F2_SubMenuTop);
+		}
+            else{
+                      
+                     key_t.keyReturn_F2_flag = key_t.keyReturn_F2_flag ^ 0X01; 
+                     if(key_t.keyReturn_F2_flag==1){
+
+                      /*****************The third********************/
+                        mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                        menu_t.menuTitle_02=2;
+                        menu_t.menuTitle_03=submenu_F2;
+                        //runKey fun
+                        menu_t.FxMainMenu_key =0xC0; //the third menu open 
+                        menu_t.FxSub_03_key=0xf20;  //F2-01 -> the third sub open
+            
+                        //F2_02_xx_SelectCmd();
+                     
+                        menu_t.menu_F1Sub_03_xx_key=menu_t.F2SubMenu_Id;
+
+                     }
+                     else{
+                      
+                        menu_t.menuId= F2;
+                       
+
+                        mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
+                      
+                        menu_t.FxMainMenu_key =0xB0;
+                         menu_t.menuTitle_02=2;
+                        menu_t.FxSub_03_key=0xff;  
+                        menu_t.menuTitle_03=0;
+                      //  F2_01_xx_SelectCmd();
+                        menu_t.F2_SubMenuTop=menu_t.F2SubMenu_Id;
+                     
+                        printf("f2sub_top_return = %d\n",menu_t.F2_SubMenuTop);
+                     }
+
+            }    
           break;
           
           case F3:
@@ -459,7 +498,34 @@ static void KEY1_ZERIO_UP_Fun(void)
                     break;
 
                     case 0xf20:
+                        switch(menu_t.menu_F1Sub_03_xx_key){
 
+                           case F201:
+                              Number_Digital_SetUp5bit_AddSelect(AF201,3);
+                           break;
+
+                           case F202:
+                              Number_Digital_5bit_AddSelect(AF202);
+                           break;
+
+                           case F203:
+                               Number_Digital_5bit_AddSelect(AF203);
+                           break;
+
+                           case F204:
+                               Number_Digital_SetUp5bit_AddSelect(AF204,3);
+                           break;
+
+                           case F205:
+                               Number_Digital_5bit_AddSelect(AF205);
+                           break;
+
+                           case F206:
+                               Number_Digital_5bit_AddSelect(AF206);
+                           break;
+
+
+                        }
                     break;
 
                     case 0xf30:
@@ -628,6 +694,34 @@ static void KEY2_TRAE_DOWN_Fun(void)
                     break;
 
                     case 0xf20:
+                        switch(menu_t.menu_F1Sub_03_xx_key){
+
+                           case F201:
+                                Number_Digital_SetUp5bit_AddSelect(AF201,3);          
+                           break;
+
+                           case F202:
+
+                           break;
+
+                           case F203:
+
+                           break;
+
+                           case F204:
+
+                           break;
+
+                           case F205:
+
+                           break;
+
+                           case F206:
+
+                           break;
+
+
+                        }
 
                     break;
 
@@ -695,6 +789,13 @@ static void KEY2_TRAE_DOWN_Fun(void)
 static void KEY3_SWITCH_LEFT_Fun(void)
 { 
      
+      if(menu_t.F1SubMenu_Id != 0xff){
+           mainitem_t.task_MainMenu =TheFirst_Menu;
+           menu_t.mainTop =  MainMenu_Top();
+           return ;
+      }
+      
+      
       //2BIT
       if(menu_t.F1SubMenu_Sub_02_Id ==0x04|| menu_t.F1SubMenu_Sub_02_Id ==0x07||menu_t.F1SubMenu_Sub_02_Id ==0x0B\
          ||menu_t.F1SubMenu_Sub_02_Id ==0x0C){
@@ -741,7 +842,14 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 
 
 
-
+/*******************************************************************
+ * 
+ * Function Name:static void F1_01_xx_SelectCmd(void)
+ * Function : one to one F1SubMenu_Id  by F1 sub menu 
+ * 
+ * 
+ * 
+*******************************************************************/
 static void F1_01_xx_SelectCmd(void)
 {
      switch(menu_t.F1SubMenu_Id){
@@ -798,6 +906,15 @@ static void F1_01_xx_SelectCmd(void)
                      
 
 }
+
+/*******************************************************************
+ * 
+ * Function Name:static void F1_01_xx_SelectCmd(void)
+ * Function : one to one F1SubMenu_Id  by F1 sub menu 
+ * 
+ * 
+ * 
+*******************************************************************/
 
 /*************************************************************
 *
@@ -1157,5 +1274,23 @@ void Number_Digital_F111_4bit_DecSelect(int8_t *ap)
        if(i ==-1)i=3;
        *ap =i;
         
+}
 
+
+void Number_Digital_SetUp5bit_AddSelect(int8_t *ap ,uint8_t n)
+{
+      uint8_t static i;
+        if(i>(n-1))i=0;
+         *ap =i;
+         i++;
+
+}
+
+void Number_Digital_SetUp_5bit_DecSelect(int8_t *ap,uint8_t n)
+{
+      int8_t static i;
+       i--;
+       if(i ==-1)i=(n-1);
+       *ap =i;
+        
 }
