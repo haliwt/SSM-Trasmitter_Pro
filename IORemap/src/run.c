@@ -43,6 +43,14 @@ void RunCommand(void)
                      F2SubMenu_Master_01();
                      F2SubMenu_02(menu_t.F2_SubMenuTop);
                  break;
+
+                 case 3: //F3-01-
+
+                 break;
+
+                 case 4: //F7-01-
+
+                 break; 
                
                 }
          break;
