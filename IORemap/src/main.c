@@ -85,7 +85,7 @@ int main(void)
 			
 		    CheckMode(keydata);//KEY_Function(keydata);
             RunCommand();
-			RunBlinkbMenuCmd();
+			
 			
 		}
     

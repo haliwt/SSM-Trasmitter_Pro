@@ -58,7 +58,9 @@ const unsigned char segChar[]={
     seg_d+seg_e+seg_f+seg_g,                    //'t'  ->12->0X0C
     seg_b+seg_c+seg_d+seg_f+seg_g,              //'Y'  ->13->0x0d
     seg_a+seg_d+seg_e,                          //'C'-lack   ->14->0xe
-    seg_g										//'-'  ->15  ->0x0F
+    seg_g,										//'-'  ->15  ->0x0F
+	seg_a+seg_b+seg_c+seg_e+seg_f+seg_g,   		//'R' ->16 -0X10                                    
+	seg_c+seg_e+seg_d                           //'u'  ->17 -0x11
 };
 
 //static void Delay_us(uint8_t i);

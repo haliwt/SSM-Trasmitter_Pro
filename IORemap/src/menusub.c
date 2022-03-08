@@ -265,3 +265,33 @@ void F2SubMenu_03_Item(void)
 
 }
 
+/*******************F3-01-01**********************************
+ * 
+ * Display F3-1.1 F3-2.2 /F3-1.2 F3-2.2 /F3-1.3 F3-2.3
+ * 
+ * 
+ * 
+*************************************************************/
+void F3SubMenu_03_Item(uint8_t mf301)
+{
+
+       switch(mf301){
+
+        case F301 : //display -> 3bit
+            menu_t.F3SubMenu_Id=F301;
+            F3SubMenu_F301_01_Select_DIS(AF301);
+        break;
+
+        case F302 : //"5BIT" has "-"
+            menu_t.F3SubMenu_Id=F302;
+            F3SubMenu_F302_02_Select_DIS(AF302);
+        break;
+
+        default:
+
+        break;
+    }
+
+
+
+}

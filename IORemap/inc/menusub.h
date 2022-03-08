@@ -45,8 +45,42 @@ typedef enum{
 }F2SubMenuenum_02;
 
 
+typedef enum{
+  F301,
+  F302,
+}F3SubMenuenum_01_03;
 
-void StackStacksubmenu_03_Init(Stacksubmenu_03 *sm03);
+typedef enum{
+  F30_11,
+  F30_21,
+
+  F30_12,
+  F30_22,
+
+  F30_13,
+  F30_23,
+
+  F3_14,
+  F3_24,
+
+  F3_15,
+  F3_25,
+
+  F3_16,
+  F3_26,
+
+  F3_17,
+  F3_27
+  
+
+}F3SubMenuenum_03_03;
+
+typedef enum{
+  F430 =0x01,
+  
+}F3SubMenuenum_04;
+
+
 int8_t Is_empty(Stacksubmenu_03 *sm03);
 int8_t Is_full(Stacksubmenu_03 *sm03);
 int8_t subPush_03(Stacksubmenu_03 *sm03, uint8_t dat);
@@ -57,7 +91,16 @@ void TheThird_F1_03_Menu(void);
 void TheThird_F2_03_Menu(void);
 void F1_TheBlinkMenu_03(void);
 
+void F3SubMenu_03_Item(uint8_t mf301);
+
+
+
+
 void F2SubMenu_03_Item(void);
+
+void F7SubMenu_03_Item(void);
+void F8ubMenu_03_Item(void);
+void F9SubMenu_03_Item(void);
 
 
 

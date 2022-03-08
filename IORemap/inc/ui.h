@@ -59,7 +59,19 @@ void F2SubMenu_F205_01_Select_DIS(int8_t *pA);
 void F2SubMenu_F206_01_Select_DIS(int8_t *pA);
 
 //F3 SubMenu List
+void F3SubMenu_01(void);
+void F3SubMenu_02(void);
 void F3SubMenu_Master_01(void);
+
+void F3SubMenu_F301_01_Select_DIS(int8_t *pA);
+void F3SubMenu_F301_02_Select_DIS(int8_t *pA);
+
+void F3SubMenu_F301_11_Select_DIS(int8_t *pA);
+void F3SubMenu_F301_12_Select_DIS(int8_t *pA);
+void F3SubMenu_F301_13_Select_DIS(int8_t *pA);
+void F3SubMenu_F301_14_Select_DIS(int8_t *pA);
+void F3SubMenu_F301_15_Select_DIS(int8_t *pA);
+void F3SubMenu_04_Item(int8_t *pA,int8_t *pt);
 
 //F7 SubMenu List 
 void F7SubMenu_Master_01(void);

@@ -45,12 +45,23 @@ void RunCommand(void)
                  break;
 
                  case 3: //F3-01-
-
+                     menu_t.F1_Submenu_Check_flag =0x03;
+                     F3SubMenu_Master_01();
+                     F3SubMenu_02_DispSelect(menu_t.F3_SubMenuTop);
                  break;
 
-                 case 4: //F7-01-
+                 case 7: //F7-01-
 
                  break; 
+
+                 case 8: //F8-01-
+
+                 break; 
+
+                 case 9: //F8-01-
+
+                 break; 
+
                
                 }
          break;
@@ -70,6 +81,23 @@ void RunCommand(void)
                            F2SubMenu_03_Item();//TheThird_F2_03_Menu();
                     break;
 
+                    case submenu_F3:
+                           F3SubMenu_03_Item(menu_t.menu_F1Sub_03_xx_key);//TheThird_F2_03_Menu();
+
+                    break;
+
+                    case submenu_F7:
+
+                    break;
+
+                    case submenu_F8:
+
+                    break;
+
+                    case submenu_F9:
+
+                    break;
+
               }
               
              
@@ -77,7 +105,18 @@ void RunCommand(void)
          break;
          
          case TheFourth_Menu: //F3->F3-1->F3-1.1 -> ;F3-2 ->F3-2.1
-         
+              
+              switch(menu_t.menuTitle_04){
+
+                   case 0:
+
+                   break;
+
+                   case F430:
+                         F3SubMenu_04_Item(AF340,AFP340);
+                   break;
+              }
+                 
          break;
 
          default:
@@ -91,44 +130,7 @@ void RunCommand(void)
 
 
 }
-void RunBlinkbMenuCmd(void)
-{
-     switch(blinkMenu.EditSubmenu_03){
-         
-         case 0:
-         
-         break;
-         
-         case F1_BLINK_1:
-              F1_TheBlinkMenu_03();
-         break;
-         
-         case F2_BLINK_2:
-         
-         break;
-         
-         case F3_BLINK_3:
-         
-         break;
-         
-         case F7_BLINK_7:
-         
-         break;
-         
-         case F8_BLINK_8:
-         
-         break;
-         
-         case F9_BLINK_9:
-         
-         break;
-         
-         
-     }
-     
-    
-    
-}
+
 
 
 	

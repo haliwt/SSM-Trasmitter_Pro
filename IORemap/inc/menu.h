@@ -88,6 +88,7 @@ typedef struct _MENU{
 	   uint8_t F3_SubMenuTop;
 	   uint8_t menuF3Sub_first;
 	   uint8_t F3SubMenu_Id;
+	   uint8_t F3SubMenu_04_Id;
 	   
 	   uint8_t F7_SubMenuTop;
 	   uint8_t menuF7Sub_first;
@@ -104,6 +105,7 @@ typedef struct _MENU{
 
 	  uint8_t menuTitle_02;
 	  uint8_t  menuTitle_03;
+	  uint8_t  menuTitle_04;
 	  uint8_t  FxMainMenu_key;
 	  uint8_t  menu_F1Sub_03_xx_key;
 
@@ -263,4 +265,8 @@ void F1SubMenu_F101_02_Select_DIS(uint8_t subm3);
 
 /******************F2-01***************************/
 void F2SubMenu_02(uint8_t mn);
+
+/******************F3-01*****************************/
+void F3SubMenu_02_DispSelect(uint8_t mn);
+
 #endif 

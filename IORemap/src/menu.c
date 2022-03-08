@@ -393,5 +393,36 @@ void F2SubMenu_02(uint8_t mn)
 		}
 
 }
+/***********************************************************
+ * 
+ * Function Name: void F3SubMenu_03(F1submenuList f1sub)
+ * Function :display nixie tube character
+ * Input Ref: F1 menu submenu item
+ * Retern Ref: No
+ * 
+************************************************************/
+void F3SubMenu_02_DispSelect(uint8_t mn)
+{
+        switch(mn){
+
+	        case F301:
+			    menu_t.F3SubMenu_Id = F301;
+				F3SubMenu_01(); //"F1 - 01"
+			break;
+
+			case F302:
+			  //  F2SubMenu_Master_01();
+			     menu_t.F3SubMenu_Id = F302;
+				 F1SubMenu_02(); //"F1-02"
+			break;
+			
+			default:
+
+			break;
+
+		}
+
+}
+
 
 

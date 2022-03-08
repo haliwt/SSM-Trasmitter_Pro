@@ -1,6 +1,15 @@
 #include "ui.h"
 static void Symbol_HrL(void);
 static void Symbol_ECH(void);
+static void Symbol_Por(void);
+static void Symbol_EEr(void);
+static void Symbol_PRS(void);
+static void Symbol_CnoSS(void);
+static void Symbol_nEt(void);
+static void Symbol_PERH(void);
+static void Symbol_uRLEy(void);
+static void Symbol_p_u(void);
+
 void DisplayMode_Normal(void)
 {
    SmgDisplay(digital_1,0x0b);//'NULL'
@@ -72,6 +81,7 @@ void Menu_F9(void)
   
 
 }
+
 /***********************************************************
  * 
  * Function Name: void F1SubMenu_01(void)
@@ -239,6 +249,80 @@ static void Symbol_ECH(void)
    SmgDisplay(digital_1,0x0B); // NULL//"n"
 
 }
+static void Symbol_Por(void)
+{
+   SmgDisplay_Character(digital_5,0x0B); //"r" 
+   SmgDisplay_Character(digital_4,0x08); //"O"
+   SmgDisplay_Character(digital_3,0x09); //"P"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
+
+}
+static void Symbol_EEr(void)
+{
+   SmgDisplay_Character(digital_5,0x0B); //"r" 
+   SmgDisplay_Character(digital_4,0x03); //"E"
+   SmgDisplay_Character(digital_3,0x03); //"E"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
+
+}
+static void Symbol_PRS(void)
+{
+   SmgDisplay(digital_5,0x05); //"S" 
+   SmgDisplay_Character(digital_4,0x10); //"R"
+   SmgDisplay_Character(digital_3,0x03); //"E"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
+}
+static void Symbol_CnoSS(void)
+{
+   SmgDisplay_Character(digital_5,0x0B); //"r" 
+   SmgDisplay_Character(digital_4,0x03); //"E"
+   SmgDisplay_Character(digital_3,0x03); //"E"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
+}
+static void Symbol_nEt(void)
+{
+   SmgDisplay_Character(digital_5,0x0c); //"t" 
+   SmgDisplay_Character(digital_4,0x03); //"E"
+   SmgDisplay_Character(digital_3,0x07); //"n"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
+}
+static void Symbol_PERH(void)
+{
+   SmgDisplay_Character(digital_5,0x05); //"H" 
+   SmgDisplay_Character(digital_4,0x10); //"R"
+   SmgDisplay_Character(digital_3,0x03); //"E"
+   SmgDisplay_Character(digital_2,0x09); //"P"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+}
+static void Symbol_uRLEy(void)
+{
+   SmgDisplay_Character(digital_5,0x05); //"Y" 
+   SmgDisplay_Character(digital_4,0x10); //"E"
+   SmgDisplay_Character(digital_3,0x03); //"L"
+   SmgDisplay_Character(digital_2,0x09); //"R"
+   SmgDisplay_Character(digital_1,0x0B); //"u"
+
+}
+static void Symbol_p_u(void)
+{
+   SmgDisplay_Character(digital_5,0x11); //"u" 
+   SmgDisplay_Character(digital_4,0x0f); //"-"
+   SmgDisplay_Character(digital_3,0x09); //"P"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+
+}
+
 /***********************************************************
  * 
  * Function Name: void F1SubMenu_Sub_02(void)
@@ -503,5 +587,152 @@ void F2SubMenu_F203_01_Select_DIS(int8_t *pA)
 
 }
 
+/*******************F3***************************************
+ * 
+ * F3 ITEM MENU 
+ * 
+ * 
+ * 
+ * 
+************************************************************/
+void F3SubMenu_01(void)
+{
+   SmgDisplay_Character(digital_3,0x0f); //"-"
+   SmgDisplay_Point(digital_4,0x01); //'1.'
+   SmgDisplay(digital_5,0x0B); //'1'
+
+}
+void F3SubMenu_02(void)
+{
+   SmgDisplay_Character(digital_3,0x0f); //"-"
+   SmgDisplay_Point(digital_4,0x02); //'1.'
+   SmgDisplay(digital_5,0x0B); //'1'
+}
+void F3SubMenu_F301_01_Select_DIS(int8_t *pA)
+{
+     
+      SmgDisplay(digital_5,*pA); // 0~100
+       
+}
+void F3SubMenu_F302_02_Select_DIS(int8_t *pA)
+{
+     SmgDisplay(digital_5,*pA); // 0~100
+}
+
+
+/*****************F3 the furth menu*****************************/
+
+ void F3SubMenu_F301_11_Select_DIS(int8_t *pA)
+ {
+      if(*pA == 0){
+         F1SubMenu_Sub_01_05(); //"nonE"
+      }
+      else if(*pA==1){ //"Por"
+         Symbol_Por();
+
+      }
+      else if(*pA==2){ //"EEr"
+
+          Symbol_EEr();
+      }
+
+ }
+
+ void F3SubMenu_F301_12_Select_DIS(int8_t *pA)
+ {
+   SmgDisplay(digital_1,0x0B); // 0~100
+   SmgDisplay(digital_2,0x0B); // 0~100
+   SmgDisplay(digital_3,0x0B); // pointer "."
+   SmgDisplay(digital_4,0x0B); // pointer "."
+   SmgDisplay(digital_5,*pA); // 0~100
+
+ }
+
+void F3SubMenu_F301_13_Select_DIS(int8_t *pA)
+{
+   
+     if(*pA == 0){
+         Symbol_PRS();
+      }
+      else if(*pA==1){ //"Por"
+        Symbol_CnoSS();
+
+      }
+      else if(*pA==2){ //"EEr"
+            Symbol_nEt();
+      }
+      else if(*pA==3){
+         Symbol_PERH();
+      }
+      else if(*pA ==4){
+         Symbol_uRLEy();
+      }
+      else if(*pA ==5){
+         Symbol_p_u();
+      }
+}
+
+void F3SubMenu_F301_14_Select_DIS(int8_t *pA)
+{
+    SmgDisplay(digital_1,0x0b); // null
+   SmgDisplay(digital_2,0x0b); // null
+   SmgDisplay(digital_3,*(pA+2)); // 0~100
+   SmgDisplay_Point(digital_4,*(pA+1));  // 0~100
+   SmgDisplay(digital_5,*pA); // 0~100
+}
+
+void F3SubMenu_F301_16_Select_DIS(int8_t *pA)
+{
+   F2SubMenu_F202_01_Select_DIS(pA);
+
+}
+
+
+
+void F3SubMenu_04_Item(int8_t *pA,int8_t *pt)
+{
+      switch(*pA){
+
+        case 0:
+
+        break;
+
+        case 1:
+              F3SubMenu_F301_11_Select_DIS(pt);
+        break; 
+
+        case 2:
+           F3SubMenu_F301_12_Select_DIS(pt);
+
+        break;
+
+        case 3:
+          F3SubMenu_F301_13_Select_DIS(pt);
+
+        break;
+            
+        case 4:
+            F3SubMenu_F301_14_Select_DIS(pt);
+        break;
+
+        case 5:
+            F2SubMenu_F202_01_Select_DIS(pt);
+        break;
+
+        case 6:
+            F2SubMenu_F202_01_Select_DIS(pt);
+        break;
+            
+        case 7:
+            F2SubMenu_F202_01_Select_DIS(pt);
+        break;
+
+
+
+
+
+      }
+
+}
  
  
