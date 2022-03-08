@@ -7,8 +7,18 @@ KEY key_t;
 run run_t;
 subNumbers_TypedDef submenStruct;
 int8_t AF104[4]={0,0,0,0};
-int8_t AF105[3]={0,0,0};
+int8_t AF105[2]={0,0};
 int8_t AF106[5]={0,0,0,0,0};
+int8_t AF107[5]={0,0,0,0,0};
+int8_t AF108[2];
+int8_t AF109[5];
+int8_t AF110[4];
+int8_t AF111[1];
+int8_t AF112[2];
+int8_t AF113[2];
+
+
+
 
 int8_t Amenu_Top = -1;
 
@@ -17,15 +27,22 @@ uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 int8_t one,two,three,four,five; 
 void(*DispDigital_3BitSmg)(void);
 
-static void Number_Digital_3bit_PointDecSelect(int8_t *ap);
-static void Number_Digital_3bit_PointAddSelect(int8_t *ap);
+
+
+static void Number_Digital_2bit_DecSelect(int8_t *ap);
+static void Number_Digital_2bit_AddSelect(int8_t *ap);
+
 static void Number_Digital_3bit_DecSelect(void);
 static void Number_Digital_3bit_AddSelect(void);
+
 static void Number_Digital_4bit_DecSelect(int8_t *ap);
 static void Number_Digital_4bit_AddSelect(int8_t *ap);
+
 static void Number_Digital_5bit_DecSelect(int8_t *ap);
 static void Number_Digital_5bit_AddSelect(int8_t *ap);
 
+static void Number_Digital_F111_4bit_AddSelect(int8_t *ap);
+static void Number_Digital_F111_4bit_DecSelect(int8_t *ap);
 
 //void RunDispDigital_Fun(void(*DisSmg)(void));
 static void KEY1_ZERIO_UP_Fun(void);
@@ -384,46 +401,54 @@ static void KEY1_ZERIO_UP_Fun(void)
                                    menu_t. F1_Sub03_unit= menu_t.unit;
                                     menu_t.F1_Sub03_decade=menu_t.decade;
                                    menu_t.F1_Sub03_hundred =menu_t.hundred;
+                                     key_t.keyReturn_flag=1;
+                                   
                               break;
 
                                case 0x03: //F1-04-01
-                                    Number_Digital_4bit_DecSelect(AF104);
+                                    Number_Digital_4bit_AddSelect(AF104);
+                                      key_t.keyReturn_flag=1;
                               break;
 
                                 case 0x04://F1-05-01
-                                   Number_Digital_3bit_PointAddSelect(AF105);
+                                   Number_Digital_2bit_AddSelect(AF105);
+                                     key_t.keyReturn_flag=1;
                               break;
 
                               case 0x05://F1-06-01
                                     Number_Digital_5bit_AddSelect(AF106);
+                                      key_t.keyReturn_flag=1;
                               break;
 
-                               case 0x06:
-                                    menu_t.F1_Sub07_Top=  PushSub_03_Menu(F101_01_07);
+                               case 0x06: //F1-07-01
+                                     Number_Digital_5bit_AddSelect(AF107);
+                                    key_t.keyReturn_flag=1;
                               break;
 
-                               case 0x07:
-                                    menu_t.F1_Sub08_Top=  PushSub_03_Menu(F101_01_08);
+                               case 0x07: //F1-08-01
+                                   Number_Digital_2bit_AddSelect(AF108);
+                                     key_t.keyReturn_flag=1;
                               break;
 
-                                case 0x08:
-                                  menu_t.F1_Sub09_Top=  PushSub_03_Menu(F101_01_09);
+                              case 0x08: //F1-09-01
+                                  Number_Digital_4bit_AddSelect(AF109);
                               break;
 
-                              case 0x09:
-                                    menu_t.F1_Sub10_Top=  PushSub_03_Menu(F101_01_10);
+                              case 0x09: //F1-10-01
+                                     Number_Digital_5bit_AddSelect(AF110);
                               break;
 
-                               case 0x0A:
-                                    menu_t.F1_Sub11_Top=  PushSub_03_Menu(F101_01_11);
+                               case 0x0A://F1-11-01 ->display 4 bit
+                                   Number_Digital_F111_4bit_AddSelect(AF111);
+                                    
                               break;
 
-                               case 0x0B:
-                                    menu_t.F1_Sub12_Top=  PushSub_03_Menu(F101_01_12);
+                               case 0x0B://F1-12-01
+                                     Number_Digital_2bit_AddSelect(AF112);
                               break;
 
-                               case 0x0C:
-                                    menu_t.F1_Sub13_Top=  PushSub_03_Menu(F101_01_13);
+                               case 0x0C://F1-13-01
+                                    Number_Digital_2bit_AddSelect(AF113);
                               break;
 
                           }
@@ -546,42 +571,46 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                                case 0x03: //F1-04-01
                                     Number_Digital_4bit_DecSelect(AF104);
+                                    key_t.keyReturn_flag=1;
                               break;
 
                                 case 0x04: //F1-05-01
-                                  Number_Digital_3bit_PointDecSelect(AF105);
+                                  Number_Digital_2bit_DecSelect(AF105);
+                                  key_t.keyReturn_flag=1;
                               break;
 
                               case 0x05: //F1-06-01
                                     Number_Digital_5bit_DecSelect(AF106);
+                                    key_t.keyReturn_flag=1;
                               break;
 
-                               case 0x06:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_07);
+                               case 0x06: //F1-07-01
+                                   Number_Digital_5bit_DecSelect(AF107);
+                                   key_t.keyReturn_flag=1;
                               break;
 
-                               case 0x07:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_08);
+                               case 0x07://F1-08-01
+                                    Number_Digital_2bit_DecSelect(AF108);
                               break;
 
-                                case 0x08:
-                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_09);
+                              case 0x08://F1-09-01
+                                 Number_Digital_4bit_DecSelect(AF109);
                               break;
 
-                              case 0x09:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_10);
+                              case 0x09://F1-10-01
+                                   Number_Digital_5bit_DecSelect(AF110);
                               break;
 
-                               case 0x0A:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_11);
+                               case 0x0A://F1-11-01
+                                     Number_Digital_F111_4bit_DecSelect(AF111);
                               break;
 
-                               case 0x0B:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_12);
+                               case 0x0B: //F1-12-01
+                                       Number_Digital_2bit_DecSelect(AF112);
                               break;
 
                                case 0x0C:
-                                    menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_13);
+                                   Number_Digital_2bit_DecSelect(AF113);
                               break;
 
                           }
@@ -670,7 +699,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           }
     }
 
-    if(menu_t.F1SubMenu_Sub_02_Id ==0x05){
+    if(menu_t.F1SubMenu_Sub_02_Id ==0x05 ||menu_t.F1SubMenu_Sub_02_Id ==0x06){
             menu_t.inputNumber_Select ++;
            if(menu_t.inputNumber_Select > 4){
               menu_t.inputNumber_Select =0;
@@ -744,6 +773,46 @@ static void F1_01_xx_SelectCmd(void)
 
 }
 
+/*************************************************************
+*
+*Display Smg 2 bit 1~9.0 increas 
+*
+*
+**************************************************************/
+static void Number_Digital_2bit_DecSelect(int8_t *ap)
+{
+  if(menu_t.inputNumber_Select==0){
+             menu_t.unit--;
+            if(menu_t.unit < 0){
+               menu_t.unit=9;
+            }
+            printf("s_1 = %d\n",menu_t.unit);
+      }
+      else if(menu_t.inputNumber_Select==1){
+            menu_t.decade--;
+            if(menu_t.decade< 0){
+             menu_t.decade=9;
+            }
+            printf("s_2 = %d\n",menu_t.decade);
+      
+      }    
+}
+static void Number_Digital_2bit_AddSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+            menu_t.unit++ ;
+            if(menu_t.unit >9){
+               menu_t.unit=0;
+            }
+      }
+      else if(menu_t.inputNumber_Select==1){
+                  menu_t.decade++;
+                  if(menu_t.decade >9){
+                        menu_t.decade=0;
+                  }
+       }
+      
+}
 
 void Number_Digital_3bit_AddSelect(void)
 {
@@ -918,6 +987,7 @@ static void Number_Digital_3bit_PointDecSelect(int8_t *ap)
 }
 static void Number_Digital_3bit_PointAddSelect(int8_t *ap)
 {
+      
       if(menu_t.inputNumber_Select==0){
             one++ ;
             if(one >9){
@@ -1030,5 +1100,24 @@ static void Number_Digital_5bit_AddSelect(int8_t *ap)
                     }
 			*(ap+4) = five; 
       } 
+
+}
+
+void Number_Digital_F111_4bit_AddSelect(int8_t *ap)
+{
+      uint8_t static i;
+        if(i>3)i=0;
+         *ap =i;
+         i++;
+
+}
+
+void Number_Digital_F111_4bit_DecSelect(int8_t *ap)
+{
+      int8_t static i;
+       i--;
+       if(i ==-1)i=3;
+       *ap =i;
+        
 
 }

@@ -126,32 +126,32 @@ void TheThird_03_Menu(void)
 
                   case 0x07 : //F1-08-01
                         menu_t.F1SubMenu_Sub_02_Id =0x07;
-                        F1SubMenu_F106_01_Select_DIS(AF106);
+                         F1SubMenu_F105_01_Select_DIS(AF108);
                         key_t.keyReturn_flag=1;
 				   break;
 
                   case 0x08 : //F1-09-01
-                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        F1SubMenu_F109_01_Select_DIS(AF109);
                         key_t.keyReturn_flag=1;
 				   break;
 
                    case 0x09 : //F1-10-01
-                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        F1SubMenu_F110_01_Select_DIS(AF110);
                         key_t.keyReturn_flag=1;
 				   break;
 
                    case 0x0A : //F1-11-01
-                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        F1SubMenu_F111_01_Select_DIS(AF111);
                         key_t.keyReturn_flag=1;
 				   break;
 
                    case 0x0B : //F1-12-01
-                        F1SubMenu_F106_01_Select_DIS(AF106);
+                        F1SubMenu_F112_01_Select_DIS(AF112);
                         key_t.keyReturn_flag=1;
 				   break;
 
                    case 0x0C : //F1-13-01
-                        F1SubMenu_F106_01_Select_DIS(AF106);
+                         F1SubMenu_F112_01_Select_DIS(AF113);
                         key_t.keyReturn_flag=1;
 				   break;
 

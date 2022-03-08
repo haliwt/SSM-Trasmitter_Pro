@@ -41,6 +41,10 @@ void F1SubMenu_F1_02_01(int8_t unit,int8_t decade,int8_t hundred);
 void F1SubMenu_F104_01_Select_DIS(int8_t *p);
 void F1SubMenu_F105_01_Select_DIS(int8_t *pA);
 void F1SubMenu_F106_01_Select_DIS(int8_t *pA);
+void F1SubMenu_F109_01_Select_DIS(int8_t *pA);
+void F1SubMenu_F110_01_Select_DIS(int8_t *pA);
+void F1SubMenu_F111_01_Select_DIS(int8_t *pA);
+void F1SubMenu_F112_01_Select_DIS(int8_t *pA);
 
 //F1 the third menu 03 list
 void F1SubMenu_Sub_03(void);

@@ -343,19 +343,27 @@ void F1SubMenu_F104_01_Select_DIS(int8_t *p)
 
 }
 
-
+/***********************************************
+*
+*Smg F1-05 display  2 bit 1-5.0
+*
+**********************************************/
 void F1SubMenu_F105_01_Select_DIS(int8_t *pA)
 {
    
    SmgDisplay(digital_1,0x0b); // 0~100
    SmgDisplay(digital_2,0x0b); // 0~100
-   SmgDisplay_Point(digital_3,*(pA+2)); // pointer "."
-   SmgDisplay(digital_4,*(pA+1)); // 0~100
+   SmgDisplay(digital_3,0x0b); // 0~100
+   SmgDisplay_Point(digital_4,*(pA+1)); // pointer "."
    SmgDisplay(digital_5,*pA); // 0~100
   
 
 }
-
+/***********************************************
+*
+*Smg F1-06 display  2 bit 0~99999
+*
+**********************************************/
 void F1SubMenu_F106_01_Select_DIS(int8_t *pA)
 {
    
@@ -368,3 +376,70 @@ void F1SubMenu_F106_01_Select_DIS(int8_t *pA)
 
 }
 
+void F1SubMenu_F109_01_Select_DIS(int8_t *pA)
+{
+   SmgDisplay(digital_1,0x0b); // 0~100
+   SmgDisplay(digital_2,*(pA+3)); // 0~100
+   SmgDisplay(digital_3,*(pA+2)); // 
+   SmgDisplay(digital_4,*(pA+1)); // 0~100
+   SmgDisplay(digital_5,*pA); // 0~100
+   
+   
+}
+
+void F1SubMenu_F110_01_Select_DIS(int8_t *pA)
+{
+   SmgDisplay(digital_1,*(pA+4)); // 0~100
+   SmgDisplay(digital_2,*(pA+3)); // 0~100
+   SmgDisplay(digital_3,*(pA+2)); // pointer "."
+   SmgDisplay_Point(digital_4,*(pA+1)); // pointer "." //SmgDisplay(digital_4,*(pA+1)); // 0~100
+   SmgDisplay(digital_5,*pA); // 0~100
+}
+
+ void F1SubMenu_F111_01_Select_DIS(int8_t *pA)
+ {
+   
+   if(*pA==0){ //"10"
+       SmgDisplay(digital_1,0x0b); // 0~100
+      SmgDisplay(digital_2,0x0b); // 0~100
+      SmgDisplay(digital_3,0x0b); // 
+      SmgDisplay(digital_4,0x01); // 0~100
+      SmgDisplay(digital_5,0x00); // 0~100
+
+   }
+   else if(*pA==1){ //'40'
+      SmgDisplay(digital_1,0x0b); // 0~100
+      SmgDisplay(digital_2,0X0B); // 0~100
+      SmgDisplay(digital_3,0X0B); // 
+      SmgDisplay(digital_4,0X04); // 0~100
+      SmgDisplay(digital_5,0X00); // 0~100
+   }
+   else if(*pA==2){ //'640'
+      SmgDisplay(digital_1,0x0b); // 0~100
+      SmgDisplay(digital_2,0X0B); // 0~100
+      SmgDisplay(digital_3,0X06); // 
+      SmgDisplay(digital_4,0X04); // 0~100
+      SmgDisplay(digital_5,0X00); // 0~100
+   }
+   else if(*pA==3){ //"1280"
+      SmgDisplay(digital_1,0x0B); // 0~100
+      SmgDisplay(digital_2,0X01); // 0~100
+      SmgDisplay(digital_3,0X02); // 
+      SmgDisplay(digital_4,0X08); // 0~100
+      SmgDisplay(digital_5,0X00); // 0~100
+   }
+    
+ }
+ 
+ 
+void F1SubMenu_F112_01_Select_DIS(int8_t *pA)
+{
+   
+   SmgDisplay(digital_1,0x0b); // 0~100
+   SmgDisplay(digital_2,0x0b); // 0~100
+   SmgDisplay(digital_3,0x0b); // 0~100
+   SmgDisplay(digital_3,*(pA+1)); // 0~100
+   SmgDisplay(digital_5,*pA); // 0~100
+   
+}
+ 

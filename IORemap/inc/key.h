@@ -26,8 +26,15 @@ typedef struct _KEY_{
 
 extern int8_t AF104[4];
 
-extern int8_t AF105[3];
+extern int8_t AF105[2]; //2bit 1~5.0 
 extern int8_t AF106[5];
+extern int8_t AF107[5];
+extern int8_t AF108[2];
+extern int8_t AF109[5];
+extern int8_t AF110[4];
+extern int8_t AF111[1];
+extern int8_t AF112[2];
+extern int8_t AF113[2];
 
 extern KEY key_t;
 
