@@ -1098,8 +1098,12 @@ static void KEY3_SWITCH_LEFT_Fun(void)
      
      
      if(mainitem_t.task_MainMenu==TheSecond_Menu){
-          mainitem_t.task_MainMenu=TheFirst_Menu;
-    
+          
+          menu_t.menuF1Sub_first=0;
+          menu_t.menuF2Sub_first=0;
+          menu_t.menuF3Sub_first=0;
+          f7menu_t.menuF7Sub_first=0;
+          f8menu_t.menuF8Sub_first=0;
           menu_t.menuMain=1;
           menuTop= -1;
           mainitem_t.task_MainMenu=TheFirst_Menu;
@@ -1107,7 +1111,8 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           menu_t.FxSub_02_key=0;
           menu_t.FxSub_03_key=0;
           menu_t.mainTop= PushMainMenu(); 
-          menu_t.menuId=0xff;
+         
+        
           return ;
       }
 
