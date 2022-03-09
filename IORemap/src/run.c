@@ -51,7 +51,7 @@ void RunCommand(void)
                  break;
 
                  case 7: //F7-01-
-
+                       F7SubMenu_02_DIS(f7menu_t.F7_02_Id) ;
                  break; 
 
                  case 8: //F8-01-
@@ -87,7 +87,7 @@ void RunCommand(void)
                     break;
 
                     case submenu_F7:
-
+                            F7SubMenu_03_DIS();
                     break;
 
                     case submenu_F8:

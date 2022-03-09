@@ -156,68 +156,7 @@ void TheThird_F1_03_Menu(void)
 		}
 }
 
-void F1_TheBlinkMenu_03(void)
-{
-	  switch(menu_t.F1SubMenu_Sub_03_Id){
-           
-                    case  F101_01 :
-                            
-                                menu_t.F1_Submenu_Check_flag =101; //0x01
-                                F1SubMenu_F101_01_Select_DIS(menu_t.F1_Sub01_Top); //"---9"
-                        break;
-                    case F101_02 :
-                                menu_t.F1_Submenu_Check_flag =102;
-                                F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_03 :
-                                menu_t.F1_Submenu_Check_flag =103;
-                                F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_04 :
-                                menu_t.F1_Submenu_Check_flag =104;
-                                F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_05 :
-                                menu_t.F1_Submenu_Check_flag =105;
-                                F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_06:
-                                menu_t.F1_Submenu_Check_flag =106;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_07 :
-                                menu_t.F1_Submenu_Check_flag =107;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_08 :
-                                menu_t.F1_Submenu_Check_flag =108;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_09 :
-                                menu_t.F1_Submenu_Check_flag =109;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_10 :
-                                menu_t.F1_Submenu_Check_flag =110;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case F101_11 :
-                                menu_t.F1_Submenu_Check_flag =111;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        
-                    case F101_12:
-                                menu_t.F1_Submenu_Check_flag =112;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                    case  F101_13:
-                                menu_t.F1_Submenu_Check_flag =113;
-                                 F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
-                        break;
-                 }
-         
-	
-	
-}
+
 
 
 void F2SubMenu_03_Item(void)

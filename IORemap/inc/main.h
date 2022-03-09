@@ -28,6 +28,10 @@ extern "C" {
 #include "led.h"
 #include "menusub.h"
 #include "printf.h"
+#include "f3menu.h"
+#include "f7menu.h"
+#include "f8menu.h"
+#include "f9menu.h"
 
 /*Led1-PA0,Led2-PB1,Key-PA8*/
 
