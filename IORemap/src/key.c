@@ -47,6 +47,9 @@ uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 int8_t one,two,three,four,five; 
 void(*DispDigital_3BitSmg)(void);
 
+void Number_Digital_Set5bit_twoAddSelect(int8_t *ap ,uint8_t n);
+void Number_Digital_Set5bit_twoDecSelect(int8_t *ap ,uint8_t n);
+
 void Number_Digital_Set5bit_ZeroAddSelect(int8_t *ap ,uint8_t n);
 void Number_Digital_Set5bit_ZeroDecSelect(int8_t *ap ,uint8_t n);
 
@@ -363,7 +366,7 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxMainMenu_key =0xD0; //the FOURTH menu open 
                         menu_t.FxSub_03_key=0xf30;  //F2-01 -> the third sub open
             
-                        menu_t.menu_F1Sub_03_xx_key=menu_t.F3SubMenu_Id ;
+                        menu_t.menu_F1Sub_03_xx_key=menu_t.F34_KEY_VALUE ;
 
 
 
@@ -610,7 +613,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                               break;
 
                         case F302:
-                                    Number_Digital_Set5bit_AddSelect(AF3402,7);
+                                    Number_Digital_Set5bit_twoAddSelect(AF3402,7);
                               break;
                         
 
@@ -862,7 +865,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
                            break;
 
                         case F302:
-                             Number_Digital_Set5bit_DecSelect(AF3402,7);
+                             Number_Digital_Set5bit_twoDecSelect(AF3402,7);
                          break;
 
                          }
@@ -983,12 +986,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 
     }
 
-//     if(menu_t.F1SubMenu_Id != 0xff){
-//            mainitem_t.task_MainMenu =TheFirst_Menu;
-//            menu_t.mainTop =  MainMenu_Top();
-//            return ;
-//    }
-      
+
 
 
    
@@ -1435,7 +1433,19 @@ void Number_Digital_F111_4bit_DecSelect(int8_t *ap)
 
 void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n)
 {
-      uint8_t static i;
+    static  uint8_t  i;
+       i++;
+       if(i>n)i=1;
+       *ap =i;
+       menu_t.F34_KEY_VALUE = i;
+      
+        
+        
+
+}
+void Number_Digital_Set5bit_twoAddSelect(int8_t *ap ,uint8_t n)
+{
+    static  uint8_t  i;
        i++;
        if(i>n)i=1;
        *ap =i;
@@ -1447,15 +1457,24 @@ void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n)
 }
 void Number_Digital_Set5bit_DecSelect(int8_t *ap,uint8_t n)
 {
-      int8_t static i;
+     static  int8_t  i=2;
+       i--;
       if(i ==0)i=n;
-        i--;
-        *ap =i;
+       *ap =i;
        
        menu_t.F34_KEY_VALUE = i;
         
 }
-
+void Number_Digital_Set5bit_twoDecSelect(int8_t *ap,uint8_t n)
+{
+     static  int8_t  i=2;
+       i--;
+      if(i ==0)i=n;
+       *ap =i;
+       
+       menu_t.F34_KEY_VALUE = i;
+        
+}
 
 void Number_Digital_Set5bit_ZeroAddSelect(int8_t *ap ,uint8_t n)
 {
