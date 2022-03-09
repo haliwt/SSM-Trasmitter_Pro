@@ -235,6 +235,7 @@ extern int8_t menuTop;
 extern int8_t menuFxSubTop;
 extern int8_t menuFxSub_03_Top;
 extern  int8_t F1_03_item_Top;
+extern int8_t F3_04_item_Top ;
 
 //Main menu
 void Menu_Init(void);
@@ -253,6 +254,10 @@ int8_t SubMenu_02_Top(void);
 extern uint8_t PushSub_03_Menu(int8_t msize);
 extern uint8_t PopSub_03_Menu(int8_t msize);
 int8_t submenu_03_Top(void);
+
+uint8_t F3_04_PushSub_Item(int8_t nsize);
+uint8_t F3_04_PopSub_Item(int8_t nsize);
+uint8_t F3_04_Item_Top(void);
 
 //F1 MENU the third menu 
 void F1SubMenu_F101_01_Select_DIS(uint8_t subm3);

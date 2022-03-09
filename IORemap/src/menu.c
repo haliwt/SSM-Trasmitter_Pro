@@ -12,6 +12,7 @@ int8_t menuTop= -1;
 int8_t menuFxSubTop=-1;
 int8_t menuFxSub_03_Top = -1;
 int8_t F1_03_item_Top=-1;
+int8_t F3_04_item_Top =0;
 
 
 
@@ -210,6 +211,38 @@ uint8_t F1_PopSub_03_Item(int8_t nsize)
 uint8_t F1_PopSub_03_Item_Top(void)
 {
 	   return F1_03_item_Top ;
+	
+}
+
+/*************************************************/
+uint8_t F3_04_PushSub_Item(int8_t nsize)
+{
+	 F3_04_item_Top++;
+	 if(F3_04_item_Top > nsize){
+	     // printf("Error :stack overflow \n");
+	     //return ;
+	  
+	   F3_04_item_Top=1;
+	}
+	
+	//F1SubMenu(menuF1SubTop);
+	return F3_04_item_Top;
+}
+uint8_t F3_04_PopSub_Item(int8_t nsize)
+{
+	 F3_04_item_Top--;
+	if(F3_04_item_Top == 0 || F3_04_item_Top ==-1 ){
+	    //printf("Error : no element to Pop \n");
+		//return;
+		F3_04_item_Top = nsize  ;
+	}
+   
+	
+    return F3_04_item_Top ;
+}
+uint8_t F3_04_Item_Top(void)
+{
+	   return F3_04_item_Top ;
 	
 }
 /***********************************************************

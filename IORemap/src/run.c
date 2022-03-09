@@ -107,7 +107,7 @@ void RunCommand(void)
          case TheFourth_Menu: //F3->F3-1->F3-1.1 -> ;F3-2 ->F3-2.1
               
            
-                        switch(menu_t.menu_F1Sub_03_xx_key){
+                        switch(menu_t.menuTitle_04){
 
                             case F3401: //3bit
                                      menu_t.F3_04_ID = F3401;
