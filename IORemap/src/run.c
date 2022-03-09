@@ -51,11 +51,13 @@ void RunCommand(void)
                  break;
 
                  case 7: //F7-01-
-                       F7SubMenu_02_DIS(f7menu_t.F7_02_Id) ;
+                        F7SubMenu_Master_01();
+                       F7SubMenu_02_DIS(f7menu_t.F7_SubMenuTop) ;
                  break; 
 
                  case 8: //F8-01-
-                    F8SubMenu_02_DIS(f8menu_t.F8_02_Id) ;
+                    F8SubMenu_Master_01();
+                    F8SubMenu_02_DIS(f8menu_t.F8_SubMenuTop) ;
                  break; 
 
                  case 9: //F8-01-

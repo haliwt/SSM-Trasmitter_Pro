@@ -23,6 +23,8 @@ typedef struct _KEY_{
 	   uint8_t keyReturn_flag;
 	   uint8_t keyReturn_F2_flag;
 	   uint8_t keyReturn_F3_flag;
+	   uint8_t  f7keyReturn_flag;
+	   uint8_t	f8keyReturn_flag;
 	  
 }KEY;
 

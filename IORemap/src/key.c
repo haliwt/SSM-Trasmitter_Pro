@@ -494,9 +494,9 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxSub_03_key=0xff;  
                         menu_t.menuTitle_03=0;
                         
-                        f8menu_t.F7_SubMenuTop=f8menu_t.F8SubMenu_Id;
+                        f8menu_t.F8_SubMenuTop=f8menu_t.F8SubMenu_Id;
                      
-                        printf("f8_keyDown = %d\n",F8menu_t.F8_SubMenuTop);
+                        printf("f8_keyDown = %d\n",f8menu_t.F8_SubMenuTop);
                     }
                        
             }  
@@ -569,7 +569,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                   printf("f7_keyDown = %d\n",f8menu_t.F8_SubMenuTop);
                 break;
 
-                case 
+             
 
                }
          break;
