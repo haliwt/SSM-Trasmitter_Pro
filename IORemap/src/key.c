@@ -1104,6 +1104,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           menu_t.menuF3Sub_first=0;
           f7menu_t.menuF7Sub_first=0;
           f8menu_t.menuF8Sub_first=0;
+          f9menu_t.menuF9Sub_first=0;
           menu_t.menuMain=1;
           menuTop= -1;
           mainitem_t.task_MainMenu=TheFirst_Menu;
