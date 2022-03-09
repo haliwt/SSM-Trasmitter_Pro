@@ -9,6 +9,8 @@ static void Symbol_nEt(void);
 static void Symbol_PERH(void);
 static void Symbol_uRLEy(void);
 static void Symbol_p_u(void);
+static void Symbol_uRLLE(void);
+static void Symbol_ERS(void);
 
 void DisplayMode_Normal(void)
 {
@@ -81,6 +83,8 @@ void Menu_F9(void)
   
 
 }
+
+
 
 /***********************************************************
  * 
@@ -323,6 +327,26 @@ static void Symbol_p_u(void)
 
 }
 
+static void Symbol_uRLLE(void)
+{
+   
+   SmgDisplay_Character(digital_5,0x10); //"E"
+   SmgDisplay_Character(digital_4,0x03); //"L" 
+   SmgDisplay_Character(digital_3,0x03); //"L"
+   SmgDisplay_Character(digital_2,0x09); //"R"
+   SmgDisplay_Character(digital_1,0x0B); //"u"
+
+}
+static void Symbol_ERS(void)
+{
+
+   SmgDisplay(digital_5,0x05); //"S" 
+   SmgDisplay_Character(digital_4,0x10); //"R"
+   SmgDisplay_Character(digital_3,0x03); //"E"
+   SmgDisplay(digital_2,0x0B); // NULL//"n"
+   SmgDisplay(digital_1,0x0B); // NULL//"n"
+   
+}
 /***********************************************************
  * 
  * Function Name: void F1SubMenu_Sub_02(void)
@@ -744,4 +768,33 @@ void F3SubMenu_04_Item(int8_t *pA,int8_t *pt)
 
 }
  
- 
+ void F8SubMenu_03_02_StandDis(uint8_t mu)
+ {
+      switch(mu)
+      {
+         case 0:
+               Symbol_ERS();
+         break;
+
+         case 1:
+               Symbol_CnoSS();
+         break;
+
+          case 2:
+               Symbol_nEt();
+         break;
+
+         case 3:
+               Symbol_PERH();
+         break;
+
+           case 4:
+                  Symbol_uRLLE();
+         break;
+
+         case 5:
+               Symbol_p_u();
+         break;
+      }
+
+}

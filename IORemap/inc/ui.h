@@ -78,6 +78,7 @@ void F7SubMenu_Master_01(void);
 
 //F8 SubMenu List 
 void F8SubMenu_Master_01(void);
+void F8SubMenu_03_02_StandDis(uint8_t mu);
 
 //F9 SubMenu List 
 void F9SubMenu_Master_01(void);

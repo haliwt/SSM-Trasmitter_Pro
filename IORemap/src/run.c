@@ -55,7 +55,7 @@ void RunCommand(void)
                  break; 
 
                  case 8: //F8-01-
-
+                    F8SubMenu_02_DIS(f8menu_t.F8_02_Id) ;
                  break; 
 
                  case 9: //F8-01-
@@ -91,7 +91,7 @@ void RunCommand(void)
                     break;
 
                     case submenu_F8:
-
+                          F8SubMenu_03_DIS();
                     break;
 
                     case submenu_F9:

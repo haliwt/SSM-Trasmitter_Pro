@@ -95,9 +95,7 @@ typedef struct _MENU{
 	   uint8_t F3SubMenu_04_Id;
 	   uint8_t F34_KEY_VALUE;
 	   
-	   uint8_t F7_SubMenuTop;
-	   uint8_t menuF7Sub_first;
-	   uint8_t F7SubMenu_Id;
+	
 	   
 	   uint8_t F8_SubMenuTop;
 	   uint8_t menuF8Sub_first;
