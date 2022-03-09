@@ -608,15 +608,23 @@ void F3SubMenu_02(void)
    SmgDisplay_Point(digital_4,0x02); //'1.'
    SmgDisplay(digital_5,0x0B); //'NULL'
 }
-void F3SubMenu_F301_01_Select_DIS(int8_t *pA)
+void F3SubMenu_F301_01_Select_DIS(int8_t *pA,uint8_t n)
 {
-      
+     static uint8_t i=0;
+     if(i==0){
+        if(*pA==0)*pA =1;
+         i++;
+     }
       SmgDisplay(digital_5,*pA); // 0~100
        
 }
-void F3SubMenu_F302_02_Select_DIS(int8_t *pA)
+void F3SubMenu_F302_02_Select_DIS(int8_t *pA,uint8_t n)
 {
-    
+      static uint8_t i=0;
+     if(i==0){
+        if(*pA==0)*pA =1;
+         i++;
+     }
       SmgDisplay(digital_5,*pA); // 0~100
 }
 
