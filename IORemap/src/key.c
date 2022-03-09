@@ -311,7 +311,7 @@ static void KEY_SubMenuFun_Enter(void)
           break;
           
           case F3:
-            if(menu_t.menuF3Sub_first==0){  
+            if(menu_t.menuF3Sub_first==0){  //F3-1.
 				menu_t.menuF3Sub_first++;
 			       menuFxSubTop=-1;
                         mainitem_t.task_MainMenu=TheSecond_Menu;
@@ -319,12 +319,12 @@ static void KEY_SubMenuFun_Enter(void)
 				menu_t.FxMainMenu_key =0xB0;
                         menu_t.FxSub_02_key=0xf30;
 				menu_t.F3_SubMenuTop= PushSub_Menu(F3Mnumbers);
-			} 
+		} 
             else{
                     key_t.keyReturn_F3_flag++;
                     printf("F3_Keyreturn = %d\n",key_t.keyReturn_F3_flag);
                    // key_t.keyReturn_F3_flag = key_t.keyReturn_F3_flag ^ 0X01; 
-                    if(key_t.keyReturn_F3_flag==1){
+                    if(key_t.keyReturn_F3_flag==1){ //F3-1.1
 
                       /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
@@ -588,13 +588,13 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                     case 0xf30://F3-01 ->Control F3-1.1 
                         switch(menu_t.menu_F1Sub_03_xx_key){
-								case F301:
-									  Number_Digital_Set5bit_AddSelect(AF301,7);
-								   break;
+                        case F301:
+                                    Number_Digital_Set5bit_AddSelect(AF301,7);
+                              break;
 
-								case F302:
-									   Number_Digital_Set5bit_AddSelect(AF302,7);
-								 break;
+                        case F302:
+                                    Number_Digital_Set5bit_AddSelect(AF302,7);
+                              break;
                           printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
 
                         }
@@ -677,6 +677,10 @@ static void KEY2_TRAE_DOWN_Fun(void)
      
     switch(menu_t.FxMainMenu_key){
     
+    case 0:
+
+    break;
+
     case 0xA0 :
             menu_t.mainTop=PopMainMenu();
      break;
@@ -715,7 +719,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
       }
      break;   
 
-     case 0xC0:
+     case 0xC0: //The input the first 
              switch( menu_t.FxSub_03_key){
 
                     
@@ -840,12 +844,13 @@ static void KEY2_TRAE_DOWN_Fun(void)
                            break;
 
                         case F302:
-                               Number_Digital_Set5bit_DecSelect(AF302,7);
+                             Number_Digital_Set5bit_DecSelect(AF302,7);
                          break;
 
-                         printf("F3f30_DecKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
+                         
 
                         }
+                        printf("F3f30_DecKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
                     break;
 
                     case 0xf40:
@@ -1412,8 +1417,9 @@ void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n)
 void Number_Digital_Set5bit_DecSelect(int8_t *ap,uint8_t n)
 {
       int8_t static i;
-       i--;
+      
        if(i ==0)i=n;
        *ap =i;
+        i--;
         
 }
