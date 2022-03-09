@@ -599,23 +599,24 @@ void F3SubMenu_01(void)
 {
    SmgDisplay_Character(digital_3,0x0f); //"-"
    SmgDisplay_Point(digital_4,0x01); //'1.'
-   SmgDisplay(digital_5,0x0B); //'1'
+   SmgDisplay(digital_5,0x0B); //'NULL'
 
 }
 void F3SubMenu_02(void)
 {
    SmgDisplay_Character(digital_3,0x0f); //"-"
    SmgDisplay_Point(digital_4,0x02); //'1.'
-   SmgDisplay(digital_5,0x0B); //'1'
+   SmgDisplay(digital_5,0x0B); //'NULL'
 }
 void F3SubMenu_F301_01_Select_DIS(int8_t *pA)
 {
-     
+      if(*pA==0)*pA=1;
       SmgDisplay(digital_5,*pA); // 0~100
        
 }
 void F3SubMenu_F302_02_Select_DIS(int8_t *pA)
 {
+     if(*pA==0)*pA = 1;
      SmgDisplay(digital_5,*pA); // 0~100
 }
 

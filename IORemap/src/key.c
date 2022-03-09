@@ -288,7 +288,7 @@ static void KEY_SubMenuFun_Enter(void)
                         //F2_02_xx_SelectCmd();
                      
                         menu_t.menu_F1Sub_03_xx_key=menu_t.F2SubMenu_Id;
-
+                        
                      }
                      else{
                       
@@ -317,25 +317,26 @@ static void KEY_SubMenuFun_Enter(void)
                         mainitem_t.task_MainMenu=TheSecond_Menu;
                         menu_t.menuTitle_02=3;
 				menu_t.FxMainMenu_key =0xB0;
-                        menu_t.FxSub_02_key=0xf20;
+                        menu_t.FxSub_02_key=0xf30;
 				menu_t.F3_SubMenuTop= PushSub_Menu(F3Mnumbers);
 			} 
             else{
                     key_t.keyReturn_F3_flag++;
+                    printf("F3_Keyreturn = %d\n",key_t.keyReturn_F3_flag);
                    // key_t.keyReturn_F3_flag = key_t.keyReturn_F3_flag ^ 0X01; 
                     if(key_t.keyReturn_F3_flag==1){
 
                       /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
-                        menu_t.menuTitle_02=3;
+                        //menu_t.menuTitle_02=3;
                         menu_t.menuTitle_03=submenu_F3;
                        
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf30;  //F2-01 -> the third sub open
-            
                         menu_t.menu_F1Sub_03_xx_key=menu_t.F3SubMenu_Id;
-
+                        printf("F3_enter_03 = %d\n",menu_t.F3SubMenu_Id);
+                        
                      }
                      else if(key_t.keyReturn_F3_flag==2){ //the fourth menu
                         mainitem_t.task_MainMenu=TheFourth_Menu; //open the Fourth  menu
@@ -345,7 +346,7 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxMainMenu_key =0xD0; //the FOURTH menu open 
                         menu_t.FxSub_03_key=0xf30;  //F2-01 -> the third sub open
             
-                        menu_t.menu_F1Sub_03_xx_key=menu_t.F3SubMenu_04_Id;
+                        menu_t.menu_F1Sub_03_xx_key=menu_t.F3SubMenu_Id ;
 
 
 
@@ -365,6 +366,7 @@ static void KEY_SubMenuFun_Enter(void)
                         printf("f3sub_top_enter = %d\n",menu_t.F3_SubMenuTop);
                   
                      }
+                 
             }   
           break;
           
@@ -465,6 +467,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                 case 0xf30:
                      menu_t.F3_SubMenuTop= PushSub_Menu(F3Mnumbers);
+                      printf("f1f3_b_keyd+ = %d\n",menu_t.F3_SubMenuTop);
                 break;
 
                }
@@ -552,7 +555,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                           }
                     break;
 
-                    case 0xf20:
+                    case 0xf20://F2-01->Control
                         switch(menu_t.menu_F1Sub_03_xx_key){
 
                            case F201:
@@ -583,15 +586,16 @@ static void KEY1_ZERIO_UP_Fun(void)
                         }
                     break;
 
-                    case 0xf30:
+                    case 0xf30://F3-01 ->Control F3-1.1 
                         switch(menu_t.menu_F1Sub_03_xx_key){
-                        case F301:
-                              Number_Digital_Set5bit_AddSelect(AF301,7);
-                           break;
+								case F301:
+									  Number_Digital_Set5bit_AddSelect(AF301,7);
+								   break;
 
-                        case F302:
-                               Number_Digital_Set5bit_AddSelect(AF302,7);
-                         break;
+								case F302:
+									   Number_Digital_Set5bit_AddSelect(AF302,7);
+								 break;
+                          printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
 
                         }
                     break;
@@ -691,6 +695,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                 case 0xf30: //F3-01
                      menu_t.F3_SubMenuTop = PopSub_Menu(F3Mnumbers);
+                     printf("f1f3_b_keyd = %d\n",menu_t.F3_SubMenuTop);
                 break;
 
                 case 0xf70:
@@ -837,6 +842,8 @@ static void KEY2_TRAE_DOWN_Fun(void)
                         case F302:
                                Number_Digital_Set5bit_DecSelect(AF302,7);
                          break;
+
+                         printf("F3f30_DecKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
 
                         }
                     break;

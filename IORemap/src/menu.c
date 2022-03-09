@@ -407,13 +407,13 @@ void F3SubMenu_02_DispSelect(uint8_t mn)
 
 	        case F301:
 			    menu_t.F3SubMenu_Id = F301;
-				F3SubMenu_01(); //"F1 - 01"
+				F3SubMenu_01(); //"F1 - 1."
 			break;
 
 			case F302:
 			  //  F2SubMenu_Master_01();
 			     menu_t.F3SubMenu_Id = F302;
-				 F1SubMenu_02(); //"F1-02"
+				 F3SubMenu_02(); //"F1-2."
 			break;
 			
 			default:
