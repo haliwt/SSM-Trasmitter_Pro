@@ -1,10 +1,17 @@
 #include "key.h"
 #include "menu.h"
 
+
+
 #define MAZ_F1_SUBMENU_SIZE   13
+
+
 
 KEY key_t;
 run run_t;
+
+
+uint8_t F305_tmp4,F305_tmp5,F305_tmp6,F305_tmp7;
 subNumbers_TypedDef submenStruct;
 int8_t AF104[4];
 int8_t AF105[2];
@@ -388,7 +395,7 @@ static void KEY_SubMenuFun_Enter(void)
                        
 
                         printf("F3_enter_04 = %d\n",menu_t.menuTitle_04);
-                        printf("F3_03_xx_key_04 = %d\n",menu_t.menuTitle_04);
+                        printf("F3_03_xx_key_04 = %d\n",menu_t.menu_F1Sub_03_xx_key);
                      }
                      else{
                         menu_t.menuId= F3;
@@ -663,31 +670,40 @@ static void KEY1_ZERIO_UP_Fun(void)
               switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case F3401:
-                       Number_Digital_Set5bit_ZeroAddSelect(AF301,3);
+                      AF301[0]= F3_05_PushSub_Item(3); //Number_Digital_Set5bit_ZeroAddSelect(AF301,3);
                   break;
 
                   case F3402:
-                        Number_Digital_Set5bit_ZeroAddSelect(AF302,1);
+                       AF302[0] = F3_05_PushSub_Item(1);//Number_Digital_Set5bit_ZeroAddSelect(AF302,1);
                   break;
 
                   case F3403:
-                         Number_Digital_Set5bit_ZeroAddSelect(AF303,6);
+                       AF303[0] = F3_05_PushSub_Item(6);  //Number_Digital_Set5bit_ZeroAddSelect(AF303,6);
                   break;
 
                   case F3404:
-                         Number_Digital_Set5bit_ZeroAddSelect(AF304,3);
+                       AF304[F305_tmp4] = F3_05_PushSub_Item(3);  //Number_Digital_Set5bit_ZeroAddSelect(AF304,3);
+                       F305_tmp4++;
+                       if(F305_tmp4>2)F305_tmp4=0;
                   break;
 
                   case F3405:
-                        Number_Digital_Set5bit_ZeroAddSelect(AF305,5);
+                      AF305[F305_tmp5] = F3_05_PushSub_Item(5);  //Number_Digital_Set5bit_ZeroAddSelect(AF305,5);
+                      F305_tmp5++;
+                      if(F305_tmp5>4)F305_tmp5=0;
                   break;
 
                   case F3406:
-                        Number_Digital_Set5bit_ZeroAddSelect(AF306,5);
+                      AF306[F305_tmp6] = F3_05_PushSub_Item(5);  //Number_Digital_Set5bit_ZeroAddSelect(AF306,5);
+                      F305_tmp6++;
+                      if(F305_tmp6>4)F305_tmp6=0;
                   break;
 
                   case F3407:
-                        Number_Digital_Set5bit_ZeroAddSelect(AF307,5);
+                
+                     AF307[F305_tmp7] = F3_05_PushSub_Item(5);//   Number_Digital_Set5bit_ZeroAddSelect(AF307,5);
+                     F305_tmp7++;
+                     if(F305_tmp7>4)F305_tmp7=0;
                   break;
 
               }
@@ -919,31 +935,39 @@ static void KEY2_TRAE_DOWN_Fun(void)
          switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case F3401:
-                       Number_Digital_Set5bit_ZeroDecSelect(AF301,3);
+                       AF301[0]= F3_05_PopSub_Item(3);  //Number_Digital_Set5bit_ZeroDecSelect(AF301,3);
                   break;
 
                   case F3402:
-                        Number_Digital_Set5bit_ZeroDecSelect(AF302,1);
+                       AF302[0]= F3_05_PopSub_Item(1);  //Number_Digital_Set5bit_ZeroDecSelect(AF302,1);
                   break;
 
                   case F3403:
-                         Number_Digital_Set5bit_ZeroDecSelect(AF303,6);
+                       AF303[0]= F3_05_PopSub_Item(6);   //Number_Digital_Set5bit_ZeroDecSelect(AF303,6);
                   break;
 
                   case F3404:
-                         Number_Digital_Set5bit_ZeroDecSelect(AF304,3);
+                      AF304[F305_tmp4]= F3_05_PopSub_Item(3); 
+                       F305_tmp4++;
+                       if(F305_tmp4>2)F305_tmp4=0;   //Number_Digital_Set5bit_ZeroDecSelect(AF304,3);
                   break;
 
                   case F3405:
-                        Number_Digital_Set5bit_ZeroDecSelect(AF305,5);
+                       AF305[F305_tmp5]= F3_05_PopSub_Item(5); Number_Digital_Set5bit_ZeroDecSelect(AF305,5);
+                         F305_tmp5++;
+                      if(F305_tmp5>4)F305_tmp5=0;
                   break;
 
                   case F3406:
-                        Number_Digital_Set5bit_ZeroDecSelect(AF306,5);
+                       AF306[F305_tmp6]= F3_05_PopSub_Item(5);   //Number_Digital_Set5bit_ZeroDecSelect(AF306,5);
+                        F305_tmp6++;
+                      if(F305_tmp6>4)F305_tmp6=0;
                   break;
 
                   case F3407:
-                        Number_Digital_Set5bit_ZeroDecSelect(AF307,5);
+                          AF307[F305_tmp7]= F3_05_PopSub_Item(5);//Number_Digital_Set5bit_ZeroDecSelect(AF307,5);
+                        F305_tmp7++;
+                     if(F305_tmp7>4)F305_tmp7=0;
                   break;
 
               }

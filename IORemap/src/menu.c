@@ -13,7 +13,7 @@ int8_t menuFxSubTop=-1;
 int8_t menuFxSub_03_Top = -1;
 int8_t F1_03_item_Top=-1;
 int8_t F3_04_item_Top =0;
-
+int8_t F3_05_item_Top =-1;
 
 
 void Menu_Init(void)
@@ -230,19 +230,65 @@ uint8_t F3_04_PushSub_Item(int8_t nsize)
 }
 uint8_t F3_04_PopSub_Item(int8_t nsize)
 {
-	 F3_04_item_Top--;
+	 
 	if(F3_04_item_Top == 0 || F3_04_item_Top ==-1 ){
 	    //printf("Error : no element to Pop \n");
 		//return;
 		F3_04_item_Top = nsize  ;
 	}
-   
+    F3_04_item_Top--;
+
+	if(F3_04_item_Top == 0 || F3_04_item_Top ==-1 ){
+	    //printf("Error : no element to Pop \n");
+		//return;
+		F3_04_item_Top = nsize  ;
+	}
 	
     return F3_04_item_Top ;
 }
 uint8_t F3_04_Item_Top(void)
 {
 	   return F3_04_item_Top ;
+	
+}
+
+/*************************************************
+*
+*The F1 ->F1-01-> F1-01-01,F1-01-02,F1-01-03
+*F1-01-04,F1-01-05,F1-01-06.....F1-01-13
+*
+*
+*
+
+*************************************************/
+uint8_t F3_05_PushSub_Item(int8_t nsize)
+{
+	 if(F3_05_item_Top >= nsize){
+	     // printf("Error :stack overflow \n");
+	     //return ;
+	  
+	   F3_05_item_Top=0;
+	}
+	else{
+		F3_05_item_Top++;
+	}
+	//F1SubMenu(menuF1SubTop);
+	return F3_05_item_Top;
+}
+uint8_t F3_05_PopSub_Item(int8_t nsize)
+{
+	
+	if(F3_05_item_Top== -1){
+	    //printf("Error : no element to Pop \n");
+		//return;
+		F3_05_item_Top = nsize -1 ;
+	}
+    F3_05_item_Top--;
+    return F3_05_item_Top ;
+}
+uint8_t F3_05_PopSub_Item_Top(void)
+{
+	   return F3_05_item_Top ;
 	
 }
 /***********************************************************
