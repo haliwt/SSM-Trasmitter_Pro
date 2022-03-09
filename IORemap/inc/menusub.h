@@ -76,7 +76,13 @@ typedef enum{
 }F3SubMenuenum_03_03;
 
 typedef enum{
-  F430 =0x01,
+  F3401,
+  F3402,
+  F3403,
+  F3404,
+  F3405,
+  F3406,
+  F3407
   
 }F3SubMenuenum_04;
 

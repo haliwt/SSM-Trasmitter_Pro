@@ -106,16 +106,52 @@ void RunCommand(void)
          
          case TheFourth_Menu: //F3->F3-1->F3-1.1 -> ;F3-2 ->F3-2.1
               
-              switch(menu_t.menuTitle_04){
+           
+                        switch(menu_t.F3_SubMenuTop_03){
 
-                   case 0:
+                            case F3401: //3bit
+                                     menu_t.F3_04_ID = F3401;
+                                     F3SubMenu_F301_11_Select_DIS(AF301);
 
-                   break;
+                             break;
 
-                   case F430:
-                         F3SubMenu_04_Item(AF340,AFP340);
-                   break;
-              }
+                             case F3402: //bit  1
+                                      menu_t.F3_04_ID = F3402;
+                                     F3SubMenu_F301_12_Select_DIS(AF302);
+                             break;
+
+
+                             case F3403://bit 6
+                                     menu_t.F3_04_ID = F3403;
+                                    F3SubMenu_F301_13_Select_DIS(AF303);
+                             break;
+
+                             case F3404: //bit 3 point
+                                      menu_t.F3_04_ID = F3404;
+                                     F3SubMenu_F301_14_Select_DIS(AF304);
+                             break;
+
+                             case F3405://  5 bit
+                                     menu_t.F3_04_ID = F3405;
+                                    F2SubMenu_F202_01_Select_DIS(AF305);
+                             break;
+
+                             case F3406:
+                                 menu_t.F3_04_ID = F3406;
+                                F2SubMenu_F202_01_Select_DIS(AF306);
+                             break;
+
+                             case F3407:
+                                 menu_t.F3_04_ID = F3407;
+                                F2SubMenu_F202_01_Select_DIS(AF307);
+                             break;
+
+
+
+                        }
+                         
+              
+              
                  
          break;
 

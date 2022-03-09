@@ -26,10 +26,17 @@ int8_t AF205[5];
 int8_t AF206[5];
 
 /************F3*****************/
-int8_t AF340[7];
-int8_t AFP340[7];
-int8_t AF301[7];
-int8_t AF302[7];
+int8_t AF3401[7];
+int8_t AF3402[7];
+
+int8_t AF301[3];
+int8_t AF302[1];
+int8_t AF303[6];
+int8_t AF304[3];
+int8_t AF305[5];
+int8_t AF306[5];
+int8_t AF307[5];
+
 
 
 
@@ -39,6 +46,9 @@ uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 
 int8_t one,two,three,four,five; 
 void(*DispDigital_3BitSmg)(void);
+
+void Number_Digital_Set5bit_ZeroAddSelect(int8_t *ap ,uint8_t n);
+void Number_Digital_Set5bit_ZeroDecSelect(int8_t *ap ,uint8_t n);
 
 static void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n);
 static void Number_Digital_Set5bit_DecSelect(int8_t *ap ,uint8_t n);
@@ -334,14 +344,21 @@ static void KEY_SubMenuFun_Enter(void)
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf30;  //F2-01 -> the third sub open
+                        
+                        menu_t.F3_SubMenuTop_02 = submenu_03_Top();
                         menu_t.menu_F1Sub_03_xx_key=menu_t.F3SubMenu_Id;
                         printf("F3_enter_03 = %d\n",menu_t.F3SubMenu_Id);
                         
                      }
                      else if(key_t.keyReturn_F3_flag==2){ //the fourth menu
                         mainitem_t.task_MainMenu=TheFourth_Menu; //open the Fourth  menu
-                        menu_t.menuTitle_04=F430;
+                       
 
+                         menu_t.F3_SubMenuTop_02 = submenu_03_Top();
+                         if(menu_t.F3_SubMenuTop_02==F301){
+                             menu_t.F3_SubMenuTop_03 = menu_t.F34_KEY_VALUE;
+                         }
+                         else  menu_t.F3_SubMenuTop_03 = menu_t.F34_KEY_VALUE;
                         //runKey fun
                         menu_t.FxMainMenu_key =0xD0; //the FOURTH menu open 
                         menu_t.FxSub_03_key=0xf30;  //F2-01 -> the third sub open
@@ -589,28 +606,19 @@ static void KEY1_ZERIO_UP_Fun(void)
                     case 0xf30://F3-01 ->Control F3-1.1 
                         switch(menu_t.menu_F1Sub_03_xx_key){
                         case F301:
-                                    Number_Digital_Set5bit_AddSelect(AF301,7);
+                                   Number_Digital_Set5bit_AddSelect(AF3401,7);
                               break;
 
                         case F302:
-                                    Number_Digital_Set5bit_AddSelect(AF301,7);
+                                    Number_Digital_Set5bit_AddSelect(AF3402,7);
                               break;
-                          printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
+                        
 
                         }
+                        printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
                     break;
 
-                    case 0xf40:
-
-                    break;
-
-                    case 0xf50:
-
-                    break;
-
-                    case 0xf60:
-
-                    break;
+                  
 
                     case 0xf70:
 
@@ -624,21 +632,6 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                     break;
 
-                    case 0xfa0:
-
-                    break;
-
-                    case 0xfb0:
-
-                    break;
-
-                    case 0xfc0:
-
-                    break;
-
-                    case 0xf13:
-
-                    break;
 
                 }
                  
@@ -647,8 +640,32 @@ static void KEY1_ZERIO_UP_Fun(void)
          case 0xD0:
               switch(menu_t.menu_F1Sub_03_xx_key){
 
-                  case F430:
-                        
+                  case F3401:
+                       Number_Digital_Set5bit_ZeroAddSelect(AF301,3);
+                  break;
+
+                  case F3402:
+                        Number_Digital_Set5bit_ZeroAddSelect(AF302,1);
+                  break;
+
+                  case F3403:
+                         Number_Digital_Set5bit_ZeroAddSelect(AF303,6);
+                  break;
+
+                  case F3404:
+                         Number_Digital_Set5bit_ZeroAddSelect(AF304,3);
+                  break;
+
+                  case F3405:
+                        Number_Digital_Set5bit_ZeroAddSelect(AF305,5);
+                  break;
+
+                  case F3406:
+                        Number_Digital_Set5bit_ZeroAddSelect(AF306,5);
+                  break;
+
+                  case F3407:
+                        Number_Digital_Set5bit_ZeroAddSelect(AF307,5);
                   break;
 
               }
@@ -840,30 +857,19 @@ static void KEY2_TRAE_DOWN_Fun(void)
                     case 0xf30:
                         switch(menu_t.menu_F1Sub_03_xx_key){
                         case F301:
-                              Number_Digital_Set5bit_DecSelect(AF301,7);
+                              Number_Digital_Set5bit_DecSelect(AF3401,7);
+                             
                            break;
 
                         case F302:
-                             Number_Digital_Set5bit_DecSelect(AF301,7);
+                             Number_Digital_Set5bit_DecSelect(AF3402,7);
                          break;
 
-                         
-
-                        }
+                         }
                         printf("F3f30_DecKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
                     break;
 
-                    case 0xf40:
-
-                    break;
-
-                    case 0xf50:
-
-                    break;
-
-                    case 0xf60:
-
-                    break;
+               
 
                     case 0xf70:
 
@@ -877,25 +883,47 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                     break;
 
-                    case 0xfa0:
-
-                    break;
-
-                    case 0xfb0:
-
-                    break;
-
-                    case 0xfc0:
-
-                    break;
-
-                    case 0xf13:
-
-                    break;
+                   
 
                 }
 
      break; 
+
+     /*********the fourth menu ************/
+
+     case 0xD0:
+
+         switch(menu_t.menu_F1Sub_03_xx_key){
+
+                  case F3401:
+                       Number_Digital_Set5bit_ZeroDecSelect(AF301,3);
+                  break;
+
+                  case F3402:
+                        Number_Digital_Set5bit_ZeroDecSelect(AF302,1);
+                  break;
+
+                  case F3403:
+                         Number_Digital_Set5bit_ZeroDecSelect(AF303,6);
+                  break;
+
+                  case F3404:
+                         Number_Digital_Set5bit_ZeroDecSelect(AF304,3);
+                  break;
+
+                  case F3405:
+                        Number_Digital_Set5bit_ZeroDecSelect(AF305,5);
+                  break;
+
+                  case F3406:
+                        Number_Digital_Set5bit_ZeroDecSelect(AF306,5);
+                  break;
+
+                  case F3407:
+                        Number_Digital_Set5bit_ZeroDecSelect(AF307,5);
+                  break;
+
+              }
           
         
     }
@@ -1411,18 +1439,42 @@ void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n)
        i++;
        if(i>n)i=1;
        *ap =i;
+       menu_t.F34_KEY_VALUE = i;
       
         
         
 
 }
-
 void Number_Digital_Set5bit_DecSelect(int8_t *ap,uint8_t n)
 {
       int8_t static i;
-      
-       if(i ==0)i=n;
-       *ap =i;
+      if(i ==0)i=n;
         i--;
+        *ap =i;
+       
+       menu_t.F34_KEY_VALUE = i;
+        
+}
+
+
+void Number_Digital_Set5bit_ZeroAddSelect(int8_t *ap ,uint8_t n)
+{
+     static  uint8_t  i;
+       i++;
+       if(i>(n-1))i=0;
+       *ap =i;
+       menu_t.F34_KEY_VALUE = i;
+      
+        
+        
+
+}
+void Number_Digital_Set5bit_ZeroDecSelect(int8_t *ap,uint8_t n)
+{
+   static  int8_t  i;
+      if(i== -1) i= (n-1);
+      i--;
+      *ap =i;
+      menu_t.F34_KEY_VALUE = i;
         
 }

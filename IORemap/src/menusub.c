@@ -279,12 +279,12 @@ void F3SubMenu_03_Item(uint8_t mf301)
 
         case F301 : //display -> 3bit
            // menu_t.F3SubMenu_Id_03=F301;
-            F3SubMenu_F301_01_Select_DIS(AF301);
+            F3SubMenu_F301_01_Select_DIS(AF3401);
         break;
 
         case F302 : //"5BIT" has "-"
            // menu_t.F3SubMenu_Id_03=F302;
-            F3SubMenu_F302_02_Select_DIS(AF302);
+            F3SubMenu_F302_02_Select_DIS(AF3402);
         break;
 
         default:

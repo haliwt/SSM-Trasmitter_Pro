@@ -45,10 +45,16 @@ extern int8_t AF204[1];
 extern int8_t AF205[5];
 extern int8_t AF206[5];
 
-extern int8_t AF340[7];
-extern int8_t AFP340[7];
-extern int8_t AF301[7];
-extern int8_t AF302[7];
+extern int8_t AF3401[7];
+extern int8_t AF3402[7];
+extern int8_t AF301[3];
+extern int8_t AF302[1];
+extern int8_t AF303[6];
+extern int8_t AF304[3];
+extern int8_t AF305[5];
+extern int8_t AF306[5];
+extern int8_t AF307[5];
+
 
 extern KEY key_t;
 
