@@ -593,7 +593,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                               break;
 
                         case F302:
-                                    Number_Digital_Set5bit_AddSelect(AF302,7);
+                                    Number_Digital_Set5bit_AddSelect(AF301,7);
                               break;
                           printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
 
@@ -844,7 +844,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
                            break;
 
                         case F302:
-                             Number_Digital_Set5bit_DecSelect(AF302,7);
+                             Number_Digital_Set5bit_DecSelect(AF301,7);
                          break;
 
                          
@@ -1408,9 +1408,12 @@ void Number_Digital_F111_4bit_DecSelect(int8_t *ap)
 void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n)
 {
       uint8_t static i;
-        if(i>n)i=1;
-         *ap =i;
-         i++;
+       i++;
+       if(i>n)i=1;
+       *ap =i;
+      
+        
+        
 
 }
 
