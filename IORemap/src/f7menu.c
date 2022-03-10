@@ -64,37 +64,38 @@ void F7SubMenu_03_DIS(uint8_t f7mu)
 	
 	
 	case 0:
-		  F7SubMenu_03_01_Dis(f7menu_t.F7_03_01_Id);
-		  printf("f703_dis = %d\n",f7menu_t.F7_03_01_Id);
+	     f7menu_t.F7_theThird_sub_Id =0x0;
+		  F7SubMenu_03_01_Dis(f7menu_t.F7_03_00_Id);
+		  printf("f703_dis = %d\n",f7menu_t.F7_03_00_Id);
 	break;
 		  
 	case 1:
-	    
-		F7SubMenu_03_02_Dis(f7menu_t.F7_03_02_Id);
+	    f7menu_t.F7_theThird_sub_Id =0x1;
+		F7SubMenu_03_02_Dis(f7menu_t.F7_03_01_Id);
 	break;
 	
 	case 2:
-	    
+	    f7menu_t.F7_theThird_sub_Id =0x2;
 		F7SubMenu_03_03_Dis(f7menu_t.unit,f7menu_t.decade,f7menu_t.hundred);
 	break;
 	
 	case 3:
-	    
-		F7SubMenu_03_04_Dis(f7menu_t.F7_03_04_Id);
+	    f7menu_t.F7_theThird_sub_Id =0x3;
+		F7SubMenu_03_04_Dis(f7menu_t.F7_03_03_Id);
 	break;
 	
 	case 4:
-		
+		f7menu_t.F7_theThird_sub_Id =0x04;
 		F7SubMenu_03_05_Dis(f7menu_t.unit,f7menu_t.decade,f7menu_t.hundred);
 	break;
 	
 	case 5:
-		
-		F7SubMenu_03_06_Dis(f7menu_t.F7_03_06_Id);
+		f7menu_t.F7_theThird_sub_Id =0x05;
+		F7SubMenu_03_06_Dis(f7menu_t.F7_03_05_Id);
 	break;
 	
 	case 6:
-		
+		f7menu_t.F7_theThird_sub_Id =0x06;
 		F7SubMenu_03_07_Dis(f7menu_t.F7_03_07_Id);
 	break;
 

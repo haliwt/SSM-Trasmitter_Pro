@@ -703,55 +703,52 @@ static void KEY1_ZERIO_UP_Fun(void)
                     case 0xf70:
                           switch(menu_t.menu_F1Sub_03_xx_key){
                               case 0x00: //F1-01-01
-                                  f7menu_t.F7_03_01_Id=  PushSub_03_Menu(2);
+                                  f7menu_t.F7_03_00_Id=  PushSub_03_Menu(2);
                                   printf("f7_03_Upkey = %d\n",f7menu_t.F7_03_01_Id);
                                    key_t.f7keyReturn_flag=1;
                               break;
 
                               case 0x01: //F1-02-01
-                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
-                                   menu_t. F1_Sub02_unit= menu_t.unit;
-                                    menu_t.F1_Sub02_decade=menu_t.decade;
-                                   menu_t.F1_Sub02_hundred =menu_t.hundred;
+                                    f7menu_t.F7_03_01_Id=  PushSub_03_Menu(8);
                                 
-                                    printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);
+                                    printf("f7_03_upkey = %d\n",menu_t.F1_Sub02_Top);
                                    key_t.f7keyReturn_flag=1;
                               break;
 
                                case 0x02: //F1-03-01
                                    RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
-                                   menu_t. F1_Sub03_unit= menu_t.unit;
-                                    menu_t.F1_Sub03_decade=menu_t.decade;
-                                   menu_t.F1_Sub03_hundred =menu_t.hundred;
+                                   f7menu_t.unit= menu_t.unit;
+                                   f7menu_t.decade=menu_t.decade;
+                                   f7menu_t.hundred =menu_t.hundred;
                                    key_t.f7keyReturn_flag=1;
                                    
                               break;
 
                                case 0x03: //F1-04-01
-                                    Number_Digital_4bit_AddSelect(AF104);
+                                    f7menu_t.F7_03_03_Id=PushSub_03_Menu(7);
                                      key_t.f7keyReturn_flag=1;
                               break;
 
                                 case 0x04://F1-05-01
-                                   Number_Digital_2bit_AddSelect(AF105);
-                                   printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
-                                key_t.f7keyReturn_flag=1;
+                                    RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                                   f7menu_t.unit= menu_t.unit;
+                                   f7menu_t.decade=menu_t.decade;
+                                   f7menu_t.hundred =menu_t.hundred;
+                                   key_t.f7keyReturn_flag=1;
+                                 
                               break;
 
                               case 0x05://F1-06-01
-                                    Number_Digital_5bit_AddSelect(AF106);
+                                   f7menu_t.F7_03_05_Id=PushSub_03_Menu(2);
                                     key_t.f7keyReturn_flag=1;
                               break;
 
                                case 0x06: //F1-07-01
-                                     Number_Digital_5bit_AddSelect(AF107);
+                                    
                                    key_t.f7keyReturn_flag=1;
                               break;
 
-                               case 0x07: //F1-08-01
-                                   Number_Digital_2bit_AddSelect(AF108);
-                                  key_t.f7keyReturn_flag=1;
-                              break;
+                              
                          }
                     break;
 
@@ -1013,51 +1010,52 @@ static void KEY2_TRAE_DOWN_Fun(void)
                     break;
 
                
-
+                   //F7 -01 -display
                     case 0xf70:
                     switch(menu_t.menu_F1Sub_03_xx_key){
-                              case 0x00: //F7-01-01
-                                  f7menu_t.F7_03_01_Id=  PopSub_03_Menu(2);
-                                  printf("f7_03_Downkey = %d\n",f7menu_t.F7_03_01_Id);
+                              case 0x00: //F1-01-01
+                                  f7menu_t.F7_03_00_Id=  PopSub_03_Menu(2);
+                                  printf("f7_03_Upkey = %d\n",f7menu_t.F7_03_01_Id);
                                    key_t.f7keyReturn_flag=1;
                               break;
 
-                              case 0x01: //F7-02-01
-                                  f7menu_t.F7_03_02_Id = PopSub_03_Menu(8);
+                              case 0x01: //F1-02-01
+                                    f7menu_t.F7_03_01_Id=  PopSub_03_Menu(8);
+                                
+                                    printf("f7_03_upkey = %d\n",menu_t.F1_Sub02_Top);
                                    key_t.f7keyReturn_flag=1;
                               break;
 
-                               case 0x02: //F7-03-01
-                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                               case 0x02: //F1-03-01
+                                   RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
                                    f7menu_t.unit= menu_t.unit;
-                                    f7menu_t.decade=menu_t.decade;
+                                   f7menu_t.decade=menu_t.decade;
                                    f7menu_t.hundred =menu_t.hundred;
                                    key_t.f7keyReturn_flag=1;
                                    
                               break;
 
-                               case 0x03: //F7-04-01
-                                   f7menu_t.F7_03_04_Id=PopSub_03_Menu(7);
+                               case 0x03: //F1-04-01
+                                    f7menu_t.F7_03_03_Id=PushSub_03_Menu(7);
                                      key_t.f7keyReturn_flag=1;
                               break;
 
-                                case 0x04://F7-05-01
-                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                                case 0x04://F1-05-01
+                                    RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
                                    f7menu_t.unit= menu_t.unit;
-                                    f7menu_t.decade=menu_t.decade;
+                                   f7menu_t.decade=menu_t.decade;
                                    f7menu_t.hundred =menu_t.hundred;
                                    key_t.f7keyReturn_flag=1;
-                                   printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
-                                key_t.f7keyReturn_flag=1;
+                                 
                               break;
 
-                              case 0x05://F7-06-01
-                                    f7menu_t.F7_03_06_Id=PopSub_03_Menu(2);
+                              case 0x05://F1-06-01
+                                   f7menu_t.F7_03_05_Id=PopSub_03_Menu(2);
                                     key_t.f7keyReturn_flag=1;
                               break;
 
-                               case 0x06: //F7-07-01
-                                     
+                               case 0x06: //F1-07-01
+                                    
                                    key_t.f7keyReturn_flag=1;
                               break;
 
