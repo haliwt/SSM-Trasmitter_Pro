@@ -78,10 +78,10 @@ int main(void)
 
 			}
 			if(keydata !=0xff)run_t.dispCmd =1;
-
-	        CheckMode(keydata);//KEY_Function(keydata);
-            RunCommand();
-			
+            if(run_t.dispCmd ==1){
+				CheckMode(keydata);//KEY_Function(keydata);
+				RunCommand();
+			}
 			
 		}
     
