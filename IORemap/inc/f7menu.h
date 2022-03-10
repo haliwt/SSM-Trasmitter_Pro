@@ -31,10 +31,7 @@ extern F7menu f7menu_t;
 
 void F7SubMenu_02_DIS(uint8_t mu);
 
-void F7SubMenu_03_DIS(void);
-
-
-
+void F7SubMenu_03_DIS(uint8_t f7mu);
 
 #endif 
 

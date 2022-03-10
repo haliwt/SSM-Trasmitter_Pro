@@ -47,7 +47,8 @@ void RunCommand(void)
                  break;
 
                  case 7: //F7-01-
-                    F7SubMenu_Master_01();
+                       printf("RunCmd F7 TheSecond_Menu");
+                        F7SubMenu_Master_01();
                        F7SubMenu_02_DIS(f7menu_t.F7_SubMenuTop) ;
                  break; 
 
@@ -85,16 +86,15 @@ void RunCommand(void)
                     break;
 
                     case submenu_F7:
-                            F7SubMenu_03_DIS();
+                            printf("RunCmd F7 TheThird_Menu");
+                            F7SubMenu_03_DIS(f7menu_t.F7_03_subMenuTop);
                     break;
 
                     case submenu_F8:
                           F8SubMenu_03_DIS();
                     break;
 
-                    case submenu_F9:
-
-                    break;
+                   
 
               }
               
@@ -149,7 +149,12 @@ void RunCommand(void)
             break;
 
          default:
-           run_t.dispCmd =0;
+                    key_t.keyset++;
+                    key_t.keyswitch++;
+                    key_t.keytrae++;
+                    key_t.keyzero++; 
+                    key_t.keyTimes =0;
+					run_t.dispCmd=0;
 
          break;
 

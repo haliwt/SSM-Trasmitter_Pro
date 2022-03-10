@@ -19,33 +19,33 @@ void F7SubMenu_02_DIS(uint8_t f7m2)
 			break;
 
 			case F102:
-			  //  F2SubMenu_Master_01();
-			     f7menu_t.F7SubMenu_Id = F102;
+			  f7menu_t.F7SubMenu_Id = F102;
+			   
 				 F1SubMenu_02(); //"F1-02"
 			break;
 			
 			case F103://
-			     f7menu_t.F7SubMenu_Id = F103;
+			   f7menu_t.F7SubMenu_Id = F103;
 				 F1SubMenu_03();
 			break;
 				
 			case F104:
-				 f7menu_t.F7SubMenu_Id = F104;
+				f7menu_t.F7SubMenu_Id = F104;
 				F1SubMenu_04();
 			break;
 
 			case F105:
-				 f7menu_t.F7SubMenu_Id = F105;
+				f7menu_t.F7SubMenu_Id = F105;
 				F1SubMenu_05();
 			break;
 				
 			case F106:
-				 f7menu_t.F7SubMenu_Id = F106;
+				f7menu_t.F7SubMenu_Id = F106;
 				F1SubMenu_06();
 			break;
 
 			case F107:
-				 f7menu_t.F7SubMenu_Id = F107;
+				f7menu_t.F7SubMenu_Id = F107;
 				 F1SubMenu_07();
 			break;
 	
@@ -57,41 +57,48 @@ void F7SubMenu_02_DIS(uint8_t f7m2)
 
 }
 
-void F7SubMenu_03_DIS(void)
+void F7SubMenu_03_DIS(uint8_t f7mu)
 {
-     switch(f7menu_t.F7_03_subMenuTop){
+     switch(f7mu){
 	 
 	
 	
 	case 0:
-		   
 		  F7SubMenu_03_01_Dis(f7menu_t.F7_03_01_Id);
-		   
+		  printf("f703_dis = %d\n",f7menu_t.F7_03_01_Id);
 	break;
 		  
 	case 1:
+	    
 		F7SubMenu_03_02_Dis(f7menu_t.F7_03_02_Id);
 	break;
 	
 	case 2:
+	    
 		F7SubMenu_03_03_Dis(f7menu_t.unit,f7menu_t.decade,f7menu_t.hundred);
 	break;
 	
 	case 3:
+	    
 		F7SubMenu_03_04_Dis(f7menu_t.F7_03_04_Id);
 	break;
 	
 	case 4:
+		
 		F7SubMenu_03_05_Dis(f7menu_t.unit,f7menu_t.decade,f7menu_t.hundred);
 	break;
 	
 	case 5:
+		
 		F7SubMenu_03_06_Dis(f7menu_t.F7_03_06_Id);
 	break;
 	
 	case 6:
+		
 		F7SubMenu_03_07_Dis(f7menu_t.F7_03_07_Id);
 	break;
+
+	
 	 
 	 
 	 }
@@ -133,26 +140,26 @@ void F7SubMenu_03_02_Dis(uint8_t mu)
 		
 		case 0:
 		        SmgDisplay(digital_1,0x0b);//'NULL'
-				SmgDisplay(digital_2,0x01);//'NULL'
-				SmgDisplay(digital_3,0x2);//'NULL'
-				SmgDisplay(digital_4,0x0);//'NULL'
+				SmgDisplay(digital_2,0x01);//'1'
+				SmgDisplay(digital_3,0x2);//'2'
+				SmgDisplay(digital_4,0x0);//'0'
 				SmgDisplay(digital_5,0x0); //'0'
 
 		break;
 
 		case 1:
 				 SmgDisplay(digital_1,0x0b);//'NULL'
-				SmgDisplay(digital_2,0x02);//'NULL'
-				SmgDisplay(digital_3,0x4);//'NULL'
-				SmgDisplay(digital_4,0x0);//'NULL'
+				SmgDisplay(digital_2,0x02);//'2'
+				SmgDisplay(digital_3,0x4);//'4'
+				SmgDisplay(digital_4,0x0);//'0'
 				SmgDisplay(digital_5,0x0); //'0'
 		break;
 
 		case 2:
 				 SmgDisplay(digital_1,0x0b);//'NULL'
-				SmgDisplay(digital_2,0x04);//'NULL'
-				SmgDisplay(digital_3,0x8);//'NULL'
-				SmgDisplay(digital_4,0x0);//'NULL'
+				SmgDisplay(digital_2,0x04);//'4'
+				SmgDisplay(digital_3,0x8);//'8'
+				SmgDisplay(digital_4,0x0);//'0'
 				SmgDisplay(digital_5,0x0); //'0'
 		break;
 

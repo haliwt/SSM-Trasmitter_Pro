@@ -75,7 +75,6 @@ int main(void)
                     key_t.keyzero++; 
                     key_t.keyTimes =0;
 
-
 			}
 			if(keydata !=0xff)run_t.dispCmd =1;
             if(run_t.dispCmd ==1){

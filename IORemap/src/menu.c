@@ -146,7 +146,7 @@ int8_t SubMenu_02_Top(void)
 *************************************************/
 uint8_t PushSub_03_Menu(int8_t nsize)
 {
-	 if(menuFxSub_03_Top == (nsize -1) || menuFxSub_03_Top >= nsize){
+	 if(menuFxSub_03_Top == (nsize -1)||menuFxSub_03_Top >(nsize-1)){
 	     // printf("Error :stack overflow \n");
 	     //return ;
 	  
@@ -161,7 +161,7 @@ uint8_t PushSub_03_Menu(int8_t nsize)
 uint8_t PopSub_03_Menu(int8_t nsize)
 {
 	 menuFxSub_03_Top--;
-	if(menuFxSub_03_Top == -1){
+	if(menuFxSub_03_Top == -1 || menuFxSub_03_Top > 200){
 	    //printf("Error : no element to Pop \n");
 		//return;
 		menuFxSub_03_Top = nsize -1 ;

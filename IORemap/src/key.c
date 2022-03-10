@@ -408,35 +408,36 @@ static void KEY_SubMenuFun_Enter(void)
                  
             }   
           break;
-          
+         //Enter KY4 F7 
          case F7:
-            if(f7menu_t.menuF7Sub_first==0){  
+            if(f7menu_t.menuF7Sub_first==0){  //F7- 01 
                   f7menu_t.menuF7Sub_first++;
                   menuFxSubTop=-1;
                   mainitem_t.task_MainMenu=TheSecond_Menu;
 
                   
-                  menu_t.menuTitle_02=7; //the 
+                  menu_t.menuTitle_02=7; //the second menu 
                   menu_t.FxMainMenu_key =0xB0;
                    menu_t.FxSub_02_key=0xf70;
                   f7menu_t.F7_SubMenuTop = PushSub_Menu(F7Mnumbers);
 		} 
-            else{
+            else{ //F7-01-> 01
                   key_t.f7keyReturn_flag = key_t.f7keyReturn_flag^ 0x01;
-                  printf("f7_enter = %d\n",key_t.f7keyReturn_flag);
+                  printf("f7keyenter = %d\n",key_t.f7keyReturn_flag);
                   if(key_t.f7keyReturn_flag== 1){
                  
                         /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
                         menu_t.menuTitle_03=submenu_F7;
+                        menu_t.FxSub_02_key=0;
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf70;  //the third sub open
             
-                       f7menu_t.F7_03_subMenuTop=SubMenu_02_Top();
-                        menu_t.menu_F1Sub_03_xx_key=f7menu_t.F7_03_subMenuTop;
-                    }    
-                  
+                       f7menu_t.F7_03_subMenuTop=f7menu_t.F7SubMenu_Id;
+                        menu_t.menu_F1Sub_03_xx_key=f7menu_t.F7SubMenu_Id;
+                        printf("f7_03_Top = %d\n",f7menu_t.F7_03_subMenuTop);
+                  }    
                   else{
                         
                         menu_t.menuId= F7;
@@ -444,10 +445,10 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxMainMenu_key =0xB0;
                         menu_t.FxSub_03_key=0xff;  
                         menu_t.menuTitle_03=0;
-                        
+                        menu_t.menuTitle_02= 7;
                         f7menu_t.F7_SubMenuTop=f7menu_t.F7_03_subMenuTop;
                      
-                        printf("f1sub_top_return = %d\n",f7menu_t.F7_03_subMenuTop);
+                        printf("f7_04_enkey = %d\n",f7menu_t.F7_03_subMenuTop);
                     }
 
             } 
@@ -555,7 +556,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                 case 0xf70:
                   f7menu_t.F7_SubMenuTop = PushSub_Menu(F7Mnumbers);
-                  printf("f7_02_Topup = %d\n",f7menu_t.F7_SubMenuTop);
+                  printf("f7_02_TopKey = %d\n",f7menu_t.F7_SubMenuTop);
                 break;
 
                  case 0xf80:
@@ -701,8 +702,8 @@ static void KEY1_ZERIO_UP_Fun(void)
                     case 0xf70:
                           switch(menu_t.menu_F1Sub_03_xx_key){
                               case 0x00: //F1-01-01
-                                  f7menu_t.F7_03_subMenuTop=  PushSub_03_Menu(2);
-                                  printf("f1sub_01_n_Top = %d\n",f7menu_t.F7_03_subMenuTop);
+                                  f7menu_t.F7_03_01_Id=  PushSub_03_Menu(2);
+                                  printf("f7_03_Upkey = %d\n",f7menu_t.F7_03_01_Id);
                                    key_t.f7keyReturn_flag=1;
                               break;
 
@@ -859,7 +860,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                 case 0xf70:
                   f7menu_t.F7_SubMenuTop = PopSub_Menu(F7Mnumbers);
-                  printf("f7_keyDown = %d\n",f7menu_t.F7_SubMenuTop);
+                  printf("f7_02_keyDown = %d\n",f7menu_t.F7_SubMenuTop);
                 break;
 
                 case 0xf80:
@@ -1013,6 +1014,54 @@ static void KEY2_TRAE_DOWN_Fun(void)
                
 
                     case 0xf70:
+                    switch(menu_t.menu_F1Sub_03_xx_key){
+                              case 0x00: //F7-01-01
+                                  f7menu_t.F7_03_01_Id=  PopSub_03_Menu(2);
+                                  printf("f7_03_Downkey = %d\n",f7menu_t.F7_03_01_Id);
+                                   key_t.f7keyReturn_flag=1;
+                              break;
+
+                              case 0x01: //F7-02-01
+                                  f7menu_t.F7_03_02_Id = PopSub_03_Menu(8);
+                                   key_t.f7keyReturn_flag=1;
+                              break;
+
+                               case 0x02: //F7-03-01
+                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                                   f7menu_t.unit= menu_t.unit;
+                                    f7menu_t.decade=menu_t.decade;
+                                   f7menu_t.hundred =menu_t.hundred;
+                                   key_t.f7keyReturn_flag=1;
+                                   
+                              break;
+
+                               case 0x03: //F7-04-01
+                                   f7menu_t.F7_03_04_Id=PopSub_03_Menu(7);
+                                     key_t.f7keyReturn_flag=1;
+                              break;
+
+                                case 0x04://F7-05-01
+                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                                   f7menu_t.unit= menu_t.unit;
+                                    f7menu_t.decade=menu_t.decade;
+                                   f7menu_t.hundred =menu_t.hundred;
+                                   key_t.f7keyReturn_flag=1;
+                                   printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
+                                key_t.f7keyReturn_flag=1;
+                              break;
+
+                              case 0x05://F7-06-01
+                                    f7menu_t.F7_03_06_Id=PopSub_03_Menu(2);
+                                    key_t.f7keyReturn_flag=1;
+                              break;
+
+                               case 0x06: //F7-07-01
+                                     
+                                   key_t.f7keyReturn_flag=1;
+                              break;
+
+                             
+                         }
 
                     break;
 
@@ -1103,14 +1152,13 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           f7menu_t.menuF7Sub_first=0;
           f8menu_t.menuF8Sub_first=0;
           f9menu_t.menuF9Sub_first=0;
-          menu_t.menuMain=1;
-          menuTop= -1;
+           menu_t.menuMain=menu_t.menuId;
           mainitem_t.task_MainMenu=TheFirst_Menu;
           menu_t.FxMainMenu_key =0xA0;
+         
+          menu_t.mainTop= menu_t.menuId;//PushMainMenu(); 
           menu_t.FxSub_02_key=0;
           menu_t.FxSub_03_key=0;
-          menu_t.mainTop= PushMainMenu(); 
-         
         
           return ;
       }
