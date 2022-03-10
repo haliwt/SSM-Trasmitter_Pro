@@ -51,7 +51,7 @@ void F8SubMenu_02_DIS(uint8_t mu)
 			break;
 
             case F108:
-				 f8menu_t.F8SubMenu_Id = F107;
+				 f8menu_t.F8SubMenu_Id = F108;
 				 F1SubMenu_08();
 			break;
 
@@ -152,12 +152,16 @@ void F8SubMenu_03_02_Dis(uint8_t mu)
      F8SubMenu_03_02_StandDis(mu);
 
 }
-
+//MSB has symbol "-"
 void F8SubMenu_03_03_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
 {
 
-    SmgDisplay(digital_1,tenthousand); // 0~100
-    SmgDisplay(digital_2,onethousand); // 0~100
+    if(tenthousand == 10 || tenthousand == -1){
+           SmgDisplay_Character(digital_1,0x0f);
+	}
+	else 
+	      SmgDisplay(digital_1,tenthousand); // 0~100
+    SmgDisplay_Point(digital_2,onethousand);//SmgDisplay(digital_2,onethousand); // 0~100
     SmgDisplay(digital_3,hundred); // 0~100
     SmgDisplay(digital_4,decade); // 0~100
     SmgDisplay(digital_5,unit); // 0~100
@@ -165,15 +169,21 @@ void F8SubMenu_03_03_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethou
 
 
 }
+//MSB has symbol "-"
 void F8SubMenu_03_04_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
 {
-    SmgDisplay(digital_1,tenthousand); // 0~100
-    SmgDisplay(digital_2,onethousand); // 0~100
+    if(tenthousand == 10 || tenthousand == -1){
+			 SmgDisplay_Character(digital_1,0x0f);
+	}
+	else 
+	SmgDisplay(digital_1,tenthousand); // 0~100
+    SmgDisplay_Point(digital_2,onethousand);//SmgDisplay(digital_2,onethousand); // 0~100
     SmgDisplay(digital_3,hundred); // 0~100
     SmgDisplay(digital_4,decade); // 0~100
     SmgDisplay(digital_5,unit); // 0~100
 
 }
+//MSB has symbol "-"
 void F8SubMenu_03_05_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
 {
     SmgDisplay(digital_1,tenthousand); // 0~100
@@ -184,6 +194,7 @@ void F8SubMenu_03_05_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethou
 
 
 }
+//MSB has symbol "-"
 void F8SubMenu_03_06_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
 {
     SmgDisplay(digital_1,tenthousand); // 0~100

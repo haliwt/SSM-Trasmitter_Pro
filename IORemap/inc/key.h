@@ -60,6 +60,11 @@ extern int8_t AF305[5];
 extern int8_t AF306[5];
 extern int8_t AF307[5];
 
+extern int8_t AF803[5];
+extern int8_t AF804[5];
+extern int8_t AF805[5];
+extern int8_t AF806[5];
+
 
 extern KEY key_t;
 

@@ -24,7 +24,8 @@ extern F9menu f9menu_t;
 
 void F9SubMenu_02_DIS(uint8_t mu);
 
-void F9SubMenu_03_DIS(void);
+void F9SubMenu_03_DIS(uint8_t mu);
+
 
 
 

@@ -44,6 +44,11 @@ int8_t AF305[5];
 int8_t AF306[5];
 int8_t AF307[5];
 
+int8_t AF803[5];
+int8_t AF804[5];
+int8_t AF805[5];
+int8_t AF806[5];
+
 
 
 
@@ -53,6 +58,9 @@ uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 
 int8_t one,two,three,four,five; 
 void(*DispDigital_3BitSmg)(void);
+
+static void Number_Digital_5bitPoint_AddSelect(int8_t *ap);
+static void Number_Digital_5bitPoint_DecSelect(int8_t *ap);
 
 void Number_Digital_Set5bit_twoAddSelect(int8_t *ap ,uint8_t n);
 void Number_Digital_Set5bit_twoDecSelect(int8_t *ap ,uint8_t n);
@@ -205,7 +213,7 @@ static void	KEY4_SET_ENTER_Fun(void)
           menu_t.FxSub_02_key=0;
           menu_t.FxSub_03_key=0;
           menu_t.mainTop= PushMainMenu(); 
-         
+          
                                    
        }
        else{
@@ -223,7 +231,7 @@ static void	KEY4_SET_ENTER_Fun(void)
 static void KEY_SubMenuFun_Enter(void)
 {
       
-      switch(menu_t.menuId){
+      switch(menu_t.mainTop){//switch(menu_t.menuId){
                
           case F1: //F1 - 01
             
@@ -408,18 +416,18 @@ static void KEY_SubMenuFun_Enter(void)
                  
             }   
           break;
-         //Enter KY4 F7 
+         //Enter KY4 F7 Enter key
          case F7:
             if(f7menu_t.menuF7Sub_first==0){  //F7- 01 
                   f7menu_t.menuF7Sub_first++;
                   menuFxSubTop=-1;
                   mainitem_t.task_MainMenu=TheSecond_Menu;
 
-                  
                   menu_t.menuTitle_02=7; //the second menu 
                   menu_t.FxMainMenu_key =0xB0;
                    menu_t.FxSub_02_key=0xf70;
-                  f7menu_t.F7_SubMenuTop = PushSub_Menu(F7Mnumbers);
+                  f7menu_t.F7_SubMenuTop = PushSub_Menu(7);
+                   printf("f7_theFirst_enkey = %d\n", menu_t.menuTitle_02);
 		} 
             else{ //F7-01-> 01
                   key_t.f7keyReturn_flag = key_t.f7keyReturn_flag^ 0x01;
@@ -446,14 +454,15 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxMainMenu_key =0xB0; 
                        menu_t.FxSub_02_key=0xf70; 
                         menu_t.menuTitle_03=0;
-						 menu_t.menuTitle_02=7; 
+				menu_t.menuTitle_02=7; 
                         f7menu_t.F7_SubMenuTop=f7menu_t.F7SubMenu_Id;
                      
                         printf("f7_04_enkey = %d\n",f7menu_t.F7_03_subMenuTop);
                     }
 
             } 
-          //F8 -01->
+           break;
+          //F8 -01-> Enter KEY 
           case F8:
           
                if(f8menu_t.menuF8Sub_first==0){  //F8- 01 
@@ -465,8 +474,9 @@ static void KEY_SubMenuFun_Enter(void)
                   menu_t.FxMainMenu_key =0xB0;
                    menu_t.FxSub_02_key=0xf80;
                   f8menu_t.F8_SubMenuTop = PushSub_Menu(F8Mnumbers);
+                  printf("f8_theFirst_enkey = %d\n",menu_t.menuTitle_02);
 		} 
-            else{ //F7-01-> 01
+            else{ //F801-> 01
                   key_t.f8keyReturn_flag = key_t.f8keyReturn_flag^ 0x01;
                   printf("f8keyenter = %d\n",key_t.f8keyReturn_flag);
                   if(key_t.f8keyReturn_flag== 1){
@@ -490,7 +500,7 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxMainMenu_key =0xB0; 
                        menu_t.FxSub_02_key=0xf80; 
                         menu_t.menuTitle_03=0;
-						 menu_t.menuTitle_02=8; 
+				menu_t.menuTitle_02=8; 
                         f8menu_t.F8_SubMenuTop=f8menu_t.F8SubMenu_Id;
                      
                         printf("f8_04_enkey = %d\n",f8menu_t.F8_03_subMenuTop);
@@ -535,6 +545,7 @@ static void KEY1_ZERIO_UP_Fun(void)
          case 0xA0:  //the first Menu 
              
                menu_t.mainTop= PushMainMenu(); 
+              printf("mainTop_keyUp = %d\n",menu_t.mainTop);
                  
          break;
 
@@ -753,8 +764,66 @@ static void KEY1_ZERIO_UP_Fun(void)
                               
                          }
                     break;
-
+                    //F8 - 01 -> the thrid menu
                     case 0xf80:
+
+                         switch(menu_t.menu_F1Sub_03_xx_key){
+
+                              case 0:
+                                    f8menu_t.F8_03_01_Id=  PushSub_03_Menu(3);
+                              break;
+
+                              case 1:
+                                    f8menu_t.F8_03_02_Id =  PushSub_03_Menu(6);
+                              break;
+
+                              case 2:
+                                      Number_Digital_5bitPoint_AddSelect(AF803);
+                                      f8menu_t.unit =AF803[0];
+                                      f8menu_t.decade = AF803[1];
+                                      f8menu_t.hundred = AF803[2];
+                                      f8menu_t.onethousand= AF803[3];
+                                      f8menu_t.tenthousand= AF803[4];
+                                    printf("f802_03_upkey = %d\n",AF803[0]);
+                                     printf("f802_03_upkey = %d\n",AF803[1]);
+                                      printf("f802_03_upkey = %d\n",AF803[2]);
+                                       printf("f802_03_upkey = %d\n",AF803[3]);
+                                        printf("f802_03_upkey = %d\n",AF803[4]);
+                              break;
+
+                              case 3:
+                                    Number_Digital_5bitPoint_AddSelect(AF804);
+                                      f8menu_t.unit =AF804[0];
+                                      f8menu_t.decade = AF804[1];
+                                      f8menu_t.hundred = AF804[2];
+                                      f8menu_t.onethousand= AF804[3];
+                                      f8menu_t.tenthousand= AF804[4];
+                                     
+                                    printf("f803_04_upkey = %d\n",AF804[0]);
+                                     printf("f803_04_upkey = %d\n",AF804[1]);
+                                      printf("f803_04_upkey = %d\n",AF804[2]);
+                                       printf("f803_04_upkey = %d\n",AF804[3]);
+                                        printf("f803_04_upkey = %d\n",AF804[4]);
+
+                              break;
+
+                               case 4:
+
+                              break;
+
+                              case 5:
+
+                              break;
+
+                              case 6:
+
+                              break;
+
+                               case 7:
+
+                              break;
+
+                        }
 
                     break;
 
@@ -839,6 +908,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
     case 0xA0 :
             menu_t.mainTop=PopMainMenu();
+         printf("mainTop_keyDown = %d\n",menu_t.mainTop);
      break;
       
      case 0xB0:  //the second mentu
@@ -1620,6 +1690,94 @@ static void Number_Digital_5bit_AddSelect(int8_t *ap)
       } 
 
 }
+static void Number_Digital_5bitPoint_DecSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+             one--;
+            if(one == -2){ //one == -1 ->display "-"
+               one=9;
+            }
+		*ap= one;
+            printf("s_1 = %d\n",one);
+      }
+      else if(menu_t.inputNumber_Select==1){
+            two--;
+            if(two< 0){
+               two=9;
+            }
+			*(ap+1) = two;
+            printf("s_2 = %d\n",*(ap+1));
+      
+      }
+      else if(menu_t.inputNumber_Select==2){
+            three--;
+            if(three< 0){ 
+               three=9;
+            }
+			*(ap+2) = three;
+            printf("s_3 = %d\n",*(ap+2));
+          
+      }
+      else if(menu_t.inputNumber_Select==3){
+             four--;
+            if( four < 0){ 
+               four=9;
+            }
+			*(ap+3) = four;
+            printf("s_4 = %d\n", *(ap+3));
+          
+      }
+      else if(menu_t.inputNumber_Select ==4){
+             five--;
+            if( five < 0){ 
+                five=9;
+            }
+		*(ap+4) = five;
+            printf("s_4 = %d\n", *(ap+4));
+          
+      }
+
+}
+static void Number_Digital_5bitPoint_AddSelect(int8_t *ap)
+{
+       if(menu_t.inputNumber_Select==0){
+            one++ ;
+            if(one >10 ){
+               one=0;
+            }
+		*ap = one;
+      }
+      else if(menu_t.inputNumber_Select==1){
+                  two++;
+                  if(two >9){
+                        two=0;
+                  }
+				  *(ap+1) = two;
+       }
+      else if(menu_t.inputNumber_Select==2){
+                  three++;  
+                  if(three >9){
+                      three=0;
+                   }
+				  *(ap+2)=three;
+      } 
+      else if(menu_t.inputNumber_Select==3){
+                  four++;  
+                  if(four >9){
+                      four=0;
+                    }
+				  *(ap+3) = four; 
+      } 
+      else if(menu_t.inputNumber_Select ==4){
+                  five++;  
+                  if(five >9){
+                      five=0;
+                    }
+			*(ap+4) = five; 
+      } 
+
+}
+
 
 void Number_Digital_F111_4bit_AddSelect(int8_t *ap)
 {

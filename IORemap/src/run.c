@@ -69,7 +69,7 @@ void RunCommand(void)
                switch(menu_t.menuTitle_03){
 
                    case 0:
-                         mainitem_t.task_MainMenu=TheSecond_Menu;
+                         
                     break;
 
                    case submenu_F1: //F1-01:
@@ -91,8 +91,13 @@ void RunCommand(void)
                     break;
 
                     case submenu_F8:
-                         // F8SubMenu_03_DIS();
+                          //F8SubMenu_03_DIS();
                           F8SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
+                    break;
+
+                    case submenu_F9:
+                         // F9SubMenu_03_DIS();
+                          F9SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
                     break;
 
                    
