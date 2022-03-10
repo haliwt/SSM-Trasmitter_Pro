@@ -66,17 +66,16 @@ int main(void)
 		
 		 keydata = ScanKey();
 		 if(keydata == 0xff){
-			 
-			 keydata=0;
+			  keydata = 0;
 			  key_t.keyset++;
-                    key_t.keyswitch++;
-                    key_t.keytrae++;
-                    key_t.keyzero++; 
-                    key_t.keyTimes =0;
+              key_t.keyswitch++;
+              key_t.keytrae++;
+              key_t.keyzero++; 
+              key_t.keyTimes =0;
 					
 		 }
-		 if(keydata !=0)run_t.dispCmd=1;
-		if(run_t.dispCmd==0xff){
+		if(keydata !=0)run_t.dispCmd=1;
+		if(run_t.dispCmd==0){
 			Get_Weight();
 			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 		}
