@@ -428,13 +428,12 @@ static void KEY_SubMenuFun_Enter(void)
                  
                         /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
-                        menu_t.menuTitle_02=7;
                         menu_t.menuTitle_03=submenu_F7;
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf70;  //the third sub open
             
-                     
+                       f7menu_t.F7_03_subMenuTop=SubMenu_02_Top();
                         menu_t.menu_F1Sub_03_xx_key=f7menu_t.F7_03_subMenuTop;
                     }    
                   
