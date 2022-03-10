@@ -76,23 +76,27 @@ void F8SubMenu_03_DIS(uint8_t mu)
 	break;
 	
 	case 2:
-		f8menu_t.F8_03_subMenuTop_Id = 0x02; 
+		f8menu_t.F8_03_subMenuTop_Id = 0x02;
+		 menu_t.DisplaySmgBit_Select_Numbers =5;
 		F8SubMenu_03_03_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);
 	break;
 	
 	case 3:
 		f8menu_t.F8_03_subMenuTop_Id = 0x03; 
-		F8SubMenu_03_04_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);
+		 menu_t.DisplaySmgBit_Select_Numbers =5;
+		F8SubMenu_03_03_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);
 	break;
 	
 	case 4:
-		f8menu_t.F8_03_subMenuTop_Id = 0x04; 
-		F8SubMenu_03_05_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);
+		f8menu_t.F8_03_subMenuTop_Id = 0x04;
+		 menu_t.DisplaySmgBit_Select_Numbers =5;
+		F8SubMenu_03_04_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);
 	break;
 	
 	case 5:
 		f8menu_t.F8_03_subMenuTop_Id = 0x05; 
-		F8SubMenu_03_06_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);
+		 menu_t.DisplaySmgBit_Select_Numbers =5;
+		F8SubMenu_03_04_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);
 	break;
 	
 	case 6:
@@ -115,7 +119,7 @@ void F8SubMenu_03_DIS(uint8_t mu)
             case  0:
 
              SmgDisplay(digital_1,0x00); //'0'
-			 SmgDisplay(digital_2,0x0f); //'-'
+			 SmgDisplay_Character(digital_2,0x0f); //'-'
              SmgDisplay(digital_3,0x02); //'2'
             SmgDisplay(digital_4,0x00); //'0'
 			 SmgDisplay_Character(digital_5,0x0e); //"C-"
@@ -125,7 +129,7 @@ void F8SubMenu_03_DIS(uint8_t mu)
 
             case 1:
             SmgDisplay(digital_1,0x04); //'4'
-			 SmgDisplay(digital_2,0x0f); //'-'
+			 SmgDisplay_Character(digital_2,0x0f); //'-'
              SmgDisplay(digital_3,0x02); //'2'
             SmgDisplay(digital_4,0x00); //'0'
 			 SmgDisplay_Character(digital_5,0x0e); //"C-"
@@ -134,8 +138,8 @@ void F8SubMenu_03_DIS(uint8_t mu)
 
             case 2:
             
-             SmgDisplay(digital_1,0x00); //'n'
-			 SmgDisplay(digital_2,0x0f); //'-'
+             SmgDisplay_Character(digital_1,0x07); //'n'
+			 SmgDisplay_Character(digital_2,0x0f); //'-'
              SmgDisplay(digital_3,0x01); //'1'
             SmgDisplay(digital_4,0x00); //'0'
 			 SmgDisplay_Character(digital_5,0x11); //"u"
@@ -146,17 +150,17 @@ void F8SubMenu_03_DIS(uint8_t mu)
 
 }
 
-
 void F8SubMenu_03_02_Dis(uint8_t mu)
 {
      F8SubMenu_03_02_StandDis(mu);
 
 }
-//MSB has symbol "-"
+
+
+
 void F8SubMenu_03_03_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
 {
-
-    if(tenthousand == 10 || tenthousand == -1){
+      if(tenthousand == 10 || tenthousand == -1){
            SmgDisplay_Character(digital_1,0x0f);
 	}
 	else 
@@ -166,45 +170,25 @@ void F8SubMenu_03_03_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethou
     SmgDisplay(digital_4,decade); // 0~100
     SmgDisplay(digital_5,unit); // 0~100
 
-
-
 }
+
 //MSB has symbol "-"
 void F8SubMenu_03_04_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
 {
-    if(tenthousand == 10 || tenthousand == -1){
-			 SmgDisplay_Character(digital_1,0x0f);
+    
+	  if(tenthousand == 10 || tenthousand == -1){
+           SmgDisplay_Character(digital_1,0x0f);
 	}
 	else 
-	SmgDisplay(digital_1,tenthousand); // 0~100
-    SmgDisplay_Point(digital_2,onethousand);//SmgDisplay(digital_2,onethousand); // 0~100
-    SmgDisplay(digital_3,hundred); // 0~100
-    SmgDisplay(digital_4,decade); // 0~100
-    SmgDisplay(digital_5,unit); // 0~100
-
-}
-//MSB has symbol "-"
-void F8SubMenu_03_05_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
-{
-    SmgDisplay(digital_1,tenthousand); // 0~100
+	      SmgDisplay(digital_1,tenthousand); // 0~100
+	
     SmgDisplay(digital_2,onethousand); // 0~100
     SmgDisplay(digital_3,hundred); // 0~100
     SmgDisplay(digital_4,decade); // 0~100
     SmgDisplay(digital_5,unit); // 0~100
 
-
 }
-//MSB has symbol "-"
-void F8SubMenu_03_06_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
-{
-    SmgDisplay(digital_1,tenthousand); // 0~100
-    SmgDisplay(digital_2,onethousand); // 0~100
-    SmgDisplay(digital_3,hundred); // 0~100
-    SmgDisplay(digital_4,decade); // 0~100
-    SmgDisplay(digital_5,unit); // 0~100
 
-
-}
 
 void F8SubMenu_03_07_Dis(uint8_t um)
 {

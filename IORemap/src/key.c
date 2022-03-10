@@ -784,11 +784,6 @@ static void KEY1_ZERIO_UP_Fun(void)
                                       f8menu_t.hundred = AF803[2];
                                       f8menu_t.onethousand= AF803[3];
                                       f8menu_t.tenthousand= AF803[4];
-                                    printf("f802_03_upkey = %d\n",AF803[0]);
-                                     printf("f802_03_upkey = %d\n",AF803[1]);
-                                      printf("f802_03_upkey = %d\n",AF803[2]);
-                                       printf("f802_03_upkey = %d\n",AF803[3]);
-                                        printf("f802_03_upkey = %d\n",AF803[4]);
                               break;
 
                               case 3:
@@ -799,28 +794,35 @@ static void KEY1_ZERIO_UP_Fun(void)
                                       f8menu_t.onethousand= AF804[3];
                                       f8menu_t.tenthousand= AF804[4];
                                      
-                                    printf("f803_04_upkey = %d\n",AF804[0]);
-                                     printf("f803_04_upkey = %d\n",AF804[1]);
-                                      printf("f803_04_upkey = %d\n",AF804[2]);
-                                       printf("f803_04_upkey = %d\n",AF804[3]);
-                                        printf("f803_04_upkey = %d\n",AF804[4]);
 
                               break;
 
                                case 4:
+                                 Number_Digital_5bitPoint_AddSelect(AF805);
+                                      f8menu_t.unit =AF805[0];
+                                      f8menu_t.decade = AF805[1];
+                                      f8menu_t.hundred = AF805[2];
+                                      f8menu_t.onethousand= AF805[3];
+                                      f8menu_t.tenthousand= AF805[4];
 
                               break;
 
                               case 5:
+                                      Number_Digital_5bitPoint_AddSelect(AF806);
+                                      f8menu_t.unit =AF806[0];
+                                      f8menu_t.decade = AF806[1];
+                                      f8menu_t.hundred = AF806[2];
+                                      f8menu_t.onethousand= AF806[3];
+                                      f8menu_t.tenthousand= AF806[4];
 
                               break;
 
                               case 6:
-
+                                    f8menu_t.F8_03_07_Id= PushSub_03_Menu(3);
                               break;
 
                                case 7:
-
+                                    f8menu_t.F8_03_08_Id= PushSub_03_Menu(3);
                               break;
 
                         }
@@ -1235,9 +1237,9 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           return ;
       }
 
-
-      if(menu_t.F1SubMenu_Sub_02_Id ==0x04|| menu_t.F1SubMenu_Sub_02_Id ==0x07||menu_t.F1SubMenu_Sub_02_Id ==0x0B\
-         ||menu_t.F1SubMenu_Sub_02_Id ==0x0C){
+      //2BIT
+      
+       if(menu_t.DisplaySmgBit_Select_Numbers ==2){
                
             menu_t.inputNumber_Select ++;
             if(menu_t.inputNumber_Select >1){
@@ -1248,8 +1250,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
        }
       
       //3BIT
-      if(menu_t.F1SubMenu_Sub_02_Id ==0x01 ||  menu_t.F1SubMenu_Sub_02_Id ==0x02 || menu_t.F2SubMenu_Id==F201\
-          ||menu_t.F2SubMenu_Id==F204){
+     if(menu_t.DisplaySmgBit_Select_Numbers ==3){
                
             menu_t.inputNumber_Select ++;
             if(menu_t.inputNumber_Select >2){
@@ -1259,15 +1260,14 @@ static void KEY3_SWITCH_LEFT_Fun(void)
               
        }
     //4IBIT
-    if(menu_t.F1SubMenu_Sub_02_Id ==0x03|| menu_t.F1SubMenu_Sub_02_Id ==0x08|| menu_t.F1SubMenu_Sub_02_Id ==0x0A){
+    if(menu_t.DisplaySmgBit_Select_Numbers ==4){
           menu_t.inputNumber_Select ++;
         if(menu_t.inputNumber_Select >3){
                   menu_t.inputNumber_Select =0;
           }
     }
     //5BIT
-    if(menu_t.F1SubMenu_Sub_02_Id ==0x05 ||menu_t.F1SubMenu_Sub_02_Id ==0x06||menu_t.F1SubMenu_Sub_02_Id ==0x09\
-            ||menu_t.F2SubMenu_Id==F202||menu_t.F2SubMenu_Id==F203||menu_t.F2SubMenu_Id==F205||menu_t.F2SubMenu_Id==F206){
+    if(menu_t.DisplaySmgBit_Select_Numbers ==5){
             menu_t.inputNumber_Select ++;
            if(menu_t.inputNumber_Select >4){
               menu_t.inputNumber_Select =0;

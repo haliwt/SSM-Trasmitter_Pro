@@ -19,6 +19,8 @@ typedef struct _MENU{
 	   uint8_t menuList;
 	   uint8_t menuFirst;
 	   uint8_t menuTitle;
+
+	   uint8_t DisplaySmgBit_Select_Numbers;
 	   
 	   
 	   
