@@ -107,7 +107,9 @@ void KEY_Function(uint8_t keydata)
 {
              switch(keydata){
 
-               case 0:
+               case 0xff:
+                  Get_Weight();
+			 Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
                     key_t.keyset++;
                     key_t.keyswitch++;
                     key_t.keytrae++;
@@ -1095,9 +1097,12 @@ static void KEY2_TRAE_DOWN_Fun(void)
 static void KEY3_SWITCH_LEFT_Fun(void)
 { 
      
-     
-     
+     if(mainitem_t.task_MainMenu==TheFirst_Menu){
+           run_t.dispCmd=0;
+           return ;
+     }
      if(mainitem_t.task_MainMenu==TheSecond_Menu){
+          
           
           menu_t.menuF1Sub_first=0;
           menu_t.menuF2Sub_first=0;

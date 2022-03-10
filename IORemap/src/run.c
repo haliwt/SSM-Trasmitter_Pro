@@ -13,8 +13,14 @@ void RunCommand(void)
 {
      switch(mainitem_t.task_MainMenu){
 
-         case 0:
-
+         case 0xff:
+          
+             key_t.keyset++;
+				  key_t.keyswitch++;
+				  key_t.keytrae++;
+				  key_t.keyzero++; 
+				  key_t.keyTimes =0;
+         
          break;
          
          

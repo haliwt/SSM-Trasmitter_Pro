@@ -153,7 +153,10 @@ void TIM1_UP_IRQHandler(void)
 
         /* Pin PC.06 toggling */
        // GPIO_WriteBit(GPIOB, GPIO_PIN_9, (Bit_OperateType)(1 - GPIO_ReadOutputDataBit(GPIOB, GPIO_PIN_9)));
-       if(key_t.keyTimes ==1) {
+		
+		
+		
+	  if(key_t.keyTimes ==1) {
             i++;
             if(i>999){ //1s
                 i=0;

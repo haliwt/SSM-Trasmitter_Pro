@@ -8,6 +8,8 @@ typedef struct _KEY_{
 	   uint8_t keyTimes_ms;
 	   uint8_t keyTimes_1s;
 	   uint8_t keyTimes_2s;
+	   uint8_t keyRunTimes;
+	
 	   uint8_t GetKey;
 	   uint8_t PrevKey;
 	   uint8_t keypress;
@@ -25,6 +27,7 @@ typedef struct _KEY_{
 	   uint8_t keyReturn_F3_flag;
 	   uint8_t  f7keyReturn_flag;
 	   uint8_t	f8keyReturn_flag;
+	   uint8_t	f9keyReturn_flag;
 	  
 }KEY;
 
