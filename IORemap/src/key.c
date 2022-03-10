@@ -511,15 +511,48 @@ static void KEY_SubMenuFun_Enter(void)
           break; 
           
           case F9:
-            if(menu_t.menuF9Sub_first==0){  
-				menu_t.menuF9Sub_first++;
-				menu_t.menuMain=0;
-				menuTop= -1;
-				menuFxSubTop=-1;
-				menu_t.active_Submenu=F9;//the second menu
-				menu_t.menuTitle_03=submenu_F9; //RunCommand()
-				menu_t.F9_SubMenuTop= PushSub_Menu(F9Mnumbers);
-			}    
+              if(f9menu_t.menuF9Sub_first==0){  //F8- 01 
+                  f9menu_t.menuF9Sub_first++;
+                  menuFxSubTop=-1;
+                  mainitem_t.task_MainMenu=TheSecond_Menu;
+
+                  menu_t.menuTitle_02=9; //the second menu 
+                  menu_t.FxMainMenu_key =0xB0;
+                   menu_t.FxSub_02_key=0xf90;
+                  f9menu_t.F9_SubMenuTop = PushSub_Menu(F9Mnumbers);
+                  printf("f9_theFirst_enkey = %d\n",menu_t.menuTitle_02);
+		} 
+            else{ //F801-> 01
+                  key_t.f9keyReturn_flag = key_t.f9keyReturn_flag^ 0x01;
+                  if(key_t.f9keyReturn_flag== 1){
+                 
+                        /*****************The third********************/
+                        mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                       
+                         menu_t.menuTitle_03=submenu_F9;
+                        //runKey fun
+                        menu_t.FxMainMenu_key =0xC0; //the third menu open 
+                        menu_t.FxSub_03_key=0xf90;  //the third sub open
+            
+                       //f7menu_t.F7_03_subMenuTop=f7menu_t.F7SubMenu_Id;
+                        menu_t.menu_F1Sub_03_xx_key=f9menu_t.F9SubMenu_Id;
+                        printf("f9_03_Top = %d\n",f9menu_t.F9_03_subMenuTop);
+                  }    
+                  else{
+                        
+                        menu_t.menuId= F9;
+                        mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
+                        menu_t.FxMainMenu_key =0xB0; 
+                       menu_t.FxSub_02_key=0xf90; 
+                        menu_t.menuTitle_03=0;
+				menu_t.menuTitle_02=9; 
+                        f9menu_t.F9_SubMenuTop=f9menu_t.F9SubMenu_Id;
+                     
+                        printf("f9_04_enkey = %d\n",f9menu_t.F9_03_subMenuTop);
+                    }
+
+            }          
+
           break; 
           
      } 

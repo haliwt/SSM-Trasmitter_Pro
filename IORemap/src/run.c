@@ -58,7 +58,8 @@ void RunCommand(void)
                  break; 
 
                  case 9: //F8-01-
-                        F9SubMenu_Master_01();
+                       F9SubMenu_Master_01();
+                       F9SubMenu_02_DIS(f9menu_t.F9_SubMenuTop) ;
                  break; 
 
                
