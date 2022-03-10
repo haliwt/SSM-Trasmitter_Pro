@@ -65,6 +65,20 @@ int main(void)
 	  
 	
 			keydata = ScanKey();
+			if(run_t.dispCmd ==0){
+				    Get_Weight();
+			        Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
+				    SysTick_Delay_Ms(200);
+                    key_t.keyset++;
+                    key_t.keyswitch++;
+                    key_t.keytrae++;
+                    key_t.keyzero++; 
+                    key_t.keyTimes =0;
+
+
+			}
+			if(keydata !=0xff)run_t.dispCmd =1;
+
 	        CheckMode(keydata);//KEY_Function(keydata);
             RunCommand();
 			

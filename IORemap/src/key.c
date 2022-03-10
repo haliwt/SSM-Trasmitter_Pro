@@ -107,16 +107,7 @@ void KEY_Function(uint8_t keydata)
 {
              switch(keydata){
 
-               case 0xff:
-                  Get_Weight();
-			 Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
-                    key_t.keyset++;
-                    key_t.keyswitch++;
-                    key_t.keytrae++;
-                    key_t.keyzero++; 
-                    key_t.keyTimes =0;
-	
-			break;
+           
    
                case 0xf4://KEY1-ZERO--up
                     run_t.dispCmd =1;
