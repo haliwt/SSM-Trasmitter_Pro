@@ -414,7 +414,11 @@ static void KEY_SubMenuFun_Enter(void)
                   f7menu_t.menuF7Sub_first++;
                   menuFxSubTop=-1;
                   mainitem_t.task_MainMenu=TheSecond_Menu;
+
+                  
                   menu_t.menuTitle_02=7; //the 
+                  menu_t.FxMainMenu_key =0xB0;
+                   menu_t.FxSub_02_key=0xf70;
                   f7menu_t.F7_SubMenuTop = PushSub_Menu(F7Mnumbers);
 		} 
             else{
