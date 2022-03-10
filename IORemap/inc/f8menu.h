@@ -17,7 +17,7 @@ typedef struct _F8menu{
    uint8_t F8_03_06_Id;
    uint8_t F8_03_07_Id;
    uint8_t F8_03_08_Id;
-	
+	uint8_t F8_03_subMenuTop_Id;
 	
    uint8_t unit;
     uint8_t decade;
@@ -35,7 +35,7 @@ extern F8menu f8menu_t;
 
 void F8SubMenu_02_DIS(uint8_t mu);
 
-void F8SubMenu_03_DIS(void);
+void F8SubMenu_03_DIS(uint8_t mu);
 
 
 

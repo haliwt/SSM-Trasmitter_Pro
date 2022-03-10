@@ -58,7 +58,7 @@ void RunCommand(void)
                  break; 
 
                  case 9: //F8-01-
-
+                        F9SubMenu_Master_01();
                  break; 
 
                
@@ -92,7 +92,7 @@ void RunCommand(void)
 
                     case submenu_F8:
                          // F8SubMenu_03_DIS();
-                          F7SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
+                          F8SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
                     break;
 
                    
@@ -158,11 +158,7 @@ void RunCommand(void)
 					run_t.dispCmd=0;
 
          break;
-
-
-
-     }
-
+    }
 
 }
 

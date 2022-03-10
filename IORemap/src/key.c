@@ -453,49 +453,51 @@ static void KEY_SubMenuFun_Enter(void)
                     }
 
             } 
-            //F8 
+          //F8 -01->
           case F8:
-            if(menu_t.menuF8Sub_first==0){  
-				f8menu_t.menuF8Sub_first++;
-                        menu_t.menuMain=0;
-                              menuTop= -1;
-                               menuFxSubTop=-1;
-			
-				menu_t.menuTitle_03=submenu_F8; //RunCommand()
-				f8menu_t.F8_SubMenuTop = PushSub_Menu(F8Mnumbers);
-				
-			}  
-            else{
-                        key_t.f8keyReturn_flag = key_t.f8keyReturn_flag^ 0x01;
-                  printf("key_enter = %d\n",key_t.keyReturn_flag);
+          
+               if(f8menu_t.menuF8Sub_first==0){  //F8- 01 
+                  f8menu_t.menuF8Sub_first++;
+                  menuFxSubTop=-1;
+                  mainitem_t.task_MainMenu=TheSecond_Menu;
+
+                  menu_t.menuTitle_02=8; //the second menu 
+                  menu_t.FxMainMenu_key =0xB0;
+                   menu_t.FxSub_02_key=0xf80;
+                  f8menu_t.F8_SubMenuTop = PushSub_Menu(F8Mnumbers);
+		} 
+            else{ //F7-01-> 01
+                  key_t.f8keyReturn_flag = key_t.f8keyReturn_flag^ 0x01;
+                  printf("f8keyenter = %d\n",key_t.f8keyReturn_flag);
                   if(key_t.f8keyReturn_flag== 1){
                  
                         /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
-                        menu_t.menuTitle_02=8;
-                        menu_t.menuTitle_03=submenu_F8;
+                       
+                         menu_t.menuTitle_03=submenu_F8;
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf80;  //the third sub open
             
-                     
+                       //f7menu_t.F7_03_subMenuTop=f7menu_t.F7SubMenu_Id;
                         menu_t.menu_F1Sub_03_xx_key=f8menu_t.F8SubMenu_Id;
-                    }    
-                  
+                        printf("f8_03_Top = %d\n",f8menu_t.F8_03_subMenuTop);
+                  }    
                   else{
                         
                         menu_t.menuId= F8;
                         mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
-                        menu_t.FxMainMenu_key =0xB0;
-                        menu_t.FxSub_03_key=0xff;  
+                        menu_t.FxMainMenu_key =0xB0; 
+                       menu_t.FxSub_02_key=0xf80; 
                         menu_t.menuTitle_03=0;
-                        
+						 menu_t.menuTitle_02=8; 
                         f8menu_t.F8_SubMenuTop=f8menu_t.F8SubMenu_Id;
                      
-                        printf("f8_keyDown = %d\n",f8menu_t.F8_SubMenuTop);
+                        printf("f8_04_enkey = %d\n",f8menu_t.F8_03_subMenuTop);
                     }
-                       
-            }  
+
+            }          
+
           break; 
           
           case F9:
@@ -1065,6 +1067,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
                     break;
 
                     case 0xf80:
+
 
                     break;
 
