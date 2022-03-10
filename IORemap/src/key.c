@@ -1139,6 +1139,65 @@ static void KEY2_TRAE_DOWN_Fun(void)
                     break;
 
                     case 0xf80:
+                      switch(menu_t.menu_F1Sub_03_xx_key){
+
+                              case 0:
+                                    f8menu_t.F8_03_01_Id=  PopSub_03_Menu(3);
+                              break;
+
+                              case 1:
+                                    f8menu_t.F8_03_02_Id =  PopSub_03_Menu(6);
+                              break;
+
+                              case 2:
+                                      Number_Digital_5bitPoint_DecSelect(AF803);
+                                      f8menu_t.unit =AF803[0];
+                                      f8menu_t.decade = AF803[1];
+                                      f8menu_t.hundred = AF803[2];
+                                      f8menu_t.onethousand= AF803[3];
+                                      f8menu_t.tenthousand= AF803[4];
+                              break;
+
+                              case 3:
+                                    Number_Digital_5bitPoint_DecSelect(AF804);
+                                      f8menu_t.unit =AF804[0];
+                                      f8menu_t.decade = AF804[1];
+                                      f8menu_t.hundred = AF804[2];
+                                      f8menu_t.onethousand= AF804[3];
+                                      f8menu_t.tenthousand= AF804[4];
+                                     
+
+                              break;
+
+                               case 4:
+                                 Number_Digital_5bitPoint_DecSelect(AF805);
+                                      f8menu_t.unit =AF805[0];
+                                      f8menu_t.decade = AF805[1];
+                                      f8menu_t.hundred = AF805[2];
+                                      f8menu_t.onethousand= AF805[3];
+                                      f8menu_t.tenthousand= AF805[4];
+
+                              break;
+
+                              case 5:
+                                      Number_Digital_5bitPoint_DecSelect(AF806);
+                                      f8menu_t.unit =AF806[0];
+                                      f8menu_t.decade = AF806[1];
+                                      f8menu_t.hundred = AF806[2];
+                                      f8menu_t.onethousand= AF806[3];
+                                      f8menu_t.tenthousand= AF806[4];
+
+                              break;
+
+                              case 6:
+                                    f8menu_t.F8_03_07_Id= PopSub_03_Menu(3);
+                              break;
+
+                               case 7:
+                                    f8menu_t.F8_03_08_Id= PopSub_03_Menu(3);
+                              break;
+
+                        }
 
 
                     break;
@@ -1272,6 +1331,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
            if(menu_t.inputNumber_Select >4){
               menu_t.inputNumber_Select =0;
           }
+        printf("key3_right= %d\n",menu_t.inputNumber_Select);
       }
 
 }
@@ -1694,7 +1754,7 @@ static void Number_Digital_5bitPoint_DecSelect(int8_t *ap)
 {
       if(menu_t.inputNumber_Select==0){
              one--;
-            if(one == -2){ //one == -1 ->display "-"
+            if(one < 0){ //one == -1 ->display "-"
                one=9;
             }
 		*ap= one;
@@ -1729,7 +1789,7 @@ static void Number_Digital_5bitPoint_DecSelect(int8_t *ap)
       }
       else if(menu_t.inputNumber_Select ==4){
              five--;
-            if( five < 0){ 
+            if( five == -2){ 
                 five=9;
             }
 		*(ap+4) = five;
@@ -1742,7 +1802,7 @@ static void Number_Digital_5bitPoint_AddSelect(int8_t *ap)
 {
        if(menu_t.inputNumber_Select==0){
             one++ ;
-            if(one >10 ){
+            if(one >9 ){
                one=0;
             }
 		*ap = one;
@@ -1770,7 +1830,7 @@ static void Number_Digital_5bitPoint_AddSelect(int8_t *ap)
       } 
       else if(menu_t.inputNumber_Select ==4){
                   five++;  
-                  if(five >9){
+                  if(five >10){
                       five=0;
                     }
 			*(ap+4) = five; 
