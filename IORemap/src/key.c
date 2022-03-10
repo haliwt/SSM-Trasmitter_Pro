@@ -428,13 +428,14 @@ static void KEY_SubMenuFun_Enter(void)
                  
                         /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
-                        menu_t.menuTitle_03=submenu_F7;
-                        menu_t.FxSub_02_key=0;
+                       
+                        menu_t.FxSub_02_key=07;
+                         menu_t.menuTitle_03=submenu_F7;
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
                         menu_t.FxSub_03_key=0xf70;  //the third sub open
             
-                       f7menu_t.F7_03_subMenuTop=f7menu_t.F7SubMenu_Id;
+                       //f7menu_t.F7_03_subMenuTop=f7menu_t.F7SubMenu_Id;
                         menu_t.menu_F1Sub_03_xx_key=f7menu_t.F7SubMenu_Id;
                         printf("f7_03_Top = %d\n",f7menu_t.F7_03_subMenuTop);
                   }    
@@ -444,9 +445,9 @@ static void KEY_SubMenuFun_Enter(void)
                         mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
                         menu_t.FxMainMenu_key =0xB0;
                         menu_t.FxSub_03_key=0xff;  
-                        menu_t.menuTitle_03=0;
+                        menu_t.menuTitle_03=submenu_F7;
                         menu_t.menuTitle_02= 7;
-                        f7menu_t.F7_SubMenuTop=f7menu_t.F7_03_subMenuTop;
+                        f7menu_t.F7_SubMenuTop=f7menu_t.F7SubMenu_Id;
                      
                         printf("f7_04_enkey = %d\n",f7menu_t.F7_03_subMenuTop);
                     }

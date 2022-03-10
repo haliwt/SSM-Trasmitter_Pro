@@ -87,11 +87,13 @@ void RunCommand(void)
 
                     case submenu_F7:
                             printf("RunCmd F7 TheThird_Menu");
-                            F7SubMenu_03_DIS(f7menu_t.F7_03_subMenuTop);
+                            F7SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
+                         
                     break;
 
                     case submenu_F8:
-                          F8SubMenu_03_DIS();
+                         // F8SubMenu_03_DIS();
+                          F7SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
                     break;
 
                    

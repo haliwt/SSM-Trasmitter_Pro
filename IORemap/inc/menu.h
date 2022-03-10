@@ -145,8 +145,8 @@ typedef enum{
 
 typedef enum{
    
-    mainmenuItem = 0x01,
-	 submenu_F1,
+    
+	 submenu_F1=0X01,
 	 submenu_F2,
 	 submenu_F3,
 	 submenu_F7,
