@@ -411,12 +411,11 @@ static void KEY_SubMenuFun_Enter(void)
           
          case F7:
             if(f7menu_t.menuF7Sub_first==0){  
-				f7menu_t.menuF7Sub_first++;
-				menu_t.menuMain=0;
-                          
-                        menuFxSubTop=-1;
-				menu_t.menuTitle_03=submenu_F7; //RunCommand()
-				f7menu_t.F7_SubMenuTop = PushSub_Menu(F7Mnumbers);
+                  f7menu_t.menuF7Sub_first++;
+                  menuFxSubTop=-1;
+                  mainitem_t.task_MainMenu=TheSecond_Menu;
+                  menu_t.menuTitle_02=7; //the 
+                  f7menu_t.F7_SubMenuTop = PushSub_Menu(F7Mnumbers);
 		} 
             else{
                   key_t.f7keyReturn_flag = key_t.f7keyReturn_flag^ 0x01;

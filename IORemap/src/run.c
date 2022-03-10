@@ -13,17 +13,7 @@ void RunCommand(void)
 {
      switch(mainitem_t.task_MainMenu){
 
-         case 0xff:
-          
-             key_t.keyset++;
-				  key_t.keyswitch++;
-				  key_t.keytrae++;
-				  key_t.keyzero++; 
-				  key_t.keyTimes =0;
-         
-         break;
-         
-         
+        
          case TheFirst_Menu:
                  MainMenu(menu_t.mainTop);
          break;
@@ -57,7 +47,7 @@ void RunCommand(void)
                  break;
 
                  case 7: //F7-01-
-                        F7SubMenu_Master_01();
+                    F7SubMenu_Master_01();
                        F7SubMenu_02_DIS(f7menu_t.F7_SubMenuTop) ;
                  break; 
 
@@ -115,53 +105,48 @@ void RunCommand(void)
          case TheFourth_Menu: //F3->F3-1->F3-1.1 -> ;F3-2 ->F3-2.1
               
            
-                        switch(menu_t.menuTitle_04){
+             switch(menu_t.menuTitle_04){
 
-                            case F3401: //3bit
-                                     menu_t.F3_04_ID = F3401;
-                                     F3SubMenu_F301_11_Select_DIS(AF301);
+                case F3401: //3bit
+                            menu_t.F3_04_ID = F3401;
+                            F3SubMenu_F301_11_Select_DIS(AF301);
 
-                             break;
+                    break;
 
-                             case F3402: //bit  1
-                                      menu_t.F3_04_ID = F3402;
-                                     F3SubMenu_F301_12_Select_DIS(AF302);
-                             break;
-
-
-                             case F3403://bit 6
-                                     menu_t.F3_04_ID = F3403;
-                                    F3SubMenu_F301_13_Select_DIS(AF303);
-                             break;
-
-                             case F3404: //bit 3 point
-                                      menu_t.F3_04_ID = F3404;
-                                     F3SubMenu_F301_14_Select_DIS(AF304);
-                             break;
-
-                             case F3405://  5 bit
-                                     menu_t.F3_04_ID = F3405;
-                                    F2SubMenu_F202_01_Select_DIS(AF305);
-                             break;
-
-                             case F3406:
-                                 menu_t.F3_04_ID = F3406;
-                                F2SubMenu_F202_01_Select_DIS(AF306);
-                             break;
-
-                             case F3407:
-                                 menu_t.F3_04_ID = F3407;
-                                F2SubMenu_F202_01_Select_DIS(AF307);
-                             break;
+                    case F3402: //bit  1
+                            menu_t.F3_04_ID = F3402;
+                            F3SubMenu_F301_12_Select_DIS(AF302);
+                    break;
 
 
+                    case F3403://bit 6
+                            menu_t.F3_04_ID = F3403;
+                        F3SubMenu_F301_13_Select_DIS(AF303);
+                    break;
 
-                        }
+                    case F3404: //bit 3 point
+                            menu_t.F3_04_ID = F3404;
+                            F3SubMenu_F301_14_Select_DIS(AF304);
+                    break;
+
+                    case F3405://  5 bit
+                            menu_t.F3_04_ID = F3405;
+                        F2SubMenu_F202_01_Select_DIS(AF305);
+                    break;
+
+                    case F3406:
+                        menu_t.F3_04_ID = F3406;
+                    F2SubMenu_F202_01_Select_DIS(AF306);
+                    break;
+
+                    case F3407:
+                        menu_t.F3_04_ID = F3407;
+                    F2SubMenu_F202_01_Select_DIS(AF307);
+                    break;
+
+            }
                          
-              
-              
-                 
-         break;
+            break;
 
          default:
            run_t.dispCmd =0;
