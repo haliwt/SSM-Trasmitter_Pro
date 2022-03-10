@@ -47,7 +47,7 @@ void RunCommand(void)
                  break;
 
                  case 7: //F7-01-
-                       printf("RunCmd F7 TheSecond_Menu");
+                       
                         F7SubMenu_Master_01();
                        F7SubMenu_02_DIS(f7menu_t.F7_SubMenuTop) ;
                  break; 
@@ -86,7 +86,6 @@ void RunCommand(void)
                     break;
 
                     case submenu_F7:
-                            printf("RunCmd F7 TheThird_Menu");
                             F7SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
                          
                     break;

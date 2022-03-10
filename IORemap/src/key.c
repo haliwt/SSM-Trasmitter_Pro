@@ -429,7 +429,7 @@ static void KEY_SubMenuFun_Enter(void)
                         /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
                        
-                        menu_t.FxSub_02_key=07;
+                      //  menu_t.FxSub_02_key=7;
                          menu_t.menuTitle_03=submenu_F7;
                         //runKey fun
                         menu_t.FxMainMenu_key =0xC0; //the third menu open 
@@ -443,10 +443,10 @@ static void KEY_SubMenuFun_Enter(void)
                         
                         menu_t.menuId= F7;
                         mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
-                        menu_t.FxMainMenu_key =0xB0;
-                        menu_t.FxSub_03_key=0xff;  
-                        menu_t.menuTitle_03=submenu_F7;
-                        menu_t.menuTitle_02= 7;
+                        menu_t.FxMainMenu_key =0xB0; 
+                       menu_t.FxSub_02_key=0xf70; 
+                        menu_t.menuTitle_03=0;
+						 menu_t.menuTitle_02=7; 
                         f7menu_t.F7_SubMenuTop=f7menu_t.F7SubMenu_Id;
                      
                         printf("f7_04_enkey = %d\n",f7menu_t.F7_03_subMenuTop);
