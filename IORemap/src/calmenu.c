@@ -573,7 +573,6 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
    
     case caliTheFirst_Menu:
 
-
         cali_t.CaliMenu_Item = Push_stackCaliMain(3);
          printf("cali_t.CaliMenu_Item = %d\n", cali_t.CaliMenu_Item );
     break;
@@ -586,6 +585,7 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
 
                 cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4,cali_t.stackCali_02_01_Tp);
                  cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Itme;
+                  
             break;
 
           case CAL2:

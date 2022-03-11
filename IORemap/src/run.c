@@ -189,7 +189,7 @@ void RunCommand(void)
 void RunCalibration_Command(void)
 {
 
-      switch(mainitem_t.task_MainMenu = caliTheFirst_Menu){
+      switch(mainitem_t.task_MainMenu){
       
       case caliTheFirst_Menu: //Calibration Function //CAL1 ,CAL2,CAL3 ,CAL5
 
@@ -200,6 +200,7 @@ void RunCalibration_Command(void)
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
                       
                     CALI_MENU_SUB_02_DIS(cali_t.CaliMenu_Item, cali_t.CaliSub_Menu_02_Title);
+                     printf("runCmdcailTheSecond = %d\n",  cali_t.CaliMenu_Item);
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
