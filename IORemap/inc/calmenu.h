@@ -54,7 +54,11 @@ enum cali{
 
 };
 
-extern int caliMainTop  ;
+
+
+extern int8_t caliMainTop  ;
+
+extern int8_t caliSun_02_Top  ;
 
 
 uint8_t Push_stackCaliMain(int8_t maxize);

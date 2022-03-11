@@ -1,8 +1,11 @@
 #include "calmenu.h"
 
 cali cali_t;
- int caliMainTop =-1  ;
-int caliSun_02_Top  = -1;
+ int8_t caliMainTop =-1  ;
+int8_t caliSun_02_Top  = -1;
+
+
+
 
 //cali_t.stackCali_02_01_Tp=-1;
 //cali_t.stackCali_02_02_Tp =-1;
@@ -451,14 +454,7 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
            break;
 
 
-
-
-
-
-
-
-
-                }
+        }
     }
 
 
@@ -470,7 +466,7 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
 uint8_t Push_stackCaliMain(int8_t maxsize)
 {
      
-    if(caliMainTop > (maxsize -1) || caliMainTop == -1){
+    if(caliMainTop > (maxsize -1)){
             caliMainTop=0;
     }
 	else{
@@ -559,7 +555,8 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
      if(cali_t.keyEnter_flag == 1){
             
           mainitem_t.task_MainMenu = caliTheSecond_Menu;
-         
+          cali_t.CaliSub_Menu_02_Title= Push_stackCaliMain_02(4,cali_t.stackCali_02_01_Tp);
+          printf("keyEnter_second = %d\n",  mainitem_t.task_MainMenu );
         
      }
      else{
@@ -577,7 +574,8 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
     case caliTheFirst_Menu:
 
 
-        cali_t.CaliMenu_Item = Push_stackCaliMain(4);
+        cali_t.CaliMenu_Item = Push_stackCaliMain(3);
+         printf("cali_t.CaliMenu_Item = %d\n", cali_t.CaliMenu_Item );
     break;
 
     case caliTheSecond_Menu:
@@ -657,7 +655,81 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
 
 void CALI_KEY2_DOWN_Fun(void)
 {
+    switch( mainitem_t.task_MainMenu){
+   
+    case caliTheFirst_Menu:
 
+
+        cali_t.CaliMenu_Item = Pop_stackCaliMain(3);
+    break;
+
+    case caliTheSecond_Menu:
+          
+          switch(cali_t.CaliMenu_Item){
+     
+           case CAL1:
+
+                cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4,cali_t.stackCali_02_01_Tp);
+                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Itme;
+            break;
+
+          case CAL2:
+                cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5,cali_t.stackCali_02_02_Tp);
+                cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_02_Item;
+          break;
+
+          case CAL3:
+               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3,cali_t.stackCali_02_03_Tp);
+               cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_03_Item;
+
+          break;
+
+          case CAL5:
+                  
+          break;
+	  }
+          
+
+      break;
+
+
+     case caliTheThird_Menu:
+         
+          switch(cali_t.CaliMenu_Item){
+
+              case CAL1:
+                      
+              cali_t.CaliSub_03_01_Itme  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_01_Tp);
+                 cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_01_Itme;
+              break;
+
+              case CAL2:
+                        cali_t.CaliSub_03_02_Item  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_02_Tp);
+                 cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_02_Item;
+              break;
+
+              case CAL3:
+                    cali_t.CaliSub_03_03_Item  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_03_Tp);
+                 cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_03_Item;
+              break;
+
+              case CAL5:
+
+              break;
+
+
+
+
+        } 
+
+
+     break;
+
+
+
+
+
+}
 
 }
 
