@@ -60,14 +60,16 @@ extern int8_t caliMainTop  ;
 
 extern int8_t caliSun_02_Top  ;
 
+extern int8_t caliSubMeun_03_Top ;
+
 
 uint8_t Push_stackCaliMain(int8_t maxize);
 uint8_t Pop_stackCaliMain(int8_t maxize);
 uint8_t CaliMain_stackTop(void);
 
-int8_t Push_stackCaliMain_02(int8_t maxize,int8_t ntop);
-int8_t Pop_stackCaliMain_02(int8_t maxize,int8_t ntop);
-int8_t CaliSub_02_stackTop(int8_t ntop);
+int8_t Push_stackCaliMain_02(int8_t maxize);
+int8_t Pop_stackCaliMain_02(int8_t maxize);
+int8_t CaliSub_02_stackTop(void);
 
 void KEY4_InputCalibration_Mode(void);
  void CALI_KEY3_SWITCH_Fun(void );

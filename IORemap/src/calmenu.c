@@ -3,6 +3,7 @@
 cali cali_t;
  int8_t caliMainTop =-1  ;
 int8_t caliSun_02_Top  = -1;
+int8_t caliSubMeun_03_Top =-1;
 
 
 
@@ -494,37 +495,37 @@ uint8_t CaliMain_stackTop(void)
     return caliMainTop;
 }
 
-int8_t Push_stackCaliMain_02(int8_t maxize,int8_t ntop)
+int8_t Push_stackCaliMain_02(int8_t maxize)
 {
-    if(ntop > (maxize -1) || ntop == -1){
-            ntop=0;
+    if(caliSubMeun_03_Top  > (maxize -1)){
+            caliSubMeun_03_Top =0;
     }
 	else{
 		
-		 ntop ++;
+		 caliSubMeun_03_Top  ++;
 	}
-	return ntop ;
+	return caliSubMeun_03_Top  ;
 
 }
 
-int8_t Pop_stackCaliMain_02(int8_t maxize,int8_t ntop)
+int8_t Pop_stackCaliMain_02(int8_t maxize)
 {
-     if( ntop ==-1){
-	       ntop = (maxize -1);
+     if( caliSubMeun_03_Top  ==-1){
+	       caliSubMeun_03_Top  = (maxize -1);
        }
 	   else{
-            ntop--;
+            caliSubMeun_03_Top --;
 		
 	   }
-     return   ntop ;
+     return   caliSubMeun_03_Top  ;
 
 
 }
 
-int8_t CaliSub_02_stackTop(int8_t ntop)
+int8_t CaliSub_02_stackTop(void)
 {
 
-    return ntop;
+    return caliSubMeun_03_Top ;
 }
 
 /*******************************************************************
@@ -555,7 +556,7 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
      if(cali_t.keyEnter_flag == 1){
             
           mainitem_t.task_MainMenu = caliTheSecond_Menu;
-          cali_t.CaliSub_Menu_02_Title= Push_stackCaliMain_02(4,cali_t.stackCali_02_01_Tp);
+          cali_t.CaliSub_Menu_02_Title= Push_stackCaliMain_02(4);
           printf("keyEnter_second = %d\n",  mainitem_t.task_MainMenu );
         
      }
@@ -583,18 +584,18 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
      
            case CAL1:
 
-                cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4,cali_t.stackCali_02_01_Tp);
+                cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Itme;
                   
             break;
 
           case CAL2:
-                cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5,cali_t.stackCali_02_02_Tp);
+                cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5);
                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_02_Item;
           break;
 
           case CAL3:
-               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3,cali_t.stackCali_02_03_Tp);
+               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3);
                cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_03_Item;
 
           break;
@@ -614,17 +615,17 @@ int8_t CaliSub_02_stackTop(int8_t ntop)
 
               case CAL1:
                       
-              cali_t.CaliSub_03_01_Itme  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_01_Tp);
+              cali_t.CaliSub_03_01_Itme  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_01_Itme;
               break;
 
               case CAL2:
-                        cali_t.CaliSub_03_02_Item  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_02_Tp);
+                        cali_t.CaliSub_03_02_Item  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_02_Item;
               break;
 
               case CAL3:
-                    cali_t.CaliSub_03_03_Item  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_03_Tp);
+                    cali_t.CaliSub_03_03_Item  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_03_Item;
               break;
 
@@ -669,17 +670,17 @@ void CALI_KEY2_DOWN_Fun(void)
      
            case CAL1:
 
-                cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4,cali_t.stackCali_02_01_Tp);
+                cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Itme;
             break;
 
           case CAL2:
-                cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5,cali_t.stackCali_02_02_Tp);
+                cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5);
                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_02_Item;
           break;
 
           case CAL3:
-               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3,cali_t.stackCali_02_03_Tp);
+               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3);
                cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_03_Item;
 
           break;
@@ -699,17 +700,17 @@ void CALI_KEY2_DOWN_Fun(void)
 
               case CAL1:
                       
-              cali_t.CaliSub_03_01_Itme  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_01_Tp);
+              cali_t.CaliSub_03_01_Itme  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_01_Itme;
               break;
 
               case CAL2:
-                        cali_t.CaliSub_03_02_Item  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_02_Tp);
+                        cali_t.CaliSub_03_02_Item  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_02_Item;
               break;
 
               case CAL3:
-                    cali_t.CaliSub_03_03_Item  =  Push_stackCaliMain_02(4,cali_t.stackCali_03_03_Tp);
+                    cali_t.CaliSub_03_03_Item  =  Push_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_03_Item;
               break;
 
