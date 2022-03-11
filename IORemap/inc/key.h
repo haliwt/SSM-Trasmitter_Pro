@@ -76,5 +76,8 @@ void GetKeyValua_Init(void);
 
 extern void (*DispDigital_3BitSmg)(void);
 void RunDispDigital_Fun(void(*DisSmg)(void));
+
+
+
 #endif 
 

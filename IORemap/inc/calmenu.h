@@ -31,6 +31,12 @@ typedef struct _CALI{
     int8_t stackCali_02_02_Tp;
     int8_t stackCali_02_03_Tp;
 
+    uint8_t unit;
+    uint8_t decade;
+    uint8_t hundred;
+    uint8_t onethousand;
+    uint8_t tenthousand; //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
+
 
 
     int8_t stackCali_03_01_Tp;
@@ -61,6 +67,13 @@ extern int8_t caliMainTop  ;
 extern int8_t caliSun_02_Top  ;
 
 extern int8_t caliSubMeun_03_Top ;
+
+
+extern int8_t ACAL301[3];
+extern int8_t ACAL302[5];
+extern int8_t ACAL303[3];
+extern int8_t ACAL304[3];
+extern int8_t ACAL305[5];
 
 
 uint8_t Push_stackCaliMain(int8_t maxize);

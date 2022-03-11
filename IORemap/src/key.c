@@ -1567,6 +1567,8 @@ void Number_Digital_3bit_DecSelect(void)
       }
 }
 
+
+
 void RunDispDigital_Fun(void(*DisSmg)(void))
 {
     DispDigital_3BitSmg =DisSmg;
@@ -1981,6 +1983,8 @@ void Number_Digital_Set5bit_ZeroDecSelect(int8_t *ap,uint8_t n)
       menu_t.F34_KEY_VALUE = i;
         
 }
+
+
 
 
 
