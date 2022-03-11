@@ -65,6 +65,7 @@ int main(void)
 	  
 	
 			keydata = ScanKey();
+		
 			if(run_t.dispCmd ==0){
 				    Get_Weight();
 			        Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
@@ -74,12 +75,20 @@ int main(void)
                     key_t.keytrae++;
                     key_t.keyzero++; 
                     key_t.keyTimes =0;
+					key_t.keyPressedTimes=0;
 
 			}
-			if(keydata !=0xff)run_t.dispCmd =1;
+			if(keydata !=0xff){
+				key_t.keyTimes =1;
+				run_t.dispCmd =1;
+			}
             if(run_t.dispCmd ==1){
-				CheckMode(keydata);//KEY_Function(keydata);
-				RunCommand();
+				
+				  CheckMode(keydata);//KEY_Function(keydata);
+				
+				   RunCommand();
+				   
+				
 			}
 			
 		}

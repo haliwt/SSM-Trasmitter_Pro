@@ -2,7 +2,7 @@
  mainitem mainitem_t;
 submenublinkmenu blinkMenu;
 
-
+uint8_t csmu;
 void CheckMode(uint8_t mydata)
 {
     KEY_Function(mydata);
@@ -11,6 +11,8 @@ void CheckMode(uint8_t mydata)
 
 void RunCommand(void)
 {
+    
+    if(cali_t.CaliControl_key==0){
      switch(mainitem_t.task_MainMenu){
 
         
@@ -155,6 +157,8 @@ void RunCommand(void)
                          
             break;
 
+          
+
          default:
                     key_t.keyset++;
                     key_t.keyswitch++;
@@ -165,9 +169,46 @@ void RunCommand(void)
 
          break;
     }
+  }
+  else{
+
+    RunCalibration_Command();
+
+  }
 
 }
 
 
+/***************************************************************
+ * 
+ * Function Name :void RunCalibration_Command(void)
+ * 
+ * 
+ * 
+ ***************************************************************/
+void RunCalibration_Command(void)
+{
+
+      switch(mainitem_t.task_MainMenu = caliTheFirst_Menu){
+      
+      case caliTheFirst_Menu: //Calibration Function //CAL1 ,CAL2,CAL3 ,CAL5
+
+                  CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
+
+            break;
+
+            case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
+                      
+                    CALI_MENU_SUB_02_DIS(cali_t.CaliMenu_Item, cali_t.CaliSub_Menu_02_Title);
+            break;
+
+            case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
+                     CALI_MENU_SUB_03_DIS(cali_t.CaliMenu_Item, cali_t.CaliSub_Menu_03_Title);
+            break;
+
+
+      }
+
+}
 
 	

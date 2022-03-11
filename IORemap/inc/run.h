@@ -16,7 +16,10 @@ typedef enum{
      TheFirst_Menu =0x01,
      TheSecond_Menu,
      TheThird_Menu,
-     TheFourth_Menu
+     TheFourth_Menu,
+     TheFifth_Menu,
+     TheSixth_Menu,
+     TheSeventh_Menu,
 
 }MainMenuStructure;
 
@@ -50,6 +53,6 @@ void CheckMode(uint8_t mydata);
 void RunCommand(void);
 void RunBlinkbMenuCmd(void);
 
-
+void RunCalibration_Command(void);
 
 #endif 

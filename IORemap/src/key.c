@@ -123,7 +123,10 @@ void KEY_Function(uint8_t keydata)
                    
                     if(key_t.currkeyzero != key_t.keyzero){
                            key_t.currkeyzero = key_t.keyzero; 
-                           KEY1_ZERIO_UP_Fun();
+                           if(cali_t.CaliControl_key==0)
+                               KEY1_ZERIO_UP_Fun();
+                            else
+                                CALI_KEY1_UP_Fun();//CALI_KEY_UP_Fun();
                           
                     }
                     key_t.keyset++;
@@ -139,7 +142,10 @@ void KEY_Function(uint8_t keydata)
                      Mot_KeyLed();
                      if(key_t.currkeytrae != key_t.keytrae){
                            key_t.currkeytrae = key_t.keytrae;
-                          KEY2_TRAE_DOWN_Fun();
+                          if(cali_t.CaliControl_key==0)
+                                KEY2_TRAE_DOWN_Fun();
+                          else
+                                CALI_KEY2_DOWN_Fun();
                      }
 											
                    key_t.keyset++;
@@ -155,7 +161,10 @@ void KEY_Function(uint8_t keydata)
                      key_t.keyTimes=1;
                      if(key_t.currkeyswitch !=key_t.keyswitch){
                             key_t.currkeyswitch = key_t.keyswitch;
-                            KEY3_SWITCH_LEFT_Fun();
+                             if(cali_t.CaliControl_key==0)
+                                   KEY3_SWITCH_LEFT_Fun();
+                             else 
+                                 CALI_KEY3_SWITCH_Fun();
                       }
                     
                   Valley_KeyLed();
@@ -171,7 +180,21 @@ void KEY_Function(uint8_t keydata)
                      key_t.keyTimes =1;
                      if(key_t.keyset !=key_t.currkeyset){
                           key_t.keyset = key_t.currkeyset;
-                              KEY4_SET_ENTER_Fun();
+                            if(cali_t.CaliControl_key == 0){
+                                if(key_t.keyPressedTimes < 2){
+                                    
+                                     //  KEY4_SET_ENTER_Fun();
+                                      
+                                    //}
+                                   // else{
+                                         KEY4_InputCalibration_Mode();
+                                    }
+                            }
+                            else{
+                                  
+                                  CAL_KEY4_ENTER_Fun();//CAL_KEY_ENTER_Fun();
+
+                            }
                              
                          
                     }
@@ -190,6 +213,7 @@ void KEY_Function(uint8_t keydata)
                     key_t.keytrae++;
                     key_t.keyzero++; 
                     key_t.keyTimes =0;
+                    key_t.keyPressedTimes=0;
                break;
 
                
@@ -1959,11 +1983,4 @@ void Number_Digital_Set5bit_ZeroDecSelect(int8_t *ap,uint8_t n)
 }
 
 
-/*************************************************
-*
-*The F1 ->F1-01-> F1-01-01,F1-01-02,F1-01-03
-*F1-01-04,F1-01-05,F1-01-06.....F1-01-13
-*
-*
-*
-*****************************************************/
+

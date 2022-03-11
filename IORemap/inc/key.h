@@ -7,7 +7,7 @@ typedef struct _KEY_{
 	   uint8_t keyTimes;
 	   uint8_t keyTimes_ms;
 	   uint8_t keyTimes_1s;
-	   uint8_t keyTimes_2s;
+	   uint8_t keyPressedTimes;
 	   uint8_t keyRunTimes;
 	
 	   uint8_t GetKey;

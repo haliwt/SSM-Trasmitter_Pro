@@ -12,6 +12,8 @@ static void Symbol_p_u(void);
 static void Symbol_uRLLE(void);
 static void Symbol_ERS(void);
 
+
+
 void DisplayMode_Normal(void)
 {
    SmgDisplay(digital_1,0x0b);//'NULL'
@@ -347,6 +349,7 @@ static void Symbol_ERS(void)
    SmgDisplay(digital_1,0x0B); // NULL//"n"
    
 }
+
 /***********************************************************
  * 
  * Function Name: void F1SubMenu_Sub_02(void)
@@ -798,3 +801,13 @@ void F3SubMenu_04_Item(int8_t *pA,int8_t *pt)
       }
 
 }
+/*****************************************************************
+ * 
+ * Function Calibration FUNCTION
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+*****************************************************************/
