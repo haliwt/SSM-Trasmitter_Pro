@@ -93,7 +93,7 @@ void CAL_KEY4_ENTER_Fun(void);
 
 void CALI_MENU_01_DIS(uint8_t mu);
 void CALI_MENU_SUB_02_DIS(uint8_t mu,uint8_t su);
- void CALI_MENU_SUB_03_DIS(uint8_t mu,uint8_t su); //speical numbers "0000 000 1000"
+ void CALI_MENU_SUB_03_DIS(uint8_t mu); //speical numbers "0000 000 1000"
  
 
 #endif 

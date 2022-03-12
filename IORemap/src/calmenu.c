@@ -354,14 +354,14 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
 
 
 
- void CALI_MENU_SUB_03_DIS(uint8_t item, uint8_t itsub)
+ void CALI_MENU_SUB_03_DIS(uint8_t item)
  {
      
      switch(item){
 
            case CAL1:
              
-                switch(itsub){
+                switch(cali_t.CaliSub_Menu_03_Title){
                  
 
                 case 0:
@@ -395,7 +395,7 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
            break;
 
            case CAL2:
-               switch(itsub){
+               switch(cali_t.CaliSub_Menu_03_Title){
                 case 0:
                     CaliSubMenu_03_01_01_3bitPoint(pA);   
                 break;
@@ -427,7 +427,7 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
 
            case CAL3:
 
-               switch(itsub){
+               switch(cali_t.CaliSub_Menu_03_Title){
 
                 case 0:
                     CaliSubMenu_03_01_01_3bitPoint(pA);   
@@ -656,7 +656,7 @@ int8_t CaliSub_02_stackTop(void)
                 break;
 
                 case 1: //up+
-                    caliNumber_Digital_5bit_DecSelect(ACAL302);
+                    caliNumber_Digital_5bit_AddSelect(ACAL302);
                         cali_t.unit =ACAL302[0];
                         cali_t.decade = ACAL302[1];
                         cali_t.hundred = ACAL302[2];
@@ -698,7 +698,7 @@ int8_t CaliSub_02_stackTop(void)
 /******************************************************************/
 void CALI_KEY2_DOWN_Fun(void)
 {
-    switch( mainitem_t.task_MainMenu){
+    switch( cali_t.runKeyMenu){
    
     case caliTheFirst_Menu:
 
@@ -742,17 +742,24 @@ void CALI_KEY2_DOWN_Fun(void)
 
               case CAL1:
                       
-              cali_t.CaliSub_03_01_Itme  =  Push_stackCaliMain_02(4);
-                 cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_01_Itme;
-              break;
+            
+
+                  cali_t.CaliSub_Menu_03_Title = Pop_stackCaliMain_02(4);   
+                  cali_t.runKeyMenu=caliTheFifth_Menu;
+               break;
+
+                
+            
+
 
               case CAL2:
-                        cali_t.CaliSub_03_02_Item  =  Push_stackCaliMain_02(4);
-                 cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_02_Item;
+                   
+               cali_t.CaliSub_Menu_03_Title = Pop_stackCaliMain_02(4);   
+                  cali_t.runKeyMenu=caliTheFifth_Menu;
               break;
 
               case CAL3:
-                    cali_t.CaliSub_03_03_Item  =  Push_stackCaliMain_02(4);
+                    cali_t.CaliSub_03_03_Item  =  Pop_stackCaliMain_02(4);
                  cali_t.CaliSub_Menu_03_Title =cali_t.CaliSub_03_03_Item;
               break;
 
@@ -768,11 +775,63 @@ void CALI_KEY2_DOWN_Fun(void)
 
      break;
 
+       case  caliTheFifth_Menu:
+
+             switch(cali_t.CaliMenu_Item){
+
+                 case CAL1:
+
+                  switch(cali_t.CaliSub_Menu_03_Title){
+
+                     case 0:
+                      Number_Digital_3bit_PointerDecSelect(ACAL301);
+                        cali_t.unit =ACAL301[0];
+                        cali_t.decade = ACAL301[1];
+                        cali_t.hundred = ACAL301[2];
+                        
+                break;
+
+                case 1: //up+
+                    caliNumber_Digital_5bit_DecSelect(ACAL302);
+                        cali_t.unit =ACAL302[0];
+                        cali_t.decade = ACAL302[1];
+                        cali_t.hundred = ACAL302[2];
+                        cali_t.onethousand=ACAL302[3];
+                        cali_t.tenthousand =ACAL302[4];
+
+                        break;
+
+                case 2:
+                    Number_Digital_3bit_PointerDecSelect(ACAL303);
+                    cali_t.unit =ACAL303[0];
+                        cali_t.decade = ACAL303[1];
+                        cali_t.hundred = ACAL303[2];
+                    
+
+                break;
+
+                case 3:
+                        Number_Digital_4bit_DecSelect(ACAL304);
+                        cali_t.unit =ACAL304[0];
+                        cali_t.decade = ACAL304[1];
+                        cali_t.hundred = ACAL304[2];
+                        cali_t.onethousand= ACAL304[3];
+                        
+
+                break;
 
 
 
 
-}
+                  }
+			  }
+				break;
+
+
+
+
+
+		}
 
 }
 
