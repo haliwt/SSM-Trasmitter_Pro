@@ -367,26 +367,26 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
                 case 0:
                 menu_t.DisplaySmgBit_Select_Numbers=3;
                  caliSubMenu_03_01_3bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred);  // CaliSubMenu_03_01_01_3bitPoint(ACAL301);   
-                 printf("run_03_dis_cal1_0\n" );
+                 printf("run_03_dis_cal1_0\n",cali_t.CaliSub_Menu_03_Title );
                
                 break;
 
                 case 1:
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                   caliSubMenu_03_02_5bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand,cali_t.tenthousand); //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
-                 printf("run_03_dis_cal1_1\n" );
+                 printf("run_03_dis_cal1_1\n",cali_t.CaliSub_Menu_03_Title );
                 break;
 
                 case 2:
                      menu_t.DisplaySmgBit_Select_Numbers=3;
                    caliSubMenu_03_01_3bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
-                  printf("run_03_dis_cal1_2\n" );
+                  printf("run_03_dis_cal1_2\n" ,cali_t.CaliSub_Menu_03_Title);
                 break;
 
                 case 3:
                     menu_t.DisplaySmgBit_Select_Numbers=4;
                     caliSubMenu_03_4bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
-                  printf("run_03_dis_cal1_3\n" );
+                  printf("run_03_dis_cal1_3\n", cali_t.CaliSub_Menu_03_Title);
                 break;
 
                
@@ -401,26 +401,39 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
 
            case CAL2:
                switch(cali_t.CaliSub_Menu_03_Title){
-                case 0:
-                    CaliSubMenu_03_01_01_3bitPoint(pA);   
+                 case 0:
+                menu_t.DisplaySmgBit_Select_Numbers=3;
+                 caliSubMenu_03_01_3bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred);  // CaliSubMenu_03_01_01_3bitPoint(ACAL301);   
+                 printf("run_03_dis_02_0\n",cali_t.CaliSub_Menu_03_Title );
+               
                 break;
 
                 case 1:
-                   CaliSubMenu_03_01_01_4bitPoint(pA);
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                  caliSubMenu_03_02_5bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand,cali_t.tenthousand); //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
+                 printf("run_03_dis_02_1\n",cali_t.CaliSub_Menu_03_Title );
                 break;
 
                 case 2:
-                    CaliSubMenu_03_01_01_3bitPoint(pA);   
+                     menu_t.DisplaySmgBit_Select_Numbers=3;
+                   caliSubMenu_03_01_3bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
+                  printf("run_03_dis_02_2\n" ,cali_t.CaliSub_Menu_03_Title);
                 break;
 
                 case 3:
-                    CaliSubMenu_03_01_01_5bitPoint(pA);   
+                    menu_t.DisplaySmgBit_Select_Numbers=4;
+                    caliSubMenu_03_4bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
+                  printf("run_03_dis_02_3\n", cali_t.CaliSub_Menu_03_Title);
                 break;
 
-                
-                 case 4:
-                    CaliSubMenu_03_01_01_4bitPoint(pA);   
+               
+                //add weight extra
+                case 4:
+                printf("run_03_dis_02_3\n", cali_t.CaliSub_Menu_03_Title);
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                    caliSubMenu_03_02_5bit_Dis(f8menu_t.unit,f8menu_t.decade,f8menu_t.hundred,f8menu_t.onethousand,f8menu_t.tenthousand);//CaliSubMenu_03_01_01_5bitPoint(ACAL306);   
                 break;
+
 
                 //add weight extra
                   case 5:
@@ -591,7 +604,7 @@ int8_t CaliSub_02_stackTop(void)
    
     case caliTheFirst_Menu:
 
-        cali_t.CaliMenu_Item = Push_stackCaliMain(3);
+        cali_t.CaliMenu_Item = Push_stackCaliMain(4);
          printf("cali_t.CaliMenu_Item = %d\n", cali_t.CaliMenu_Item );
     break;
 
