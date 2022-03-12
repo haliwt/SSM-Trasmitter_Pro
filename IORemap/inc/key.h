@@ -77,7 +77,13 @@ void GetKeyValua_Init(void);
 extern void (*DispDigital_3BitSmg)(void);
 void RunDispDigital_Fun(void(*DisSmg)(void));
 
+void Number_Digital_3bit_PointerDecSelect(int8_t *ap);
+void Number_Digital_3bit_PointerAddSelect(int8_t *ap);
 
+ void Number_Digital_4bit_DecSelect(int8_t *ap);
+void Number_Digital_4bit_AddSelect(int8_t *ap);
 
+void Number_Digital_5bitPoint_AddSelect(int8_t *ap);
+void Number_Digital_5bitPoint_DecSelect(int8_t *ap);
 #endif 
 

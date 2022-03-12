@@ -59,8 +59,8 @@ uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
 int8_t one,two,three,four,five; 
 void(*DispDigital_3BitSmg)(void);
 
-static void Number_Digital_5bitPoint_AddSelect(int8_t *ap);
-static void Number_Digital_5bitPoint_DecSelect(int8_t *ap);
+//static void Number_Digital_5bitPoint_AddSelect(int8_t *ap);
+//static void Number_Digital_5bitPoint_DecSelect(int8_t *ap);
 
 void Number_Digital_Set5bit_twoAddSelect(int8_t *ap ,uint8_t n);
 void Number_Digital_Set5bit_twoDecSelect(int8_t *ap ,uint8_t n);
@@ -74,14 +74,13 @@ static void Number_Digital_Set5bit_DecSelect(int8_t *ap ,uint8_t n);
 static void Number_Digital_2bit_DecSelect(int8_t *ap);
 static void Number_Digital_2bit_AddSelect(int8_t *ap);
 
-static void Number_Digital_3bit_PointerDecSelect(int8_t *ap);
-static void Number_Digital_3bit_PointerAddSelect(int8_t *ap);
+
 
 static void Number_Digital_3bit_DecSelect(void);
 static void Number_Digital_3bit_AddSelect(void);
 
-static void Number_Digital_4bit_DecSelect(int8_t *ap);
-static void Number_Digital_4bit_AddSelect(int8_t *ap);
+//static void Number_Digital_4bit_DecSelect(int8_t *ap);
+//static void Number_Digital_4bit_AddSelect(int8_t *ap);
 
 static void Number_Digital_5bit_DecSelect(int8_t *ap);
 static void Number_Digital_5bit_AddSelect(int8_t *ap);
@@ -1661,7 +1660,7 @@ void Number_Digital_4bit_AddSelect(int8_t *ap)
 
 }
 
-static void Number_Digital_3bit_PointerDecSelect(int8_t *ap)
+void Number_Digital_3bit_PointerDecSelect(int8_t *ap)
 {
       if(menu_t.inputNumber_Select==0){
              one--;
@@ -1692,7 +1691,7 @@ static void Number_Digital_3bit_PointerDecSelect(int8_t *ap)
      
 
 }
-static void Number_Digital_3bit_PointerAddSelect(int8_t *ap)
+void Number_Digital_3bit_PointerAddSelect(int8_t *ap)
 {
       
       if(menu_t.inputNumber_Select==0){
@@ -1809,7 +1808,7 @@ static void Number_Digital_5bit_AddSelect(int8_t *ap)
       } 
 
 }
-static void Number_Digital_5bitPoint_DecSelect(int8_t *ap)
+void Number_Digital_5bitPoint_DecSelect(int8_t *ap)
 {
       if(menu_t.inputNumber_Select==0){
              one--;
@@ -1857,7 +1856,7 @@ static void Number_Digital_5bitPoint_DecSelect(int8_t *ap)
       }
 
 }
-static void Number_Digital_5bitPoint_AddSelect(int8_t *ap)
+void Number_Digital_5bitPoint_AddSelect(int8_t *ap)
 {
        if(menu_t.inputNumber_Select==0){
             one++ ;

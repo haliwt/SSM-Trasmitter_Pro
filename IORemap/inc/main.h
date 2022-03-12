@@ -34,6 +34,7 @@ extern "C" {
 #include "f9menu.h"
 #include "calibration.h"
 #include "calmenu.h"
+#include "flash.h"
 
 /*Led1-PA0,Led2-PB1,Key-PA8*/
 

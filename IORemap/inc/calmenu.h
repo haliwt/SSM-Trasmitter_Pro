@@ -16,10 +16,10 @@ typedef struct _CALI{
     uint8_t CaliMenu_02_Id;
     uint8_t keyEnter_flag;
 
-    uint8_t CaliSub_02_01_Itme;
+    uint8_t CaliSub_02_01_Item;
     uint8_t CaliSub_02_02_Item;
     uint8_t CaliSub_02_03_Item;
-
+        uint8_t runKeyMenu;
            
 
      uint8_t CaliSub_03_01_Itme;
@@ -48,7 +48,8 @@ enum calimenu{
 
     caliTheFirst_Menu,
     caliTheSecond_Menu,
-    caliTheThird_Menu
+    caliTheThird_Menu,
+    caliTheFifth_Menu
 };
 
 enum cali{
@@ -66,13 +67,13 @@ extern int8_t caliMainTop  ;
 
 extern int8_t caliSun_02_Top  ;
 
-extern int8_t caliSubMeun_03_Top ;
+extern int8_t caliSubMenu_03_Top ;
 
 
 extern int8_t ACAL301[3];
 extern int8_t ACAL302[5];
 extern int8_t ACAL303[3];
-extern int8_t ACAL304[3];
+extern int8_t ACAL304[4];
 extern int8_t ACAL305[5];
 
 

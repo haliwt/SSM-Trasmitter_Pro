@@ -3,15 +3,15 @@
 cali cali_t;
  int8_t caliMainTop =-1  ;
 int8_t caliSun_02_Top  = -1;
-int8_t caliSubMeun_03_Top =-1;
+int8_t caliSubMenu_03_Top  =-1;
 
 
-
+int cone,ctwo,cthree,cfour,cfive;
 
 int8_t ACAL301[3];
 int8_t ACAL302[5];
 int8_t ACAL303[3];
-int8_t ACAL304[3];
+int8_t ACAL304[4];
 int8_t ACAL305[5];
 
 
@@ -27,9 +27,7 @@ static void Symbol_qtY(void);
 static void Symbol_C_nS(void);
 static void Symbol_ContC(void);
 
-static CaliSubMenu_03_01_01_3bitPoint(uint8_t *pA);
-static CaliSubMenu_03_01_01_4bitPoint(uint8_t *pA);
-static CaliSubMenu_03_01_01_5bitPoint(uint8_t *pA);
+
 
 
 
@@ -44,6 +42,9 @@ static void CaliSubMenu_02_04_Dis(uint8_t);
  static void caliSubMenu_03_01_3bit_Dis(int8_t unit,int8_t decade,int8_t hundred);
  static void caliSubMenu_03_02_5bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand); //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
  static void caliSubMenu_03_4bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
+
+static void caliNumber_Digital_5bit_AddSelect(int8_t *ap);
+static void caliNumber_Digital_5bit_DecSelect(int8_t *ap);
 
 uint8_t cmu,*pA;
 
@@ -468,7 +469,7 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
 uint8_t Push_stackCaliMain(int8_t maxsize)
 {
      
-    if(caliMainTop > (maxsize -1)){
+    if(caliMainTop >= (maxsize -1)){
             caliMainTop=0;
     }
 	else{
@@ -480,7 +481,7 @@ uint8_t Push_stackCaliMain(int8_t maxsize)
 }
 uint8_t Pop_stackCaliMain(int8_t maxsize)
 {
-       if(caliMainTop ==-1){
+       if(caliMainTop ==-1 ||caliMainTop <0 ){
 	      caliMainTop = (maxsize -1);
        }
 	   else{
@@ -498,27 +499,27 @@ uint8_t CaliMain_stackTop(void)
 
 int8_t Push_stackCaliMain_02(int8_t maxize)
 {
-    if(caliSubMeun_03_Top  > (maxize -1)){
-            caliSubMeun_03_Top =0;
+    if(caliSubMenu_03_Top  >= (maxize -1) ){
+            caliSubMenu_03_Top =0;
     }
 	else{
 		
-		 caliSubMeun_03_Top  ++;
+		 caliSubMenu_03_Top  ++;
 	}
-	return caliSubMeun_03_Top  ;
+	return caliSubMenu_03_Top  ;
 
 }
 
 int8_t Pop_stackCaliMain_02(int8_t maxize)
 {
-     if( caliSubMeun_03_Top  ==-1){
-	       caliSubMeun_03_Top  = (maxize -1);
+     if( caliSubMenu_03_Top   ==-1 ||caliSubMenu_03_Top <0 ){
+	       caliSubMenu_03_Top   = (maxize -1);
        }
 	   else{
-            caliSubMeun_03_Top --;
+            caliSubMenu_03_Top  --;
 		
 	   }
-     return   caliSubMeun_03_Top  ;
+     return   caliSubMenu_03_Top   ;
 
 
 }
@@ -526,7 +527,7 @@ int8_t Pop_stackCaliMain_02(int8_t maxize)
 int8_t CaliSub_02_stackTop(void)
 {
 
-    return caliSubMeun_03_Top ;
+    return caliSubMenu_03_Top  ;
 }
 
 /*******************************************************************
@@ -563,7 +564,7 @@ int8_t CaliSub_02_stackTop(void)
      }
      else if(cali_t.keyEnter_flag == 2){
           mainitem_t.task_MainMenu = caliTheThird_Menu;
-         cali_t.CaliSub_Menu_03_Title = Push_stackCaliMain_02(1);
+         cali_t.CaliSub_Menu_03_Title = Push_stackCaliMain_02(4);
 
      }
      else{
@@ -574,13 +575,14 @@ int8_t CaliSub_02_stackTop(void)
        
 
      }
+      cali_t.runKeyMenu=mainitem_t.task_MainMenu;
       
 
 }
 
  void  CALI_KEY1_UP_Fun(void)
 {
-    switch( mainitem_t.task_MainMenu){
+    switch(cali_t.runKeyMenu){
    
     case caliTheFirst_Menu:
 
@@ -594,8 +596,8 @@ int8_t CaliSub_02_stackTop(void)
      
            case CAL1:
 
-                cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4);
-                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Itme;
+                cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_02(4);
+                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Item;
                   
             break;
 
@@ -623,69 +625,77 @@ int8_t CaliSub_02_stackTop(void)
          
           switch(cali_t.CaliMenu_Item){
 
-             switch(menu_t.menu_F1Sub_03_xx_key){
+            case CAL1:
 
-                    
+                  cali_t.CaliSub_Menu_03_Title = Push_stackCaliMain_02(4);   
+                  cali_t.runKeyMenu=caliTheFifth_Menu;
+               break;
 
-                              case 0:
-                                      Number_Digital_3bitPoint_AddSelect(ACAL301[3]);
-                                      cali_t.unit =ACAL301[0];
-                                      cali_t.decade = ACAL301[1];
-                                      cali_t.hundred = ACAL301[2];
-                                      
-                              break;
+                
+            }
 
-                              case 1:
-                                    Number_Digital_5bitPoint_AddSelect(ACAL302);
-                                      cali_t.unit =ACAL302[0];
-                                      cali_t.decade = ACAL302[1];
-                                      cali_t.hundred = ACAL302[2];
-                                      cali_t.onethousand=ACAL302[3];
-                                      cali_t.tenthousand =ACAL302[4];
-
-                                      break;
-
-                               case 2:
-                                 Number_Digital_3bitPoint_AddSelect(ACAL303);
-                                    cali_t.unit =ACAL303[0];
-                                      cali_t.decade = ACAL303[1];
-                                      cali_t.hundred = ACAL303[2];
-                                   
-
-                              break;
-
-                              case 3:
-                                      Number_Digital_4bitPoint_AddSelect(ACAL304);
-                                      cali_t.unit =ACAL304[0];
-                                      cali_t.decade = ACAL304[1];
-                                      cali_t.hundred = ACAL304[2];
-                                      cali_t.onethousand= ACAL304[3];
-                                      
-
-                              break;
-
-                              
-
-                             
-
-                        }
-
-
-
-        } 
+        
 
 
      break;
 
+     case  caliTheFifth_Menu:
+
+             switch(cali_t.CaliMenu_Item){
+
+                 case CAL1:
+
+                  switch(cali_t.CaliSub_Menu_03_Title){
+
+                     case 0:
+                      Number_Digital_3bit_PointerAddSelect(ACAL301);
+                        cali_t.unit =ACAL301[0];
+                        cali_t.decade = ACAL301[1];
+                        cali_t.hundred = ACAL301[2];
+                        
+                break;
+
+                case 1: //up+
+                    caliNumber_Digital_5bit_DecSelect(ACAL302);
+                        cali_t.unit =ACAL302[0];
+                        cali_t.decade = ACAL302[1];
+                        cali_t.hundred = ACAL302[2];
+                        cali_t.onethousand=ACAL302[3];
+                        cali_t.tenthousand =ACAL302[4];
+
+                        break;
+
+                case 2:
+                    Number_Digital_3bit_PointerAddSelect(ACAL303);
+                    cali_t.unit =ACAL303[0];
+                        cali_t.decade = ACAL303[1];
+                        cali_t.hundred = ACAL303[2];
+                    
+
+                break;
+
+                case 3:
+                        Number_Digital_4bit_AddSelect(ACAL304);
+                        cali_t.unit =ACAL304[0];
+                        cali_t.decade = ACAL304[1];
+                        cali_t.hundred = ACAL304[2];
+                        cali_t.onethousand= ACAL304[3];
+                        
+
+                break;
 
 
 
+
+                  }
+
+				break;
+
+           }
 
 }
 }
-
-
-
+/******************************************************************/
 void CALI_KEY2_DOWN_Fun(void)
 {
     switch( mainitem_t.task_MainMenu){
@@ -702,8 +712,8 @@ void CALI_KEY2_DOWN_Fun(void)
      
            case CAL1:
 
-                cali_t.CaliSub_02_01_Itme  =  Push_stackCaliMain_02(4);
-                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Itme;
+                cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_02(4);
+                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Item;
             break;
 
           case CAL2:
@@ -856,3 +866,90 @@ static void caliSubMenu_03_4bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int
  }
 
 
+static void caliNumber_Digital_5bit_AddSelect(int8_t *ap)
+{
+       if(menu_t.inputNumber_Select==0){
+            cone++ ;
+            if(cone >9){
+               cone=0;
+            }
+			*ap = cone;
+      }
+      else if(menu_t.inputNumber_Select==1){
+                  ctwo++;
+                  if(ctwo >9){
+                        ctwo=0;
+                  }
+				  *(ap+1) = ctwo;
+       }
+      else if(menu_t.inputNumber_Select==2){
+                  cthree++;  
+                  if(cthree >9){
+                      cthree=0;
+                   }
+				  *(ap+2)=cthree;
+      } 
+      else if(menu_t.inputNumber_Select==3){
+                  cfour++;  
+                  if(cfour >9){
+                      cfour=0;
+                    }
+				  *(ap+3) = cfour; 
+      } 
+      else if(menu_t.inputNumber_Select ==4){
+                  cfive++;  
+                  if(cfive >9){
+                      cfive=0;
+                    }
+			*(ap+4) = cfive; 
+      } 
+
+}
+static void caliNumber_Digital_5bit_DecSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+             cone--;
+            if(cone < 0){ //one == -1 ->display "-"
+               cone=9;
+            }
+		*ap= cone;
+            printf("s_1 = %d\n",cone);
+      }
+      else if(menu_t.inputNumber_Select==1){
+            ctwo--;
+            if(ctwo< 0){
+               ctwo=9;
+            }
+			*(ap+1) = ctwo;
+            printf("s_2 = %d\n",*(ap+1));
+      
+      }
+      else if(menu_t.inputNumber_Select==2){
+            cthree--;
+            if(cthree< 0){ 
+               cthree=9;
+            }
+			*(ap+2) = cthree;
+            printf("s_3 = %d\n",*(ap+2));
+          
+      }
+      else if(menu_t.inputNumber_Select==3){
+             cfour--;
+            if( cfour < 0){ 
+               cfour=9;
+            }
+			*(ap+3) = cfour;
+            printf("s_4 = %d\n", *(ap+3));
+          
+      }
+      else if(menu_t.inputNumber_Select ==4){
+             cfive--;
+            if( cfive <0){ 
+                cfive=9;
+            }
+		*(ap+4) = cfive;
+            printf("s_4 = %d\n", *(ap+4));
+          
+      }
+
+}

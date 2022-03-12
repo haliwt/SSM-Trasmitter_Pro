@@ -409,6 +409,7 @@ void CRC16Calc_TX(void)
 	 TxcrcOne_byte = ret1;
 
 }
+#if 0
 /**
  * @brief  Compares two buffers.
  * @param  pBuffer1, pBuffer2: buffers to be compared.
@@ -431,3 +432,4 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 
     return PASSED;
 }
+#endif 
