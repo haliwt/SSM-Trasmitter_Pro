@@ -14,6 +14,11 @@ int8_t ACAL303[3];
 int8_t ACAL304[4];
 int8_t ACAL305[5];
 
+int8_t ACAL30201[3];
+int8_t ACAL30202[4];
+int8_t ACAL30203[5];
+int8_t ACAL30204[5];
+int8_t ACAL30205[4];
 
 static void Symbol_CAL1(void);
 static void Symbol_CAL2(void);
@@ -46,6 +51,7 @@ static void CaliSubMenu_02_04_Dis(uint8_t);
 static void caliNumber_Digital_5bit_AddSelect(int8_t *ap);
 static void caliNumber_Digital_5bit_DecSelect(int8_t *ap);
 
+static void caliSubMenu_onePoint_5bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
 uint8_t cmu,*pA;
 
 static void Symbol_CAL1(void)
@@ -413,8 +419,8 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
                 break;
 
                 case 1:
-                     menu_t.DisplaySmgBit_Select_Numbers=5;
-                  caliSubMenu_03_02_5bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand,cali_t.tenthousand); //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
+                     menu_t.DisplaySmgBit_Select_Numbers=4;
+                  caliSubMenu_03_4bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand); //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
                  printf("run_03_dis_02_1\n",cali_t.CaliSub_Menu_03_Title );
                 break;
 
@@ -425,8 +431,8 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
                 break;
 
                 case 3:
-                    menu_t.DisplaySmgBit_Select_Numbers=4;
-                    caliSubMenu_03_4bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
+                    menu_t.DisplaySmgBit_Select_Numbers=5;
+                    caliSubMenu_onePoint_5bit_Dis(cali_t.unit,cali_t.decade,cali_t.hundred,cali_t.onethousand,cali_t.tenthousand); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
                   printf("run_03_dis_02_3\n", cali_t.CaliSub_Menu_03_Title);
                 break;
 
@@ -655,10 +661,7 @@ int8_t CaliSub_02_stackTop(void)
      case caliTheThird_Menu:
          
           switch(cali_t.CaliMenu_Item){
-
-        
-
-                 case CAL1:
+                case CAL1:
 
                   switch(cali_t.CaliSub_Menu_03_Title){
 
@@ -707,17 +710,71 @@ int8_t CaliSub_02_stackTop(void)
 
 
                   }
+           //CAL2 -------------------------------
            case CAL2:
            
-               
+            switch(cali_t.CaliSub_Menu_03_Title){
+
+                     case 0: //dC-u
+                       printf("upkey_03_cal_0 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                      Number_Digital_3bit_PointerAddSelect(ACAL30201);
+                        cali_t.unit =ACAL30201[0];
+                        cali_t.decade = ACAL30201[1];
+                        cali_t.hundred = ACAL30201[2];
+                        
+                break;
+
+                case 1: //up+ //CAP
+                  printf("upkey_03_cal_1 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                    Number_Digital_4bit_AddSelect(ACAL30202);
+                        cali_t.unit =ACAL30202[0];
+                        cali_t.decade = ACAL30202[1];
+                        cali_t.hundred = ACAL30202[2];
+                        cali_t.onethousand=ACAL30202[3];
+                      
+
+                        break;
+
+                case 2: //2Ero
+                  printf("upkey_03_cal_2 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                     caliNumber_Digital_5bit_AddSelect(ACAL30203);
+                    cali_t.unit =ACAL30203[0];
+                        cali_t.decade = ACAL30203[1];
+                        cali_t.hundred = ACAL30203[2];
+                         cali_t.onethousand = ACAL30203[3];
+                           cali_t.tenthousand = ACAL30203[4];
+                    
+
+                break;
+
+                case 3:
+                          printf("upkey_03_cal_3 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                        caliNumber_Digital_5bit_AddSelect(ACAL30204);
+                        cali_t.unit =ACAL30204[0];
+                        cali_t.decade = ACAL30204[1];
+                        cali_t.hundred = ACAL30204[2];
+                        cali_t.onethousand= ACAL30204[3];
+                         cali_t.tenthousand= ACAL30204[4];
+
+                break;
+                case 4:
+                          printf("upkey_03_cal_3 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                        Number_Digital_4bit_AddSelect(ACAL30205); //  Number_Digital_4bit_AddSelect(ACAL304);
+                        cali_t.unit =ACAL30205[0];
+                        cali_t.decade = ACAL30205[1];
+                        cali_t.hundred = ACAL30205[2];
+                        cali_t.onethousand= ACAL30205[3];
+                        
+
+                break;
            
-           break;
 
 		 }
+        break;
 
     }
 }
-
+}
 /******************************************************************/
 void CALI_KEY2_DOWN_Fun(void)
 {
@@ -810,13 +867,72 @@ void CALI_KEY2_DOWN_Fun(void)
 
 
                   }
+            //CAL2
+            case CAL2:
+                 switch(cali_t.CaliSub_Menu_03_Title){
+
+                     case 0: //dC-u
+                       printf("upkey_03_cal_0 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                      Number_Digital_3bit_PointerDecSelect(ACAL30201);
+                        cali_t.unit =ACAL30201[0];
+                        cali_t.decade = ACAL30201[1];
+                        cali_t.hundred = ACAL30201[2];
+                        
+                break;
+
+                case 1: //up+ //CAP
+                  printf("upkey_03_cal_1 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                     Number_Digital_4bit_DecSelect(ACAL30202);
+                        cali_t.unit =ACAL30202[0];
+                        cali_t.decade = ACAL30202[1];
+                        cali_t.hundred = ACAL30202[2];
+                        cali_t.onethousand=ACAL30202[3];
+                       
+
+                        break;
+
+                case 2: //2Ero
+                  printf("upkey_03_cal_2 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                    caliNumber_Digital_5bit_DecSelect(ACAL30203);
+                    cali_t.unit =ACAL30203[0];
+                        cali_t.decade = ACAL30203[1];
+                        cali_t.hundred = ACAL30203[2];
+                         cali_t.onethousand= ACAL30203[3];
+                           cali_t.tenthousand = ACAL30203[4];
+                    
+
+                break;
+
+                case 3:
+                          printf("upkey_03_cal_3 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                        caliNumber_Digital_5bit_DecSelect(ACAL30204);
+                        cali_t.unit =ACAL30204[0];
+                        cali_t.decade = ACAL30204[1];
+                        cali_t.hundred = ACAL30204[2];
+                        cali_t.onethousand= ACAL30204[3];
+                         cali_t.tenthousand= ACAL30204[4];
+
+                break;
+                case 4:
+                          printf("upkey_03_cal_3 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
+                           Number_Digital_4bit_DecSelect(ACAL30205);
+                        cali_t.unit =ACAL30205[0];
+                        cali_t.decade = ACAL30205[1];
+                        cali_t.hundred = ACAL30205[2];
+                        cali_t.onethousand= ACAL30205[3];
+                        
+
+                break;
+                  
+                  
 			  }
 		break;
 
         }
+	break;
 
 }
-
+}
 
 /**********************************************************************
  *
@@ -995,3 +1111,14 @@ static void caliSubMenu_03_4bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int
 
 
 }   
+
+static void caliSubMenu_onePoint_5bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand)
+{
+    SmgDisplay_Point(digital_1,tenthousand); // 0~100
+    SmgDisplay(digital_2,onethousand);//SmgDisplay(digital_2,onethousand); // 0~100
+    SmgDisplay(digital_3,hundred); // 0~100
+    SmgDisplay(digital_4,decade); // 0~100
+    SmgDisplay(digital_5,unit); // 0~100
+    
+    
+}

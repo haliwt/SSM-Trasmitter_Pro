@@ -79,6 +79,13 @@ extern int8_t ACAL303[3];
 extern int8_t ACAL304[4];
 extern int8_t ACAL305[5];
 
+extern int8_t ACAL30201[3];
+extern int8_t ACAL30202[4];
+extern int8_t ACAL30203[5];
+extern int8_t ACAL30204[5];
+extern int8_t ACAL30205[4];
+
+
 
 uint8_t Push_stackCaliMain(int8_t maxize);
 uint8_t Pop_stackCaliMain(int8_t maxize);
