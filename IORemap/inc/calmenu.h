@@ -19,6 +19,8 @@ typedef struct _CALI{
     uint8_t CaliSub_02_01_Item;
     uint8_t CaliSub_02_02_Item;
     uint8_t CaliSub_02_03_Item;
+    uint8_t CaliSub_theSecond_02_Item;
+    uint8_t CaliMenu_02_sub_Id;
         uint8_t runKeyMenu;
            
 
@@ -49,6 +51,7 @@ enum calimenu{
     caliTheFirst_Menu,
     caliTheSecond_Menu,
     caliTheThird_Menu,
+    caliTheFourth_Menu,
     caliTheFifth_Menu
 };
 
@@ -92,7 +95,7 @@ void CALI_KEY2_DOWN_Fun(void );
 void CAL_KEY4_ENTER_Fun(void);
 
 void CALI_MENU_01_DIS(uint8_t mu);
-void CALI_MENU_SUB_02_DIS(uint8_t mu,uint8_t su);
+void CALI_MENU_SUB_02_DIS(uint8_t mu);
  void CALI_MENU_SUB_03_DIS(uint8_t mu); //speical numbers "0000 000 1000"
  
 

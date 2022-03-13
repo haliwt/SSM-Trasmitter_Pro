@@ -215,30 +215,30 @@ void CALI_MENU_01_DIS(uint8_t mu)
 
 }
 
-void CALI_MENU_SUB_02_DIS(uint8_t mu,uint8_t sub03)
+void CALI_MENU_SUB_02_DIS(uint8_t mu)
 {
 
      switch(mu){
 
         case CAL1://dC-u,CAP,2Ero, SPAn
-              
-              CaliSubMenu_02_01_Dis(sub03);
+              CaliMenu_02_Id = CAL1;
+              CaliSubMenu_02_01_Dis(cali_t.CaliSub_theSecond_02_Item);
 
         break;
 
         case CAL2: //dC-u,CAP,2Ero,SEn,SPARn
-               
-                CaliSubMenu_02_02_Dis(sub03);
+                CaliMenu_02_Id = CAL2;
+                CaliSubMenu_02_02_Dis(cali_t.CaliSub_theSecond_02_Item);
         break;
 
         case CAL3://CLS ,QtY,C-nS
-            
-            CaliSubMenu_02_03_Dis(sub03);
+             CaliMenu_02_Id = CAL3;
+            CaliSubMenu_02_03_Dis(cali_t.CaliSub_theSecond_02_Item);
         break;
 
         case CAL5:
-           
-            CaliSubMenu_02_04_Dis(sub03);
+            CaliMenu_02_Id = CAL5;
+            CaliSubMenu_02_04_Dis(cali_t.CaliSub_theSecond_02_Item);
         break;
 
 
@@ -261,22 +261,22 @@ void CALI_MENU_SUB_02_DIS(uint8_t mu,uint8_t sub03)
      switch(n){
 
       case 0:  //dC-u
-            cali_t.CaliMenu_02_Id =0;
+            cali_t.CaliMenu_02_sub_Id =0;
             Symbol_dC_u();
       break;
             
       case 1: //CAP
-               cali_t.CaliMenu_02_Id =1;
+               cali_t.CaliMenu_02_sub_Id =1;
               Symbol_CAP();
       break;
 
       case 2: //2Ero
-             cali_t.CaliMenu_02_Id =2;
+             cali_t.CaliMenu_02_sub_Id =2;
             Symbol_2Ero();
       break;
 
       case 3: //SPAn
-             cali_t.CaliMenu_02_Id =3;
+             cali_t.CaliMenu_02_sub_Id =3;
             Symbol_SPAn();
       break;
 
@@ -517,26 +517,25 @@ uint8_t CaliMain_stackTop(void)
 
 int8_t Push_stackCaliMain_02(int8_t maxize)
 {
-    if(caliSubMenu_03_Top  >= (maxize -1) ){
+   
+    if(caliSubMenu_03_Top  >= (maxize -1) || caliSubMenu_03_Top > 200){
             caliSubMenu_03_Top =0;
     }
-	else{
-		
-		 caliSubMenu_03_Top  ++;
-	}
+	caliSubMenu_03_Top  ++;
 	return caliSubMenu_03_Top  ;
 
 }
 
 int8_t Pop_stackCaliMain_02(int8_t maxize)
 {
-     if( caliSubMenu_03_Top   ==-1 ||caliSubMenu_03_Top <0 ){
+     if( caliSubMenu_03_Top   ==-1 || caliSubMenu_03_Top <0  ){
 	       caliSubMenu_03_Top   = (maxize -1);
        }
 	   else{
             caliSubMenu_03_Top  --;
 		
 	   }
+       if(caliSubMenu_03_Top > 200) caliSubMenu_03_Top   = (maxize -1);
      return   caliSubMenu_03_Top   ;
 
 
@@ -550,54 +549,60 @@ int8_t CaliSub_02_stackTop(void)
 
 /*******************************************************************
  * 
- * Calibration of key Function
+ * Calibration of key Function "Item"
  * 
  * 
  * 
  *******************************************************************/
  void KEY4_InputCalibration_Mode(void)
  {
-     cali_t.CaliControl_key=1;
+     //CAL1,CAL2,CAL3,CAL5
+     cali_t.CaliControl_key=1; 
      mainitem_t.task_MainMenu = caliTheFirst_Menu ;
      caliMainTop=-1;
-    cali_t.CaliMenu_Item = Push_stackCaliMain(4);
+     cali_t.CaliMenu_Item = Push_stackCaliMain(4);
 	 printf("Cali_keyEnter = %d\n",cali_t.CaliMenu_Item);
 	 printf("task_MainMenu = %d\n", caliTheFirst_Menu);
 
  }
- 
- 
- 
- 
+ /*******************************************************************
+ *
+ *Function :select which's menu item ?  adjust how many sub menu ?
+ *
+ *
+ *******************************************************************/
  void CAL_KEY4_ENTER_Fun(void)
  {
      cali_t.keyEnter_flag ++; //= cali_t.keyEnter_flag ^ 0x01;
 
-     if(cali_t.keyEnter_flag == 1){
+     if(cali_t.keyEnter_flag == 1){//{ //CAL1->{dC-u,CAP,2Ero,SPARn}
             
-          mainitem_t.task_MainMenu = caliTheSecond_Menu;
+          mainitem_t.task_MainMenu = caliTheSecond_Menu; 
           cali_t.CaliSub_Menu_02_Title= Push_stackCaliMain_02(4);
           printf("keyEnter_second = %d\n",  mainitem_t.task_MainMenu );
         
      }
-     else if(cali_t.keyEnter_flag == 2){
-          mainitem_t.task_MainMenu = caliTheThird_Menu;
-         cali_t.CaliSub_Menu_03_Title = Push_stackCaliMain_02(4);
-
-     }
+     else if(cali_t.keyEnter_flag == 2)
+         mainitem_t.task_MainMenu = caliTheThird_Menu;  //select Item
+         cali_t.CaliSub_Menu_03_Title = cali_t.CaliMenu_02_sub_Id; //execut codes
+        
+        }
      else{
          cali_t.keyEnter_flag=0;
         mainitem_t.task_MainMenu = caliTheFirst_Menu ;
-        caliMainTop=-1;
-        cali_t.CaliMenu_Item = Push_stackCaliMain(4);
+        cali_t.CaliMenu_Item=CaliMain_stackTop();
        
 
      }
-      cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+    cali_t.runKeyMenu=mainitem_t.task_MainMenu;
       
 
 }
-
+/*******************************************************************
+*
+*Function :execute 
+*
+*******************************************************************/
  void  CALI_KEY1_UP_Fun(void)
 {
     switch(cali_t.runKeyMenu){
@@ -610,23 +615,23 @@ int8_t CaliSub_02_stackTop(void)
 
     case caliTheSecond_Menu:
           
-          switch(cali_t.CaliMenu_Item){
+          switch( CaliSub_Menu_02_Title){
      
            case CAL1:
 
                 cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_02(4);
-                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Item;
+                 cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_01_Item;
                   
             break;
 
           case CAL2:
                 cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5);
-                cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_02_Item;
+                cali_t.CaliSub_theSecond_02_Item  =cali_t.CaliSub_02_02_Item;
           break;
 
           case CAL3:
                cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3);
-               cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_03_Item;
+               cali_t.CaliSub_theSecond_02_Item  =cali_t.CaliSub_02_03_Item;
 
           break;
 
@@ -643,24 +648,7 @@ int8_t CaliSub_02_stackTop(void)
          
           switch(cali_t.CaliMenu_Item){
 
-            case CAL1:
-
-                  cali_t.CaliSub_Menu_03_Title = Push_stackCaliMain_02(4);   
-                  cali_t.runKeyMenu=caliTheFifth_Menu;
-                   printf("upkey_03_cal = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-               break;
-
-                
-            }
-
         
-
-
-     break;
-
-     case  caliTheFifth_Menu:
-
-             switch(cali_t.CaliMenu_Item){
 
                  case CAL1:
 
@@ -711,13 +699,17 @@ int8_t CaliSub_02_stackTop(void)
 
 
                   }
+           case CAL2:
+           
+               
+           
+           break;
 
-				break;
+		 }
 
-           }
-
+    }
 }
-}
+
 /******************************************************************/
 void CALI_KEY2_DOWN_Fun(void)
 {

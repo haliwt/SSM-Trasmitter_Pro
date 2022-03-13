@@ -100,7 +100,7 @@ static void F1_01_xx_SelectCmd(void);
 
 int8_t ATop(void);
 
-void GetKeyValua_Init(void)
+void GetKeyValue_Init(void)
 {
    key_t.currkeyset =0xff;
    key_t.currkeytrae = 0xff;
@@ -114,8 +114,7 @@ void KEY_Function(uint8_t keydata)
 {
              switch(keydata){
 
-           
-   
+            
                case 0xf4://KEY1-ZERO--up
                     run_t.dispCmd =1;
                     Net_KeyLed();

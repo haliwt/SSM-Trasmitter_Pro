@@ -182,7 +182,7 @@ void RunCommand(void)
 /***************************************************************
  * 
  * Function Name :void RunCalibration_Command(void)
- * 
+ * Function : Display for Smg 
  * 
  * 
  ***************************************************************/
@@ -199,12 +199,13 @@ void RunCalibration_Command(void)
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
                       
-                    CALI_MENU_SUB_02_DIS(cali_t.CaliMenu_Item, cali_t.CaliSub_Menu_02_Title);
-                     printf("runCmdcailTheSecond = %d\n",  cali_t.CaliMenu_Item);
+                    CALI_MENU_SUB_02_DIS(cali_t.CaliSub_theSecond_02_Item );
+                     printf("runTheSecond = %d\n",  cali_t.CaliMenu_Item);
+                     printf("runSencod_02_Title = %d\n",  cali_t.CaliSub_Menu_02_Title);
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
-                     CALI_MENU_SUB_03_DIS(cali_t.CaliMenu_Item);
+                     CALI_MENU_SUB_03_DIS(cali_t.CaliSub_Menu_03_Title);
                      printf("RunThethird  = %d\n",  cali_t.CaliMenu_Item);
                      printf("RunThird_sub  = %d\n",  cali_t.CaliSub_Menu_03_Title);
             break;
