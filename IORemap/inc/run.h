@@ -5,6 +5,7 @@
 typedef struct _RUN{
   
     uint8_t dispCmd;
+    uint8_t keySetValue;
     
 
 }run;

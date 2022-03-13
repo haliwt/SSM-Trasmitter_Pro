@@ -36,6 +36,8 @@ static void Symbol_qtY(void);
 static void Symbol_C_nS(void);
 static void Symbol_ContC(void);
 
+ static void Number_Digital_0bit_(uint8_t unit);
+
 static void CaliSubMenu_fourPoint_3bitPoint_Dis(int8_t unit,int8_t decade,int8_t hundred);
 static void CaliSubMenu_fourPoint_2bitPoint_Dis(int8_t unit,int8_t decade);
 static void CaliSubMenu_fourPoint_5bitPoint_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
@@ -474,8 +476,7 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
                 break;
                  //add weight extra
                 case 3:
-                     menu_t.DisplaySmgBit_Select_Numbers=0;
-                    item= 0xff;
+                      menu_t.DisplaySmgBit_Select_Numbers=0;
                       Symbol_ContC(); 
                 break;
 
@@ -485,10 +486,10 @@ void CaliSubMenu_02_03_Dis(uint8_t n)
 
            break;
 
-           //case CAL5:
-                 //   menu_t.DisplaySmgBit_Select_Numbers=0;
-                 //   Symbol_ContC(); 
-         //  break;
+           case CAL5:
+                menu_t.DisplaySmgBit_Select_Numbers=0;
+                Symbol_ContC(); 
+          break;
 
 
         }
@@ -534,10 +535,10 @@ uint8_t CaliMain_stackTop(void)
 int8_t Push_stackCaliMain_02(int8_t maxize)
 {
     caliSubMenu_03_Top  ++;
-    if(caliSubMenu_03_Top  == maxize){
+    if(caliSubMenu_03_Top  == maxize || caliSubMenu_03_Top  >maxize  ){
             caliSubMenu_03_Top =0;
     }
-    else
+    
 	    
 	return caliSubMenu_03_Top  ;
 
@@ -547,10 +548,10 @@ int8_t Pop_stackCaliMain_02(int8_t maxize)
 {
      
      caliSubMenu_03_Top  --;
-     if( caliSubMenu_03_Top   ==-1 || caliSubMenu_03_Top   ==-2){
+     if( caliSubMenu_03_Top   ==-1 || caliSubMenu_03_Top  <0){
 	       caliSubMenu_03_Top   = (maxize -1);
     }
-     if(caliSubMenu_03_Top>200)  caliSubMenu_03_Top   = (maxize -1);
+     if(caliSubMenu_03_Top <0 || caliSubMenu_03_Top  > maxize)  caliSubMenu_03_Top   = (maxize -1);
      return   caliSubMenu_03_Top   ;
 
 
@@ -572,10 +573,12 @@ int8_t CaliSub_02_stackTop(void)
  void KEY4_InputCalibration_Mode(void)
  {
      //CAL1,CAL2,CAL3,CAL5
+    
      cali_t.CaliControl_key=1; 
      mainitem_t.task_MainMenu = caliTheFirst_Menu ;
      caliMainTop=-1;
      cali_t.CaliMenu_Item = Push_stackCaliMain(4);
+     
 	 printf("Cali_keyEnter = %d\n",cali_t.CaliMenu_Item);
 	 printf("task_MainMenu = %d\n", caliTheFirst_Menu);
 
@@ -600,10 +603,16 @@ int8_t CaliSub_02_stackTop(void)
      }
      else if(cali_t.keyEnter_flag == 2){//CAL->dC-u -> 0.00
          
-        mainitem_t.task_MainMenu = caliTheThird_Menu;  //select Item
-        cali_t.CaliSub_Menu_03_Title = cali_t.CaliMenu_02_sub_Id; //execut codes
+            if(menu_t.DisplaySmgBit_Select_Numbers==0){
+                mainitem_t.task_MainMenu = caliTheFirst_Menu ;
+                menu_t.DisplaySmgBit_Select_Numbers=0xff;
+                return ;
+              }
+            else{
+            mainitem_t.task_MainMenu = caliTheThird_Menu;  //select Item
+            cali_t.CaliSub_Menu_03_Title = cali_t.CaliMenu_02_sub_Id; //execut codes
+            }
              
-          
         }
      else{
          cali_t.keyEnter_flag=0;
@@ -815,8 +824,8 @@ int8_t CaliSub_02_stackTop(void)
                 break;
                 
                 case 3:
-                        cali_t.CaliMenu_02_sub_Id =0xff;
-                         Symbol_ContC(); 
+                    Number_Digital_0bit_(0);
+                       
                 break;
             }
         
@@ -824,10 +833,9 @@ int8_t CaliSub_02_stackTop(void)
         
         case CAL5:
             
-                menu_t.DisplaySmgBit_Select_Numbers=0;
-              cali_t.CaliSub_Menu_03_Title = 0xff;
-              Symbol_ContC(); 
-        
+              
+          Number_Digital_0bit_(0);
+                       
        
         
         break;
@@ -836,7 +844,13 @@ int8_t CaliSub_02_stackTop(void)
     }
 }
 }
-/******************************************************************/
+/***************************************************************************
+*
+*Function KEY ---
+*
+*
+*
+*******************************************************************************/
 void CALI_KEY2_DOWN_Fun(void)
 {
     switch( cali_t.runKeyMenu){
@@ -1023,17 +1037,18 @@ void CALI_KEY2_DOWN_Fun(void)
                 break;
                 
                 case 3:
-                        cali_t.CaliSub_Menu_03_Title = 0xff;
-                         Symbol_ContC(); 
+                        Number_Digital_0bit_(0);
+                        
+                        
                 break;
             }
         
         break;
         
         case CAL5:
-                menu_t.DisplaySmgBit_Select_Numbers=0;
-              cali_t.CaliSub_Menu_03_Title = 0xff;
-              Symbol_ContC(); 
+              
+              Number_Digital_0bit_(0);
+                       
         
         break;
 
@@ -1052,10 +1067,21 @@ void CALI_KEY2_DOWN_Fun(void)
  void CALI_KEY3_SWITCH_Fun(void )
  {
      
-
+      
       if(mainitem_t.task_MainMenu == caliTheFirst_Menu )
       {
-          run_t.dispCmd= 0;
+          run_t.keySetValue = 1;
+         run_t.dispCmd=0;
+      
+          printf("key3_switch_dispCmd=0= %d\n", run_t.keySetValue);
+          return ;
+          
+      }
+      
+        if(mainitem_t.task_MainMenu == caliTheSecond_Menu )
+      {
+          mainitem_t.task_MainMenu == caliTheFirst_Menu;
+           printf("key3_switch_theFirst= %d\n",mainitem_t.task_MainMenu);
           return ;
           
       }
@@ -1063,10 +1089,9 @@ void CALI_KEY2_DOWN_Fun(void)
       
       if(menu_t.DisplaySmgBit_Select_Numbers ==0)
       {
-        cali_t.keyEnter_flag=0;
-        mainitem_t.task_MainMenu = caliTheFirst_Menu ;
-        cali_t.CaliMenu_Item=CaliMain_stackTop();
         
+        mainitem_t.task_MainMenu == caliTheFirst_Menu;
+         printf("key3_switch_theFirst= %d\n",mainitem_t.task_MainMenu);
         return;
           
       }
@@ -1269,4 +1294,11 @@ static void CaliSubMenu_03_05_Dis(void)
 {
    Symbol_ContC(); 
 
+}
+
+static void Number_Digital_0bit_(uint8_t unit)
+{
+    
+    unit =0;
+    
 }

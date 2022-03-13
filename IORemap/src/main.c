@@ -63,10 +63,15 @@ int main(void)
     while (1)
     {
 	  
-	
-			keydata = ScanKey();
-		
-			if(run_t.dispCmd ==0 && keydata == 0xff){
+			if(run_t.keySetValue == 0)
+			          keydata  = ScanKey();
+			else{
+			        run_t.dispCmd=0;
+					keydata = 0xff;
+			
+			}
+			
+			if(run_t.dispCmd ==0 &&  keydata == 0xff ){
 				    Get_Weight();
 			        Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 				    SysTick_Delay_Ms(200);
@@ -75,14 +80,28 @@ int main(void)
                     key_t.keytrae++;
                     key_t.keyzero++; 
                     key_t.keyTimes =0;
-			  key_t.keyPressedTimes=0;
+					menu_t.DisplaySmgBit_Select_Numbers=0xff;
+			        key_t.keyPressedTimes=0;
+				    run_t.keySetValue=0;
 
 			}
 			else{
+				
+				if(run_t.keySetValue == 1){
+					run_t.dispCmd=0;
+					keydata = 0xff;
+					
+				}
+				else{
+				
+				    run_t.dispCmd=1;
+					
+				}
 				key_t.keyTimes =1;
-				run_t.dispCmd =1;
+				
 				CheckMode(keydata);//KEY_Function(keydata);
 				RunCommand();
+				
 					
 				
 				

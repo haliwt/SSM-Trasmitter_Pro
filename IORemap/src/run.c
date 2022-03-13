@@ -17,6 +17,7 @@ void RunCommand(void)
 
         
          case TheFirst_Menu:
+              
                  MainMenu(menu_t.mainTop);
          break;
 
@@ -69,6 +70,7 @@ void RunCommand(void)
          break;
 
          case TheThird_Menu:
+        
                switch(menu_t.menuTitle_03){
 
                    case 0:
@@ -190,22 +192,32 @@ void RunCalibration_Command(void)
 {
 
       switch(mainitem_t.task_MainMenu){
+          
+          
+       
+       case 0xff:
+                    Get_Weight();
+			        Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
+                     SysTick_Delay_Ms(50);
+       
+       break;   
+          
       
       case caliTheFirst_Menu: //Calibration Function //CAL1 ,CAL2,CAL3 ,CAL5
-
+         
                   CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
 
             break;
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
-                      
+                    
                     CALI_MENU_SUB_02_DIS( cali_t.CaliSub_theSecond_02_Item);
                     printf("runTheSecond = %d\n", cali_t.CaliSub_theSecond_02_Item);
                     // printf("runSencod_02_Title = %d\n",  cali_t.CaliSub_Menu_02_Title);
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
-                     
+                    
                      CALI_MENU_SUB_03_DIS( cali_t.CaliMenu_02_sub_Id);
                     // printf("RunThethird  = %d\n",  cali_t.CaliMenu_Item);
                      printf("RunThird_sub  = %d\n",  cali_t.CaliMenu_02_sub_Id);
