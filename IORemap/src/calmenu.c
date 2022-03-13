@@ -218,27 +218,27 @@ void CALI_MENU_01_DIS(uint8_t mu)
 void CALI_MENU_SUB_02_DIS(uint8_t mu)
 {
 
-     switch(mu){
+     switch(cali_t.CaliMenu_Item){
 
         case CAL1://dC-u,CAP,2Ero, SPAn
               cali_t.CaliMenu_02_Id = CAL1;
-              CaliSubMenu_02_01_Dis(cali_t.CaliSub_theSecond_02_Item);
+              CaliSubMenu_02_01_Dis(mu);
 
         break;
 
         case CAL2: //dC-u,CAP,2Ero,SEn,SPARn
                 cali_t.CaliMenu_02_Id = CAL2;
-                CaliSubMenu_02_02_Dis(cali_t.CaliSub_theSecond_02_Item);
+                CaliSubMenu_02_02_Dis(mu);
         break;
 
         case CAL3://CLS ,QtY,C-nS
              cali_t.CaliMenu_02_Id = CAL3;
-            CaliSubMenu_02_03_Dis(cali_t.CaliSub_theSecond_02_Item);
+            CaliSubMenu_02_03_Dis(mu);
         break;
 
         case CAL5:
             cali_t.CaliMenu_02_Id = CAL5;
-            CaliSubMenu_02_04_Dis(cali_t.CaliSub_theSecond_02_Item);
+            CaliSubMenu_02_04_Dis(mu);
         break;
 
 
@@ -583,7 +583,7 @@ int8_t CaliSub_02_stackTop(void)
      if(cali_t.keyEnter_flag == 1){//{ //CAL1->{dC-u,CAP,2Ero,SPARn}
             
           mainitem_t.task_MainMenu = caliTheSecond_Menu; 
-          cali_t.CaliSub_Menu_02_Title= cali_t.CaliMenu_01_Id;//Push_stackCaliMain_02(4);
+        cali_t.CaliSub_theSecond_02_Item=cali_t.CaliMenu_02_sub_Id;
           printf("keyEnter_second = %d\n",  mainitem_t.task_MainMenu );
         
      }
@@ -744,17 +744,17 @@ void CALI_KEY2_DOWN_Fun(void)
            case CAL1:
 
                 cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_02(4);
-                 cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_01_Item;
+                 cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_01_Item;
             break;
 
           case CAL2:
                 cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5);
-                cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_02_Item;
+               cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_02_Item;
           break;
 
           case CAL3:
                cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3);
-               cali_t.CaliSub_Menu_02_Title =cali_t.CaliSub_02_03_Item;
+              cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_03_Item;
 
           break;
 

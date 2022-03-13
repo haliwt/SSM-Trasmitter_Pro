@@ -199,7 +199,7 @@ void RunCalibration_Command(void)
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
                       
-                    CALI_MENU_SUB_02_DIS(cali_t.CaliSub_theSecond_02_Item );
+                    CALI_MENU_SUB_02_DIS( cali_t.CaliSub_theSecond_02_Item);
                      printf("runTheSecond = %d\n",  cali_t.CaliMenu_Item);
                      printf("runSencod_02_Title = %d\n",  cali_t.CaliSub_Menu_02_Title);
             break;
