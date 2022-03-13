@@ -521,25 +521,24 @@ uint8_t CaliMain_stackTop(void)
 
 int8_t Push_stackCaliMain_02(int8_t maxize)
 {
-   
-    if(caliSubMenu_03_Top  >= (maxize -1) || caliSubMenu_03_Top > 200){
+    caliSubMenu_03_Top  ++;
+    if(caliSubMenu_03_Top  == maxize){
             caliSubMenu_03_Top =0;
     }
-	caliSubMenu_03_Top  ++;
+    else
+	    
 	return caliSubMenu_03_Top  ;
 
 }
 
 int8_t Pop_stackCaliMain_02(int8_t maxize)
 {
-     if( caliSubMenu_03_Top   ==-1 || caliSubMenu_03_Top <0  ){
+     
+     caliSubMenu_03_Top  --;
+     if( caliSubMenu_03_Top   ==-1 || caliSubMenu_03_Top   ==-2){
 	       caliSubMenu_03_Top   = (maxize -1);
-       }
-	   else{
-            caliSubMenu_03_Top  --;
-		
-	   }
-       if(caliSubMenu_03_Top > 200) caliSubMenu_03_Top   = (maxize -1);
+    }
+     if(caliSubMenu_03_Top>200)  caliSubMenu_03_Top   = (maxize -1);
      return   caliSubMenu_03_Top   ;
 
 
@@ -635,7 +634,7 @@ int8_t CaliSub_02_stackTop(void)
                     
                     cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_02(4);
                     cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_01_Item;
-                    
+                   
                 break;
 
             case CAL2:
@@ -743,17 +742,17 @@ void CALI_KEY2_DOWN_Fun(void)
      
            case CAL1:
 
-                cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_02(4);
+                cali_t.CaliSub_02_01_Item  =  Pop_stackCaliMain_02(4);
                  cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_01_Item;
             break;
 
           case CAL2:
-                cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_02(5);
+                cali_t.CaliSub_02_02_Item  =  Pop_stackCaliMain_02(5);
                cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_02_Item;
           break;
 
           case CAL3:
-               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_02(3);
+               cali_t.CaliSub_02_03_Item  =  Pop_stackCaliMain_02(3);
               cali_t.CaliSub_theSecond_02_Item =cali_t.CaliSub_02_03_Item;
 
           break;
