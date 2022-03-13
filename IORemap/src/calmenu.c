@@ -516,13 +516,11 @@ uint8_t Push_stackCaliMain(int8_t maxsize)
 }
 uint8_t Pop_stackCaliMain(int8_t maxsize)
 {
+       caliMainTop-- ;
        if(caliMainTop ==-1 ||caliMainTop <0 ){
 	      caliMainTop = (maxsize -1);
        }
-	   else{
-           caliMainTop--;
-		
-	   }
+	  
      return  caliMainTop ;
 
 
@@ -858,7 +856,8 @@ void CALI_KEY2_DOWN_Fun(void)
     case caliTheFirst_Menu:
 
 
-        cali_t.CaliMenu_Item = Pop_stackCaliMain(3);
+        cali_t.CaliMenu_Item = Pop_stackCaliMain(4);
+        printf("cali_t.CaliMenu_Item_pop = %d\n", cali_t.CaliMenu_Item );
     break;
 
     case caliTheSecond_Menu:

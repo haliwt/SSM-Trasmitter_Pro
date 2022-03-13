@@ -63,12 +63,12 @@ int main(void)
     while (1)
     {
 	  
-			if(run_t.keySetValue == 0)
-			          keydata  = ScanKey();
+		   if(run_t.keySetValue == 0){
+			      keydata  = ScanKey();
+		    }
 			else{
 			        run_t.dispCmd=0;
 					keydata = 0xff;
-			
 			}
 			
 			if(run_t.dispCmd ==0 &&  keydata == 0xff ){
