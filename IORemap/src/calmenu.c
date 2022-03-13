@@ -1078,9 +1078,14 @@ void CALI_KEY2_DOWN_Fun(void)
           
       }
       
-        if(mainitem_t.task_MainMenu == caliTheSecond_Menu )
+      if(mainitem_t.task_MainMenu == caliTheSecond_Menu )
       {
-          mainitem_t.task_MainMenu == caliTheFirst_Menu;
+          mainitem_t.task_MainMenu = caliTheFirst_Menu;
+          if(caliMainTop==-1){
+            cali_t.CaliMenu_Item=0;
+          }
+          else
+            cali_t.CaliMenu_Item = CaliMain_stackTop();
            printf("key3_switch_theFirst= %d\n",mainitem_t.task_MainMenu);
           return ;
           
@@ -1090,7 +1095,7 @@ void CALI_KEY2_DOWN_Fun(void)
       if(menu_t.DisplaySmgBit_Select_Numbers ==0)
       {
         
-        mainitem_t.task_MainMenu == caliTheFirst_Menu;
+        mainitem_t.task_MainMenu = caliTheFirst_Menu;
          printf("key3_switch_theFirst= %d\n",mainitem_t.task_MainMenu);
         return;
           

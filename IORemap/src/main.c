@@ -69,6 +69,7 @@ int main(void)
 			else{
 			        run_t.dispCmd=0;
 					keydata = 0xff;
+					
 			}
 			
 			if(run_t.dispCmd ==0 &&  keydata == 0xff ){
@@ -83,6 +84,7 @@ int main(void)
 					menu_t.DisplaySmgBit_Select_Numbers=0xff;
 			        key_t.keyPressedTimes=0;
 				    run_t.keySetValue=0;
+					cali_t.keyEnter_flag=0;
 
 			}
 			else{
@@ -90,6 +92,7 @@ int main(void)
 				if(run_t.keySetValue == 1){
 					run_t.dispCmd=0;
 					keydata = 0xff;
+					
 					
 				}
 				else{
