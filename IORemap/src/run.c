@@ -205,9 +205,9 @@ void RunCalibration_Command(void)
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
-                     CALI_MENU_SUB_03_DIS(cali_t.CaliSub_Menu_03_Title);
+                     CALI_MENU_SUB_03_DIS( cali_t.CaliMenu_02_sub_Id);
                     // printf("RunThethird  = %d\n",  cali_t.CaliMenu_Item);
-                     printf("RunThird_sub  = %d\n",  cali_t.CaliSub_Menu_03_Title);
+                     printf("RunThird_sub  = %d\n",  cali_t.CaliMenu_02_sub_Id);
             break;
 
 
