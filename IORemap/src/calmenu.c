@@ -1069,6 +1069,7 @@ void CALI_KEY2_DOWN_Fun(void)
       
       if(mainitem_t.task_MainMenu == caliTheFirst_Menu )
       {
+         cali_t.keyEnter_flag =0;
           run_t.keySetValue = 1;
          run_t.dispCmd=0;
       
