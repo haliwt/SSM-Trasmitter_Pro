@@ -189,7 +189,7 @@ float Get_Weight(void)
 
 }
 
-void Weigt_DisSmg(float weightValue) 
+void Weight_DisSmg(float weightValue) 
 {
 	
 	uint32_t unitPlace,tenPlace,hundredPlace,thousandPlace,onethousandPlace,hundredthousandPlace,tenthousandPlace;
@@ -431,16 +431,16 @@ void RunHX720Cmd(void)
 	
 		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
 		//Weight_Real = 0x100;
-			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
+			Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 		SysTick_Delay_Ms(1000);
 		
 		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
 		//Weight_Real = 0x0A;
-			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
+			Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
         SysTick_Delay_Ms(1000);
 		Get_Weight();//Weight_Real=HX711_Read();//GetHX720Data();//Get_Weight();
 		//Weight_Real = 0x0A;
-			Weigt_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
+			Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 		SysTick_Delay_Ms(1000);
 	  
 

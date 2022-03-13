@@ -24,7 +24,7 @@ void Get_No_Lode(void);
 float Get_Weight(void);
 
 
-void Weigt_DisSmg(float weightValue) ;
+void Weight_DisSmg(float weightValue) ;
 void SmgDis_TurnOff_ALl(void);
 float Get_Maopi(void);
 float Get_Weight_2(void);
