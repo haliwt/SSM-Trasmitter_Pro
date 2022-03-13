@@ -85,6 +85,10 @@ extern int8_t ACAL30203[5];
 extern int8_t ACAL30204[5];
 extern int8_t ACAL30205[4];
 
+extern int8_t ACAL30301[2];
+extern int8_t ACAL30232[5];
+extern int8_t ACAL30303[3];
+
 
 
 uint8_t Push_stackCaliMain(int8_t maxize);

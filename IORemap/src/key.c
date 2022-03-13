@@ -71,16 +71,14 @@ void Number_Digital_Set5bit_ZeroDecSelect(int8_t *ap ,uint8_t n);
 static void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n);
 static void Number_Digital_Set5bit_DecSelect(int8_t *ap ,uint8_t n);
 
-static void Number_Digital_2bit_DecSelect(int8_t *ap);
-static void Number_Digital_2bit_AddSelect(int8_t *ap);
+
 
 
 
 static void Number_Digital_3bit_DecSelect(void);
 static void Number_Digital_3bit_AddSelect(void);
 
-//static void Number_Digital_4bit_DecSelect(int8_t *ap);
-//static void Number_Digital_4bit_AddSelect(int8_t *ap);
+
 
 static void Number_Digital_5bit_DecSelect(int8_t *ap);
 static void Number_Digital_5bit_AddSelect(int8_t *ap);
@@ -1470,7 +1468,7 @@ static void F1_01_xx_SelectCmd(void)
 *
 *
 **************************************************************/
-static void Number_Digital_2bit_DecSelect(int8_t *ap)
+void Number_Digital_2bit_DecSelect(int8_t *ap)
 {
   if(menu_t.inputNumber_Select==0){
              menu_t.unit--;
@@ -1490,7 +1488,7 @@ static void Number_Digital_2bit_DecSelect(int8_t *ap)
       
       }    
 }
-static void Number_Digital_2bit_AddSelect(int8_t *ap)
+void Number_Digital_2bit_AddSelect(int8_t *ap)
 {
       if(menu_t.inputNumber_Select==0){
             menu_t.unit++ ;
