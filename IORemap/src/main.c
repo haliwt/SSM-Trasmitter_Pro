@@ -86,6 +86,7 @@ int main(void)
 			        key_t.keyPressedTimes=0;
 				    run_t.keySetValue=0;
 					cali_t.keyEnter_flag=0;
+					key_t.keyPressedVale= 0xff;
 
 			}
 			else{

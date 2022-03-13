@@ -178,20 +178,26 @@ void KEY_Function(uint8_t keydata)
                      if(key_t.keyset !=key_t.currkeyset){
                           key_t.keyset = key_t.currkeyset;
                             if(cali_t.CaliControl_key == 0){
-                                if(key_t.keyPressedTimes < 3 && key_t.keyPressedVale !=0xf7 ){
+                                  
+                                if(key_t.keyPressedTimes >2 && key_t.keyPressedVale ==0xf7 ){
+                                       
+                                         KEY4_InputCalibration_Mode();
+                                           key_t.keyTimes=0;
+                                      key_t.keyPressedTimes=0;
+                                }
+                               else{
                                     
                                        KEY4_SET_ENTER_Fun();
                                        key_t.keyTimes=0;
-                                       key_t.keyTimes =0;
-                                    }
-                                    else{
-                                         KEY4_InputCalibration_Mode();
-                                 }
+                                       key_t.keyPressedTimes=0;
+                               }
+                                   
+                            
                             }
-                            else{
+                          else{
                                   
                                   CAL_KEY4_ENTER_Fun();//CAL_KEY_ENTER_Fun();
-
+                                  key_t.keyPressedTimes=0;
                             }
                              
                          
