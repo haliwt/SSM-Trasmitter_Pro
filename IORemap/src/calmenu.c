@@ -594,9 +594,16 @@ int8_t CaliSub_02_stackTop(void)
 
      if(cali_t.keyEnter_flag == 1){//{ //CAL1->{dC-u,CAP,2Ero,SPARn}
             
-          mainitem_t.task_MainMenu = caliTheSecond_Menu; 
-        cali_t.CaliSub_theSecond_02_Item=cali_t.CaliMenu_02_sub_Id;
-          printf("keyEnter_second = %d\n",  mainitem_t.task_MainMenu );
+        mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+        if(run_t.keyReturn ==1){
+          cali_t.CaliMenu_02_sub_Id=0;
+          cali_t.CaliSub_theSecond_02_Item=0;
+          run_t.keyReturn=0;
+          mainitem_t.task_MainMenu = caliTheFirst_Menu; 
+        }
+        else 
+             cali_t.CaliSub_theSecond_02_Item=cali_t.CaliMenu_02_sub_Id;
+          printf("keyEnter_second = %d\n",  cali_t.CaliMenu_02_sub_Id );
         //By test is success
      }
      else if(cali_t.keyEnter_flag == 2){//CAL->dC-u -> 0.00
@@ -1072,6 +1079,7 @@ void CALI_KEY2_DOWN_Fun(void)
          cali_t.keyEnter_flag =0;
           run_t.keySetValue = 1;
          run_t.dispCmd=0;
+         run_t.keyReturn =1;
       
           printf("key3_switch_dispCmd=0= %d\n", run_t.keySetValue);
           return ;
