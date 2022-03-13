@@ -171,20 +171,22 @@ void KEY_Function(uint8_t keydata)
                break;
 
                  case 0xf7://KEY4-SET/CAL-->Enter
+                
                     run_t.dispCmd =1;
                     CH2_KeyLed();
                      key_t.keyTimes =1;
                      if(key_t.keyset !=key_t.currkeyset){
                           key_t.keyset = key_t.currkeyset;
                             if(cali_t.CaliControl_key == 0){
-                                if(key_t.keyPressedTimes < 2){
+                                if(key_t.keyPressedTimes < 3 && key_t.keyPressedVale !=0xf7 ){
                                     
-                                     //  KEY4_SET_ENTER_Fun();
-                                      
-                                    //}
-                                   // else{
-                                         KEY4_InputCalibration_Mode();
+                                       KEY4_SET_ENTER_Fun();
+                                       key_t.keyTimes=0;
+                                       key_t.keyTimes =0;
                                     }
+                                    else{
+                                         KEY4_InputCalibration_Mode();
+                                 }
                             }
                             else{
                                   

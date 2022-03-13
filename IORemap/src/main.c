@@ -65,6 +65,7 @@ int main(void)
 	  
 		   if(run_t.keySetValue == 0){
 			      keydata  = ScanKey();
+				  key_t.keyPressedVale = keydata;
 		    }
 			else{
 			        run_t.dispCmd=0;
@@ -100,8 +101,6 @@ int main(void)
 				    run_t.dispCmd=1;
 					
 				}
-				key_t.keyTimes =1;
-				
 				CheckMode(keydata);//KEY_Function(keydata);
 				RunCommand();
 				

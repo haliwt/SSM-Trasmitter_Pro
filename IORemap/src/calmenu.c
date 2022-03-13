@@ -1080,6 +1080,7 @@ void CALI_KEY2_DOWN_Fun(void)
           run_t.keySetValue = 1;
          run_t.dispCmd=0;
          run_t.keyReturn =1;
+         cali_t.CaliControl_key=0; //F1~F9 function 
       
           printf("key3_switch_dispCmd=0= %d\n", run_t.keySetValue);
           return ;
