@@ -201,7 +201,7 @@ void RunCalibration_Command(void)
             break;
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
-                    if(cali_t.Thefirst_InputKeyValue==1 ||cali_t.Thefirst_InputKeyValue==0 ){
+                    if(cali_t.Thefirst_InputKeyValue==0 ){
                                 mainitem_t.task_MainMenu=caliTheFirst_Menu;
                     }
                     else{

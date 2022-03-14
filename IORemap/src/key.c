@@ -192,7 +192,7 @@ void KEY_Function(uint8_t keydata)
                                
                           if(key_t.keyGetLong_Numbers >1 ){
 										 
-								key_t.keyGetLong_Numbers++;
+						key_t.keyGetLong_Numbers++;
                                     key_t.RunCmd_flag =1;
                                       
                                     
@@ -204,7 +204,7 @@ void KEY_Function(uint8_t keydata)
 						key_t.keyGetLong_Numbers++;
                                     
                                     cali_t.CaliControl_key=1;
-                                    key_t.keyset = key_t.currkeyset;
+                                  
                                      
                                     
 					}
@@ -212,8 +212,8 @@ void KEY_Function(uint8_t keydata)
                                
                          }
                         else{
-                          
-                          CAL_KEY4_ENTER_Fun();
+                           if(key_t.keyPressedLongTimes==1)
+                                 CAL_KEY4_ENTER_Fun();
                         }
                      }
                      CH4_KeyLed();

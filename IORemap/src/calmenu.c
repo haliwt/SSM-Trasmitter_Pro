@@ -195,11 +195,6 @@ void CALI_MENU_01_DIS(uint8_t mu)
        case CAL1: //CAL1
           cali_t.CaliMenu_01_Id =CAL1;
           Symbol_CAL1();
-          if(cali_t.Thefirst_InputKeyValue==1){
-              mu = CAL1;
-
-          }
-
        break;
           
        case CAL2: //CAL2
