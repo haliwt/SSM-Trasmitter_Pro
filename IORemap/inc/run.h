@@ -8,6 +8,7 @@ typedef struct _RUN{
     uint8_t keySetValue;
     uint8_t keyReturn;
     uint8_t Fx_Menu_Function ;
+	uint8_t timerOver_flag;
 
 }run;
 

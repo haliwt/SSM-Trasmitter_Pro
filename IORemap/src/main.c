@@ -115,35 +115,62 @@ int main(void)
 					
 
 			}
+
+
 			
-           if(run_t.dispCmd==1){
+
+			 if(run_t.dispCmd ==1){
 
 				
                
 			   
 			   
-			   if(key_t.keyadjust_flag ==1){
-                          key_t.RunCmd_flag=1;
-						
-				
-							KEY4_SET_ENTER_Fun();
-                            key_t.keyPressedLongTimes =0;
-						//	  printf("F4  short  Function\n");
-						///printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		 	
-							
-
-			   }
-				 if(key_t.keyadjust_flag ==2){
+			 
+				if(key_t.keyadjust_flag ==2){
 						
 						KEY4_InputCalibration_Mode();
 						key_t.keyPressedLongTimes =0;
 					//	printf("CAL  Function  Enable\n");
 						 
-				 key_t.keyPressedTimes=0;
-				 key_t.keyTimes =0;
+				 
+
+				 key_t.keyTimes=0;
+				  key_t.keyPressedLongTimes=0;
 
 									
-			   }        
+			   } 
+			   else if(key_t.keyadjust_flag ==1  ){
+                          key_t.RunCmd_flag=1;
+						    key_t.keyTimes=0;
+				  key_t.keyPressedLongTimes=0;
+						
+				
+							KEY4_SET_ENTER_Fun();
+                            key_t.keyPressedLongTimes =0;
+					
+
+			   }
+			   else{
+						 if(run_t.timerOver_flag ==3 || key_t.keyPressedLongTimes !=0) 	{
+						 	run_t.timerOver_flag=0;
+
+                               		    key_t.keyTimes=0;
+				                      key_t.keyPressedLongTimes=0;
+
+							KEY4_SET_ENTER_Fun();
+                           
+					
+						 }
+							
+
+			   }
+
+
+
+			   
+
+
+				
 				
 				if(run_t.keySetValue == 1){
 					run_t.dispCmd=0;
@@ -169,7 +196,7 @@ int main(void)
 				RunCommand();
 				
 					
-				
+			}
 
 				
 			}
@@ -177,7 +204,7 @@ int main(void)
 		}
     
 				 
- }
+ 
 		
 
 /**
