@@ -140,7 +140,7 @@ void TIM1_UP_IRQHandler(void)
 					  key_t.keyPressedLongTimes=0;
 					  key_t.RunCmd_flag = 2;
 					  run_t.dispCmd=1;
-					 
+					  key_t.keyadjust_flag =2;
 
 				}
 				else if(key_t.keyPressedLongTimes >  70 && key_t.keyPressedLongTimes <80){
@@ -148,6 +148,8 @@ void TIM1_UP_IRQHandler(void)
 					 printf("adjust is shot key times !!!!!!!!!!!!!!! \n");
 					 run_t.dispCmd=1;
 				     key_t.RunCmd_flag= 1;
+
+					 key_t.keyadjust_flag =1;
 					 
 					 
 				}

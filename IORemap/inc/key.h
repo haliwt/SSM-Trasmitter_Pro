@@ -12,6 +12,8 @@ typedef struct _KEY_{
 	   
 	   uint8_t keyGetLong_Numbers;
 	   uint8_t RunCmd_flag; 
+
+	   uint8_t keyadjust_flag ;
 	
 	   uint8_t GetKey;
 	   uint8_t PrevKey;

@@ -86,7 +86,7 @@ int main(void)
 					   
 					 } 
 
-				      printf("  keylong1  = %d \n",  keylong1 );
+				    //  printf("  keylong1  = %d \n",  keylong1 );
 			   }
 				   
 		    }
@@ -116,29 +116,29 @@ int main(void)
 
 			}
 			
-           if(run_t.dispCmd==2){
+           if(run_t.dispCmd==1){
 
 				
                
-			   if( key_t.keyPressedTimes >2  && key_t.keyPressedTimes  < 20){
 			   
-			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
+			   
+			   if(key_t.keyadjust_flag ==1){
                           key_t.RunCmd_flag=1;
 						
 				
 							KEY4_SET_ENTER_Fun();
                             key_t.keyPressedLongTimes =0;
-							  printf("F4  short  Function\n");
-						printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		 	
+						//	  printf("F4  short  Function\n");
+						///printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		 	
 							
 
-				} 
-				if(key_t.keyGetLong_Numbers>30){
+			   }
+				 if(key_t.keyadjust_flag ==2){
 						
 						KEY4_InputCalibration_Mode();
 						key_t.keyPressedLongTimes =0;
-						printf("CAL  Function  Enable\n");
-						}  
+					//	printf("CAL  Function  Enable\n");
+						 
 				 key_t.keyPressedTimes=0;
 				 key_t.keyTimes =0;
 
@@ -160,9 +160,9 @@ int main(void)
 					
 				}
 
-				printf(" key_t.keyTimes = %d \n",key_t.keyTimes);	
-				printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		
-				CheckMode(keydata);//KEY_Function(keydata);
+				////printf(" key_t.keyTimes = %d \n",key_t.keyTimes);	
+				//printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		
+			//	CheckMode(keydata);//KEY_Function(keydata);
 
 				
       
