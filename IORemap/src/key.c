@@ -117,8 +117,21 @@ void KEY_Function(uint8_t keydata)
       switch(keydata){
 
             
+              case 0:
+
+                    key_t.keyset++;
+                    key_t.keyswitch++;
+                    key_t.keytrae++;
+                    key_t.keyzero++; 
+              break;
+              
+              
+              
+              
+              
+              
                case 0xf4://KEY1-ZERO--up
-                    run_t.dispCmd =1;
+                
                     Net_KeyLed();
                    
                     if(key_t.currkeyzero != key_t.keyzero){
@@ -137,7 +150,7 @@ void KEY_Function(uint8_t keydata)
                break;
                    
                case 0xf6://KEY2 -TARE-donwn
-                    run_t.dispCmd =1;
+                  
                     // Peak_KeyLed();
                      Mot_KeyLed();
                      if(key_t.currkeytrae != key_t.keytrae){
@@ -155,7 +168,7 @@ void KEY_Function(uint8_t keydata)
                break;
 
                case 0xf5: //KEY3 -SWITCH   <-
-                    run_t.dispCmd =1;
+               
                     // CH1_KeyLed();
                      CH3_KeyLed();
                      key_t.keyTimes=1;
@@ -175,22 +188,15 @@ void KEY_Function(uint8_t keydata)
                break;
 
                  case 0xf7://KEY4-SET/CAL-->Enter
-                
-                
-                    run_t.dispCmd =1;
-                    CH2_KeyLed();
+                      CH2_KeyLed();
                      
                      if(key_t.keyset !=key_t.currkeyset){
                         key_t.keyTimes =1;
                           key_t.keyset = key_t.currkeyset;
                         if(cali_t.CaliControl_key == 0){
                               
-                                  
-                           
-                              key_t.keyGetLong_Numbers++;
-                        
-                               
-                          if(key_t.keyGetLong_Numbers >1 ){
+                          key_t.keyGetLong_Numbers++;
+                           if(key_t.keyGetLong_Numbers >1 ){
 										 
 						key_t.keyGetLong_Numbers++;
                                     key_t.RunCmd_flag =1;
@@ -202,18 +208,18 @@ void KEY_Function(uint8_t keydata)
 				   if(key_t.keyGetLong_Numbers> 30){
 									   
 						key_t.keyGetLong_Numbers++;
-                                    
                                     cali_t.CaliControl_key=1;
                                   
-                                     
-                                    
-					}
+                              }
 							 
                                
                          }
                         else{
-                           if(key_t.keyPressedLongTimes==1)
+                         //  if(key_t.keyPressedLongTimes==1){
                                  CAL_KEY4_ENTER_Fun();
+                                 printf("CAL_KEY4_ENTER_Fun()\n ");
+                                 key_t.keyGetLong_Numbers=0;
+                          // }
                         }
                      }
                      CH4_KeyLed();
@@ -227,13 +233,11 @@ void KEY_Function(uint8_t keydata)
                
              
                default:     
-					key_t.keyset++;
+			 key_t.keyset++;
                     key_t.keyswitch++;
                     key_t.keytrae++;
                     key_t.keyzero++; 
                     
-                   
-			        keydata = 0;
                break;
 
                

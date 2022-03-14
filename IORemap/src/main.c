@@ -70,7 +70,8 @@ int main(void)
 			else{
 			        run_t.dispCmd=0;
 					keydata = 0xff;
-					
+					key_t.RunCmd_flag=0;
+					cali_t.CaliControl_key=0;
 			}
 			
 			if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
@@ -92,7 +93,7 @@ int main(void)
 
 				
                
-			   if( key_t.keyPressedTimes >1 && key_t.keyPressedTimes <3 ){
+			   if( key_t.keyPressedTimes >1 ){
 			   
 			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
                           key_t.RunCmd_flag=1;
@@ -106,9 +107,9 @@ int main(void)
 				} 
 				if(key_t.keyGetLong_Numbers>30){
 						
-							
 						KEY4_InputCalibration_Mode();
-						
+						key_t.keyPressedLongTimes =0;
+						printf("CAL  Function  Enable\n");
 						}  
 				 key_t.keyPressedTimes=0;
 				 key_t.keyTimes =0;
@@ -119,7 +120,8 @@ int main(void)
 				if(run_t.keySetValue == 1){
 					run_t.dispCmd=0;
 					keydata = 0xff;
-					
+					key_t.RunCmd_flag=0;
+					cali_t.CaliControl_key=0;
 				}
 				else{
 				

@@ -197,7 +197,7 @@ void RunCalibration_Command(void)
            case caliTheFirst_Menu: //Calibration Function //CAL1 ,CAL2,CAL3 ,CAL5
          
                   CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
-                printf("Cali_theFirstMenu = %d\n",cali_t.CaliMenu_Item);
+                    printf("Cali_theFirstMenu = %d\n",cali_t.CaliMenu_Item);
             break;
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
