@@ -80,13 +80,13 @@ int main(void)
 				 
 				   
                     
-					if(key_t.keyPressedLongTimes > 134254727 ){
+					if(key_t.keyPressedLongTimes > 10000 ){
 					       run_t.dispCmd=1;
 						 
 					   
 					 } 
 
-				    //  printf("  keylong1  = %d \n",  keylong1 );
+				      printf("  keylong1  = %d \n",   key_t.keyPressedLongTimes );
 			   }
 				   
 		    }
@@ -116,7 +116,7 @@ int main(void)
 
 			}
 
-
+	           
 			
 
 			 if(run_t.dispCmd ==1){
