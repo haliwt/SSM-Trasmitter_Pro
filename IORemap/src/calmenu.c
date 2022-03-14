@@ -569,27 +569,35 @@ int8_t CaliSub_02_stackTop(void)
  *
  *
  *******************************************************************/
- void CAL_KEY4_ENTER_Fun(void)
- {
-     
-     if(cali_t.Thefirst_InputKeyValue == 0){
+void KEY4_InputCalibration_Mode(void)
+{
+     if(cali_t.Thefirst_InputKeyValue==0){
        cali_t.Thefirst_InputKeyValue++;
-         cali_t.CaliControl_key=1; 
+      cali_t.CaliControl_key=1; 
      mainitem_t.task_MainMenu = caliTheFirst_Menu ;
      caliMainTop=-1;
      cali_t.CaliMenu_Item = Push_stackCaliMain(4);
      
 	 printf("Cali_keyEnter = %d\n",cali_t.CaliMenu_Item);
 	 printf("task_MainMenu = %d\n", caliTheFirst_Menu);
+   
+     SysTick_Delay_Ms(1000);
+     }
 
+	 
+}
 
-
-
-
+void CAL_KEY4_ENTER_Fun(void)
+{
+     if( cali_t.Thefirst_InputKeyValue==1){
+             cali_t.Thefirst_InputKeyValue++;
+             SysTick_Delay_Ms(1000);
+             SysTick_Delay_Ms(1000);
+            
      }
      else{
-     
-     
+
+     if(key_t.keyPressedLongTimes ==1){
      cali_t.keyEnter_flag ++; //= cali_t.keyEnter_flag ^ 0x01;
 
      if(cali_t.keyEnter_flag == 1){//{ //CAL1->{dC-u,CAP,2Ero,SPARn}
@@ -627,8 +635,9 @@ int8_t CaliSub_02_stackTop(void)
        
 
      }
+      cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+    }
      }
-    cali_t.runKeyMenu=mainitem_t.task_MainMenu;
       
 
 }

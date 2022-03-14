@@ -9,8 +9,9 @@ typedef struct _KEY_{
 	   uint8_t keyTimes_1s;
 	   uint8_t keyPressedTimes;
 	   uint8_t keyRunTimes;
-	   uint8_t keyPressedVale;
+	   uint8_t keyPressedLongTimes;
 	   uint8_t keyGetLong_Numbers;
+	   uint8_t RunCmd_flag; 
 	
 	   uint8_t GetKey;
 	   uint8_t PrevKey;
@@ -73,7 +74,8 @@ extern KEY key_t;
 void KEY_Function(uint8_t keyvalue);
 void	KEY4_SET_ENTER_Fun(void);
 
-void GetKeyValua_Init(void);
+void KeyValua_Init(void);
+
 
 
 extern void (*DispDigital_3BitSmg)(void);

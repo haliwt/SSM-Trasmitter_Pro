@@ -98,14 +98,16 @@ static void F1_01_xx_SelectCmd(void);
 
 int8_t ATop(void);
 
-void GetKeyValue_Init(void)
+
+
+void KeyValua_Init(void)
 {
    key_t.currkeyset =0xff;
    key_t.currkeytrae = 0xff;
    key_t.currkeyswitch = 0xff;
    key_t.currkeyzero = 0xff;   
    key_t.keyTimes=0;
-   
+
 }
 
 void KEY_Function(uint8_t keydata)
@@ -190,18 +192,17 @@ void KEY_Function(uint8_t keydata)
                                
                           if(key_t.keyGetLong_Numbers >1 ){
 										 
-						 key_t.keyGetLong_Numbers++;
-                                      key_t.keyPressedVale =1;
+								key_t.keyGetLong_Numbers++;
+                                    key_t.RunCmd_flag =1;
                                       
                                     
-                                  
-				  }   
+                                }   
                                    
 					   			   
 				   if(key_t.keyGetLong_Numbers> 30){
 									   
 						key_t.keyGetLong_Numbers++;
-                                    key_t.keyPressedVale =2;
+                                    
                                     cali_t.CaliControl_key=1;
                                      
                                     
@@ -211,7 +212,7 @@ void KEY_Function(uint8_t keydata)
                          }
                         else{
                           
-                           //   CAL_KEY4_ENTER_Fun();
+                          CAL_KEY4_ENTER_Fun();
                         }
                      }
                      CH4_KeyLed();

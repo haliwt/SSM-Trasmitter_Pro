@@ -56,9 +56,9 @@ int main(void)
 	//GPIO_Configuration(); //test Timer1 
 	  
 	  TIM1_NVIC_Configuration();
-	  GetKeyValue_Init();
+	  KeyValua_Init();
 	  Menu_Init();
-      key_t.keyPressedVale = 0;
+     
 	run_t.keySetValue=0;
     while (1)
     {
@@ -73,7 +73,7 @@ int main(void)
 					
 			}
 			
-			if(run_t.dispCmd ==0  &&  keydata == 0xff && key_t.keyPressedVale !=1 && key_t.keyPressedVale !=2){
+			if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
 				    Get_Weight();
 			        Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 				    SysTick_Delay_Ms(200);
@@ -95,25 +95,25 @@ int main(void)
 			   if( key_t.keyPressedTimes >1 && key_t.keyPressedTimes <3 ){
 			   
 			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
-
+                          key_t.RunCmd_flag=1;
 						
 					printf(" key_t.keyGetLong_Numbers = %d \n", key_t.keyGetLong_Numbers);		 	
 							KEY4_SET_ENTER_Fun();
-                             key_t.keyPressedVale =2;
+                            key_t.keyPressedLongTimes =0;
 							  printf("F4  short  Function\n");
 						
 
 				} 
 				if(key_t.keyGetLong_Numbers>30){
-
-						key_t.keyPressedVale =1;
+						KEY4_InputCalibration_Mode();
+						
 						 CAL_KEY4_ENTER_Fun();
 
 				}  
 				 key_t.keyPressedTimes=0;
 				 key_t.keyTimes =0;
 
-					printf("enter key ????? %d\n",key_t.keyPressedVale);				
+									
 			   }        
 				
 				if(run_t.keySetValue == 1){
