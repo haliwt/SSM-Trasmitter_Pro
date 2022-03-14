@@ -92,9 +92,9 @@ int main(void)
 
 				
                
-			   if( key_t.keyPressedTimes >1){
+			   if( key_t.keyPressedTimes >1 && key_t.keyPressedTimes <3 ){
 			   
-			    if(key_t.keyGetLong_Numbers>5 && key_t.keyGetLong_Numbers<20) {
+			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
 
 						
 					printf(" key_t.keyGetLong_Numbers = %d \n", key_t.keyGetLong_Numbers);		 	
@@ -104,11 +104,15 @@ int main(void)
 						
 
 				} 
-				if(key_t.keyGetLong_Numbers>20){
+				if(key_t.keyGetLong_Numbers>30){
 
 						key_t.keyPressedVale =1;
+						 CAL_KEY4_ENTER_Fun();
 
 				}  
+				 key_t.keyPressedTimes=0;
+				 key_t.keyTimes =0;
+
 					printf("enter key ????? %d\n",key_t.keyPressedVale);				
 			   }        
 				

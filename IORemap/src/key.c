@@ -188,7 +188,7 @@ void KEY_Function(uint8_t keydata)
                               key_t.keyGetLong_Numbers++;
                         
                                
-                          if(key_t.keyGetLong_Numbers >5 ){
+                          if(key_t.keyGetLong_Numbers >1 ){
 										 
 						 key_t.keyGetLong_Numbers++;
                                       key_t.keyPressedVale =1;
@@ -198,7 +198,7 @@ void KEY_Function(uint8_t keydata)
 				  }   
                                    
 					   			   
-				   if(key_t.keyGetLong_Numbers> 20){
+				   if(key_t.keyGetLong_Numbers> 30){
 									   
 						key_t.keyGetLong_Numbers++;
                                     key_t.keyPressedVale =2;
@@ -211,7 +211,7 @@ void KEY_Function(uint8_t keydata)
                          }
                         else{
                           
-                              CAL_KEY4_ENTER_Fun();
+                           //   CAL_KEY4_ENTER_Fun();
                         }
                      }
                      CH4_KeyLed();
