@@ -72,6 +72,8 @@ int main(void)
 					keydata = 0xff;
 					key_t.RunCmd_flag=0;
 					cali_t.CaliControl_key=0;
+					 key_t.keyGetLong_Numbers=0;
+					 run_t.Fx_Menu_Function=0;
 			}
 			
 			if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
@@ -93,16 +95,17 @@ int main(void)
 
 				
                
-			   if( key_t.keyPressedTimes >1 && run_t.Fx_Menu_Function==0 &&   key_t.keyPressedLongTimes==0 ){
+			   if( key_t.keyPressedTimes >1 &&  key_t.keyPressedTimes <3){
 			   
-			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
+			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<25) {
                           key_t.RunCmd_flag=1;
 						
-					printf(" key_t.keyGetLong_Numbers = %d \n", key_t.keyGetLong_Numbers);		 	
+				
 							KEY4_SET_ENTER_Fun();
                             key_t.keyPressedLongTimes =0;
 							  printf("F4  short  Function\n");
-						
+						printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		 	
+							KEY4_SET_ENTER_Fun();
 
 				} 
 				if(key_t.keyGetLong_Numbers>30){
@@ -122,6 +125,8 @@ int main(void)
 					keydata = 0xff;
 					key_t.RunCmd_flag=0;
 					cali_t.CaliControl_key=0;
+					 key_t.keyGetLong_Numbers=0;
+					 run_t.Fx_Menu_Function=0;
 				}
 				else{
 				
