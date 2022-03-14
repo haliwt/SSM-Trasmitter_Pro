@@ -564,24 +564,6 @@ int8_t CaliSub_02_stackTop(void)
 /*******************************************************************
  * 
  * Calibration of key Function "Item"
- * 
- * 
- * 
- *******************************************************************/
- void KEY4_InputCalibration_Mode(void)
- {
-     //CAL1,CAL2,CAL3,CAL5
-    
-     cali_t.CaliControl_key=1; 
-     mainitem_t.task_MainMenu = caliTheFirst_Menu ;
-     caliMainTop=-1;
-     cali_t.CaliMenu_Item = Push_stackCaliMain(4);
-     
-	 printf("Cali_keyEnter = %d\n",cali_t.CaliMenu_Item);
-	 printf("task_MainMenu = %d\n", caliTheFirst_Menu);
-
- }
- /*******************************************************************
  *
  *Function :select which's menu item ?  adjust how many sub menu ?
  *
@@ -589,6 +571,24 @@ int8_t CaliSub_02_stackTop(void)
  *******************************************************************/
  void CAL_KEY4_ENTER_Fun(void)
  {
+     
+     if(cali_t.Thefirst_InputKeyValue == 0){
+       cali_t.Thefirst_InputKeyValue++;
+         cali_t.CaliControl_key=1; 
+     mainitem_t.task_MainMenu = caliTheFirst_Menu ;
+     caliMainTop=-1;
+     cali_t.CaliMenu_Item = Push_stackCaliMain(4);
+     
+	 printf("Cali_keyEnter = %d\n",cali_t.CaliMenu_Item);
+	 printf("task_MainMenu = %d\n", caliTheFirst_Menu);
+
+
+
+
+
+     }
+     else{
+     
      
      cali_t.keyEnter_flag ++; //= cali_t.keyEnter_flag ^ 0x01;
 
@@ -626,6 +626,7 @@ int8_t CaliSub_02_stackTop(void)
         
        
 
+     }
      }
     cali_t.runKeyMenu=mainitem_t.task_MainMenu;
       

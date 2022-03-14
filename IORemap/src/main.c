@@ -94,17 +94,17 @@ int main(void)
                
 			   if( key_t.keyPressedTimes >1){
 			   
-			    if(key_t.keyGetLong_Numbers ==8) {
+			    if(key_t.keyGetLong_Numbers>5 && key_t.keyGetLong_Numbers<20) {
 
 						
 					printf(" key_t.keyGetLong_Numbers = %d \n", key_t.keyGetLong_Numbers);		 	
-
+							KEY4_SET_ENTER_Fun();
                              key_t.keyPressedVale =2;
 							  printf("F4  short  Function\n");
 						
 
 				} 
-				if(key_t.keyGetLong_Numbers>15){
+				if(key_t.keyGetLong_Numbers>20){
 
 						key_t.keyPressedVale =1;
 

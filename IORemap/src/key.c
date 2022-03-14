@@ -111,12 +111,8 @@ void GetKeyValue_Init(void)
 void KEY_Function(uint8_t keydata)
 {
              
-      static uint32_t kf=0,i=0;   
-           
-          
-          
-           #if 1
-             switch(keydata){
+    
+      switch(keydata){
 
             
                case 0xf4://KEY1-ZERO--up
@@ -188,41 +184,34 @@ void KEY_Function(uint8_t keydata)
                         if(cali_t.CaliControl_key == 0){
                               
                                   
-                              kf++;
-                              key_t.keyGetLong_Numbers=kf;
+                           
+                              key_t.keyGetLong_Numbers++;
                         
                                
-                          if(key_t.keyGetLong_Numbers ==7 ){
+                          if(key_t.keyGetLong_Numbers >5 ){
 										 
 						 key_t.keyGetLong_Numbers++;
-                                      key_t.keyPressedVale =2;
+                                      key_t.keyPressedVale =1;
                                       
-                                      printf("kf short = %d \n",kf);
+                                    
                                   
 				  }   
                                    
 					   			   
-				   if(key_t.keyGetLong_Numbers> 15){
+				   if(key_t.keyGetLong_Numbers> 20){
 									   
-							key_t.keyGetLong_Numbers++;
-                                          key_t.keyPressedVale =1;
-                                         
-					  
-                                          cali_t.CaliControl_key=1;
-                                      //   key_t.keyGetLong_Numbers=0;
-                                         kf=0;
-						}
-					 printf("kf = %d \n",kf);
-                               printf("enterKEY = %d \n",keydata);		 
+						key_t.keyGetLong_Numbers++;
+                                    key_t.keyPressedVale =2;
+                                    cali_t.CaliControl_key=1;
+                                     
+                                    
+					}
+							 
                                
-                               
-                      
-                             
-                         
-                        }
+                         }
                         else{
-                           printf("cali_t.CaliControl_key = %d \n",1);
-
+                          
+                              CAL_KEY4_ENTER_Fun();
                         }
                      }
                      CH4_KeyLed();
@@ -234,18 +223,7 @@ void KEY_Function(uint8_t keydata)
 								      
                break;
                
-               case 0xaa:
-               
-                          printf("F1funt key  is success \n");
-				if(key_t.keyPressedVale ==1)
-					KEY4_InputCalibration_Mode();
-				else if(key_t.keyPressedVale ==2) KEY4_SET_ENTER_Fun();
-				
-				
-               
-               
-               break;
-
+             
                default:     
 					key_t.keyset++;
                     key_t.keyswitch++;
@@ -258,46 +236,8 @@ void KEY_Function(uint8_t keydata)
 
                
             }
-      #endif 
-#if 0  
-	if(keydata !=0xf7){
-            switch(key_t.keyPressedVale ){
-              
-           case 0:
-           
-           break;
-           
-		   case 1:
-                    
-                          printf("CALI key  is success 1 \n");
-				
-					KEY4_InputCalibration_Mode();
-				
-				
-				key_t.keyPressedVale=0;
-                 
-               
-               
-               break;
-               
-          case 2:
-                 if(key_t.keyGetLong_flag == 0){
-                       SysTick_Delay_Ms(500);
-                     if(key_t.keyGetLong_flag == 0){
-                              KEY4_SET_ENTER_Fun();
-                              key_t.keyPressedVale=0;
-                               printf("CALI key  is success 2\n");
-                    }
-                    else{
-                        KEY4_InputCalibration_Mode();
-                         printf("F1  key  is success 2 \n");
-                    }
-				}
-          break;
-        
-         }
-      }
-#endif 
+     
+
 
 }
 /**********************************************************

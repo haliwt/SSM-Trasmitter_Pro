@@ -5,6 +5,8 @@
 
 typedef struct _CALI{
    
+   
+   uint8_t Thefirst_InputKeyValue;
     uint8_t CaliControl_key;
     uint8_t CaliMenu_Item;
     uint8_t CaliMenu_Sub_Item;
