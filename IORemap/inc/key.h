@@ -70,7 +70,7 @@ extern int8_t AF806[5];
 extern KEY key_t;
 
 void KEY_Function(uint8_t keyvalue);
-
+void	KEY4_SET_ENTER_Fun(void);
 
 void GetKeyValua_Init(void);
 

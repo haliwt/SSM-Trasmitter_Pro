@@ -90,7 +90,7 @@ static void Number_Digital_F111_4bit_DecSelect(int8_t *ap);
 static void KEY1_ZERIO_UP_Fun(void);
 static void KEY2_TRAE_DOWN_Fun(void);
 static void KEY3_SWITCH_LEFT_Fun(void);
-static void KEY4_SET_ENTER_Fun(void);
+//static void KEY4_SET_ENTER_Fun(void);
 static void KEY_SubMenuFun_Enter(void);
 static void F1_01_xx_SelectCmd(void);
 
@@ -110,6 +110,12 @@ void GetKeyValue_Init(void)
 
 void KEY_Function(uint8_t keydata)
 {
+             
+           static uint32_t kf=0;   
+           
+          
+          
+           #if 1
              switch(keydata){
 
             
@@ -172,6 +178,7 @@ void KEY_Function(uint8_t keydata)
 
                  case 0xf7://KEY4-SET/CAL-->Enter
                 
+                
                     run_t.dispCmd =1;
                     CH2_KeyLed();
                      key_t.keyTimes =1;
@@ -179,25 +186,55 @@ void KEY_Function(uint8_t keydata)
                           key_t.keyset = key_t.currkeyset;
                             if(cali_t.CaliControl_key == 0){
                                   
-                                if(key_t.keyPressedTimes >2 && key_t.keyPressedVale ==0xf7 ){
+                              kf++;
+                              printf("kf = %d \n",kf);
+                               printf("enterKEY = %d \n",keydata);
+                               
+                             
+                               if(kf <50000){
+								   
+								   
+								  
+								   if(kf> 30){
+									   
+								       key_t.keyPressedVale =1;
+								    }
+									if(kf<30){
+										 
+										   
+										  key_t.keyPressedVale =2;
+									}   
+										   
+										
+									}
+									
                                        
-                                         KEY4_InputCalibration_Mode();
-                                           key_t.keyTimes=0;
-                                      key_t.keyPressedTimes=0;
-                                }
-                               else{
-                                    
-                                       KEY4_SET_ENTER_Fun();
-                                       key_t.keyTimes=0;
-                                       key_t.keyPressedTimes=0;
-                               }
-                                   
-                            
-                            }
-                          else{
+                                      kf= kf+20;
+									 
+									   
                                   
-                                  CAL_KEY4_ENTER_Fun();//CAL_KEY_ENTER_Fun();
-                                  key_t.keyPressedTimes=0;
+						   
+							     if(kf> 30 ){
+                                     key_t.keyPressedVale =1;
+                                       keydata = 0xaa;
+                                    }
+								 
+                                printf("ekey_t.keyPressedVale  = %d \n",key_t.keyPressedVale );
+                               
+                        //          if(kf>200){
+                        //                KEY4_InputCalibration_Mode();
+                        //          }
+                        //          else if(kf<200){
+                                       
+                        //                 KEY4_SET_ENTER_Fun();
+                        //          }
+                        //          else kf =0;
+                                 
+                        //     }
+                        //  else{
+                                  
+                                //  CAL_KEY4_ENTER_Fun();//CAL_KEY_ENTER_Fun();
+                                //  key_t.keyPressedTimes=0;
                             }
                              
                          
@@ -208,20 +245,61 @@ void KEY_Function(uint8_t keydata)
                  key_t.keyswitch++;
                  key_t.keytrae++;
                  key_t.keyzero++; 
+                keydata = 0xaa;
 								      
+               break;
+               
+               case 0xaa:
+               
+                          printf("F1funt key  is success \n");
+				if(key_t.keyPressedVale ==1)
+					KEY4_InputCalibration_Mode();
+				else if(key_t.keyPressedVale ==2) KEY4_SET_ENTER_Fun();
+				
+				
+               
+               
                break;
 
                default:     
-			 key_t.keyset++;
+					key_t.keyset++;
                     key_t.keyswitch++;
                     key_t.keytrae++;
                     key_t.keyzero++; 
                     key_t.keyTimes =0;
                     key_t.keyPressedTimes=0;
+			        keydata = 0;
                break;
 
                
             }
+      #endif 
+         
+		if(keydata !=0xf7){
+            switch(key_t.keyPressedVale ){
+              
+           case 0:
+           
+           break;
+           
+		   case 1:
+               
+                          printf("F1funt key  is success \n");
+				
+					KEY4_InputCalibration_Mode();
+				
+				
+				key_t.keyPressedVale=0;
+               
+               
+               break;
+               
+          case 2:
+          KEY4_SET_ENTER_Fun();
+          key_t.keyPressedVale=0;
+          break;
+        }
+         }
 
 }
 /**********************************************************
@@ -230,7 +308,7 @@ void KEY_Function(uint8_t keydata)
  * Function : the first be pressed Enter key
  * 
 ********************************************************/  
-static void	KEY4_SET_ENTER_Fun(void)
+ void	KEY4_SET_ENTER_Fun(void)
 {
        if(menu_t.menuFirst == 0){
           menu_t.menuFirst++;
@@ -1478,6 +1556,8 @@ static void F1_01_xx_SelectCmd(void)
 **************************************************************/
 void Number_Digital_2bit_DecSelect(int8_t *ap)
 {
+  
+ 
   if(menu_t.inputNumber_Select==0){
              menu_t.unit--;
             if(menu_t.unit < 0){

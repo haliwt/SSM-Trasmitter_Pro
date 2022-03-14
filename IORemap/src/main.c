@@ -58,14 +58,14 @@ int main(void)
 	  TIM1_NVIC_Configuration();
 	  GetKeyValue_Init();
 	  Menu_Init();
-
-	
+      key_t.keyPressedVale = 0;
+	run_t.keySetValue=0;
     while (1)
     {
 	  
 		   if(run_t.keySetValue == 0){
 			      keydata  = ScanKey();
-				  key_t.keyPressedVale = keydata;
+				  
 		    }
 			else{
 			        run_t.dispCmd=0;
@@ -73,7 +73,7 @@ int main(void)
 					
 			}
 			
-			if(run_t.dispCmd ==0 &&  keydata == 0xff ){
+			if(run_t.dispCmd ==0  &&  keydata == 0xff && key_t.keyPressedVale !=1 && key_t.keyPressedVale !=2){
 				    Get_Weight();
 			        Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 				    SysTick_Delay_Ms(200);
@@ -86,7 +86,7 @@ int main(void)
 			        key_t.keyPressedTimes=0;
 				    run_t.keySetValue=0;
 					cali_t.keyEnter_flag=0;
-					key_t.keyPressedVale= 0xff;
+					
 
 			}
 			else{
@@ -95,7 +95,6 @@ int main(void)
 					run_t.dispCmd=0;
 					keydata = 0xff;
 					
-					
 				}
 				else{
 				
@@ -103,6 +102,14 @@ int main(void)
 					
 				}
 				CheckMode(keydata);//KEY_Function(keydata);
+//				
+//				if(key_t.keyPressedVale ==1)
+//					KEY4_InputCalibration_Mode();
+//				else if(key_t.keyPressedVale ==2){
+//					KEY4_SET_ENTER_Fun();
+//				}
+				
+      
 				RunCommand();
 				
 					
