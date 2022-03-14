@@ -583,10 +583,6 @@ void KEY4_InputCalibration_Mode(void)
      mainitem_t.task_MainMenu = caliTheFirst_Menu ;
      caliMainTop=-1;
      cali_t.CaliMenu_Item = Push_stackCaliMain(4);
-     
-	 
-   
-     SysTick_Delay_Ms(1000);
      key_t.keyPressedLongTimes=1;
 
      printf("Cali_keyEnter_1 = %d\n",cali_t.CaliMenu_Item);
@@ -598,19 +594,9 @@ void KEY4_InputCalibration_Mode(void)
 
 void CAL_KEY4_ENTER_Fun(void)
 {
-     if( cali_t.Thefirst_InputKeyValue==1){
-          mainitem_t.task_MainMenu= caliTheFirst_Menu;
-             cali_t.Thefirst_InputKeyValue++;
-             SysTick_Delay_Ms(1000);
-             SysTick_Delay_Ms(1000);
-            mainitem_t.task_MainMenu= caliTheFirst_Menu;
+    
 
-     printf("Cali_keyEnter _2 = %d\n",cali_t.CaliMenu_Item);
-	   printf("task_MainMenu_ 2 = %d\n", caliTheFirst_Menu);
-     }
-     else{
-
-     if(key_t.keyPressedLongTimes ==1){
+     
      cali_t.keyEnter_flag ++; //= cali_t.keyEnter_flag ^ 0x01;
 
      if(cali_t.keyEnter_flag == 1){//{ //CAL1->{dC-u,CAP,2Ero,SPARn}
@@ -649,11 +635,11 @@ void CAL_KEY4_ENTER_Fun(void)
 
      }
       cali_t.runKeyMenu=mainitem_t.task_MainMenu;
-    }
-     }
+}
+    
       
 
-}
+
 /*******************************************************************
 *
 *Function :execute 
