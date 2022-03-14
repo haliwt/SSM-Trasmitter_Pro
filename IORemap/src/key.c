@@ -111,7 +111,7 @@ void GetKeyValue_Init(void)
 void KEY_Function(uint8_t keydata)
 {
              
-           static uint32_t kf=0;   
+      static uint32_t kf=0,i=0;   
            
           
           
@@ -184,62 +184,38 @@ void KEY_Function(uint8_t keydata)
                      key_t.keyTimes =1;
                      if(key_t.keyset !=key_t.currkeyset){
                           key_t.keyset = key_t.currkeyset;
-                            if(cali_t.CaliControl_key == 0){
+                        if(cali_t.CaliControl_key == 0){
                                   
                               kf++;
-                              printf("kf = %d \n",kf);
-                               printf("enterKEY = %d \n",keydata);
+                        
                                
-                             
-                               if(kf <50000){
-								   
-								   
-								  
-								   if(kf> 30){
-									   
-								       key_t.keyPressedVale =1;
-								    }
-									if(kf<30){
+                          if( kf ==50 ){
 										 
-										   
-										  key_t.keyPressedVale =2;
-									}   
-										   
-										
-									}
-									
-                                       
-                                      kf= kf+20;
-									 
+						  key_t.keyPressedVale =2;
+                                      printf("kf short = %d \n",kf);
+                                  
+					}   
+                                   
+					   			   
+				   if(kf > 100 ){
 									   
-                                  
-						   
-							     if(kf> 30 ){
-                                     key_t.keyPressedVale =1;
-                                       keydata = 0xaa;
-                                    }
-								 
-                                printf("ekey_t.keyPressedVale  = %d \n",key_t.keyPressedVale );
+							key_t.keyPressedVale =1;
+                                          key_t.keyGetLong_flag = 1;
+                                          cali_t.CaliControl_key=1;
+						}
+					 printf("kf = %d \n",kf);
+                               printf("enterKEY = %d \n",keydata);		 
                                
-                        //          if(kf>200){
-                        //                KEY4_InputCalibration_Mode();
-                        //          }
-                        //          else if(kf<200){
-                                       
-                        //                 KEY4_SET_ENTER_Fun();
-                        //          }
-                        //          else kf =0;
-                                 
-                        //     }
-                        //  else{
-                                  
-                                //  CAL_KEY4_ENTER_Fun();//CAL_KEY_ENTER_Fun();
-                                //  key_t.keyPressedTimes=0;
-                            }
+                               
+                      
                              
                          
-                    }
-                  
+                        }
+                        else{
+                           printf("cali_t.CaliControl_key = %d \n",1);
+
+                        }
+                     }
                      CH4_KeyLed();
                      
                  key_t.keyswitch++;
@@ -274,8 +250,8 @@ void KEY_Function(uint8_t keydata)
                
             }
       #endif 
-         
-		if(keydata !=0xf7){
+#if 0  
+	if(keydata !=0xf7){
             switch(key_t.keyPressedVale ){
               
            case 0:
@@ -283,23 +259,36 @@ void KEY_Function(uint8_t keydata)
            break;
            
 		   case 1:
-               
-                          printf("F1funt key  is success \n");
+                    
+                          printf("CALI key  is success 1 \n");
 				
 					KEY4_InputCalibration_Mode();
 				
 				
 				key_t.keyPressedVale=0;
+                 
                
                
                break;
                
           case 2:
-          KEY4_SET_ENTER_Fun();
-          key_t.keyPressedVale=0;
+                 if(key_t.keyGetLong_flag == 0){
+                       SysTick_Delay_Ms(500);
+                     if(key_t.keyGetLong_flag == 0){
+                              KEY4_SET_ENTER_Fun();
+                              key_t.keyPressedVale=0;
+                               printf("CALI key  is success 2\n");
+                    }
+                    else{
+                        KEY4_InputCalibration_Mode();
+                         printf("F1  key  is success 2 \n");
+                    }
+				}
           break;
-        }
+        
          }
+      }
+#endif 
 
 }
 /**********************************************************

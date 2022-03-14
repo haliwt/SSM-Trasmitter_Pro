@@ -10,6 +10,7 @@ typedef struct _KEY_{
 	   uint8_t keyPressedTimes;
 	   uint8_t keyRunTimes;
 	   uint8_t keyPressedVale;
+	   uint8_t keyGetLong_flag;
 	
 	   uint8_t GetKey;
 	   uint8_t PrevKey;
