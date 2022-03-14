@@ -134,14 +134,22 @@ void TIM1_UP_IRQHandler(void)
                 i=0;
                 key_t.keyPressedTimes++;
 				
-		        if(key_t.keyPressedLongTimes > 300)
+		        if(key_t.keyPressedLongTimes > 80)
 		        {
-		        	  printf("adjust is long key times \n");
+		        	  printf("adjust is long key times!!!!!!!!!!!!!!!! \n");
+					  key_t.keyPressedLongTimes=0;
+					  key_t.RunCmd_flag = 2;
+					  run_t.dispCmd=1;
+					 
 
 				}
-				else if(key_t.keyPressedLongTimes >  10 && key_t.keyPressedLongTimes <300){
+				else if(key_t.keyPressedLongTimes >  70 && key_t.keyPressedLongTimes <80){
 
-					 printf("adjust is shot key times \n");
+					 printf("adjust is shot key times !!!!!!!!!!!!!!! \n");
+					 run_t.dispCmd=1;
+				     key_t.RunCmd_flag= 1;
+					 
+					 
 				}
             }
            
