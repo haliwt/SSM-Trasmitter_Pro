@@ -93,7 +93,7 @@ int main(void)
 
 				
                
-			   if( key_t.keyPressedTimes >1 ){
+			   if( key_t.keyPressedTimes >1 && run_t.Fx_Menu_Function==0 &&   key_t.keyPressedLongTimes==0 ){
 			   
 			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
                           key_t.RunCmd_flag=1;

@@ -194,25 +194,32 @@ void KEY_Function(uint8_t keydata)
                         key_t.keyTimes =1;
                           key_t.keyset = key_t.currkeyset;
                         if(cali_t.CaliControl_key == 0){
-                              
-                          key_t.keyGetLong_Numbers++;
-                           if(key_t.keyGetLong_Numbers >1 ){
-										 
-						key_t.keyGetLong_Numbers++;
-                                    key_t.RunCmd_flag =1;
-                                      
-                                    
-                                }   
-                                   
-					   			   
-				   if(key_t.keyGetLong_Numbers> 30){
-									   
-						key_t.keyGetLong_Numbers++;
-                                    cali_t.CaliControl_key=1;
-                                  
+
+                              if(run_t.Fx_Menu_Function ==1){
+
+	                               KEY4_SET_ENTER_Fun();
+
+
                               }
+                              else{
+                                    key_t.keyGetLong_Numbers++;
+                                    if(key_t.keyGetLong_Numbers >1 ){
+                                                                        
+                                                key_t.keyGetLong_Numbers++;
+                                                key_t.RunCmd_flag =1;
+                                                
+                                                
+                                          }   
+                                          
+                                                            
+                                    if(key_t.keyGetLong_Numbers> 30){
+                                                                  
+                                                key_t.keyGetLong_Numbers++;
+                                                cali_t.CaliControl_key=1;
+                                          
+                                          }
 							 
-                               
+                              } 
                          }
                         else{
                          //  if(key_t.keyPressedLongTimes==1){
@@ -221,7 +228,9 @@ void KEY_Function(uint8_t keydata)
                                  key_t.keyGetLong_Numbers=0;
                           // }
                         }
+                        
                      }
+                 
                      CH4_KeyLed();
                      
                  key_t.keyswitch++;
@@ -263,7 +272,7 @@ void KEY_Function(uint8_t keydata)
           menu_t.FxSub_02_key=0;
           menu_t.FxSub_03_key=0;
           menu_t.mainTop= PushMainMenu(); 
-          
+          run_t.Fx_Menu_Function=1;
                                    
        }
        else{
@@ -1356,7 +1365,13 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 { 
      
      if(mainitem_t.task_MainMenu==TheFirst_Menu){
+           run_t.Fx_Menu_Function=0;
+           run_t.keySetValue = 1; //return normal display flag
            run_t.dispCmd=0;
+           key_t.RunCmd_flag=0; //normal display flag 
+           key_t.keyGetLong_Numbers=0;
+           menu_t.menuFirst=0;
+           printf("key3_switch_TheFirst_Menu\n");
            return ;
      }
      if(mainitem_t.task_MainMenu==TheSecond_Menu){
@@ -1375,7 +1390,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           menu_t.mainTop= menu_t.menuId;//PushMainMenu(); 
           menu_t.FxSub_02_key=0;
           menu_t.FxSub_03_key=0;
-        
+          printf("key3_switch_TheSecond_Menu\n");
           return ;
       }
 
