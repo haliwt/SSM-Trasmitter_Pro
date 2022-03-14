@@ -512,6 +512,7 @@ uint8_t Push_stackCaliMain(int8_t maxsize)
 		
 		 caliMainTop ++;
 	}
+   if(caliMainTop>maxsize) caliMainTop = 0;
 	return  caliMainTop ;
 
 }
@@ -521,7 +522,7 @@ uint8_t Pop_stackCaliMain(int8_t maxsize)
        if(caliMainTop ==-1 ||caliMainTop <0 ){
 	      caliMainTop = (maxsize -1);
        }
-	  
+	    if(caliMainTop>200) caliMainTop = (maxsize -1);
      return  caliMainTop ;
 
 
