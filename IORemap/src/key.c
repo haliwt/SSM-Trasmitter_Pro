@@ -301,7 +301,8 @@ static void KEY_SubMenuFun_Enter(void)
             
 		if( menu_t.menuF1Sub_first== 0){ //"F1- 01"
              
-               menu_t.menuF1Sub_first++;
+                menu_t.menuFirst++;
+			   menu_t.menuF1Sub_first++;
                run_t.Fx_Menu_Function=1;
                mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
                menu_t.menuTitle_02=1;

@@ -22,7 +22,7 @@ float Kp_Weight = 293.0f;
 float Weight_Maopi=0;
 
 uint32_t  HX720_Buffer = 0;
-uint32_t  Weight_No_Lode=0;
+uint32_t  Weight_No_Lode=8388608;
 uint32_t  Weight_Lode=0 ;
 
 long HX711_Buffer = 0;
@@ -171,11 +171,14 @@ float Get_Weight(void)
 	HX720_Buffer= GetHX720Data();
 	
 	Weight_Lode = HX720_Buffer;
-		
+	//	Weight_Lode=83886-10020;
 	//�жϷǿ���
 	if(Weight_Lode > Weight_No_Lode)
 	{
-		Weight_Real = (Weight_Lode - Weight_No_Lode)/Kp_Weight;
+	//	Weight_Real = (Weight_Lode - Weight_No_Lode)/Kp_Weight;
+		Weight_Real = (Weight_Lode - Weight_No_Lode);
+		
+		
 	}
 	else if(Weight_Lode <= Weight_No_Lode)
 		Weight_Real = 0.0f;

@@ -97,7 +97,7 @@ int main(void)
                
 			   if( key_t.keyPressedTimes >1 &&  key_t.keyPressedTimes <3){
 			   
-			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<25) {
+			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
                           key_t.RunCmd_flag=1;
 						
 				
@@ -105,7 +105,7 @@ int main(void)
                             key_t.keyPressedLongTimes =0;
 							  printf("F4  short  Function\n");
 						printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		 	
-							KEY4_SET_ENTER_Fun();
+							
 
 				} 
 				if(key_t.keyGetLong_Numbers>30){
