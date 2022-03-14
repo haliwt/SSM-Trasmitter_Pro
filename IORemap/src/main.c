@@ -105,9 +105,12 @@ int main(void)
 
 				} 
 				if(key_t.keyGetLong_Numbers>30){
+						
+							key_t.keyset = key_t.currkeyset;
 						KEY4_InputCalibration_Mode();
 						
-						 CAL_KEY4_ENTER_Fun();
+						
+						
 
 				}  
 				 key_t.keyPressedTimes=0;

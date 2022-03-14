@@ -195,6 +195,10 @@ void CALI_MENU_01_DIS(uint8_t mu)
        case CAL1: //CAL1
           cali_t.CaliMenu_01_Id =CAL1;
           Symbol_CAL1();
+          if(cali_t.Thefirst_InputKeyValue==1){
+              mu = CAL1;
+
+          }
 
        break;
           
@@ -227,12 +231,14 @@ void CALI_MENU_SUB_02_DIS(uint8_t mu)
         case CAL1://dC-u,CAP,2Ero, SPAn
               cali_t.CaliMenu_02_Id = CAL1;
               CaliSubMenu_02_01_Dis(mu);
+          
 
         break;
 
         case CAL2: //dC-u,CAP,2Ero,SEn,SPARn
                 cali_t.CaliMenu_02_Id = CAL2;
                 CaliSubMenu_02_02_Dis(mu);
+                
         break;
 
         case CAL3://CLS ,QtY,C-nS
@@ -578,10 +584,13 @@ void KEY4_InputCalibration_Mode(void)
      caliMainTop=-1;
      cali_t.CaliMenu_Item = Push_stackCaliMain(4);
      
-	 printf("Cali_keyEnter = %d\n",cali_t.CaliMenu_Item);
-	 printf("task_MainMenu = %d\n", caliTheFirst_Menu);
+	 
    
      SysTick_Delay_Ms(1000);
+     key_t.keyPressedLongTimes=1;
+
+     printf("Cali_keyEnter_1 = %d\n",cali_t.CaliMenu_Item);
+	   printf("task_MainMenu_1 = %d\n", caliTheFirst_Menu);
      }
 
 	 
@@ -590,10 +599,14 @@ void KEY4_InputCalibration_Mode(void)
 void CAL_KEY4_ENTER_Fun(void)
 {
      if( cali_t.Thefirst_InputKeyValue==1){
+          mainitem_t.task_MainMenu= caliTheFirst_Menu;
              cali_t.Thefirst_InputKeyValue++;
              SysTick_Delay_Ms(1000);
              SysTick_Delay_Ms(1000);
-            
+            mainitem_t.task_MainMenu= caliTheFirst_Menu;
+
+     printf("Cali_keyEnter _2 = %d\n",cali_t.CaliMenu_Item);
+	   printf("task_MainMenu_ 2 = %d\n", caliTheFirst_Menu);
      }
      else{
 

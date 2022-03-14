@@ -197,21 +197,25 @@ void RunCalibration_Command(void)
            case caliTheFirst_Menu: //Calibration Function //CAL1 ,CAL2,CAL3 ,CAL5
          
                   CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
-
+                printf("Cali_theFirstMenu = %d\n",cali_t.CaliMenu_Item);
             break;
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
-                    
+                    if(cali_t.Thefirst_InputKeyValue==1 ||cali_t.Thefirst_InputKeyValue==0 ){
+                                mainitem_t.task_MainMenu=caliTheFirst_Menu;
+                    }
+                    else{
                     CALI_MENU_SUB_02_DIS( cali_t.CaliSub_theSecond_02_Item);
-                  //  printf("runTheSecond = %d\n", cali_t.CaliSub_theSecond_02_Item);
+                    printf("runTheSecond = %d\n", cali_t.CaliSub_theSecond_02_Item);
                     // printf("runSencod_02_Title = %d\n",  cali_t.CaliSub_Menu_02_Title);
+                    }
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
                     
                      CALI_MENU_SUB_03_DIS( cali_t.CaliMenu_02_sub_Id);
-                    // printf("RunThethird  = %d\n",  cali_t.CaliMenu_Item);
-                     printf("RunThird_sub  = %d\n",  cali_t.CaliMenu_02_sub_Id);
+                    printf("RunThethird  = %d\n",  cali_t.CaliMenu_Item);
+                     //printf("RunThird_sub  = %d\n",  cali_t.CaliMenu_02_sub_Id);
             break;
 
 

@@ -204,6 +204,7 @@ void KEY_Function(uint8_t keydata)
 						key_t.keyGetLong_Numbers++;
                                     
                                     cali_t.CaliControl_key=1;
+                                    key_t.keyset = key_t.currkeyset;
                                      
                                     
 					}
