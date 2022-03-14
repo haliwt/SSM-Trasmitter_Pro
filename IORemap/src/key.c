@@ -253,59 +253,30 @@ void KEY_Function(uint8_t keydata)
                  case 0xf7://KEY4-SET/CAL-->Enter
                       CH2_KeyLed();
 					  
-                     
+                     if(run_t.EnterKey_flag ==1){
                      if(key_t.keyset !=key_t.currkeyset){
                         
                           key_t.keyset = key_t.currkeyset;
                         if(cali_t.CaliControl_key == 0){
 
-                              if(run_t.Fx_Menu_Function ==0){
-
-	                              key_t.keyTimes =1;
-                                     key_t.keyGetLong_Numbers++;
-                                    if(key_t.keyGetLong_Numbers >1 && key_t.keyGetLong_Numbers <30){
-                                                                        
-                                                key_t.keyGetLong_Numbers++;
-                                                key_t.RunCmd_flag =1;
-                                                
-                                                
-                                          }   
-                                          
-                                                            
-                                    if(key_t.keyGetLong_Numbers> 30){
-                                                                  
-                                                key_t.keyGetLong_Numbers++;
-                                                cali_t.CaliControl_key=1;
-                                          
-                                          }
-
-                              }
-                              else{ 
-                                    key_t.keyGetLong_Numbers=28;
-                                    key_t.keyTimes =0;
-                                    key_t.keyPressedTimes=10;
-                                     KEY4_SET_ENTER_Fun();
+                            KEY4_SET_ENTER_Fun();      
+                        }
+                        else{
                               
-                              }      
-                                   
-							 
+                             CAL_KEY4_ENTER_Fun() ;
+                              
                         }
-                         else{
-                         //  if(key_t.keyPressedLongTimes==1){
-                                 CAL_KEY4_ENTER_Fun();
-                                 printf("CAL_KEY4_ENTER_Fun()\n ");
-                                 key_t.keyGetLong_Numbers=0;
-                          // }
-                        }
-                     }
+                       CH4_KeyLed();
+                          
                      
                  
-                     CH4_KeyLed();
+                    
                      
                  key_t.keyswitch++;
                  key_t.keytrae++;
                  key_t.keyzero++; 
-                keydata = 0xaa;
+                  }
+              
 								      
                break;
                
@@ -320,7 +291,7 @@ void KEY_Function(uint8_t keydata)
 
                
             }
-     
+		}
 
 
 }

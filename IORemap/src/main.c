@@ -70,7 +70,7 @@ int main(void)
 		if(run_t.keySetValue == 0){
 			      keydata  = ScanKey();
 
-		          if(keydata == 0xf7){
+		          if(keydata == 0xf7 && run_t.EnterKey_flag ==0){
 
 		          scanvalue = Scan_EnterKey(keydata);
 		   		  printf(" enterKey = %d \n", scanvalue);
@@ -122,20 +122,15 @@ int main(void)
 			 if(run_t.dispCmd ==1){
 
 				
-               
-			   
-			   
-			 
-				if(key_t.keyadjust_flag ==2){
+               if(run_t.EnterKey_flag ==0){
+			   if(key_t.keyadjust_flag ==2){
 						
 						KEY4_InputCalibration_Mode();
+						cali_t.CaliControl_key =1;
 						key_t.keyPressedLongTimes =0;
-					//	printf("CAL  Function  Enable\n");
-						 
-				 
-
-				 key_t.keyTimes=0;
-				  key_t.keyPressedLongTimes=0;
+				run_t.EnterKey_flag =1;
+						key_t.keyTimes=0;
+				        key_t.keyPressedLongTimes=0;
 
 									
 			   } 
@@ -144,19 +139,18 @@ int main(void)
 						    key_t.keyTimes=0;
 				  key_t.keyPressedLongTimes=0;
 						
-				
+							run_t.EnterKey_flag =1;
 							KEY4_SET_ENTER_Fun();
                             key_t.keyPressedLongTimes =0;
 					
 
 			   }
 			   else{
-						 if(run_t.timerOver_flag ==3 || key_t.keyPressedLongTimes !=0) 	{
+					 if(run_t.timerOver_flag ==3 || key_t.keyPressedLongTimes !=0) 	{
 						 	run_t.timerOver_flag=0;
-
-                               		    key_t.keyTimes=0;
-				                      key_t.keyPressedLongTimes=0;
-
+							key_t.keyTimes=0;
+				             key_t.keyPressedLongTimes=0;
+							run_t.EnterKey_flag =1;
 							KEY4_SET_ENTER_Fun();
                            
 					
@@ -164,15 +158,8 @@ int main(void)
 							
 
 			   }
-
-
-
-			   
-
-
-				
-				
-				if(run_t.keySetValue == 1){
+			}
+			if(run_t.keySetValue == 1){
 					run_t.dispCmd=0;
 					keydata = 0xff;
 					key_t.RunCmd_flag=0;
@@ -187,9 +174,8 @@ int main(void)
 					
 				}
 
-				////printf(" key_t.keyTimes = %d \n",key_t.keyTimes);	
-				//printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		
-			//	CheckMode(keydata);//KEY_Function(keydata);
+					
+				CheckMode(keydata);//KEY_Function(keydata);
 
 				
       

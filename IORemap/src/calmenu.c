@@ -1086,12 +1086,13 @@ void CALI_KEY2_DOWN_Fun(void)
           run_t.keySetValue = 1; //return normal display flag
          run_t.dispCmd=0; //key be pressed flag 
          run_t.keyReturn =0; //return 
-         key_t.RunCmd_flag=0; //normal display flag 
+        
          key_t.keyPressedLongTimes=0;
          cali_t.CaliControl_key=0; //F1~F9 function and calibration funcont flag
          cali_t.Thefirst_InputKeyValue=0;
          key_t.keyGetLong_Numbers=0;
-         run_t.Fx_Menu_Function=0;
+        
+         run_t.EnterKey_flag =0;
         
        
           printf("key3_switch_dispCmd=0= %d\n", run_t.keySetValue);
