@@ -75,18 +75,16 @@ int main(void)
 		          scanvalue = Scan_EnterKey(keydata);
 		   		  printf(" enterKey = %d \n", scanvalue);
 				  
-			       
-				  
+			       key_t.keyTimes=1;
+				  key_t.keyPressedLongTimes++ ;
 				 
 				   
-                     keylong1 ++;
-					 keylong2++ ;
-					if(keylong1 > 134254727 ){
+                    
+					if(key_t.keyPressedLongTimes > 134254727 ){
 					       run_t.dispCmd=1;
-						   key_t.keyPressedLongTimes=2;
+						 
 					   
 					 } 
-					 if(keylong2 > 100)key_t.keyPressedLongTimes=1;
 
 				      printf("  keylong1  = %d \n",  keylong1 );
 			   }
@@ -118,7 +116,7 @@ int main(void)
 
 			}
 			
-           if(run_t.dispCmd==1){
+           if(run_t.dispCmd==2){
 
 				
                
