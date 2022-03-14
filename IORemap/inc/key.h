@@ -93,5 +93,6 @@ void Number_Digital_4bit_AddSelect(int8_t *ap);
 
 void Number_Digital_5bitPoint_AddSelect(int8_t *ap);
 void Number_Digital_5bitPoint_DecSelect(int8_t *ap);
+uint8_t Scan_EnterKey(uint8_t keyvalue);
 #endif 
 

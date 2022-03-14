@@ -130,7 +130,7 @@ void TIM1_UP_IRQHandler(void)
 		
 		if(key_t.keyTimes ==1) {
             i++;
-            if(i>199){ //500ms
+            if(i>299){ //500ms
                 i=0;
                 key_t.keyPressedTimes++;
 				

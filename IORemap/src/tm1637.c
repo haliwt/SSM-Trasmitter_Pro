@@ -402,7 +402,7 @@ uint8_t ScanKey(void)
 	  for(i=0;i<8;i++){
 			 GPIO_ResetBits(I2C_SCL_PORT, I2C_SCL_PIN);//clk=0; 
 			 rekey = rekey>>1;
-			 SysTick_Delay_us(300);//Delay_us(30);
+			 SysTick_Delay_us(10);//Delay_us(30);
 			 GPIO_SetBits(I2C_SCL_PORT, I2C_SCL_PIN); //clk=1 
 			
 			 GPIO_InputInit(I2C_SDA_PORT, I2C_SDA_PIN);
@@ -414,7 +414,7 @@ uint8_t ScanKey(void)
 			     rekey =rekey | 0x00;
 			 
 			 }
-			 SysTick_Delay_us(300);//Delay_us(30);
+			 SysTick_Delay_us(10);//Delay_us(30);
 		}
 		I2Cask();
 		I2CStop();

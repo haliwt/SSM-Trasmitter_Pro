@@ -32,7 +32,8 @@ void assert_failed(const uint8_t* expr, const uint8_t* file, uint32_t line)
 int main(void)
 {
    
-    uint8_t keydata;
+    uint8_t keydata,scanvalue,cnt1,cnt2;
+	uint32_t keylong1,keylong2;
 	
 	/*SystemInit() function has been called by startup file startup_n32l40x.s*/
 
@@ -58,14 +59,38 @@ int main(void)
 	  TIM1_NVIC_Configuration();
 	  KeyValua_Init();
 	  Menu_Init();
-     
+  
 	run_t.keySetValue=0;
     while (1)
     {
 	  
-		   if(run_t.keySetValue == 0){
+		
+		
+		
+		if(run_t.keySetValue == 0){
 			      keydata  = ScanKey();
+
+		          if(keydata == 0xf7){
+
+		          scanvalue = Scan_EnterKey(keydata);
+		   		  printf(" enterKey = %d \n", scanvalue);
 				  
+			       
+				  
+				 
+				   
+                     keylong1 ++;
+					 keylong2++ ;
+					if(keylong1 > 134254727 ){
+					       run_t.dispCmd=1;
+						   key_t.keyPressedLongTimes=2;
+					   
+					 } 
+					 if(keylong2 > 100)key_t.keyPressedLongTimes=1;
+
+				      printf("  keylong1  = %d \n",  keylong1 );
+			   }
+				   
 		    }
 			else{
 			        run_t.dispCmd=0;
@@ -74,9 +99,10 @@ int main(void)
 					cali_t.CaliControl_key=0;
 					 key_t.keyGetLong_Numbers=0;
 					 run_t.Fx_Menu_Function=0;
+					  key_t.keyPressedTimes=0;
 			}
-			
-			if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
+
+			 if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
 				    Get_Weight();
 			        Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 				    SysTick_Delay_Ms(200);
@@ -91,11 +117,12 @@ int main(void)
 					
 
 			}
-			else{
+			
+           if(run_t.dispCmd==1){
 
 				
                
-			   if( key_t.keyPressedTimes >1 &&  key_t.keyPressedTimes <3){
+			   if( key_t.keyPressedTimes >2  && key_t.keyPressedTimes  < 20){
 			   
 			    if(key_t.keyGetLong_Numbers>1 && key_t.keyGetLong_Numbers<30) {
                           key_t.RunCmd_flag=1;
@@ -127,12 +154,16 @@ int main(void)
 					cali_t.CaliControl_key=0;
 					 key_t.keyGetLong_Numbers=0;
 					 run_t.Fx_Menu_Function=0;
+					  key_t.keyPressedTimes=0;
 				}
 				else{
 				
 				    run_t.dispCmd=1;
 					
 				}
+
+				printf(" key_t.keyTimes = %d \n",key_t.keyTimes);	
+				printf(" key_t.keyPressedTimes = %d \n",key_t.keyPressedTimes);		
 				CheckMode(keydata);//KEY_Function(keydata);
 
 				
@@ -141,6 +172,7 @@ int main(void)
 				
 					
 				
+
 				
 			}
 			

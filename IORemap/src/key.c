@@ -110,6 +110,69 @@ void KeyValua_Init(void)
 
 }
 
+
+uint8_t Scan_EnterKey(uint8_t keyvalue)
+{
+
+    static uint32_t key1,key2;
+
+	   uint8_t cnt1,cnt2;
+
+	 if(keyvalue == 0xf7){
+
+      
+	    if(key1<51)
+	   	{
+                
+          key1++;
+
+
+	   }
+	   else
+	   	 key1=0;
+
+	   if(key2<101){
+          key2++;
+
+	   	}
+	   else 
+	   	key2 =0;
+
+	 }
+
+	 
+
+	   if(key1==50){
+
+          cnt1 = 0x02;
+
+	   }
+
+	   if(key2==100){
+
+         cnt2 = 0x04;
+
+	   }
+
+
+	   
+      return (cnt1|cnt2);
+
+
+
+
+
+}
+		
+
+	
+	
+
+
+
+
+
+
 void KEY_Function(uint8_t keydata)
 {
              
@@ -189,6 +252,7 @@ void KEY_Function(uint8_t keydata)
 
                  case 0xf7://KEY4-SET/CAL-->Enter
                       CH2_KeyLed();
+					  
                      
                      if(key_t.keyset !=key_t.currkeyset){
                         
@@ -199,7 +263,7 @@ void KEY_Function(uint8_t keydata)
 
 	                              key_t.keyTimes =1;
                                      key_t.keyGetLong_Numbers++;
-                                    if(key_t.keyGetLong_Numbers >1 ){
+                                    if(key_t.keyGetLong_Numbers >1 && key_t.keyGetLong_Numbers <30){
                                                                         
                                                 key_t.keyGetLong_Numbers++;
                                                 key_t.RunCmd_flag =1;
