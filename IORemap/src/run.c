@@ -166,7 +166,7 @@ void RunCommand(void)
                     key_t.keyswitch++;
                     key_t.keytrae++;
                     key_t.keyzero++; 
-                    key_t.keyTimes =0;
+                 
 					run_t.dispCmd=0;
 
          break;

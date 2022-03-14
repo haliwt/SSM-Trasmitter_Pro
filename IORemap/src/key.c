@@ -181,27 +181,36 @@ void KEY_Function(uint8_t keydata)
                 
                     run_t.dispCmd =1;
                     CH2_KeyLed();
-                     key_t.keyTimes =1;
+                     
                      if(key_t.keyset !=key_t.currkeyset){
+                        key_t.keyTimes =1;
                           key_t.keyset = key_t.currkeyset;
                         if(cali_t.CaliControl_key == 0){
+                              
                                   
                               kf++;
+                              key_t.keyGetLong_Numbers=kf;
                         
                                
-                          if( kf ==50 ){
+                          if(key_t.keyGetLong_Numbers ==7 ){
 										 
-						  key_t.keyPressedVale =2;
+						 key_t.keyGetLong_Numbers++;
+                                      key_t.keyPressedVale =2;
+                                      
                                       printf("kf short = %d \n",kf);
                                   
-					}   
+				  }   
                                    
 					   			   
-				   if(kf > 100 ){
+				   if(key_t.keyGetLong_Numbers> 15){
 									   
-							key_t.keyPressedVale =1;
-                                          key_t.keyGetLong_flag = 1;
+							key_t.keyGetLong_Numbers++;
+                                          key_t.keyPressedVale =1;
+                                         
+					  
                                           cali_t.CaliControl_key=1;
+                                      //   key_t.keyGetLong_Numbers=0;
+                                         kf=0;
 						}
 					 printf("kf = %d \n",kf);
                                printf("enterKEY = %d \n",keydata);		 
@@ -242,8 +251,8 @@ void KEY_Function(uint8_t keydata)
                     key_t.keyswitch++;
                     key_t.keytrae++;
                     key_t.keyzero++; 
-                    key_t.keyTimes =0;
-                    key_t.keyPressedTimes=0;
+                    
+                   
 			        keydata = 0;
                break;
 

@@ -81,15 +81,36 @@ int main(void)
                     key_t.keyswitch++;
                     key_t.keytrae++;
                     key_t.keyzero++; 
-                    key_t.keyTimes =0;
+                   
 					menu_t.DisplaySmgBit_Select_Numbers=0xff;
-			        key_t.keyPressedTimes=0;
 				    run_t.keySetValue=0;
 					cali_t.keyEnter_flag=0;
 					
 
 			}
 			else{
+
+				
+               
+			   if( key_t.keyPressedTimes >1){
+			   
+			    if(key_t.keyGetLong_Numbers ==8) {
+
+						
+					printf(" key_t.keyGetLong_Numbers = %d \n", key_t.keyGetLong_Numbers);		 	
+
+                             key_t.keyPressedVale =2;
+							  printf("F4  short  Function\n");
+						
+
+				} 
+				if(key_t.keyGetLong_Numbers>15){
+
+						key_t.keyPressedVale =1;
+
+				}  
+					printf("enter key ????? %d\n",key_t.keyPressedVale);				
+			   }        
 				
 				if(run_t.keySetValue == 1){
 					run_t.dispCmd=0;
@@ -102,12 +123,7 @@ int main(void)
 					
 				}
 				CheckMode(keydata);//KEY_Function(keydata);
-//				
-//				if(key_t.keyPressedVale ==1)
-//					KEY4_InputCalibration_Mode();
-//				else if(key_t.keyPressedVale ==2){
-//					KEY4_SET_ENTER_Fun();
-//				}
+
 				
       
 				RunCommand();
