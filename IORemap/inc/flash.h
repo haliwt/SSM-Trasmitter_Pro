@@ -10,7 +10,7 @@
 
 #define SIZE 							128 /4 
 
-#define FLASH_PAGE_SIZE        ((uint16_t)0x800)
+#define FLASH_PAGE_SIZE   		 ((uint16_t)0x80) //  ((uint16_t)0x800)
 
 #define FLASH_WRITE_START_ADDR ((uint32_t)0x08010000) // 
 
@@ -37,7 +37,7 @@ typedef struct _FLASH{
 		 uint8_t array_8bit_2;
 		 uint8_t array_8bit_3;
 
-		 uint32_t flashData[32];
+		 uint32_t flashData[BUFFER_SIZE];
 
 
 		 uint32_t *pointerflash;

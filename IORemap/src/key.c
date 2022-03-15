@@ -380,6 +380,8 @@ static void KEY_SubMenuFun_Enter(void)
                         
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
 						flash_t.flashSave_falg =1; //flash save data 
+						FlashSaveData();
+				
                      
                         printf("f1sub_top_return = %d\n",menu_t.F1_SubMenuTop);
                     }
@@ -804,6 +806,10 @@ static void KEY1_ZERIO_UP_Fun(void)
                                     menu_t.F1_Sub03_decade=menu_t.decade;
                                    menu_t.F1_Sub03_hundred =menu_t.hundred;
                                      key_t.keyReturn_flag=1;
+
+									 menu_t.unit =0x01;
+									 menu_t.decade =0x02;
+									 menu_t.hundred =0x03;
 
 									 SRAM_Data_Buffer[1]   = menu_t.unit << 16 ; //save flash data 
 

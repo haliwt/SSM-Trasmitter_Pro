@@ -177,15 +177,14 @@ int main(void)
 				    run_t.dispCmd=1;
 					
 				}
+				FlashSaveData();
 
 					
 				CheckMode(keydata);//KEY_Function(keydata);
 
-				
-      
 				RunCommand();
 
-				FlashSaveData();
+			
 				
 					
 			}
