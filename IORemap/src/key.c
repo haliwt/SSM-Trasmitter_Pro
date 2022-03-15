@@ -735,10 +735,11 @@ static void KEY1_ZERIO_UP_Fun(void)
                                     if(f1r01 == 0) {
 										f1r01++;
 										Flash_Read();
+									    menu_t.F1_Sub01_Top=(flash_t.flashData[0] & 0xff000000) >> 24;
 									    
                                     }
                                     
-                                    menu_t.F1_Sub01_Top=(flash_t.flashData[0] & 0xff000000) >> 24;
+                                 
                                     
 							        if(f1r01==1){
 										f1r01++;
@@ -747,7 +748,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 										menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
 									}
 						            Flash_Data_Buffer[0] = menu_t.F1_Sub01_Top <<    24 ; //SRAM_Data_Buffer[0]= menu_t.F1_Sub01_Top
-						            FlashSaveData();
+						           
 						            
                                     printf("f1sub_01_n_Top = %d\n",menu_t.F1_Sub01_Top);
                                    key_t.keyReturn_flag=1;
@@ -759,12 +760,13 @@ static void KEY1_ZERIO_UP_Fun(void)
 										f1r02++;
 										Flash_Read();
 									    
-                                    }
-									menu_t.unit=(flash_t.flashData[0] & 0x00ff0000) >> 16; //form flas read data 
+                                    
+											menu_t.unit=(flash_t.flashData[0] & 0x00ff0000) >> 16; //form flas read data 
 
-									menu_t.decade=(flash_t.flashData[0] & 0x0000ff00) >> 8;
+											menu_t.decade=(flash_t.flashData[0] & 0x0000ff00) >> 8;
 
-									menu_t.hundred=(flash_t.flashData[0] & 0x000000ff) >> 0;
+											menu_t.hundred=(flash_t.flashData[0] & 0x000000ff) >> 0;
+							         	}
 
 									if(f1r02==1){
 										 f1r02++;
@@ -786,7 +788,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 									SRAM_Data_Buffer[0] = menu_t.decade <<8;
 
 									SRAM_Data_Buffer[0] = menu_t.hundred <<0;
-									 FlashSaveData();
+									
 								   
                                     printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);
                                     key_t.keyReturn_flag=1;
