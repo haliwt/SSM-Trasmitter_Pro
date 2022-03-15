@@ -42,8 +42,8 @@ void Sensor_Init(void)
 {
     GPIO_InitType GPIO_InitStructure;
 	
-	//RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
-	RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
+	RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA, ENABLE);
+	//RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOB, ENABLE);
 	 
    // RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_GPIOB, ENABLE);
     //output CLK
