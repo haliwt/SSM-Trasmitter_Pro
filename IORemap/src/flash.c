@@ -72,7 +72,7 @@ void Flash_DMA_WriteData(void)
 	
 	/* Unlocks the FLASH Program Erase Controller */
    
-	SRAM_Data_Buffer[0] = 0x01020304;
+	//SRAM_Data_Buffer[0] = 0x01020304;
 
     /* Erase */
    

@@ -177,7 +177,12 @@ int main(void)
 				    run_t.dispCmd=1;
 					
 				}
-				FlashSaveData();
+
+				if(flash_t.flashSave_falg ==1){
+				
+                   FlashSaveData();
+				   flash_t.flashSave_falg=0;
+				}
 
 					
 				CheckMode(keydata);//KEY_Function(keydata);

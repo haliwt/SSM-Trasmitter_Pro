@@ -380,7 +380,6 @@ static void KEY_SubMenuFun_Enter(void)
                         
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
 						flash_t.flashSave_falg =1; //flash save data 
-						FlashSaveData();
 				
                      
                         printf("f1sub_top_return = %d\n",menu_t.F1_SubMenuTop);
@@ -1850,7 +1849,7 @@ void Number_Digital_3bit_AddSelect(void)
                   }
                    
        }
-      else if(menu_t.inputNumber_Select >=2){
+      else if(menu_t.inputNumber_Select ==2){
                   menu_t.hundred++;  
                   if(menu_t.hundred >9){
                   menu_t.hundred=0;
@@ -1876,7 +1875,7 @@ void Number_Digital_3bit_DecSelect(void)
             printf("s_2 = %d\n",menu_t.decade);
       
       }
-      else if(menu_t.inputNumber_Select >=2){
+      else if(menu_t.inputNumber_Select ==2){
             menu_t.hundred--;
             if(menu_t.hundred < 0){ 
               menu_t.hundred=9;
