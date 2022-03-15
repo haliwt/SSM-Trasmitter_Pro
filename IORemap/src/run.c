@@ -33,7 +33,7 @@ void RunCommand(void)
                      F1_DIS();
                     F1SubMenu(menu_t.F1_SubMenuTop); //"Fx - 01"
                     printf("runCmd_thSecondMenu_01\n");
-                    key_t.keyReturn_flag=0;
+                 
 
                  break;
 

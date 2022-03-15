@@ -9,7 +9,9 @@ typedef struct _RUN{
     uint8_t keyReturn;
     uint8_t Fx_Menu_Function ;
 	uint8_t timerOver_flag;
-    uint8_t EnterKey_flag
+    uint8_t EnterKey_flag;
+	uint8_t SaveDataSelect_flag;
+		
 }run;
 
 extern run run_t;

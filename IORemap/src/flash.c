@@ -1,5 +1,7 @@
 #include "flash.h"
 
+flash flash_t;
+
 
 typedef enum
 {
@@ -7,10 +9,10 @@ typedef enum
     PASSED = !FAILED
 } Status;
 
-void DMA_Flash_SRAM_Config(void);
+
 uint8_t Buffercmp(const uint32_t* pBuffer1, uint32_t* pBuffer2, uint32_t BufferLength);
 
-#define BUFFER_SIZE 		(uint32_t)32
+
 
 #define FLASH_PAGE_SIZE        ((uint16_t)0x800)
 #define FLASH_WRITE_START_ADDR ((uint32_t)0x08010000)
@@ -20,13 +22,23 @@ uint8_t Buffercmp(const uint32_t* pBuffer1, uint32_t* pBuffer2, uint32_t BufferL
 
 #define BUFFER_SIZE (uint32_t)32
 
+
+
+void Flash_DMA_WriteData(void);
+
+
 uint32_t Flash_Data_Buffer[BUFFER_SIZE] __attribute__((at(FLASH_WRITE_START_ADDR)));
 
-const uint32_t SRAM_Data_Buffer[BUFFER_SIZE] = {
+/*uint32_t SRAM_Data_Buffer[BUFFER_SIZE] = {
     0x01020304, 0x05060708, 0x090A0B0C, 0x0D0E0F10, 0x11121314, 0x15161718, 0x191A1B1C, 0x1D1E1F20,
     0x21222324, 0x25262728, 0x292A2B2C, 0x2D2E2F30, 0x31323334, 0x35363738, 0x393A3B3C, 0x3D3E3F40,
     0x41424344, 0x45464748, 0x494A4B4C, 0x4D4E4F50, 0x51525354, 0x55565758, 0x595A5B5C, 0x5D5E5F60,
-    0x61626364, 0x65666768, 0x696A6B6C, 0x6D6E6F70, 0x71727374, 0x75767778, 0x797A7B7C, 0x7D7E7F80};
+    0x61626364, 0x65666768, 0x696A6B6C, 0x6D6E6F70, 0x71727374, 0x75767778, 0x797A7B7C, 0x7D7E7F80}; */
+
+
+uint32_t SRAM_Data_Buffer[BUFFER_SIZE] ;//= { };
+
+
 
 
 /**
@@ -120,5 +132,60 @@ uint8_t Buffercmp(const uint32_t* pBuffer1, uint32_t* pBuffer2, uint32_t BufferL
         pBuffer2++;
     }
 
-    return PASSED;
+	return PASSED;
+}
+
+
+void FlashSaveData(void)
+{
+    //if(flash_t.flashSave_falg == 1){
+
+        
+	    Flash_DMA_WriteData();
+		flash_t.flashSave_falg =0;
+
+   //}
+
+
+}
+
+//读取指定地址的一个字(32位数据) 
+//faddr:读地址 
+//返回值:对应数据.
+uint32_t STMFLASH_ReadWord(uint32_t faddr)
+{
+	return *(uint32_t*)faddr; 
+}  
+
+//从指定地址开始读出指定长度的数据
+//ReadAddr:起始地址
+//pBuffer:数据指针
+//NumToRead:字(32位)数
+void STMFLASH_Read(uint32_t ReadAddr,uint32_t *pBuffer,uint32_t NumToRead)   	
+{
+	uint32_t i;
+	for(i=0;i<NumToRead;i++)
+	{
+		pBuffer[i]=STMFLASH_ReadWord(ReadAddr);//4 of words 
+		ReadAddr+=4;//偏移4个字节.	
+		
+		printf("ReadAddr = %x",pBuffer[i]);
+	}
+}
+
+void Flash_Read(void)
+{
+
+	uint32_t Counter_Num =0;
+
+	if(flash_t.flashRead_flag==0){
+	
+		    for (Counter_Num = 0; Counter_Num < FLASH_PAGE_SIZE; Counter_Num += 4)
+		   {
+			   flash_t.flashData[Counter_Num]= *(__IO uint32_t*)(FLASH_WRITE_START_ADDR + Counter_Num);
+			   if(Counter_Num   >= FLASH_PAGE_SIZE) flash_t.flashRead_flag= 1;
+		   }
+			
+   }
+
 }

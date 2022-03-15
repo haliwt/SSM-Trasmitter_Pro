@@ -11,6 +11,10 @@ KEY key_t;
 run run_t;
 
 
+
+
+
+
 uint8_t F305_tmp4,F305_tmp5,F305_tmp6,F305_tmp7;
 subNumbers_TypedDef submenStruct;
 int8_t AF104[4];
@@ -366,7 +370,7 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.menu_F1Sub_03_xx_key=menu_t.F1SubMenu_Id;
                     }    
                   
-                  else{
+                  else{  //return last menu and save data
                         
                         menu_t.menuId= F1;
                         mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
@@ -375,6 +379,7 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.menuTitle_03=0;
                         
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
+						flash_t.flashSave_falg =1; //flash save data 
                      
                         printf("f1sub_top_return = %d\n",menu_t.F1_SubMenuTop);
                     }
@@ -670,7 +675,8 @@ static void KEY_SubMenuFun_Enter(void)
 static void KEY1_ZERIO_UP_Fun(void)
 {
      
-     switch(menu_t.FxMainMenu_key){
+  static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r;
+	 switch(menu_t.FxMainMenu_key){
 
          case 0:
 
@@ -724,76 +730,298 @@ static void KEY1_ZERIO_UP_Fun(void)
                     case 0xf10:
                           switch(menu_t.menu_F1Sub_03_xx_key){
 
-                              case 0x00: //F1-01-01
-                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
-                                  printf("f1sub_01_n_Top = %d\n",menu_t.F1_Sub01_Top);
+                              case 0x00: //F1-01-01  -8bit flash_t.pointer = 
+                                    if(f1r01 == 0) {
+										f1r01++;
+										Flash_Read();
+									    
+                                    }
+                                    
+                                    menu_t.F1_Sub01_Top=(flash_t.flashData[0] & 0xff000000) >> 24;
+                                    
+							        if(f1r01==1){
+										f1r01++;
+									}
+									else{
+										menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
+									}
+						            Flash_Data_Buffer[0] = menu_t.F1_Sub01_Top <<    24 ; //SRAM_Data_Buffer[0]= menu_t.F1_Sub01_Top
+						            FlashSaveData();
+						            
+                                    printf("f1sub_01_n_Top = %d\n",menu_t.F1_Sub01_Top);
                                    key_t.keyReturn_flag=1;
                               break;
 
-                              case 0x01: //F1-02-01
-                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
-                                   menu_t. F1_Sub02_unit= menu_t.unit;
+                              case 0x01: //F1-02-01 -8bit
+
+							         if(f1r02== 0) {
+										f1r02++;
+										Flash_Read();
+									    
+                                    }
+									menu_t.unit=(flash_t.flashData[0] & 0x00ff0000) >> 16; //form flas read data 
+
+									menu_t.decade=(flash_t.flashData[0] & 0x0000ff00) >> 8;
+
+									menu_t.hundred=(flash_t.flashData[0] & 0x000000ff) >> 0;
+
+									if(f1r02==1){
+										 f1r02++;
+
+									}
+									else{
+								    
+							          RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+
+									}
+								   
+								   
+							        menu_t. F1_Sub02_unit= menu_t.unit;
                                     menu_t.F1_Sub02_decade=menu_t.decade;
-                                   menu_t.F1_Sub02_hundred =menu_t.hundred;
-                                
+                                    menu_t.F1_Sub02_hundred =menu_t.hundred;
+
+								    SRAM_Data_Buffer[0]   = menu_t.unit << 16 ; //save flash data 
+
+									SRAM_Data_Buffer[0] = menu_t.decade <<8;
+
+									SRAM_Data_Buffer[0] = menu_t.hundred <<0;
+									 FlashSaveData();
+								   
                                     printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);
                                     key_t.keyReturn_flag=1;
                               break;
 
-                               case 0x02: //F1-03-01
+                               case 0x02: //F1-03-01  
+								      menu_t.unit=(SRAM_Data_Buffer[1] & 0x00ff0000) >> 16; //form flas read data 
+
+									menu_t.decade=(SRAM_Data_Buffer[1] & 0x0000ff00) >> 8;
+
+									menu_t.hundred=(SRAM_Data_Buffer[1] & 0x000000ff) >> 0;
+							  
+							       
                                    RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
                                    menu_t. F1_Sub03_unit= menu_t.unit;
                                     menu_t.F1_Sub03_decade=menu_t.decade;
                                    menu_t.F1_Sub03_hundred =menu_t.hundred;
                                      key_t.keyReturn_flag=1;
+
+									 SRAM_Data_Buffer[1]   = menu_t.unit << 16 ; //save flash data 
+
+									SRAM_Data_Buffer[1] = menu_t.decade <<8;
+
+									SRAM_Data_Buffer[1] = menu_t.hundred <<0;
+									 
                                    
                               break;
 
                                case 0x03: //F1-04-01
+
+								    AF104[0]=(SRAM_Data_Buffer[2] & 0xFF000000) >> 24; //form flas read data 
+
+									AF104[1]=(SRAM_Data_Buffer[2] & 0x0000ff00) >> 16;
+
+									AF104[2]=(SRAM_Data_Buffer[2] & 0x000000ff) >> 8;
+
+									AF104[3]=(SRAM_Data_Buffer[2] & 0x000000ff) >> 0;
+							  
+							   
                                     Number_Digital_4bit_AddSelect(AF104);
+									
+									SRAM_Data_Buffer[2] = AF104[0] & 0XFF << 24;
+
+									SRAM_Data_Buffer[2] = AF104[1] & 0XFF <<16;
+
+									SRAM_Data_Buffer[2] = AF104[2] & 0XFF << 8;
+
+									SRAM_Data_Buffer[2] = AF104[3] & 0XFF <<0;
+							  
+
+									
+									
                                       key_t.keyReturn_flag=1;
                               break;
 
                                 case 0x04://F1-05-01
+
+									
+								  AF105[0]=(SRAM_Data_Buffer[3] & 0xFF000000) >> 24; //form flas read data 
+								   
+								  AF105[1]=(SRAM_Data_Buffer[3] & 0x0000ff00) >> 16;
+
+								
                                    Number_Digital_2bit_AddSelect(AF105);
+
+                                   	SRAM_Data_Buffer[3] = AF105[0] & 0XFF << 24;
+
+									SRAM_Data_Buffer[3] = AF105[1] & 0XFF <<16;
+								   
                                    printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
                                  key_t.keyReturn_flag=1;
                               break;
 
                               case 0x05://F1-06-01
+
+
+									AF106[0]=(SRAM_Data_Buffer[3] & 0x000000FF) >> 0;
+
+							        AF106[1]=(SRAM_Data_Buffer[4] & 0xFF000000) >> 24; //form flas read data 
+
+									AF106[2]=(SRAM_Data_Buffer[4] & 0x0000ff00) >> 16;
+
+									AF106[3]=(SRAM_Data_Buffer[4] & 0x000000ff) >> 8;
+
+									AF106[4]=(SRAM_Data_Buffer[4] & 0x000000ff) >> 0;
+									
                                     Number_Digital_5bit_AddSelect(AF106);
+
+									SRAM_Data_Buffer[3] = AF106[0] & 0XFF << 0;
+
+									SRAM_Data_Buffer[4] = AF106[0] & 0XFF << 24;
+
+									SRAM_Data_Buffer[4] = AF106[1] & 0XFF <<16;
+
+									SRAM_Data_Buffer[4] = AF106[2] & 0XFF << 8;
+
+									SRAM_Data_Buffer[4] = AF106[3] & 0XFF <<0;
+							  
+
+
+									
                                       key_t.keyReturn_flag=1;
                               break;
 
                                case 0x06: //F1-07-01
+
+							   		AF107[0]=(SRAM_Data_Buffer[5] & 0xFF000000) >> 24;
+
+							        AF107[1]=(SRAM_Data_Buffer[5] & 0x00FF0000) >> 16; //form flas read data 
+
+									AF107[2]=(SRAM_Data_Buffer[5] & 0x0000ff00) >> 8;
+
+									AF107[3]=(SRAM_Data_Buffer[5] & 0x000000ff) >> 0;
+
+									AF107[4]=(SRAM_Data_Buffer[6] & 0xFF000000) >> 24;
+									
                                      Number_Digital_5bit_AddSelect(AF107);
+
+									
+
+									SRAM_Data_Buffer[5] = AF107[0] & 0XFF << 24;
+
+									SRAM_Data_Buffer[5] = AF107[1] & 0XFF <<16;
+
+									SRAM_Data_Buffer[5] = AF107[2] & 0XFF << 8;
+
+									SRAM_Data_Buffer[5] = AF107[3] & 0XFF <<0;
+
+									SRAM_Data_Buffer[6] = AF107[0] & 0XFF << 24;
+									
                                     key_t.keyReturn_flag=1;
                               break;
 
                                case 0x07: //F1-08-01
+                                   AF108[0]=(SRAM_Data_Buffer[6] & 0x00FF0000) >> 16;
+
+							       AF108[1]=(SRAM_Data_Buffer[6] & 0x0000FF00) >> 8; //form flas read data 
+                               
                                    Number_Digital_2bit_AddSelect(AF108);
+										
+									 SRAM_Data_Buffer[6] = AF108[1] & 0XFF <<16;
+									 
+									SRAM_Data_Buffer[6] = AF108[2] & 0XFF << 8;
+								   
                                      key_t.keyReturn_flag=1;
                               break;
 
                               case 0x08: //F1-09-01
-                                  Number_Digital_4bit_AddSelect(AF109);
+
+							  		AF109[0]=(SRAM_Data_Buffer[7] & 0xFF000000) >> 24;
+
+							        AF109[1]=(SRAM_Data_Buffer[7] & 0x00FF0000) >> 16; //form flas read data 
+
+									AF109[2]=(SRAM_Data_Buffer[7] & 0x0000ff00) >> 8;
+
+									AF109[3]=(SRAM_Data_Buffer[7] & 0x000000ff) >> 0;
+
+									AF109[4]=(SRAM_Data_Buffer[8] & 0xFF000000) >> 24;
+									
+                                    Number_Digital_4bit_AddSelect(AF109);
+
+									
+
+									SRAM_Data_Buffer[7] = AF109[0] & 0XFF << 24;
+
+									SRAM_Data_Buffer[7] = AF109[1] & 0XFF <<16;
+
+									SRAM_Data_Buffer[7] = AF109[2] & 0XFF << 8;
+
+									SRAM_Data_Buffer[7] = AF109[3] & 0XFF <<0;
+
+									SRAM_Data_Buffer[8] = AF109[4] & 0XFF << 24;
+
+									
                               break;
 
                               case 0x09: //F1-10-01
+                              		AF110[0]=(SRAM_Data_Buffer[9] & 0xFF000000) >> 24;
+
+							        AF110[1]=(SRAM_Data_Buffer[9] & 0x00FF0000) >> 16; //form flas read data 
+
+									AF110[2]=(SRAM_Data_Buffer[9] & 0x0000ff00) >> 8;
+
+									AF110[3]=(SRAM_Data_Buffer[9] & 0x000000ff) >> 0;
+									
                                      Number_Digital_5bit_AddSelect(AF110);
+
+									 SRAM_Data_Buffer[9] = AF110[0] & 0XFF << 24;
+
+									SRAM_Data_Buffer[9] = AF110[1] & 0XFF <<16;
+
+									SRAM_Data_Buffer[9] = AF110[2] & 0XFF << 8;
+
+									SRAM_Data_Buffer[9] = AF110[3] & 0XFF <<0;
+
+
+									 
                               break;
 
                                case 0x0A://F1-11-01 ->display 4 bit
-                                   Number_Digital_F111_4bit_AddSelect(AF111);
-                                    
+
+								    AF111[0]=(SRAM_Data_Buffer[10] & 0xFF000000) >> 24;
+
+							        Number_Digital_F111_4bit_AddSelect(AF111);
+							   
+                                    SRAM_Data_Buffer[10] = AF111[0] & 0XFF << 24;
                               break;
 
                                case 0x0B://F1-12-01
+
+							         
+									AF112[0]=(SRAM_Data_Buffer[10] & 0x00FF0000) >> 16; //form flas read data 
+									 
+									AF112[1]=(SRAM_Data_Buffer[10] & 0x0000ff00) >> 8;
+                                     
                                      Number_Digital_2bit_AddSelect(AF112);
+
+									 
+								  SRAM_Data_Buffer[10] = AF112[0] & 0XFF <<16;
+								  
+								  SRAM_Data_Buffer[10] = AF112[1] & 0XFF << 8;
+
+									 
                               break;
 
                                case 0x0C://F1-13-01
+
+							   		AF113[0]=(SRAM_Data_Buffer[11] & 0xFF000000) >> 24;
+
+							        AF113[1]=(SRAM_Data_Buffer[11] & 0x00FF0000) >> 16; //form flas read data 
+							        
                                     Number_Digital_2bit_AddSelect(AF113);
+
+									SRAM_Data_Buffer[11] = AF113[0] & 0XFF << 24;
+
+									SRAM_Data_Buffer[11] = AF113[1] & 0XFF <<16;
                               break;
 
                           }
@@ -1413,7 +1641,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
            key_t.RunCmd_flag=0; //normal display flag 
            key_t.keyGetLong_Numbers=0;
            menu_t.menuFirst=0;
-           key_t.keyGetLong_Numbers=28;
+           run_t.EnterKey_flag=0;
            printf("key3_switch_TheFirst_Menu\n");
            return ;
      }
