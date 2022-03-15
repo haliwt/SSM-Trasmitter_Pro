@@ -52,6 +52,8 @@ typedef struct _FLASH{
 
 extern flash flash_t;
 
+extern uint32_t *pfdata;
+
 
 //void DMA_Flash_SRAM_Config(void);
 

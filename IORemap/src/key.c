@@ -10,9 +10,10 @@
 KEY key_t;
 run run_t;
 
+uint32_t *pfdata;
 
 
-
+// pfdata=flash_t.flashData;
 
 
 uint8_t F305_tmp4,F305_tmp5,F305_tmp6,F305_tmp7;
@@ -679,8 +680,11 @@ static void KEY_SubMenuFun_Enter(void)
 static void KEY1_ZERIO_UP_Fun(void)
 {
 
-    
-  static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r;
+      
+     static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r;
+	
+	 pfdata=flash_t.flashData;
+	
 	 switch(menu_t.FxMainMenu_key){
 
          case 0:
@@ -787,11 +791,17 @@ static void KEY1_ZERIO_UP_Fun(void)
                                     menu_t.F1_Sub02_decade=menu_t.decade;
                                     menu_t.F1_Sub02_hundred =menu_t.hundred;
 
-								   flash_t.flashData[0]  =(menu_t.unit & 0xff)<< 16 ; //save flash data 
+								   //flash_t.flashData[0]  =(menu_t.unit & 0xff)<< 16 ; //save flash data 
 
-									flash_t.flashData[0] = (menu_t.decade & 0xff)<<8;
+									///flash_t.flashData[0] = (menu_t.decade & 0xff)<<8;
 
-									flash_t.flashData[0]  = (menu_t.hundred  & 0xff)<<0;
+									//flash_t.flashData[0]  = (menu_t.hundred  & 0xff)<<0;
+									
+									*pfdata 	=(menu_t.unit & 0xff)<< 16 ; //save flash data 
+
+									*pfdata  = (menu_t.decade & 0xff)<<8;
+
+									*pfdata   = (menu_t.hundred  & 0xff)<<0;
 									
 								   
                                     printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);

@@ -123,23 +123,12 @@ uint8_t Buffercmp(const uint32_t* pBuffer1, uint32_t* pBuffer2, uint32_t BufferL
 void FlashSaveData(void)
 {
   
+    uint8_t i=0;
 
-        SRAM_Data_Buffer[0]=flash_t.flashData[0] ;
-	    SRAM_Data_Buffer[1]=flash_t.flashData[1] ;
-		SRAM_Data_Buffer[2]=flash_t.flashData[2] ;
-	    SRAM_Data_Buffer[3]=flash_t.flashData[3] ;
-		SRAM_Data_Buffer[4]=flash_t.flashData[4] ;
-	    SRAM_Data_Buffer[5]=flash_t.flashData[5] ;
-		SRAM_Data_Buffer[6]=flash_t.flashData[6] ;
-	    SRAM_Data_Buffer[7]=flash_t.flashData[7] ;
-		SRAM_Data_Buffer[8]=flash_t.flashData[8] ;
-	    SRAM_Data_Buffer[9]=flash_t.flashData[9] ;
-		SRAM_Data_Buffer[10]=flash_t.flashData[10] ;
-	    SRAM_Data_Buffer[11]=flash_t.flashData[11] ;
-		SRAM_Data_Buffer[12]=flash_t.flashData[12] ;
-	    SRAM_Data_Buffer[13]=flash_t.flashData[13] ;
-		SRAM_Data_Buffer[14]=flash_t.flashData[14] ;
-	    SRAM_Data_Buffer[15]=flash_t.flashData[15] ;
+	for(i=0;i<32;i++){
+
+       SRAM_Data_Buffer[i]= *(pfdata +i);
+	}
 	
 	    Flash_DMA_WriteData();
 		
