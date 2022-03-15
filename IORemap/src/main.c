@@ -181,6 +181,7 @@ int main(void)
 				if(flash_t.flashSave_falg ==1){
 				
                    FlashSaveData();
+				   printf("flash_save_________OK\n");
 				   flash_t.flashSave_falg=0;
 				}
 

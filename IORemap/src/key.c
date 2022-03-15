@@ -56,6 +56,9 @@ int8_t AF806[5];
 
 
 
+
+
+
 int8_t Amenu_Top = -1;
 
 uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
@@ -675,7 +678,8 @@ static void KEY_SubMenuFun_Enter(void)
 ********************************************************/
 static void KEY1_ZERIO_UP_Fun(void)
 {
-     
+
+    
   static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r;
 	 switch(menu_t.FxMainMenu_key){
 
@@ -783,11 +787,11 @@ static void KEY1_ZERIO_UP_Fun(void)
                                     menu_t.F1_Sub02_decade=menu_t.decade;
                                     menu_t.F1_Sub02_hundred =menu_t.hundred;
 
-								    SRAM_Data_Buffer[0]   = menu_t.unit << 16 ; //save flash data 
+								   flash_t.flashData[0]  =(menu_t.unit & 0xff)<< 16 ; //save flash data 
 
-									SRAM_Data_Buffer[0] = menu_t.decade <<8;
+									flash_t.flashData[0] = (menu_t.decade & 0xff)<<8;
 
-									SRAM_Data_Buffer[0] = menu_t.hundred <<0;
+									flash_t.flashData[0]  = (menu_t.hundred  & 0xff)<<0;
 									
 								   
                                     printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);
@@ -1342,7 +1346,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
                               break;
 
                                case 0x02:
-                                RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+                               	 RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
                                   menu_t. F1_Sub03_unit= menu_t.unit;
                                   menu_t.F1_Sub03_decade=menu_t.decade;
                                   menu_t.F1_Sub03_hundred =menu_t.hundred;
