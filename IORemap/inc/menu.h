@@ -224,6 +224,8 @@ typedef enum {
 }submenuNumber_02;
 
 
+typedef enum {nuzero,nuone,nutwo,nuthree,nufour,nufive,nusix,nuseven,nueight,nunine}specDigital;
+
 typedef struct _submenulist{
 	
    submenuNumbers subNumbers;
@@ -281,5 +283,8 @@ void F2SubMenu_02(uint8_t mn);
 
 /******************F3-01*****************************/
 void F3SubMenu_02_DispSelect(uint8_t mn);
+
+uint8_t SpecDisplay_Number(uint8_t number);
+
 
 #endif 

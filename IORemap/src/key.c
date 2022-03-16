@@ -339,7 +339,7 @@ void KEY_Function(uint8_t keydata)
 ***************************************************/           
 static void KEY_SubMenuFun_Enter(void)
 {
-      
+     
       switch(menu_t.mainTop){//switch(menu_t.menuId){
                
           case F1: //F1 - 01
@@ -385,7 +385,7 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.menuTitle_03=0;
                         
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
-						flash_t.flashSave_falg =1; //flash save data 
+											flash_t.flashSave_falg =1; //flash save data 
 				
                      
                         printf("f1sub_top_return = %d\n",menu_t.F1_SubMenuTop);
@@ -683,7 +683,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 {
 
       
-     static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r;
+     static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r,f1temp;
 	
 	// pfdata=flash_t.flashData;
        pfdata =  SRAM_Data_Buffer;
@@ -745,16 +745,19 @@ static void KEY1_ZERIO_UP_Fun(void)
                         if(f1r01 == 0) {
                         f1r01++;
                         Flash_Read();
-                        menu_t.F1_Sub01_Top=( *pfdata & 0xff000000) >> 24;
-
+                          f1temp= ( flash_t.flashData[0]  & 0xff000000) >> 24;
+                        
+                          menu_t.F1_Sub01_Top=   f1temp;
+                           menuFxSub_03_Top= f1temp;
+                          printf("f1sub_00_03_flash = %d\n",menu_t.F1_Sub01_Top);
                         }
-                        if(f1r01==1){
+                        if(f1r01==1){ 
                         f1r01++;
                         }
                         else{
-                        menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
-                  }
-                  Flash_Data_Buffer[0] = menu_t.F1_Sub01_Top <<    24 ; //SRAM_Data_Buffer[0]= menu_t.F1_Sub01_Top
+                              menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
+                        }
+                        Flash_Data_Buffer[0] = menu_t.F1_Sub01_Top <<    24 ; //SRAM_Data_Buffer[0]= menu_t.F1_Sub01_Top
                                     
                                     
                         printf("f1sub_01_n_Top = %d\n",menu_t.F1_Sub01_Top);
@@ -767,12 +770,13 @@ static void KEY1_ZERIO_UP_Fun(void)
                         f1r02++;
                         Flash_Read();
 
+                        menu_t.unit=(flash_t.flashData[0] & 0xFF) >> 0; //form flas read data 
 
-                        menu_t.unit=(*pfdata & 0xFF) >> 0; //form flas read data 
+                        menu_t.decade=(flash_t.flashData[0]  & 0x0000ff00) >> 8;
 
-                        menu_t.decade=(*pfdata & 0x0000ff00) >> 8;
-
-                        menu_t.hundred=(*pfdata & 0x00FF0000) >> 16; //
+                        menu_t.hundred=(flash_t.flashData[0]  & 0x00ff0000) >> 16; 
+                        
+                         printf("f1sub_01_03_Top = %d\n",menu_t.unit);
                         }
 
                         if(f1r02==1){
@@ -784,26 +788,19 @@ static void KEY1_ZERIO_UP_Fun(void)
                         RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
 
                         }
-
-
                         menu_t. F1_Sub02_unit= menu_t.unit;
                         menu_t.F1_Sub02_decade=menu_t.decade;
                         menu_t.F1_Sub02_hundred =menu_t.hundred;
+                             
+                  
+                       // *pfdata 	= 0x1 ; //(menu_t.unit & 0xff)<<0 ; //save flash data 
 
-                        //flash_t.flashData[0]  =(menu_t.unit & 0xff)<< 16 ; //save flash data 
+                       // *pfdata  = 0x02 <<8 ; //(menu_t.decade & 0xff)<<8;
 
-                        ///flash_t.flashData[0] = (menu_t.decade & 0xff)<<8;
+                        //*pfdata   = 0x3 << 16;//(menu_t.hundred  & 0xff)<<16; //MSB  
+                         *pfdata = (SpecDisplay_Number(menu_t.hundred )<< 16)  | (SpecDisplay_Number(menu_t.decade)<<8) |SpecDisplay_Number(menu_t.unit);
 
-                        //flash_t.flashData[0]  = (menu_t.hundred  & 0xff)<<0;
-
-                        *pfdata 	=(menu_t.unit & 0xff)<<0 ; //save flash data 
-
-                        *pfdata  = (menu_t.decade & 0xff)<<8;
-
-                        *pfdata   = (menu_t.hundred  & 0xff)<<16; //MSB  
-
-
-                        printf("f1sub_02_n_Top = %d\n",menu_t.F1_Sub02_Top);
+                        printf("f1sub_01_03_n_Top = %d\n",menu_t.F1_Sub02_Top);
                         key_t.keyReturn_flag=1;
                   break;
 

@@ -127,8 +127,8 @@ void FlashSaveData(void)
 	 
     pfdata =  SRAM_Data_Buffer;
 	
-		*pfdata = (0x03 <<24)|(0x2<<16)|(0x3<<8)|(0x04); //0x01020304
-	  *(pfdata+1) = (0x05 <<24)|(0x6<<16)|(0x7<<8)|0x08; //0x05060708
+	//	*pfdata = (0x03 <<24)|(0x2<<16)|(0x3<<8)|0x04; //0x01020304
+	//  *(pfdata+1) = (0x05 <<24)|(0x6<<16)|(0x7<<8)|0x08; //0x05060708
 
     Flash_DMA_WriteData();
 }
@@ -161,13 +161,13 @@ void Flash_Read(void)
 {
 
 	uint32_t Counter_Num =0;
-
+    FLASH_Unlock();
 	if(flash_t.flashRead_flag==0){
 	
 		    for (Counter_Num = 0; Counter_Num < FLASH_PAGE_SIZE; Counter_Num += 4)
 		   {
 			   flash_t.flashData[Counter_Num]= *(__IO uint32_t*)(FLASH_WRITE_START_ADDR + Counter_Num);
-			   if(Counter_Num   >= FLASH_PAGE_SIZE) flash_t.flashRead_flag= 1;
+			   //if(Counter_Num   >= FLASH_PAGE_SIZE) flash_t.flashRead_flag= 1;
 			    printf("data =%X\n", flash_t.flashData[Counter_Num]);
 		   }
 		  
