@@ -794,12 +794,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                         menu_t.F1_Sub02_hundred =menu_t.hundred;
                              
                   
-                       // *pfdata 	= 0x1 ; //(menu_t.unit & 0xff)<<0 ; //save flash data 
-
-                       // *pfdata  = 0x02 <<8 ; //(menu_t.decade & 0xff)<<8;
-
-                        //*pfdata   = 0x3 << 16;//(menu_t.hundred  & 0xff)<<16; //MSB  
-                         *pfdata =(((SpecDisplay_Number(menu_t.hundred ))<< 16)  | ((SpecDisplay_Number(menu_t.decade))<<8) 
+                     *pfdata =(((SpecDisplay_Number(menu_t.hundred ))<< 16)  | ((SpecDisplay_Number(menu_t.decade))<<8) 
 						|((SpecDisplay_Number(menu_t.unit))<<0));
 
                         printf("f1sub_01_03_n_Top = %d\n",menu_t.F1_Sub02_Top);
@@ -807,47 +802,58 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
                   case 0x02: //F1-03-01  
+                          if(f1r02==0){
 					    Flash_Read();
 
-                        menu_t.unit=(flash_t.flashData[1] & 0x00ff0000) >> 16; //form flas read data 
-
-                        menu_t.decade=(flash_t.flashData[1] & 0x0000ff00) >> 8;
-
-                        menu_t.hundred=(flash_t.flashData[1] & 0x000000ff) >> 0;
-
-
-                        RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                              menu_t.unit=(flash_t.flashData[01] & 0xFF) >> 0; //form flas read data 
+                                                printf("f1sub_01_03_unit = %d\n",menu_t.unit);
+                              menu_t.decade=( flash_t.flashData[1]  & 0xff00) >> 8;
+                                                printf("f1sub_01_03_decade = %d\n",menu_t.decade);
+                              menu_t.hundred=(flash_t.flashData[1]  & 0xff0000) >> 16; 
+                                    printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
+                        }
+                        else
+                              RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                              
                         menu_t. F1_Sub03_unit= menu_t.unit;
                         menu_t.F1_Sub03_decade=menu_t.decade;
                         menu_t.F1_Sub03_hundred =menu_t.hundred;
                         key_t.keyReturn_flag=1;
 
-                      
-						*(pfdata+1 )= ((SpecDisplay_Number(menu_t.hundred )<< 16)  | (SpecDisplay_Number(menu_t.decade)<<8) |SpecDisplay_Number(menu_t.unit)<<0);
+                          *(pfdata+1) =(((SpecDisplay_Number(menu_t.hundred ))<< 16)  | ((SpecDisplay_Number(menu_t.decade))<<8) 
+						|((SpecDisplay_Number(menu_t.unit))<<0));
 
 
                   break;
 
                   case 0x03: //F1-04-01
+                        if(f1r03==0){
+                            f1r03++;
+							Flash_Read();
+                        AF104[3]=((flash_t.flashData[8] & 0xFF000000) >> 24); //form flas read data 
+                               printf("f1sub_01_03_AF104[3] = %d\n",AF104[3]);
+                        AF104[2]=((flash_t.flashData[8] & 0x00ff0000) >> 16);
+                                printf("f1sub_01_03_AF104[2] = %d\n",AF104[2]);
+                        AF104[1]=((flash_t.flashData[8] & 0x0000ff00) >> 8);
+                                      printf("f1sub_01_03_AF104[1] = %d\n",AF104[1]);
+                        AF104[0]=((flash_t.flashData[8] & 0xff) >> 0);
+                          printf("f1sub_01_03_AF104[0] = %d\n",AF104[0]);
+                              
+                              
+                        }
+                        if(f1r03==1){
+                           f1r03++;   
+                              
+                        }
+                        else{
+                              Number_Digital_4bit_AddSelect(AF104);
+                        }
+                        
+                        
+                        *(pfdata+2) =(((SpecDisplay_Number(AF104[3]))<<24)|((SpecDisplay_Number(AF104[2] ))<< 16)  | ((SpecDisplay_Number(AF104[1]))<<8) 
+						      |((SpecDisplay_Number(AF104[0]))<<0));
 
-                        AF104[0]=(SRAM_Data_Buffer[2] & 0xFF000000) >> 24; //form flas read data 
-
-                        AF104[1]=(SRAM_Data_Buffer[2] & 0x0000ff00) >> 16;
-
-                        AF104[2]=(SRAM_Data_Buffer[2] & 0x000000ff) >> 8;
-
-                        AF104[3]=(SRAM_Data_Buffer[2] & 0x000000ff) >> 0;
-
-
-                        Number_Digital_4bit_AddSelect(AF104);
-
-                        SRAM_Data_Buffer[2] = AF104[0] & 0XFF << 24;
-
-                        SRAM_Data_Buffer[2] = AF104[1] & 0XFF <<16;
-
-                        SRAM_Data_Buffer[2] = AF104[2] & 0XFF << 8;
-
-                        SRAM_Data_Buffer[2] = AF104[3] & 0XFF <<0;
+                  
 
                         key_t.keyReturn_flag=1;
                   break;

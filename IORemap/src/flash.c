@@ -169,7 +169,8 @@ void Flash_Read(void)
 			  flash_t.flashData[Counter_Num]= *(__IO uint32_t*)(FLASH_WRITE_START_ADDR + Counter_Num);
                 
 			   
-			    printf("data =%X\n", flash_t.flashData[Counter_Num]);
+			    printf("data[] =%X\n", flash_t.flashData[Counter_Num]);
+			    printf("Counter_Num=%d\n",Counter_Num);
 		   }
 		  if(Counter_Num   >= FLASH_PAGE_SIZE) flash_t.flashRead_flag= 1;
 			
