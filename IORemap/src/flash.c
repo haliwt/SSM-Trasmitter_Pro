@@ -164,13 +164,14 @@ void Flash_Read(void)
     FLASH_Unlock();
 	if(flash_t.flashRead_flag==0){
 	
-		    for (Counter_Num = 0; Counter_Num < FLASH_PAGE_SIZE; Counter_Num += 4)
+		   for (Counter_Num = 0; Counter_Num < FLASH_PAGE_SIZE; Counter_Num += 4)
 		   {
-			   flash_t.flashData[Counter_Num]= *(__IO uint32_t*)(FLASH_WRITE_START_ADDR + Counter_Num);
-			   //if(Counter_Num   >= FLASH_PAGE_SIZE) flash_t.flashRead_flag= 1;
+			  flash_t.flashData[Counter_Num]= *(__IO uint32_t*)(FLASH_WRITE_START_ADDR + Counter_Num);
+                
+			   
 			    printf("data =%X\n", flash_t.flashData[Counter_Num]);
 		   }
-		  
+		  if(Counter_Num   >= FLASH_PAGE_SIZE) flash_t.flashRead_flag= 1;
 			
    }
 

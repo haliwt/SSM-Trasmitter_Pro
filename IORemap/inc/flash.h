@@ -3,9 +3,9 @@
 
 #include "main.h"
 
-//ÒªÐ´Èëµ½STM32 FLASHµÄ×Ö·û´®Êý×é
+//ÒªÐ´ï¿½ëµ½STM32 FLASHï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //const u8 TEXT_Buffer[]={"STM32 FLASH TEST"};
-#define TEXT_LENTH 						sizeof(TEXT_Buffer)	 		  	//Êý×é³¤¶È	
+#define TEXT_LENTH 						sizeof(TEXT_Buffer)	 		  	//ï¿½ï¿½ï¿½é³¤ï¿½ï¿½	
 //#define SIZE 							TEXT_LENTH/4+((TEXT_LENTH%4)?1:0)
 
 #define SIZE 							128 /4 
@@ -26,7 +26,6 @@ extern uint32_t Flash_Data_Buffer[BUFFER_SIZE] __attribute__((at(FLASH_WRITE_STA
 
 void STMFLASH_Read(uint32_t ReadAddr,uint32_t *pBuffer,uint32_t NumToRead)  ; 
 
-void Flash_Read(void);
 
 typedef struct _FLASH{
 
@@ -59,8 +58,7 @@ extern uint32_t *pfdata;
 
 
 
-
-void FlashSaveData(void);
+void Flash_Read(void);
 
 
 
