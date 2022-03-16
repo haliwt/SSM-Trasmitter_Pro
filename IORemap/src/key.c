@@ -684,7 +684,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 
       
      static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r,f1temp;
-	
+	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r11;
 	// pfdata=flash_t.flashData;
        *pfInputData = NULL;
        pfdata =  SRAM_Data_Buffer;
@@ -805,11 +805,11 @@ static void KEY1_ZERIO_UP_Fun(void)
                           if(f1r02==0){
 					    Flash_Read();
 
-                              menu_t.unit=(flash_t.flashData[01] & 0xFF) >> 0; //form flas read data 
+                              menu_t.unit=(flash_t.flashData[4] & 0xFF) >> 0; //form flas read data 
                                                 printf("f1sub_01_03_unit = %d\n",menu_t.unit);
-                              menu_t.decade=( flash_t.flashData[1]  & 0xff00) >> 8;
+                              menu_t.decade=( flash_t.flashData[4]  & 0xff00) >> 8;
                                                 printf("f1sub_01_03_decade = %d\n",menu_t.decade);
-                              menu_t.hundred=(flash_t.flashData[1]  & 0xff0000) >> 16; 
+                              menu_t.hundred=(flash_t.flashData[4]  & 0xff0000) >> 16; 
                                     printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
                         }
                         else
@@ -829,7 +829,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                   case 0x03: //F1-04-01
                         if(f1r03==0){
                             f1r03++;
-							Flash_Read();
+				Flash_Read();
                         AF104[3]=((flash_t.flashData[8] & 0xFF000000) >> 24); //form flas read data 
                                printf("f1sub_01_03_AF104[3] = %d\n",AF104[3]);
                         AF104[2]=((flash_t.flashData[8] & 0x00ff0000) >> 16);
@@ -858,97 +858,123 @@ static void KEY1_ZERIO_UP_Fun(void)
                         key_t.keyReturn_flag=1;
                   break;
 
-                                case 0x04://F1-05-01
+                  case 0x04://F1-05-01
 
-									
-								  AF105[0]=(SRAM_Data_Buffer[3] & 0xFF000000) >> 24; //form flas read data 
-								   
-								  AF105[1]=(SRAM_Data_Buffer[3] & 0x0000ff00) >> 16;
+                        if(f1r04==0){
+                              f1r04++;
+                              Flash_Read();
+                              AF105[1]=((flash_t.flashData[12] & 0xFF000000) >> 24); //form flas read data 
+                              AF105[0]=((flash_t.flashData[12] & 0x00ff0000) >> 16);
 
-								
-                                   Number_Digital_2bit_AddSelect(AF105);
+                        }
+                        
+                        if(f1r04==1){
+                              f1r04++;
+                        }
+                        else
+                            Number_Digital_2bit_AddSelect(AF105);
 
-                                   	SRAM_Data_Buffer[3] = AF105[0] & 0XFF << 24;
+                       
+                        *(pfdata+3) =(((SpecDisplay_Number(AF105[1]))<<24)|((SpecDisplay_Number(AF105[0] ))<< 16));
+                        printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
+                        key_t.keyReturn_flag=1;
+                  break;
 
-									SRAM_Data_Buffer[3] = AF105[1] & 0XFF <<16;
-								   
-                                   printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
-                                 key_t.keyReturn_flag=1;
-                              break;
+                  case 0x05://F1-06-01
+                        if(f1r05 ==0){
+                              f1r05++;
+                              Flash_Read();
+                              
+                        AF106[4]=((flash_t.flashData[16] & 0xFF000000) >> 24); //form flas read data 
+                               printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        AF106[3]=((flash_t.flashData[16] & 0x00ff0000) >> 16);
+                                printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        AF106[2]=((flash_t.flashData[16] & 0x0000ff00) >> 8);
+                                      printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
+                        AF106[1]=((flash_t.flashData[16] & 0xff) >> 0);
+                          printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                          
+                          
+                        AF106[0]=(flash_t.flashData[20] & 0xff000000) >> 24;  //next word   
+                               printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                          
+                              
+                        }
+                        
+                        if(f1r05==1){
+                              f1r05++;
+                        }
+                        else
+                              Number_Digital_5bit_AddSelect(AF106);
+                              
+                  *(pfdata + 4) =(((SpecDisplay_Number(AF106[4]))<<24)|((SpecDisplay_Number(AF106[3] ))<< 16)  | ((SpecDisplay_Number(AF106[2]))<<8) 
+						      |((SpecDisplay_Number(AF106[1]))<<0));
+                  
+                  *(pfdata + 5) =((SpecDisplay_Number(AF106[0]))<<24);
 
-                              case 0x05://F1-06-01
+                  key_t.keyReturn_flag=1;
+                  break;
+
+            case 0x06: //F1-07-01
+                  
+                        if(f1r06==0){
+                              f1r06++;
+                                Flash_Read();
+                              
+                        AF107[4]=((flash_t.flashData[20] & 0x00FF0000) >> 16); //form flas read data 
+                               printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        AF107[3]=((flash_t.flashData[20] & 0x0000ff00) >> 8);
+                                printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        AF107[2]=((flash_t.flashData[20] & 0xff) >> 0);
+                                      printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
+                        //next words 
+                        AF107[1]=((flash_t.flashData[24] & 0xff000000) >> 24);
+                          printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                          
+                          
+                        AF107[0]=(flash_t.flashData[24] & 0x00ff0000) >> 16;  //next word   
+                               printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                              
+                        }
+                        
+                        if(f1r06==1){
+                              f1r06++;
+                        }
+                        else
+                              Number_Digital_5bit_AddSelect(AF107);
 
 
-									AF106[0]=(SRAM_Data_Buffer[3] & 0x000000FF) >> 0;
+                        *(pfdata + 5) =(((SpecDisplay_Number(AF107[4] ))<< 16)  | ((SpecDisplay_Number(AF107[3]))<<8) 
+						      |((SpecDisplay_Number(AF107[2]))<<0));
+                  
+                         *(pfdata + 6) =(((SpecDisplay_Number(AF107[1]))<<24)|((SpecDisplay_Number(AF107[0] ))<< 16));  
+                       
 
-							        AF106[1]=(SRAM_Data_Buffer[4] & 0xFF000000) >> 24; //form flas read data 
+                        key_t.keyReturn_flag=1;
+            break;
 
-									AF106[2]=(SRAM_Data_Buffer[4] & 0x0000ff00) >> 16;
+            case 0x07: //F1-08-01
+            
+                  if(f1r07==0){
+                        
+                        f1r07++;
+                         Flash_Read();
+                              
+                        AF108[1]=((flash_t.flashData[28] & 0xFF000000) >> 24); //form flas read data 
+                               printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        AF108[0]=((flash_t.flashData[28] & 0x00ff0000) >> 16);
+                                printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        
+                  }
+                  if(f1r07==1){
+                        f1r07++;
+                  }
+                  Number_Digital_2bit_AddSelect(AF108);
 
-									AF106[3]=(SRAM_Data_Buffer[4] & 0x000000ff) >> 8;
+                  *(pfdata + 7) =(((SpecDisplay_Number(AF108[1]))<<24)|((SpecDisplay_Number(AF108[0] ))<< 16));  
 
-									AF106[4]=(SRAM_Data_Buffer[4] & 0x000000ff) >> 0;
-									
-                                    Number_Digital_5bit_AddSelect(AF106);
-
-									SRAM_Data_Buffer[3] = AF106[0] & 0XFF << 0;
-
-									SRAM_Data_Buffer[4] = AF106[0] & 0XFF << 24;
-
-									SRAM_Data_Buffer[4] = AF106[1] & 0XFF <<16;
-
-									SRAM_Data_Buffer[4] = AF106[2] & 0XFF << 8;
-
-									SRAM_Data_Buffer[4] = AF106[3] & 0XFF <<0;
-							  
-
-
-									
-                                      key_t.keyReturn_flag=1;
-                              break;
-
-                               case 0x06: //F1-07-01
-
-							   		AF107[0]=(SRAM_Data_Buffer[5] & 0xFF000000) >> 24;
-
-							        AF107[1]=(SRAM_Data_Buffer[5] & 0x00FF0000) >> 16; //form flas read data 
-
-									AF107[2]=(SRAM_Data_Buffer[5] & 0x0000ff00) >> 8;
-
-									AF107[3]=(SRAM_Data_Buffer[5] & 0x000000ff) >> 0;
-
-									AF107[4]=(SRAM_Data_Buffer[6] & 0xFF000000) >> 24;
-									
-                                     Number_Digital_5bit_AddSelect(AF107);
-
-									
-
-									SRAM_Data_Buffer[5] = AF107[0] & 0XFF << 24;
-
-									SRAM_Data_Buffer[5] = AF107[1] & 0XFF <<16;
-
-									SRAM_Data_Buffer[5] = AF107[2] & 0XFF << 8;
-
-									SRAM_Data_Buffer[5] = AF107[3] & 0XFF <<0;
-
-									SRAM_Data_Buffer[6] = AF107[0] & 0XFF << 24;
-									
-                                    key_t.keyReturn_flag=1;
-                              break;
-
-                               case 0x07: //F1-08-01
-                                   AF108[0]=(SRAM_Data_Buffer[6] & 0x00FF0000) >> 16;
-
-							       AF108[1]=(SRAM_Data_Buffer[6] & 0x0000FF00) >> 8; //form flas read data 
-                               
-                                   Number_Digital_2bit_AddSelect(AF108);
-										
-									 SRAM_Data_Buffer[6] = AF108[1] & 0XFF <<16;
-									 
-									SRAM_Data_Buffer[6] = AF108[2] & 0XFF << 8;
-								   
-                                     key_t.keyReturn_flag=1;
-                              break;
+                  key_t.keyReturn_flag=1;
+            break;
 
                               case 0x08: //F1-09-01
 
