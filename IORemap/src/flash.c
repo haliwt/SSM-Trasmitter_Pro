@@ -124,39 +124,34 @@ void FlashSaveData(void)
 {
   
     uint8_t i=0;
-
-	for(i=0;i<32;i++){
-
-       SRAM_Data_Buffer[i]= *(pfdata +i);
-	}
+	 
+    pfdata =  SRAM_Data_Buffer;
 	
-	    Flash_DMA_WriteData();
-		
+		*pfdata = (0x03 <<24)|(0x2<<16)|(0x3<<8)|(0x04); //0x01020304
+	  *(pfdata+1) = (0x05 <<24)|(0x6<<16)|(0x7<<8)|0x08; //0x05060708
 
-   
-
-
+    Flash_DMA_WriteData();
 }
 
-//¶ÁÈ¡Ö¸¶¨µØÖ·µÄÒ»¸ö×Ö(32Î»Êý¾Ý) 
-//faddr:¶ÁµØÖ· 
-//·µ»ØÖµ:¶ÔÓ¦Êý¾Ý.
+//ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½(32Î»ï¿½ï¿½ï¿½ï¿½) 
+//faddr:ï¿½ï¿½ï¿½ï¿½Ö· 
+//ï¿½ï¿½ï¿½ï¿½Öµ:ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½.
 uint32_t STMFLASH_ReadWord(uint32_t faddr)
 {
 	return *(uint32_t*)faddr; 
 }  
 
-//´ÓÖ¸¶¨µØÖ·¿ªÊ¼¶Á³öÖ¸¶¨³¤¶ÈµÄÊý¾Ý
-//ReadAddr:ÆðÊ¼µØÖ·
-//pBuffer:Êý¾ÝÖ¸Õë
-//NumToRead:×Ö(32Î»)Êý
+//ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½
+//ReadAddr:ï¿½ï¿½Ê¼ï¿½ï¿½Ö·
+//pBuffer:ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+//NumToRead:ï¿½ï¿½(32Î»)ï¿½ï¿½
 void STMFLASH_Read(uint32_t ReadAddr,uint32_t *pBuffer,uint32_t NumToRead)   	
 {
 	uint32_t i;
 	for(i=0;i<NumToRead;i++)
 	{
 		pBuffer[i]=STMFLASH_ReadWord(ReadAddr);//4 of words 
-		ReadAddr+=4;//Æ«ÒÆ4¸ö×Ö½Ú.	
+		ReadAddr+=4;//Æ«ï¿½ï¿½4ï¿½ï¿½ï¿½Ö½ï¿½.	
 		
 		printf("ReadAddr = %x",pBuffer[i]);
 	}

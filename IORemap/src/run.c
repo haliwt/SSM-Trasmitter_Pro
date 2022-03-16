@@ -32,7 +32,7 @@ void RunCommand(void)
                      menu_t.F1_Submenu_Check_flag =0x01;
                      F1_DIS();
                     F1SubMenu(menu_t.F1_SubMenuTop); //"Fx - 01"
-                    printf("runCmd_thSecondMenu_01\n");
+                  //  printf("runCmd_thSecondMenu_01\n");
                  
 
                  break;
