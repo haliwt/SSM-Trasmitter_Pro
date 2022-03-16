@@ -684,7 +684,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 
       
      static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r,f1temp;
-	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r11;
+	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
 	// pfdata=flash_t.flashData;
        *pfInputData = NULL;
        pfdata =  SRAM_Data_Buffer;
@@ -959,6 +959,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                         
                         f1r07++;
                          Flash_Read();
+                         
                               
                         AF108[1]=((flash_t.flashData[28] & 0xFF000000) >> 24); //form flas read data 
                                printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
@@ -976,270 +977,303 @@ static void KEY1_ZERIO_UP_Fun(void)
                   key_t.keyReturn_flag=1;
             break;
 
-                              case 0x08: //F1-09-01
+            case 0x08: //F1-09-01
+                   if(f1r08==0){
+                       f1r08++; 
+                       Flash_Read(); 
+                        AF109[4]=((flash_t.flashData[32] & 0xFF000000) >> 24); //form flas read data 
+                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        AF109[3]=((flash_t.flashData[32] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        AF109[2]=((flash_t.flashData[32] & 0xff00) >> 8);
+                        printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
+                        AF109[1]=((flash_t.flashData[32] & 0xff) >> 0);
+                        printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
 
-							  		AF109[0]=(SRAM_Data_Buffer[7] & 0xFF000000) >> 24;
+                        //next word 
+                        AF109[0]=(flash_t.flashData[36] & 0xff0000) >> 24;  //next word   
+                        printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
 
-							        AF109[1]=(SRAM_Data_Buffer[7] & 0x00FF0000) >> 16; //form flas read data 
-
-									AF109[2]=(SRAM_Data_Buffer[7] & 0x0000ff00) >> 8;
-
-									AF109[3]=(SRAM_Data_Buffer[7] & 0x000000ff) >> 0;
-
-									AF109[4]=(SRAM_Data_Buffer[8] & 0xFF000000) >> 24;
-									
-                                    Number_Digital_4bit_AddSelect(AF109);
-
-									
-
-									SRAM_Data_Buffer[7] = AF109[0] & 0XFF << 24;
-
-									SRAM_Data_Buffer[7] = AF109[1] & 0XFF <<16;
-
-									SRAM_Data_Buffer[7] = AF109[2] & 0XFF << 8;
-
-									SRAM_Data_Buffer[7] = AF109[3] & 0XFF <<0;
-
-									SRAM_Data_Buffer[8] = AF109[4] & 0XFF << 24;
-
-									
-                              break;
-
-                              case 0x09: //F1-10-01
-                              		AF110[0]=(SRAM_Data_Buffer[9] & 0xFF000000) >> 24;
-
-							        AF110[1]=(SRAM_Data_Buffer[9] & 0x00FF0000) >> 16; //form flas read data 
-
-									AF110[2]=(SRAM_Data_Buffer[9] & 0x0000ff00) >> 8;
-
-									AF110[3]=(SRAM_Data_Buffer[9] & 0x000000ff) >> 0;
-									
-                                     Number_Digital_5bit_AddSelect(AF110);
-
-									 SRAM_Data_Buffer[9] = AF110[0] & 0XFF << 24;
-
-									SRAM_Data_Buffer[9] = AF110[1] & 0XFF <<16;
-
-									SRAM_Data_Buffer[9] = AF110[2] & 0XFF << 8;
-
-									SRAM_Data_Buffer[9] = AF110[3] & 0XFF <<0;
+                 
+                   }
+                   
+                  if(f1r08==0){
+                      f1r08++;  
+                   }
+                  else
+                    Number_Digital_4bit_AddSelect(AF109);
 
 
-									 
-                              break;
+                  *(pfdata + 8) =(((SpecDisplay_Number(AF109[4]))<<24)|((SpecDisplay_Number(AF109[3] ))<< 16)  | ((SpecDisplay_Number(AF109[2]))<<8) 
+						      |((SpecDisplay_Number(AF109[1]))<<0));
+                  
+                  *(pfdata + 9) =((SpecDisplay_Number(AF109[0]))<<24);
 
-                               case 0x0A://F1-11-01 ->display 4 bit
+            break;
 
-								    AF111[0]=(SRAM_Data_Buffer[10] & 0xFF000000) >> 24;
-
-							        Number_Digital_F111_4bit_AddSelect(AF111);
-							   
-                                    SRAM_Data_Buffer[10] = AF111[0] & 0XFF << 24;
-                              break;
-
-                               case 0x0B://F1-12-01
-
-							         
-									AF112[0]=(SRAM_Data_Buffer[10] & 0x00FF0000) >> 16; //form flas read data 
-									 
-									AF112[1]=(SRAM_Data_Buffer[10] & 0x0000ff00) >> 8;
-                                     
-                                     Number_Digital_2bit_AddSelect(AF112);
-
-									 
-								  SRAM_Data_Buffer[10] = AF112[0] & 0XFF <<16;
-								  
-								  SRAM_Data_Buffer[10] = AF112[1] & 0XFF << 8;
-
-									 
-                              break;
-
-                               case 0x0C://F1-13-01
-
-							   		AF113[0]=(SRAM_Data_Buffer[11] & 0xFF000000) >> 24;
-
-							        AF113[1]=(SRAM_Data_Buffer[11] & 0x00FF0000) >> 16; //form flas read data 
-							        
-                                    Number_Digital_2bit_AddSelect(AF113);
-
-									SRAM_Data_Buffer[11] = AF113[0] & 0XFF << 24;
-
-									SRAM_Data_Buffer[11] = AF113[1] & 0XFF <<16;
-                              break;
-
-                          }
-                    break;
-
-                    case 0xf20://F2-01->Control
-                        switch(menu_t.menu_F1Sub_03_xx_key){
-
-                           case F201:
-                              Number_Digital_Set5bit_AddSelect(AF201,3);
-                           break;
-
-                           case F202:
-                              Number_Digital_5bit_AddSelect(AF202);
-                           break;
-
-                           case F203:
-                               Number_Digital_5bit_AddSelect(AF203);
-                           break;
-
-                           case F204:
-                               Number_Digital_Set5bit_AddSelect(AF204,3);
-                           break;
-
-                           case F205:
-                               Number_Digital_5bit_AddSelect(AF205);
-                           break;
-
-                           case F206:
-                               Number_Digital_5bit_AddSelect(AF206);
-                           break;
-
-
-                        }
-                    break;
-
-                    case 0xf30://F3-01 ->Control F3-1.1 --KEY UP +
-                        switch(menu_t.menu_F1Sub_03_xx_key){
-                        case F301:
-                              AF3401[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_AddSelect(AF3401,7);
-                              break;
-
-                        case F302:
-                               AF3402[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_twoAddSelect(AF3402,7);
-                              break;
+            case 0x09: //F1-10-01
+                  if(f1r09==0){
                         
+                    Flash_Read(); 
+                        AF110[3]=((flash_t.flashData[40] & 0xFF000000) >> 24); //form flas read data 
+                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        AF110[2]=((flash_t.flashData[40] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        AF110[1]=((flash_t.flashData[40] & 0xff00) >> 8);
+                        printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
+                        AF110[0]=((flash_t.flashData[40] & 0xff) >> 0);
+                        printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                        
+                  }
+                  
+                  if(f1r09==1){
+                     f1r09++;   
+                  }
+                  else
+                    Number_Digital_5bit_AddSelect(AF110);
 
-                        }
-                        printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
-                    break;
+            *(pfdata + 10) =(((SpecDisplay_Number(AF110[3]))<<24)|((SpecDisplay_Number(AF110[2] ))<< 16)  | ((SpecDisplay_Number(AF110[1]))<<8) 
+						      |((SpecDisplay_Number(AF110[0]))<<0));
+            break;
+
+            case 0x0A://F1-11-01 ->display 4 bit
+                  if(f1r10==0){
+                        f1r10++;
+                         Flash_Read(); 
+                        AF111[0]=((flash_t.flashData[44] & 0xFF000000) >> 24); //form flas read data 
+                        
+                  }
+
+                  if(f1r10==1){
+                        f1r10++;
+                  }
+                  else
+                      Number_Digital_F111_4bit_AddSelect(AF111);
+
+                  *(pfdata + 11) =(((SpecDisplay_Number(AF111[0]))<<24));
+						     
+            break;
+
+            case 0x0B://F1-12-01
+                  if(f1r11==0){
+                        f1r11++;
+                          Flash_Read(); 
+                        AF112[1]=((flash_t.flashData[48] & 0xFF000000) >> 24); //form flas read data 
+                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        AF112[0]=((flash_t.flashData[48] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        
+                        
+                  }
+            
+                 
+                  if(f1r11==1){
+                        f1r11++;
+                  }
+                  else
+                     Number_Digital_2bit_AddSelect(AF112);
+
+                   *(pfdata + 12) =(((SpecDisplay_Number(AF112[1]))<<24)|((SpecDisplay_Number(AF112[0] ))<< 16));
+						     
+                  
+
+
+            break;
+
+            case 0x0C://F1-13-01
+                  if(f1r12==0){
+                       f1r12++; 
+                        Flash_Read(); 
+                        AF113[1]=((flash_t.flashData[52] & 0xFF000000) >> 24); //form flas read data 
+                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        AF113[0]=((flash_t.flashData[52] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        
+                  }
+
+                  if(f1r12==1){
+                        
+                        
+                  }
+                  else 
+                        Number_Digital_2bit_AddSelect(AF113);
+                  *(pfdata + 13) =(((SpecDisplay_Number(AF113[1]))<<24)|((SpecDisplay_Number(AF113[0] ))<< 16));
+                       
+            break;
+
+            }
+            break;
+
+            case 0xf20://F2-01->Control
+                  switch(menu_t.menu_F1Sub_03_xx_key){
+
+                  case F201:
+                  Number_Digital_Set5bit_AddSelect(AF201,3);
+                  break;
+
+                  case F202:
+                  Number_Digital_5bit_AddSelect(AF202);
+                  break;
+
+                  case F203:
+                        Number_Digital_5bit_AddSelect(AF203);
+                  break;
+
+                  case F204:
+                        Number_Digital_Set5bit_AddSelect(AF204,3);
+                  break;
+
+                  case F205:
+                        Number_Digital_5bit_AddSelect(AF205);
+                  break;
+
+                  case F206:
+                        Number_Digital_5bit_AddSelect(AF206);
+                  break;
+
+
+            }
+            break;
+
+            case 0xf30://F3-01 ->Control F3-1.1 --KEY UP +
+                  switch(menu_t.menu_F1Sub_03_xx_key){
+                  case F301:
+                        AF3401[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_AddSelect(AF3401,7);
+                        break;
+
+                  case F302:
+                              AF3402[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_twoAddSelect(AF3402,7);
+                        break;
+                  
+
+                  }
+                  printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
+            break;
 
                   
 
-                    case 0xf70:
-                          switch(menu_t.menu_F1Sub_03_xx_key){
-                              case 0x00: //F1-01-01
-                                  f7menu_t.F7_03_00_Id=  PushSub_03_Menu(2);
-                                  printf("f7_03_Upkey = %d\n",f7menu_t.F7_03_01_Id);
-                                   key_t.f7keyReturn_flag=1;
-                              break;
+            case 0xf70:
+                  switch(menu_t.menu_F1Sub_03_xx_key){
+                  case 0x00: //F1-01-01
+                  f7menu_t.F7_03_00_Id=  PushSub_03_Menu(2);
+                  printf("f7_03_Upkey = %d\n",f7menu_t.F7_03_01_Id);
+                  key_t.f7keyReturn_flag=1;
+                  break;
 
-                              case 0x01: //F1-02-01
-                                    f7menu_t.F7_03_01_Id=  PushSub_03_Menu(8);
-                                
-                                    printf("f7_03_upkey = %d\n",menu_t.F1_Sub02_Top);
-                                   key_t.f7keyReturn_flag=1;
-                              break;
+                  case 0x01: //F1-02-01
+                  f7menu_t.F7_03_01_Id=  PushSub_03_Menu(8);
 
-                               case 0x02: //F1-03-01
-                                   RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
-                                   f7menu_t.unit= menu_t.unit;
-                                   f7menu_t.decade=menu_t.decade;
-                                   f7menu_t.hundred =menu_t.hundred;
-                                   key_t.f7keyReturn_flag=1;
-                                   
-                              break;
+                  printf("f7_03_upkey = %d\n",menu_t.F1_Sub02_Top);
+                  key_t.f7keyReturn_flag=1;
+                  break;
 
-                               case 0x03: //F1-04-01
-                                    f7menu_t.F7_03_03_Id=PushSub_03_Menu(7);
-                                     key_t.f7keyReturn_flag=1;
-                              break;
+                  case 0x02: //F1-03-01
+                  RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                  f7menu_t.unit= menu_t.unit;
+                  f7menu_t.decade=menu_t.decade;
+                  f7menu_t.hundred =menu_t.hundred;
+                  key_t.f7keyReturn_flag=1;
 
-                                case 0x04://F1-05-01
-                                    RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
-                                   f7menu_t.unit= menu_t.unit;
-                                   f7menu_t.decade=menu_t.decade;
-                                   f7menu_t.hundred =menu_t.hundred;
-                                   key_t.f7keyReturn_flag=1;
-                                 
-                              break;
+                  break;
 
-                              case 0x05://F1-06-01
-                                   f7menu_t.F7_03_05_Id=PushSub_03_Menu(2);
-                                    key_t.f7keyReturn_flag=1;
-                              break;
+                  case 0x03: //F1-04-01
+                  f7menu_t.F7_03_03_Id=PushSub_03_Menu(7);
+                  key_t.f7keyReturn_flag=1;
+                  break;
 
-                               case 0x06: //F1-07-01
-                                    
-                                   key_t.f7keyReturn_flag=1;
-                              break;
+                  case 0x04://F1-05-01
+                  RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                  f7menu_t.unit= menu_t.unit;
+                  f7menu_t.decade=menu_t.decade;
+                  f7menu_t.hundred =menu_t.hundred;
+                  key_t.f7keyReturn_flag=1;
 
-                              
-                         }
-                    break;
+                  break;
+
+                  case 0x05://F1-06-01
+                  f7menu_t.F7_03_05_Id=PushSub_03_Menu(2);
+                  key_t.f7keyReturn_flag=1;
+                  break;
+
+                  case 0x06: //F1-07-01
+
+                  key_t.f7keyReturn_flag=1;
+                  break;
+
+
+                  }
+            break;
                     //F8 - 01 -> the thrid menu
-                    case 0xf80:
+            case 0xf80:
 
-                         switch(menu_t.menu_F1Sub_03_xx_key){
+                  switch(menu_t.menu_F1Sub_03_xx_key){
 
-                              case 0:
-                                    f8menu_t.F8_03_01_Id=  PushSub_03_Menu(3);
-                              break;
+                  case 0:
+                  f8menu_t.F8_03_01_Id=  PushSub_03_Menu(3);
+                  break;
 
-                              case 1:
-                                    f8menu_t.F8_03_02_Id =  PushSub_03_Menu(6);
-                              break;
+                  case 1:
+                  f8menu_t.F8_03_02_Id =  PushSub_03_Menu(6);
+                  break;
 
-                              case 2:
-                                      Number_Digital_5bitPoint_AddSelect(AF803);
-                                      f8menu_t.unit =AF803[0];
-                                      f8menu_t.decade = AF803[1];
-                                      f8menu_t.hundred = AF803[2];
-                                      f8menu_t.onethousand= AF803[3];
-                                      f8menu_t.tenthousand= AF803[4];
-                              break;
+                  case 2:
+                  Number_Digital_5bitPoint_AddSelect(AF803);
+                  f8menu_t.unit =AF803[0];
+                  f8menu_t.decade = AF803[1];
+                  f8menu_t.hundred = AF803[2];
+                  f8menu_t.onethousand= AF803[3];
+                  f8menu_t.tenthousand= AF803[4];
+                  break;
 
-                              case 3:
-                                    Number_Digital_5bitPoint_AddSelect(AF804);
-                                      f8menu_t.unit =AF804[0];
-                                      f8menu_t.decade = AF804[1];
-                                      f8menu_t.hundred = AF804[2];
-                                      f8menu_t.onethousand= AF804[3];
-                                      f8menu_t.tenthousand= AF804[4];
-                                     
+                  case 3:
+                  Number_Digital_5bitPoint_AddSelect(AF804);
+                  f8menu_t.unit =AF804[0];
+                  f8menu_t.decade = AF804[1];
+                  f8menu_t.hundred = AF804[2];
+                  f8menu_t.onethousand= AF804[3];
+                  f8menu_t.tenthousand= AF804[4];
 
-                              break;
 
-                               case 4:
-                                 Number_Digital_5bitPoint_AddSelect(AF805);
-                                      f8menu_t.unit =AF805[0];
-                                      f8menu_t.decade = AF805[1];
-                                      f8menu_t.hundred = AF805[2];
-                                      f8menu_t.onethousand= AF805[3];
-                                      f8menu_t.tenthousand= AF805[4];
+                  break;
 
-                              break;
+                  case 4:
+                  Number_Digital_5bitPoint_AddSelect(AF805);
+                  f8menu_t.unit =AF805[0];
+                  f8menu_t.decade = AF805[1];
+                  f8menu_t.hundred = AF805[2];
+                  f8menu_t.onethousand= AF805[3];
+                  f8menu_t.tenthousand= AF805[4];
 
-                              case 5:
-                                      Number_Digital_5bitPoint_AddSelect(AF806);
-                                      f8menu_t.unit =AF806[0];
-                                      f8menu_t.decade = AF806[1];
-                                      f8menu_t.hundred = AF806[2];
-                                      f8menu_t.onethousand= AF806[3];
-                                      f8menu_t.tenthousand= AF806[4];
+                  break;
 
-                              break;
+                  case 5:
+                  Number_Digital_5bitPoint_AddSelect(AF806);
+                  f8menu_t.unit =AF806[0];
+                  f8menu_t.decade = AF806[1];
+                  f8menu_t.hundred = AF806[2];
+                  f8menu_t.onethousand= AF806[3];
+                  f8menu_t.tenthousand= AF806[4];
 
-                              case 6:
-                                    f8menu_t.F8_03_07_Id= PushSub_03_Menu(3);
-                              break;
+                  break;
 
-                               case 7:
-                                    f8menu_t.F8_03_08_Id= PushSub_03_Menu(3);
-                              break;
+                  case 6:
+                  f8menu_t.F8_03_07_Id= PushSub_03_Menu(3);
+                  break;
 
-                        }
+                  case 7:
+                  f8menu_t.F8_03_08_Id= PushSub_03_Menu(3);
+                  break;
 
-                    break;
+                  }
+
+                  break;
 
                     case 0xf90:
 
                     break;
 
 
-                }
+       }
                  
          break;
 
