@@ -1,6 +1,7 @@
 #include "flash.h"
 
 flash flash_t;
+QUEUE queue_t;
 
 
 typedef enum
@@ -133,25 +134,25 @@ void FlashSaveData(void)
     Flash_DMA_WriteData();
 }
 
-//��ȡָ����ַ��һ����(32λ����) 
-//faddr:����ַ 
-//����ֵ:��Ӧ����.
+//$)Ao?=o?=H!V8o?=o?=o?=o?=V7o?=o?=R;o?=o?=o?=o?=(32N;o?=o?=o?=o?=) 
+//faddr:$)Ao?=o?=o?=o?=V7 
+//$)Ao?=o?=o?=o?=V5:o?=o?=S&o?=o?=o?=o?=.
 uint32_t STMFLASH_ReadWord(uint32_t faddr)
 {
 	return *(uint32_t*)faddr; 
 }  
 
-//��ָ����ַ��ʼ����ָ�����ȵ�����
-//ReadAddr:��ʼ��ַ
-//pBuffer:����ָ��
-//NumToRead:��(32λ)��
+//$)Ao?=o?=V8o?=o?=o?=o?=V7o?=o?=J<o?=o?=o?=o?=V8o?=o?=o?=o?=o?=H5o?=o?=o?=o?=o?=
+//ReadAddr:$)Ao?=o?=J<o?=o?=V7
+//pBuffer:$)Ao?=o?=o?=o?=V8o?=o?=
+//NumToRead:$)Ao?=o?=(32N;)o?=o?=
 void STMFLASH_Read(uint32_t ReadAddr,uint32_t *pBuffer,uint32_t NumToRead)   	
 {
 	uint32_t i;
 	for(i=0;i<NumToRead;i++)
 	{
 		pBuffer[i]=STMFLASH_ReadWord(ReadAddr);//4 of words 
-		ReadAddr+=4;//ƫ��4���ֽ�.	
+		ReadAddr+=4;//$)AF+o?=o?=4o?=o?=o?=V=o?=.	
 		
 		printf("ReadAddr = %x",pBuffer[i]);
 	}
@@ -178,3 +179,68 @@ void Flash_Read(void)
 
 
 }
+
+
+void InitQueue(void)
+{
+     queue_t.front = queue_t.rear =0;
+
+}
+
+
+uint8_t QueueEmpty(void)
+{
+	if(queue_t.rear == queue_t.front){
+		return 1;
+	}
+	else 
+		return 0;
+
+
+}
+
+uint8_t EnQueue(uint8_t qdat)
+{
+   if((queue_t.rear+1)%DATA_MAXSIZE == queue_t.front){
+		return 0;
+   }
+
+   queue_t.quData[queue_t.rear]=qdat; //data insert queue in the end of 
+   queue_t.rear = (queue_t.rear +1)%DATA_MAXSIZE ;
+   return 1;
+}
+
+uint8_t DeQueue(uint8_t qdat)
+{
+   if(queue_t.rear == queue_t.front)
+   	    return 0;
+
+   qdat= queue_t.quData[queue_t.front];
+   queue_t.front = (queue_t.front +1)%DATA_MAXSIZE; //head pointer move next position
+   
+   return 1;
+
+}
+
+uint8_t GetHead_Queue(uint8_t qdat)
+{
+     if(queue_t.rear == queue_t.front)
+          return 0;
+
+	 qdat = queue_t.quData[queue_t.front];
+
+	  return 1;
+
+}
+
+uint8_t QueueNum(void)
+{
+    return (queue_t.rear -queue_t.front + DATA_MAXSIZE)%DATA_MAXSIZE;
+
+
+}
+
+
+
+
+

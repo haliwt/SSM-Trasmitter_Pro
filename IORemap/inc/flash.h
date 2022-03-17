@@ -3,9 +3,13 @@
 
 #include "main.h"
 
-//Ҫд�뵽STM32 FLASH���ַ�������
-//const u8 TEXT_Buffer[]={"STM32 FLASH TEST"};
-#define TEXT_LENTH 						sizeof(TEXT_Buffer)	 		  	//���鳤��	
+
+#define DATA_MAXSIZE        50
+
+
+
+
+#define TEXT_LENTH 						sizeof(TEXT_Buffer)	 		  	//$)Ao?=o?=o?=i3$o?=o?=	
 //#define SIZE 							TEXT_LENTH/4+((TEXT_LENTH%4)?1:0)
 
 #define SIZE 							128 /4 
@@ -23,8 +27,6 @@
 extern uint32_t SRAM_Data_Buffer[BUFFER_SIZE] ;
 
 extern uint32_t Flash_Data_Buffer[BUFFER_SIZE] __attribute__((at(FLASH_WRITE_START_ADDR)));
-
-void STMFLASH_Read(uint32_t ReadAddr,uint32_t *pBuffer,uint32_t NumToRead)  ; 
 
 
 typedef struct _FLASH{
@@ -52,6 +54,38 @@ typedef struct _FLASH{
 extern flash flash_t;
 
 extern uint32_t *pfdata;
+
+
+typedef struct _QUEUE{
+
+    uint8_t  quData[DATA_MAXSIZE];
+	uint8_t front ;
+	uint8_t rear;
+
+
+}QUEUE;
+
+extern QUEUE queue_t;
+void InitQueuq(void);
+
+uint8_t QueueEmpty(void);
+
+uint8_t EnQueue(uint8_t qdat);
+
+uint8_t DeQueue(uint8_t qdat);
+
+uint8_t GetHead_Queue(uint8_t qdat);
+
+uint8_t QueueNum(void);
+
+
+
+void STMFLASH_Read(uint32_t ReadAddr,uint32_t *pBuffer,uint32_t NumToRead)  ; 
+
+
+
+
+
 
 
 //void DMA_Flash_SRAM_Config(void);

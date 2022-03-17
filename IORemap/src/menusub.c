@@ -64,11 +64,30 @@ int8_t subTop_03(Stacksubmenu_03 *s)
 ************************************************/
 void TheThird_F1_03_Menu(void)
 {
+     static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f1temp;
+	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
+     
+       pfdata =  SRAM_Data_Buffer;
+     
      switch(menu_t.menu_F1Sub_03_xx_key){
 				   
 				   case 0: //F1-01-01
-                      menu_t.F1SubMenu_Sub_02_Id =0;
-				       F1SubMenu_F101_01_Select_DIS(menu_t.F1_Sub01_Top);
+                       menu_t.F1SubMenu_Sub_02_Id =0;
+                        if(f1r01 == 0) {
+                        f1r01++;
+                         Flash_Read();
+                          f1temp= ( flash_t.flashData[0] & 0xff000000) >> 24;
+                        
+                          menu_t.F1_Sub01_Top=   f1temp;
+                           menuFxSub_03_Top= f1temp;
+                          printf("f1sub_00_03_flash = %d\n",menu_t.F1_Sub01_Top);
+                        }
+                        if(f1r01==1){ 
+                        f1r01++;
+                        }
+                        else{
+                            F1SubMenu_F101_01_Select_DIS(menu_t.F1_Sub01_Top);
+                        }
 
                      //  printf("f1sub_01_03_Top = %d\n",menu_t.F1_Sub01_Top);
                        key_t.keyReturn_flag=1;
@@ -78,7 +97,20 @@ void TheThird_F1_03_Menu(void)
 				   case 0x01: //F1-02-01 ->
                        menu_t.F1SubMenu_Sub_02_Id =0x01;
                        menu_t.DisplaySmgBit_Select_Numbers =3;
-					   F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
+                           if(f1r02== 0) {
+                        f1r02++;
+                        Flash_Read();
+
+                        menu_t.F1_Sub02_unit=(flash_t.flashData[0] & 0xFF) >> 0; //form flas read data 
+							printf("f1subRun_01_03_unit = %d\n",menu_t.unit);
+                        menu_t.F1_Sub02_decade=( flash_t.flashData[0]  & 0xff00) >> 8;
+							printf("f1subRun_01_03_decade = %d\n",menu_t.decade);
+                        menu_t.F1_Sub02_hundred=(flash_t.flashData[0]  & 0xff0000) >> 16; 
+                        printf("f1subRun_01_03_hundred = %d\n",menu_t.hundred);
+                         
+                        }
+                        F1SubMenu_F1_02_01(menu_t.F1_Sub02_unit,menu_t.F1_Sub02_decade,menu_t.F1_Sub02_hundred);
+                        
                      //  printf("f1sub_02_03_Top = %d\n",menu_t.F1_Sub02_Top);
                         key_t.keyReturn_flag=1;
                        

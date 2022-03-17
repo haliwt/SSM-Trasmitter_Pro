@@ -61,9 +61,9 @@ int8_t AF806[5];
 
 
 
-int8_t Amenu_Top = -1;
 
-uint8_t Amenu[MAZ_F1_SUBMENU_SIZE];
+
+
 
 int8_t one,two,three,four,five; 
 void(*DispDigital_3BitSmg)(void);
@@ -686,7 +686,7 @@ static void KEY1_ZERIO_UP_Fun(void)
      static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r,f1temp;
 	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
 	// pfdata=flash_t.flashData;
-       *pfInputData = NULL;
+       
        pfdata =  SRAM_Data_Buffer;
 	
 	 switch(menu_t.FxMainMenu_key){
