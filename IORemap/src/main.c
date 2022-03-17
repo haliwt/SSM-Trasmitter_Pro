@@ -183,6 +183,9 @@ int main(void)
                    FlashSaveData();
 				   printf("flash_save_________OK\n");
 				   flash_t.flashSave_falg=0;
+				    FlashSaveData();
+					
+					Flash_Read();
 				}
 
 					

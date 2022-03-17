@@ -67,7 +67,7 @@ void TheThird_F1_03_Menu(void)
      static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f1temp;
 	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
      
-       pfdata =  SRAM_Data_Buffer;
+
      
      switch(menu_t.menu_F1Sub_03_xx_key){
 				   
@@ -76,10 +76,9 @@ void TheThird_F1_03_Menu(void)
                         if(f1r01 == 0) {
                         f1r01++;
                          Flash_Read();
-                          f1temp= ( flash_t.flashData[0] & 0xff000000) >> 24;
+                          menu_t.F1_Sub01_Top= ( flash_t.flashData[0] & 0xff000000) >> 24;
                         
-                          menu_t.F1_Sub01_Top=   f1temp;
-                           menuFxSub_03_Top= f1temp;
+
                           printf("f1sub_00_03_flash = %d\n",menu_t.F1_Sub01_Top);
                         }
                         if(f1r01==1){ 
