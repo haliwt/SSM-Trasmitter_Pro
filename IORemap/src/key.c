@@ -23,6 +23,9 @@ subNumbers_TypedDef submenStruct;
 static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r,f1temp;
 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
 static uint32_t f1r01_reg,f1r02_reg,f1r02_temp;
+
+ static uint32_t f2r01_reg, f2r02_reg,f2r03_reg,f2r04_reg,f2r05_reg,f2r06_reg,f2r05_reg_next;
+
 int8_t AF104[4];
 int8_t AF105[2];
 int8_t AF106[5];
@@ -416,10 +419,10 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.FxSub_02_key=0xf20;
 	                  menu_t.F2_SubMenuTop= PushSub_Menu(F2Mnumbers);
                         printf("f201top = %d\n",menu_t.F2_SubMenuTop);
-		}
-            else{
+		   }
+           else{
                       
-                     key_t.keyReturn_F2_flag = key_t.keyReturn_F2_flag ^ 0X01; 
+                     key_t.keyReturn_F2_flag ++;
                      if(key_t.keyReturn_F2_flag==1){
 
                       /*****************The third********************/
@@ -435,8 +438,8 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.menu_F1Sub_03_xx_key=menu_t.F2SubMenu_Id;
                         
                      }
-                     else{
-                      
+                     else if(key_t.keyReturn_F2_flag ==2){
+                        key_t.keyReturn_F2_flag =0;
                         menu_t.menuId= F2;
                        
 
@@ -446,13 +449,25 @@ static void KEY_SubMenuFun_Enter(void)
                          menu_t.menuTitle_02=2;
                         menu_t.FxSub_03_key=0xff;  
                         menu_t.menuTitle_03=0;
-                      //  F2_01_xx_SelectCmd();
+                   
                         menu_t.F2_SubMenuTop=menu_t.F2SubMenu_Id;
+                         if(key_t.F2_0102FlashSave_flag==1){
+                            key_t.F2_0102FlashSave_flag=0;
+                            FlashSaveData();
+                            printf("flash_save_________OK\n");
+                          
+				             }
+                         
+				          key_t.keyReturn_flag =0;
+                        printf("F1_0102FlashSave_flag = %d\n", key_t.F1_0102FlashSave_flag);
+                        printf("f1_enterKey_retrunMenu = %d\n", menu_t.F1_SubMenuTop);
+                               
+                       }
                      
-                        printf("f2sub_top_return = %d\n",menu_t.F2_SubMenuTop);
-                     }
+                      
+              }
 
-            }    
+                
           break;
           
           case F3:
@@ -1096,32 +1111,162 @@ static void KEY1_ZERIO_UP_Fun(void)
 
             }
             break;
-
+      /***********************F2**************************************/
             case 0xf20://F2-01->Control
                   switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case F201:
+                    key_t.F2_0102FlashSave_flag=1;
+                  // if(f2r01==0){
+                  //    f2r01++;
+                  //       Flash_Read(); 
+                  //     AF201[0] = ( flash_t.flashData[56] & 0xff000000) >> 24;
+                  
+                  // }
                   Number_Digital_Set5bit_AddSelect(AF201,3);
+                  f2r01_reg = ((SpecDisplay_Number(AF201[0]))<<24);
+                  *(pfdata + 14) =f2r01_reg  | f2r02_reg;
                   break;
 
                   case F202:
+                  key_t.F2_0102FlashSave_flag=1;
+                  // if(f2r02==0){
+                  //       f2r02++;
+                  //        Flash_Read(); 
+                  //         AF202[4]=((flash_t.flashData[56] & 0xFF) >>0); //form flas read data 
+                         
+                  //        //next Words
+                         
+                  //       AF202[3]=((flash_t.flashData[60] & 0xFF000000) >> 24); //form flas read data 
+                  //       printf("f1sub_01_05_AF106[3] = %d\n",AF202[3]);
+                  //       AF202[2]=((flash_t.flashData[60] & 0x00ff0000) >> 16);
+                  //       printf("f1sub_01_05_AF106[2] = %d\n",AF202[2]);
+                  //       AF202[1]=((flash_t.flashData[60] & 0xff00) >> 8);
+                  //       printf("f1sub_01_05_AF106[1] = %d\n",AF202[1]);
+                  //       AF202[0]=((flash_t.flashData[60] & 0xff) >> 0);
+                  //       printf("f1sub_01_05_AF106[0] = %d\n",AF202[0]);
+
+                        
+                  // }
                   Number_Digital_5bit_AddSelect(AF202);
+                  f2r02_reg  = ((SpecDisplay_Number(AF202[4]))<<0);
+                  *(pfdata + 14) =f2r02_reg | f2r01_reg;
+                  *(pfdata+15) =(((SpecDisplay_Number( AF202[3]))<< 24)|((SpecDisplay_Number( AF202[2]))<< 16)  | ((SpecDisplay_Number( AF202[1]))<<8) 
+                        |((SpecDisplay_Number( AF202[0]))<<0));
                   break;
 
                   case F203:
-                        Number_Digital_5bit_AddSelect(AF203);
+                  key_t.F2_0102FlashSave_flag=1;
+                  //    if(f2r03 ==0){
+                           
+                  //          f2r03++;
+                  //        Flash_Read(); 
+                       
+                         
+                  //        AF203[4]=((flash_t.flashData[64] & 0xFF000000) >> 24); //form flas read data 
+                  //       printf("f1sub_01_05_AF106[3] = %d\n",AF203[3]);
+                  //       AF203[3]=((flash_t.flashData[64] & 0x00ff0000) >> 16);
+                  //       printf("f1sub_01_05_AF106[2] = %d\n",AF203[2]);
+                  //       AF203[2]=((flash_t.flashData[64] & 0xff00) >> 8);
+                  //       printf("f1sub_01_05_AF106[1] = %d\n",AF203[1]);
+                  //       AF203[1]=((flash_t.flashData[64] & 0xff) >> 0);
+                  //       printf("f1sub_01_05_AF106[1] = %d\n",AF203[1]);
+                        
+                  //       //next  Words 
+                  //       AF203[0]=((flash_t.flashData[68] & 0xff000000) >> 24);
+                  //       printf("f1sub_01_05_AF106[0] = %d\n",AF203[0]);
+                           
+                  //    }
+                    Number_Digital_5bit_AddSelect(AF203);
+                    
+                  
+                  
+                  *(pfdata+16) =(((SpecDisplay_Number( AF203[4]))<< 24)|((SpecDisplay_Number( AF203[3]))<< 16)  | ((SpecDisplay_Number( AF203[2]))<<8) 
+                        |((SpecDisplay_Number( AF203[01]))<<0));
+                  
+                   f2r03_reg  = ((SpecDisplay_Number(AF203[0]))<<24);
+                  *(pfdata + 17) =f2r04_reg |(f2r03_reg ) |(f2r05_reg); 
+                    
                   break;
 
                   case F204:
-                        Number_Digital_Set5bit_AddSelect(AF204,3);
+                  key_t.F2_0102FlashSave_flag=1;
+//                  if(f2r04==0){
+//                        f2r04++;
+//                         Flash_Read(); 
+//                        F204[0]=((flash_t.flashData[68] & 0x00ff0000) >> 16);
+//                        printf("f1sub_01_05_AF106[0] = %d\n",AF204[0]);
+//                        
+//                  }
+//                  
+                   Number_Digital_Set5bit_AddSelect(AF204,3);
+                  f2r04_reg = ((SpecDisplay_Number(AF204[0]))<<16);
+                  *(pfdata +17)  =f2r04_reg |(f2r03_reg ) |(f2r05_reg);
+                       
                   break;
 
                   case F205:
-                        Number_Digital_5bit_AddSelect(AF205);
+                  key_t.F2_0102FlashSave_flag=1;
+                  //  if(f2r05==0){
+                  //       f2r05++;
+                  //        Flash_Read(); 
+                         
+                  //        AF205[4]=((flash_t.flashData[68] & 0xFF00) >>8); //form flas read data 
+                        
+                  //        AF205[3]=((flash_t.flashData[68] & 0xFF) >> 0); //form flas read data 
+                         
+                  //        //next word
+                  //             printf("f1sub_01_05_AF106[3] = %d\n",AF205[3]);
+                  //       AF205[2]=((flash_t.flashData[72] & 0xff000000) >> 24);
+                  //             printf("f1sub_01_05_AF106[2] = %d\n",AF205[2]);
+                  //       AF205[1]=((flash_t.flashData[72] & 0xff0000) >> 16);
+                  //             printf("f1sub_01_05_AF106[1] = %d\n",AF205[1]);
+                  //       AF205[0]=((flash_t.flashData[72] & 0xff00)>>8);
+                  //             printf("f1sub_01_05_AF106[0] = %d\n",AF205[0]);
+                              
+                       
+                  // }
+                  Number_Digital_5bit_AddSelect(AF205);
+                  
+                    
+                  f2r05_reg  =(((SpecDisplay_Number(AF205[4]))<<8)|((SpecDisplay_Number(AF205[3]))<<0));
+                  
+                  *(pfdata + 17) =f2r04_reg |(f2r03_reg ) |(f2r05_reg); 
+                  
+                  f2r05_reg_next = (((SpecDisplay_Number( AF205[2]))<< 24)|((SpecDisplay_Number( AF205[1]))<< 16)  | ((SpecDisplay_Number( AF205[0]))<<8)) ;
+                  *(pfdata+18) = f2r05_reg_next |f2r06_reg;
+                  
+                
+                  
                   break;
 
                   case F206:
-                        Number_Digital_5bit_AddSelect(AF206);
+                  
+                  key_t.F2_0102FlashSave_flag=1;
+                  //  if(f2r06==0){
+                  //       f2r06++;
+                  //        Flash_Read(); 
+                         
+                  //        AF206[4]=((flash_t.flashData[72] & 0xff)>>0);
+                  //             printf("f1sub_01_05_AF106[0] = %d\n",AF206[4]);
+                  //       //next word
+                  //        AF206[3]=((flash_t.flashData[76] & 0xFF000000) >>24); //form flas read data 
+                  //        AF206[2]=((flash_t.flashData[76] & 0x00FF0000) >> 16); //form flas read data 
+                  //             printf("f1sub_01_05_AF106[3] = %d\n",AF206[2]);
+                  //       AF206[1]=((flash_t.flashData[76] & 0xff00) >> 8);
+                  //             printf("f1sub_01_05_AF106[2] = %d\n",AF206[21]);
+                  //       AF206[0]=((flash_t.flashData[76] & 0xff) >> 0);
+                  //             printf("f1sub_01_05_AF106[1] = %d\n",AF206[01]);
+                  
+
+                        
+                  // }
+                  Number_Digital_5bit_AddSelect(AF206);
+                  f2r06_reg  =(((SpecDisplay_Number(AF206[4])) <<0));
+                  *(pfdata+18)= f2r06_reg |f2r05_reg_next ;
+                  
+                   *(pfdata +19) = (((SpecDisplay_Number( AF206[3]))<< 24)|((SpecDisplay_Number( AF206[2]))<< 16)  | ((SpecDisplay_Number( AF206[1]))<<8)|((SpecDisplay_Number( AF206[0]))<<8)) ;
+                  
                   break;
 
 
@@ -1669,38 +1814,69 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
             }
             break;
+        /*********************************************************************************
+        *
+        *F2
+        *
+        ********************************************************************************/
+            case 0xf20:
+            switch(menu_t.menu_F1Sub_03_xx_key){
 
-                    case 0xf20:
-                        switch(menu_t.menu_F1Sub_03_xx_key){
+                  case F201:
+                     Number_Digital_Set5bit_DecSelect(AF201,3);
+                  f2r01_reg = ((SpecDisplay_Number(AF201[0]))<<24);
+                  *(pfdata + 14) =f2r01_reg  | f2r02_reg;
+                 
+                  break;
 
-                             case F201:
-                              Number_Digital_Set5bit_DecSelect(AF201,3);
-                           break;
+                  case F202:
+                  Number_Digital_5bit_DecSelect(AF202);
+                  f2r02_reg  = ((SpecDisplay_Number(AF202[4]))<<0);
+                  *(pfdata + 14) =f2r02_reg | f2r01_reg;
+                  *(pfdata+15) =(((SpecDisplay_Number( AF202[3]))<< 24)|((SpecDisplay_Number( AF202[2]))<< 16)  | ((SpecDisplay_Number( AF202[1]))<<8) 
+                        |((SpecDisplay_Number( AF202[0]))<<0));
+                  
+                  break;
 
-                           case F202:
-                              Number_Digital_5bit_DecSelect(AF202);
-                           break;
+                  case F203:
+                        Number_Digital_5bit_DecSelect(AF203);
+                         *(pfdata+16) =(((SpecDisplay_Number( AF203[4]))<< 24)|((SpecDisplay_Number( AF203[3]))<< 16)  | ((SpecDisplay_Number( AF203[2]))<<8) 
+                        |((SpecDisplay_Number( AF203[01]))<<0));
+                  
+                   f2r03_reg  = ((SpecDisplay_Number(AF203[0]))<<24);
+                  *(pfdata + 17) =f2r04_reg |(f2r03_reg ) |(f2r05_reg); 
+                  break;
 
-                           case F203:
-                               Number_Digital_5bit_DecSelect(AF203);
-                           break;
+                  case F204:
+                        Number_Digital_Set5bit_DecSelect(AF204,3);
+                         f2r04_reg = ((SpecDisplay_Number(AF204[0]))<<16);
+                           *(pfdata +17)  =f2r04_reg |(f2r03_reg ) |(f2r05_reg);
+                  break;
 
-                           case F204:
-                               Number_Digital_Set5bit_DecSelect(AF204,3);
-                           break;
+                  case F205:
+                        Number_Digital_5bit_DecSelect(AF205);
+                   f2r05_reg  =(((SpecDisplay_Number(AF205[4]))<<8)|((SpecDisplay_Number(AF205[3]))<<0));
+                  
+                  *(pfdata + 17) =f2r04_reg |(f2r03_reg ) |(f2r05_reg); 
+                  
+                  f2r05_reg_next = (((SpecDisplay_Number( AF205[2]))<< 24)|((SpecDisplay_Number( AF205[1]))<< 16)  | ((SpecDisplay_Number( AF205[0]))<<8)) ;
+                  *(pfdata+18) = f2r05_reg_next |f2r06_reg;
+                  break;
 
-                           case F205:
-                               Number_Digital_5bit_DecSelect(AF205);
-                           break;
+                  case F206:
+                        Number_Digital_5bit_DecSelect(AF206);
+                         f2r06_reg  =(((SpecDisplay_Number(AF206[4])) <<0));
+                  *(pfdata+18)= f2r06_reg |f2r05_reg_next ;
+                  
+                   *(pfdata +19) = (((SpecDisplay_Number( AF206[3]))<< 24)|((SpecDisplay_Number( AF206[2]))<< 16)  | ((SpecDisplay_Number( AF206[1]))<<8)|((SpecDisplay_Number( AF206[0]))<<8)) ;
+                  break;
 
-                           case F206:
-                               Number_Digital_5bit_DecSelect(AF206);
-                           break;
 
+            }
 
-                        }
-
-                    break;
+            break;
+/**************************************************************************************
+****************************************************/
                   //F3-1.1
                     case 0xf30: //KEY - DOWN -
                         switch(menu_t.menu_F1Sub_03_xx_key){
@@ -2512,9 +2688,6 @@ void Number_Digital_Set5bit_AddSelect(int8_t *ap ,uint8_t n)
        *ap =i;
        menu_t.F34_KEY_VALUE = i;
       
-        
-        
-
 }
 void Number_Digital_Set5bit_twoAddSelect(int8_t *ap ,uint8_t n)
 {

@@ -305,14 +305,14 @@ void TheThird_F1_03_Menu(void)
 
                    case 0x0B : //F1-12-01 -> 2bit
                         menu_t.F1SubMenu_Sub_02_Id =0x0B;
-                         menu_t.DisplaySmgBit_Select_Numbers =2;
+                        menu_t.DisplaySmgBit_Select_Numbers =2;
                          
                         if(f1r11==0){
-                        f1r11++;
+                            f1r11++;
                           Flash_Read(); 
                         AF112[1]=((flash_t.flashData[48] & 0xFF000000) >> 24); //form flas read data 
-                        printf("f1sub_01_05_AF106[3] = %d\n",AF112[1]);
-                        AF112[0]=((flash_t.flashData[48] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF112[1] = %d\n",AF112[1]);
+                       AF112[0]=((flash_t.flashData[48] & 0x00ff0000) >> 16);
                         printf("f1sub_01_05_AF106[2] = %d\n",AF112[0]);
                         }
                          
@@ -323,7 +323,7 @@ void TheThird_F1_03_Menu(void)
                    case 0x0C : //F1-13-01
                         menu_t.F1SubMenu_Sub_02_Id =0x0C;
                          menu_t.DisplaySmgBit_Select_Numbers =2;
-                        if(f1r12==0){
+                       if(f1r12==0){
                        f1r12++; 
                         Flash_Read(); 
                         AF113[1]=((flash_t.flashData[52] & 0xFF000000) >> 24); //form flas read data 
@@ -343,35 +343,132 @@ void TheThird_F1_03_Menu(void)
 
 void F2SubMenu_03_Item(void)
 {
+   
+   static uint8_t f2r01,f2r02,f2r03,f2r04,f2r05,f2r06;
+   
     switch(menu_t.menu_F1Sub_03_xx_key){
                  
                  case F201 : //display -> 3bit
                         menu_t.F2SubMenu_Id=F201;
-                        F2SubMenu_F201_01_Select_DIS(AF201);
+                      menu_t.DisplaySmgBit_Select_Numbers =1;
+                      if(f2r01==0){
+                      f2r01++;
+                        Flash_Read(); 
+                      AF201[0] = (flash_t.flashData[56] & 0xff000000) >> 24;
+                  
+                  }
+                    F2SubMenu_F201_01_Select_DIS(AF201);
                  break;
 
                  case F202 : //"5BIT" has "-"
                         menu_t.F2SubMenu_Id=F202;
+                         menu_t.DisplaySmgBit_Select_Numbers =5;
+                         if(f2r02==0){
+                        f2r02++;
+                         Flash_Read(); 
+                          AF202[4]=((flash_t.flashData[56] & 0xFF) >>0); //form flas read data 
+                         
+                         //next Words
+                         
+                        AF202[3]=((flash_t.flashData[60] & 0xFF000000) >> 24); //form flas read data 
+                        printf("f1sub_01_05_AF106[3] = %d\n",AF202[3]);
+                        AF202[2]=((flash_t.flashData[60] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[2] = %d\n",AF202[2]);
+                        AF202[1]=((flash_t.flashData[60] & 0xff00) >> 8);
+                        printf("f1sub_01_05_AF106[1] = %d\n",AF202[1]);
+                        AF202[0]=((flash_t.flashData[60] & 0xff) >> 0);
+                        printf("f1sub_01_05_AF106[0] = %d\n",AF202[0]);
+
+                        
+                  }
                         F2SubMenu_F202_01_Select_DIS(AF202);
                  break;
 
                  case F203 : //5BIT 
                          menu_t.F2SubMenu_Id=F203;
+                          menu_t.DisplaySmgBit_Select_Numbers =5;
+                          if(f2r03 ==0){
+                           
+                           f2r03++;
+                         Flash_Read(); 
+                       
+                         
+                         AF203[4]=((flash_t.flashData[64] & 0xFF000000) >> 24); //form flas read data 
+                        printf("f1sub_01_05_AF106[3] = %d\n",AF203[3]);
+                        AF203[3]=((flash_t.flashData[64] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[2] = %d\n",AF203[2]);
+                        AF203[2]=((flash_t.flashData[64] & 0xff00) >> 8);
+                        printf("f1sub_01_05_AF106[1] = %d\n",AF203[1]);
+                        AF203[1]=((flash_t.flashData[64] & 0xff) >> 0);
+                        printf("f1sub_01_05_AF106[1] = %d\n",AF203[1]);
+                        
+                        //next  Words 
+                        AF203[0]=((flash_t.flashData[68] & 0xff000000) >> 24);
+                        printf("f1sub_01_05_AF106[0] = %d\n",AF203[0]);
+                           
+                     }
                          F2SubMenu_F203_01_Select_DIS(AF203);
                  break;
 
                  case F204 : //3bit
                          menu_t.F2SubMenu_Id=F204;
+                        menu_t.DisplaySmgBit_Select_Numbers =1;
+                        if(f2r04==0){
+                        f2r04++;
+                         Flash_Read(); 
+                        AF204[0]=((flash_t.flashData[68] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[0] = %d\n",AF204[0]);
+                        
+                      }
                          F2SubMenu_F201_01_Select_DIS(AF204);//F2SubMenu_F204_01_Select_DIS(AF204);
                  break;
                 
                 case F205 : //"5BIT" has "-"
                         menu_t.F2SubMenu_Id=F205;
+                         menu_t.DisplaySmgBit_Select_Numbers =5;
+                          if(f2r05==0){
+                        f2r05++;
+                         Flash_Read(); 
+                         
+                         AF205[4]=((flash_t.flashData[68] & 0xFF00) >>8); //form flas read data 
+                        
+                         AF205[3]=((flash_t.flashData[68] & 0xFF) >> 0); //form flas read data 
+                         
+                         //next word
+                              printf("f1sub_01_05_AF106[3] = %d\n",AF205[3]);
+                        AF205[2]=((flash_t.flashData[72] & 0xff000000) >> 24);
+                              printf("f1sub_01_05_AF106[2] = %d\n",AF205[2]);
+                        AF205[1]=((flash_t.flashData[72] & 0xff0000) >> 16);
+                              printf("f1sub_01_05_AF106[1] = %d\n",AF205[1]);
+                        AF205[0]=((flash_t.flashData[72] & 0xff00)>>8);
+                              printf("f1sub_01_05_AF106[0] = %d\n",AF205[0]);
+                              
+                       
+                      }
                         F2SubMenu_F202_01_Select_DIS(AF205); //F2SubMenu_F205_01_Select_DIS(AF205);
                  break;
 
                  case F206 ://"5BIT"
                         menu_t.F2SubMenu_Id=F206;
+                         menu_t.DisplaySmgBit_Select_Numbers =5;
+                        if(f2r06==0){
+                        f2r06++;
+                         Flash_Read(); 
+                         
+                         AF206[4]=((flash_t.flashData[72] & 0xff)>>0);
+                              printf("f1sub_01_05_AF106[0] = %d\n",AF206[4]);
+                        //next word
+                         AF206[3]=((flash_t.flashData[76] & 0xFF000000) >>24); //form flas read data 
+                         AF206[2]=((flash_t.flashData[76] & 0x00FF0000) >> 16); //form flas read data 
+                              printf("f1sub_01_05_AF106[3] = %d\n",AF206[2]);
+                        AF206[1]=((flash_t.flashData[76] & 0xff00) >> 8);
+                              printf("f1sub_01_05_AF106[2] = %d\n",AF206[21]);
+                        AF206[0]=((flash_t.flashData[76] & 0xff) >> 0);
+                              printf("f1sub_01_05_AF106[1] = %d\n",AF206[01]);
+                  
+
+                        
+                  }
                         F2SubMenu_F203_01_Select_DIS(AF206);//F2SubMenu_F206_01_Select_DIS(AF206);
                  break;
                  default:

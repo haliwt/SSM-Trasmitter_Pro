@@ -441,6 +441,7 @@ void F2SubMenu_02(uint8_t mn)
 
 	        case F201:
 			    menu_t.F2SubMenu_Id = F201;
+				menu_t.DisplaySmgBit_Select_Numbers=1;
 				F1SubMenu_01(); //"F1 - 01"
 			break;
 
