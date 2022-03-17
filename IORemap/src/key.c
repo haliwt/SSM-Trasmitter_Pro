@@ -751,6 +751,7 @@ static void KEY1_ZERIO_UP_Fun(void)
             switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case 0x00: //F1-01-01  -8bit flash_t.pointer = 
+                     key_t.F1_0102FlashSave_flag=1;
                         if(f1r01 == 0) {
                         f1r01++;
                          //Flash_Read();
@@ -964,7 +965,7 @@ static void KEY1_ZERIO_UP_Fun(void)
             break;
 
             case 0x07: //F1-08-01
-            
+                  key_t.F1_0102FlashSave_flag=1;
                   if(f1r07==0){
                         
                         f1r07++;
@@ -987,6 +988,7 @@ static void KEY1_ZERIO_UP_Fun(void)
             break;
 
             case 0x08: //F1-09-01
+                  key_t.F1_0102FlashSave_flag=1;
                    if(f1r08==0){
                        f1r08++; 
                   //      Flash_Read(); 
@@ -1018,6 +1020,7 @@ static void KEY1_ZERIO_UP_Fun(void)
             break;
 
             case 0x09: //F1-10-01
+                   key_t.F1_0102FlashSave_flag=1;
                   if(f1r09==0){
                         f1r09++;
                         // Flash_Read(); 
@@ -1039,6 +1042,7 @@ static void KEY1_ZERIO_UP_Fun(void)
             break;
 
             case 0x0A://F1-11-01 ->display 4 bit
+            key_t.F1_0102FlashSave_flag=1;
                   if(f1r10==0){
                         f1r10++;
                         //  Flash_Read(); 
@@ -1053,6 +1057,7 @@ static void KEY1_ZERIO_UP_Fun(void)
             break;
 
             case 0x0B://F1-12-01
+            key_t.F1_0102FlashSave_flag=1;
                   if(f1r11==0){
                         f1r11++;
                           Flash_Read(); 
@@ -1071,6 +1076,7 @@ static void KEY1_ZERIO_UP_Fun(void)
             break;
 
             case 0x0C://F1-13-01
+            key_t.F1_0102FlashSave_flag=1;
                   if(f1r12==0){
                        f1r12++; 
                         // Flash_Read(); 
