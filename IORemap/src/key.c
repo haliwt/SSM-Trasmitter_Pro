@@ -814,18 +814,25 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
                   case 0x02: //F1-03-01  
+                        key_t.F1_0102FlashSave_flag=1;
                           if(f1r02==0){
-					    Flash_Read();
+					f1r02++;
 
-                              menu_t.unit=(flash_t.flashData[4] & 0xFF) >> 0; //form flas read data 
-                                                printf("f1sub_01_03_unit = %d\n",menu_t.unit);
-                              menu_t.decade=( flash_t.flashData[4]  & 0xff00) >> 8;
-                                                printf("f1sub_01_03_decade = %d\n",menu_t.decade);
-                              menu_t.hundred=(flash_t.flashData[4]  & 0xff0000) >> 16; 
-                                    printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
+                              // menu_t.unit=(flash_t.flashData[4] & 0xFF) >> 0; //form flas read data 
+                              //                   printf("f1sub_01_03_unit = %d\n",menu_t.unit);
+                              // menu_t.decade=( flash_t.flashData[4]  & 0xff00) >> 8;
+                              //                   printf("f1sub_01_03_decade = %d\n",menu_t.decade);
+                              // menu_t.hundred=(flash_t.flashData[4]  & 0xff0000) >> 16; 
+                              //       printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
+                             menu_t.unit=menu_t. F1_Sub03_unit;
+                             
+                             menu_t.decade =menu_t.F1_Sub03_decade;
+                              
+                           menu_t.hundred=menu_t.F1_Sub03_hundred;
+                        
                         }
-                        else
-                              RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                        
+                        RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
                               
                         menu_t. F1_Sub03_unit= menu_t.unit;
                         menu_t.F1_Sub03_decade=menu_t.decade;
@@ -839,27 +846,28 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
                   case 0x03: //F1-04-01
+                        key_t.F1_0102FlashSave_flag=1;
                         if(f1r03==0){
                             f1r03++;
-				Flash_Read();
-                        AF104[3]=((flash_t.flashData[8] & 0xFF000000) >> 24); //form flas read data 
-                               printf("f1sub_01_03_AF104[3] = %d\n",AF104[3]);
-                        AF104[2]=((flash_t.flashData[8] & 0x00ff0000) >> 16);
-                                printf("f1sub_01_03_AF104[2] = %d\n",AF104[2]);
-                        AF104[1]=((flash_t.flashData[8] & 0x0000ff00) >> 8);
-                                      printf("f1sub_01_03_AF104[1] = %d\n",AF104[1]);
-                        AF104[0]=((flash_t.flashData[8] & 0xff) >> 0);
-                          printf("f1sub_01_03_AF104[0] = %d\n",AF104[0]);
-                              
-                              
+				// Flash_Read();
+                        // AF104[3]=((flash_t.flashData[8] & 0xFF000000) >> 24); //form flas read data 
+                        //        printf("f1sub_01_03_AF104[3] = %d\n",AF104[3]);
+                        // AF104[2]=((flash_t.flashData[8] & 0x00ff0000) >> 16);
+                        //         printf("f1sub_01_03_AF104[2] = %d\n",AF104[2]);
+                        // AF104[1]=((flash_t.flashData[8] & 0x0000ff00) >> 8);
+                        //               printf("f1sub_01_03_AF104[1] = %d\n",AF104[1]);
+                        // AF104[0]=((flash_t.flashData[8] & 0xff) >> 0);
+                        //   printf("f1sub_01_03_AF104[0] = %d\n",AF104[0]);
+                            
+                              // AF104[3]++;
+                              // AF104[2]++;
+                              // AF104[1]++;
+                              // AF104[0]++;
+                              // Number_Digital_4bit_AddSelect(AF104);
                         }
-                        if(f1r03==1){
-                           f1r03++;   
-                              
-                        }
-                        else{
-                              Number_Digital_4bit_AddSelect(AF104);
-                        }
+                        else
+                           Number_Digital_4bit_AddSelect(AF104);
+                        
                         
                         
                         *(pfdata+2) =(((SpecDisplay_Number(AF104[3]))<<24)|((SpecDisplay_Number(AF104[2] ))<< 16)  | ((SpecDisplay_Number(AF104[1]))<<8) 
@@ -871,17 +879,13 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
                   case 0x04://F1-05-01
-
+                        key_t.F1_0102FlashSave_flag=1;
                         if(f1r04==0){
                               f1r04++;
-                              Flash_Read();
-                              AF105[1]=((flash_t.flashData[12] & 0xFF000000) >> 24); //form flas read data 
-                              AF105[0]=((flash_t.flashData[12] & 0x00ff0000) >> 16);
-
-                        }
-                        
-                        if(f1r04==1){
-                              f1r04++;
+                              // Flash_Read();
+                              // AF105[1]=((flash_t.flashData[12] & 0xFF000000) >> 24); //form flas read data 
+                              // AF105[0]=((flash_t.flashData[12] & 0x00ff0000) >> 16);
+                                    Number_Digital_2bit_AddSelect(AF105);
                         }
                         else
                             Number_Digital_2bit_AddSelect(AF105);
@@ -893,28 +897,25 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
                   case 0x05://F1-06-01
+                           key_t.F1_0102FlashSave_flag=1;
                         if(f1r05 ==0){
                               f1r05++;
-                              Flash_Read();
+                        //       Flash_Read();
                               
-                        AF106[4]=((flash_t.flashData[16] & 0xFF000000) >> 24); //form flas read data 
-                               printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
-                        AF106[3]=((flash_t.flashData[16] & 0x00ff0000) >> 16);
-                                printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
-                        AF106[2]=((flash_t.flashData[16] & 0x0000ff00) >> 8);
-                                      printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
-                        AF106[1]=((flash_t.flashData[16] & 0xff) >> 0);
-                          printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                        // AF106[4]=((flash_t.flashData[16] & 0xFF000000) >> 24); //form flas read data 
+                        //        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        // AF106[3]=((flash_t.flashData[16] & 0x00ff0000) >> 16);
+                        //         printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        // AF106[2]=((flash_t.flashData[16] & 0x0000ff00) >> 8);
+                        //               printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
+                        // AF106[1]=((flash_t.flashData[16] & 0xff) >> 0);
+                        //   printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
                           
                           
-                        AF106[0]=(flash_t.flashData[20] & 0xff000000) >> 24;  //next word   
-                               printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                        // AF106[0]=(flash_t.flashData[20] & 0xff000000) >> 24;  //next word   
+                        //        printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
                           
-                              
-                        }
-                        
-                        if(f1r05==1){
-                              f1r05++;
+                         Number_Digital_5bit_AddSelect(AF106);
                         }
                         else
                               Number_Digital_5bit_AddSelect(AF106);
@@ -928,32 +929,29 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
             case 0x06: //F1-07-01
-                  
+                  key_t.F1_0102FlashSave_flag=1;
                         if(f1r06==0){
                               f1r06++;
-                                Flash_Read();
+                        //         Flash_Read();
                               
-                        AF107[4]=((flash_t.flashData[20] & 0x00FF0000) >> 16); //form flas read data 
-                               printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
-                        AF107[3]=((flash_t.flashData[20] & 0x0000ff00) >> 8);
-                                printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
-                        AF107[2]=((flash_t.flashData[20] & 0xff) >> 0);
-                                      printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
-                        //next words 
-                        AF107[1]=((flash_t.flashData[24] & 0xff000000) >> 24);
-                          printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                        // AF107[4]=((flash_t.flashData[20] & 0x00FF0000) >> 16); //form flas read data 
+                        //        printf("f1sub_01_05_AF106[3] = %d\n",AF107[3]);
+                        // AF107[3]=((flash_t.flashData[20] & 0x0000ff00) >> 8);
+                        //         printf("f1sub_01_05_AF106[2] = %d\n",AF107[2]);
+                        // AF107[2]=((flash_t.flashData[20] & 0xff) >> 0);
+                        //               printf("f1sub_01_05_AF106[1] = %d\n",AF107[1]);
+                        // //next words 
+                        // AF107[1]=((flash_t.flashData[24] & 0xff000000) >> 24);
+                        //   printf("f1sub_01_05_AF106[0] = %d\n",AF107[0]);
                           
                           
-                        AF107[0]=(flash_t.flashData[24] & 0x00ff0000) >> 16;  //next word   
-                               printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
-                              
-                        }
-                        
-                        if(f1r06==1){
-                              f1r06++;
+                        // AF107[0]=(flash_t.flashData[24] & 0x00ff0000) >> 16;  //next word   
+                        //        printf("f1sub_01_05_AF106[0] = %d\n",AF107[0]);
+                          Number_Digital_5bit_AddSelect(AF107);
+
                         }
                         else
-                              Number_Digital_5bit_AddSelect(AF107);
+                             Number_Digital_5bit_AddSelect(AF107);
 
 
                         *(pfdata + 5) =(((SpecDisplay_Number(AF107[4] ))<< 16)  | ((SpecDisplay_Number(AF107[3]))<<8) 
@@ -970,19 +968,18 @@ static void KEY1_ZERIO_UP_Fun(void)
                   if(f1r07==0){
                         
                         f1r07++;
-                         Flash_Read();
+                        //  Flash_Read();
                          
                               
-                        AF108[1]=((flash_t.flashData[28] & 0xFF000000) >> 24); //form flas read data 
-                               printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
-                        AF108[0]=((flash_t.flashData[28] & 0x00ff0000) >> 16);
-                                printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        // AF108[1]=((flash_t.flashData[28] & 0xFF000000) >> 24); //form flas read data 
+                        //        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        // AF108[0]=((flash_t.flashData[28] & 0x00ff0000) >> 16);
+                        //         printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                         Number_Digital_2bit_AddSelect(AF108);
                         
                   }
-                  if(f1r07==1){
-                        f1r07++;
-                  }
-                  Number_Digital_2bit_AddSelect(AF108);
+                  else
+                        Number_Digital_2bit_AddSelect(AF108);
 
                   *(pfdata + 7) =(((SpecDisplay_Number(AF108[1]))<<24)|((SpecDisplay_Number(AF108[0] ))<< 16));  
 
@@ -992,27 +989,24 @@ static void KEY1_ZERIO_UP_Fun(void)
             case 0x08: //F1-09-01
                    if(f1r08==0){
                        f1r08++; 
-                       Flash_Read(); 
-                        AF109[4]=((flash_t.flashData[32] & 0xFF000000) >> 24); //form flas read data 
-                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
-                        AF109[3]=((flash_t.flashData[32] & 0x00ff0000) >> 16);
-                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
-                        AF109[2]=((flash_t.flashData[32] & 0xff00) >> 8);
-                        printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
-                        AF109[1]=((flash_t.flashData[32] & 0xff) >> 0);
-                        printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                  //      Flash_Read(); 
+                  //       AF109[4]=((flash_t.flashData[32] & 0xFF000000) >> 24); //form flas read data 
+                  //       printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                  //       AF109[3]=((flash_t.flashData[32] & 0x00ff0000) >> 16);
+                  //       printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                  //       AF109[2]=((flash_t.flashData[32] & 0xff00) >> 8);
+                  //       printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
+                  //       AF109[1]=((flash_t.flashData[32] & 0xff) >> 0);
+                  //       printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
 
-                        //next word 
-                        AF109[0]=(flash_t.flashData[36] & 0xff0000) >> 24;  //next word   
-                        printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                  //       //next word 
+                  //       AF109[0]=(flash_t.flashData[36] & 0xff0000) >> 24;  //next word   
+                  //       printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
 
-                 
+                        Number_Digital_4bit_AddSelect(AF109);
+
                    }
-                   
-                  if(f1r08==0){
-                      f1r08++;  
-                   }
-                  else
+                   else
                     Number_Digital_4bit_AddSelect(AF109);
 
 
@@ -1025,21 +1019,17 @@ static void KEY1_ZERIO_UP_Fun(void)
 
             case 0x09: //F1-10-01
                   if(f1r09==0){
-                        
-                    Flash_Read(); 
-                        AF110[3]=((flash_t.flashData[40] & 0xFF000000) >> 24); //form flas read data 
-                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
-                        AF110[2]=((flash_t.flashData[40] & 0x00ff0000) >> 16);
-                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
-                        AF110[1]=((flash_t.flashData[40] & 0xff00) >> 8);
-                        printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
-                        AF110[0]=((flash_t.flashData[40] & 0xff) >> 0);
-                        printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
-                        
-                  }
-                  
-                  if(f1r09==1){
-                     f1r09++;   
+                        f1r09++;
+                        // Flash_Read(); 
+                        // AF110[3]=((flash_t.flashData[40] & 0xFF000000) >> 24); //form flas read data 
+                        // printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        // AF110[2]=((flash_t.flashData[40] & 0x00ff0000) >> 16);
+                        // printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        // AF110[1]=((flash_t.flashData[40] & 0xff00) >> 8);
+                        // printf("f1sub_01_05_AF106[1] = %d\n",AF104[1]);
+                        // AF110[0]=((flash_t.flashData[40] & 0xff) >> 0);
+                        // printf("f1sub_01_05_AF106[0] = %d\n",AF104[0]);
+                         Number_Digital_5bit_AddSelect(AF110);
                   }
                   else
                     Number_Digital_5bit_AddSelect(AF110);
@@ -1051,13 +1041,9 @@ static void KEY1_ZERIO_UP_Fun(void)
             case 0x0A://F1-11-01 ->display 4 bit
                   if(f1r10==0){
                         f1r10++;
-                         Flash_Read(); 
-                        AF111[0]=((flash_t.flashData[44] & 0xFF000000) >> 24); //form flas read data 
-                        
-                  }
-
-                  if(f1r10==1){
-                        f1r10++;
+                        //  Flash_Read(); 
+                        // AF111[0]=((flash_t.flashData[44] & 0xFF000000) >> 24); //form flas read data 
+                         Number_Digital_F111_4bit_AddSelect(AF111);
                   }
                   else
                       Number_Digital_F111_4bit_AddSelect(AF111);
@@ -1070,42 +1056,29 @@ static void KEY1_ZERIO_UP_Fun(void)
                   if(f1r11==0){
                         f1r11++;
                           Flash_Read(); 
-                        AF112[1]=((flash_t.flashData[48] & 0xFF000000) >> 24); //form flas read data 
-                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
-                        AF112[0]=((flash_t.flashData[48] & 0x00ff0000) >> 16);
-                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        // AF112[1]=((flash_t.flashData[48] & 0xFF000000) >> 24); //form flas read data 
+                        // printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        // AF112[0]=((flash_t.flashData[48] & 0x00ff0000) >> 16);
+                        // printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                         Number_Digital_2bit_AddSelect(AF112);
                         
-                        
-                  }
-            
-                 
-                  if(f1r11==1){
-                        f1r11++;
                   }
                   else
                      Number_Digital_2bit_AddSelect(AF112);
 
                    *(pfdata + 12) =(((SpecDisplay_Number(AF112[1]))<<24)|((SpecDisplay_Number(AF112[0] ))<< 16));
 						     
-                  
-
-
             break;
 
             case 0x0C://F1-13-01
                   if(f1r12==0){
                        f1r12++; 
-                        Flash_Read(); 
-                        AF113[1]=((flash_t.flashData[52] & 0xFF000000) >> 24); //form flas read data 
-                        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
-                        AF113[0]=((flash_t.flashData[52] & 0x00ff0000) >> 16);
-                        printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
-                        
-                  }
-
-                  if(f1r12==1){
-                        
-                        
+                        // Flash_Read(); 
+                        // AF113[1]=((flash_t.flashData[52] & 0xFF000000) >> 24); //form flas read data 
+                        // printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        // AF113[0]=((flash_t.flashData[52] & 0x00ff0000) >> 16);
+                        // printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                         Number_Digital_2bit_AddSelect(AF113);
                   }
                   else 
                         Number_Digital_2bit_AddSelect(AF113);
