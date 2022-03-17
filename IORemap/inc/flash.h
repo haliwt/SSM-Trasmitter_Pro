@@ -31,7 +31,7 @@ extern uint32_t Flash_Data_Buffer[BUFFER_SIZE] __attribute__((at(FLASH_WRITE_STA
 
 typedef struct _FLASH{
 
-         uint8_t flashSave_falg;
+         uint8_t flashSave_flag;
 
 		 uint8_t flashRead_flag;
 		 uint8_t array_8bit_1;

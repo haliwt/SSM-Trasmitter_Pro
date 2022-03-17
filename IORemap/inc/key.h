@@ -12,7 +12,7 @@ typedef struct _KEY_{
 	   
 	   uint8_t keyGetLong_Numbers;
 	   uint8_t RunCmd_flag; 
-	   uint8_t F1_01_02_UPKEY ;
+	   uint8_t F1_0102FlashSave_flag ;
 
 	   uint8_t keyadjust_flag ;
 	

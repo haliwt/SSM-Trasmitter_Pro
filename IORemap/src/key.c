@@ -374,8 +374,7 @@ static void KEY_SubMenuFun_Enter(void)
                         F1_01_xx_SelectCmd();
                      
                         menu_t.menu_F1Sub_03_xx_key=menu_t.F1SubMenu_Id;
-                    }    
-                  
+                   }    
                   else if( key_t.keyReturn_flag ==2){  //return last menu and save data
                         
                         menu_t.menuId= F1;
@@ -385,15 +384,20 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.menuTitle_03=0;
                         
                         menu_t.F1_SubMenuTop=menu_t.F1SubMenu_Id;
-                        if(key_t.F1_01_02_UPKEY ==1){
-							flash_t.flashSave_falg =1; //flash save data
-									key_t.F1_01_02_UPKEY=0;
-                        } 
-						key_t.keyReturn_flag =0;
-                     
-                        printf("f1sub_top_return = %d\n",menu_t.F1_SubMenuTop);
-                    }
-		}
+                       printf("F1_0102FlashSave_flag_prev= %d\n", key_t.F1_0102FlashSave_flag);
+                        if(key_t.F1_0102FlashSave_flag==1){
+                            flash_t.flashSave_flag =1; //flash save data
+                            key_t.F1_0102FlashSave_flag=0;
+                            FlashSaveData();
+                            printf("flash_save_________OK\n");
+                            flash_t.flashSave_flag=0;
+						}
+                         
+							key_t.keyReturn_flag =0;
+                        printf("F1_0102FlashSave_flag = %d\n", key_t.F1_0102FlashSave_flag);
+                        printf("f1_enterKey_retrunMenu = %d\n", menu_t.F1_SubMenuTop);
+                       }
+		      }
 
 
             break;
@@ -775,7 +779,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
                   case 0x01: //F1-02-01 -8bit
-                         key_t.F1_01_02_UPKEY  =1;
+                        key_t.F1_0102FlashSave_flag=1;
                         if(f1r02== 0) {
                            f1r02++;
                            Flash_Read();
