@@ -34,9 +34,10 @@ typedef struct _FLASH{
          uint8_t flashSave_flag;
 
 		 uint8_t flashRead_flag;
-		 uint8_t array_8bit_1;
-		 uint8_t array_8bit_2;
-		 uint8_t array_8bit_3;
+
+		 
+		uint8_t saveDataNumber_flag;
+        uint8_t saveDataTheSecondNumber_flag;
 
 		 uint32_t flashData[BUFFER_SIZE];
 

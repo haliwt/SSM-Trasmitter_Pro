@@ -433,15 +433,15 @@ void F2SubMenu_03_Item(void)
                          AF205[4]=((flash_t.flashData[68] & 0xFF00) >>8); //form flas read data 
                         
                          AF205[3]=((flash_t.flashData[68] & 0xFF) >> 0); //form flas read data 
-                         
+                          printf("f2sub_02_05_AF205[3] = %d\n",AF205[3]);
                          //next word
-                              printf("f1sub_01_05_AF106[3] = %d\n",AF205[3]);
+                             
                         AF205[2]=((flash_t.flashData[72] & 0xff000000) >> 24);
-                              printf("f1sub_01_05_AF106[2] = %d\n",AF205[2]);
+                              printf("f2sub_02_05_AF205[2] = %d\n",AF205[2]);
                         AF205[1]=((flash_t.flashData[72] & 0xff0000) >> 16);
-                              printf("f1sub_01_05_AF106[1] = %d\n",AF205[1]);
+                              printf("f2sub_02_05_AF205[1] = %d\n",AF205[1]);
                         AF205[0]=((flash_t.flashData[72] & 0xff00)>>8);
-                              printf("f1sub_01_05_AF106[0] = %d\n",AF205[0]);
+                              printf("f2sub_02_05_AF205[0] = %d\n",AF205[0]);
                               
                        
                       }
@@ -456,15 +456,16 @@ void F2SubMenu_03_Item(void)
                          Flash_Read(); 
                          
                          AF206[4]=((flash_t.flashData[72] & 0xff)>>0);
-                              printf("f1sub_01_05_AF106[0] = %d\n",AF206[4]);
+                              printf("f2sub_02_06_AF206[4] = %d\n",AF206[4]);
                         //next word
-                         AF206[3]=((flash_t.flashData[76] & 0xFF000000) >>24); //form flas read data 
+                         AF206[3]=((flash_t.flashData[76] & 0xFF000000) >>24); //form flas read data
+                            printf("f2sub_02_06_AF206[3] = %d\n",AF206[3]); 
                          AF206[2]=((flash_t.flashData[76] & 0x00FF0000) >> 16); //form flas read data 
-                              printf("f1sub_01_05_AF106[3] = %d\n",AF206[2]);
+                              printf("f2sub_02_06_AF206[2] = %d\n",AF206[2]);
                         AF206[1]=((flash_t.flashData[76] & 0xff00) >> 8);
-                              printf("f1sub_01_05_AF106[2] = %d\n",AF206[21]);
+                              printf("f2sub_02_06_AF206[1] = %d\n",AF206[1]);
                         AF206[0]=((flash_t.flashData[76] & 0xff) >> 0);
-                              printf("f1sub_01_05_AF106[1] = %d\n",AF206[01]);
+                              printf("f2sub_02_06_AF206[0] = %d\n",AF206[0]);
                   
 
                         

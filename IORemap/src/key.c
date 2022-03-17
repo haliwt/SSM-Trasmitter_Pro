@@ -453,14 +453,21 @@ static void KEY_SubMenuFun_Enter(void)
                         menu_t.F2_SubMenuTop=menu_t.F2SubMenu_Id;
                          if(key_t.F2_0102FlashSave_flag==1){
                             key_t.F2_0102FlashSave_flag=0;
-                            FlashSaveData();
+                            if(flash_t.saveDataNumber_flag >=1 ||flash_t.saveDataNumber_flag==1)
+                                     FlashSaveData();
+                                     
+                            if(flash_t.saveDataTheSecondNumber_flag >=1){
+                                 FlashSaveData(); 
+                                  
+                            }
                             printf("flash_save_________OK\n");
                           
-				             }
-                         
+				   }
+                         flash_t.saveDataNumber_flag=0;
+                         flash_t.saveDataTheSecondNumber_flag=0;
 				          key_t.keyReturn_flag =0;
-                        printf("F1_0102FlashSave_flag = %d\n", key_t.F1_0102FlashSave_flag);
-                        printf("f1_enterKey_retrunMenu = %d\n", menu_t.F1_SubMenuTop);
+                        printf("F2_0102FlashSave_flag = %d\n", key_t.F2_0102FlashSave_flag);
+                        printf("f2_enterKey_retrunMenu = %d\n", menu_t.F2_SubMenuTop);
                                
                        }
                      
@@ -1111,7 +1118,10 @@ static void KEY1_ZERIO_UP_Fun(void)
 
             }
             break;
-      /***********************F2**************************************/
+      /*************************************************************
+      **
+      *F2
+      ******************************************************************/
             case 0xf20://F2-01->Control
                   switch(menu_t.menu_F1Sub_03_xx_key){
 
@@ -1228,13 +1238,19 @@ static void KEY1_ZERIO_UP_Fun(void)
                   // }
                   Number_Digital_5bit_AddSelect(AF205);
                   
-                    
-                  f2r05_reg  =(((SpecDisplay_Number(AF205[4]))<<8)|((SpecDisplay_Number(AF205[3]))<<0));
                   
-                  *(pfdata + 17) =f2r04_reg |(f2r03_reg ) |(f2r05_reg); 
+                 flash_t.saveDataNumber_flag++;
+                 
+                 flash_t.saveDataTheSecondNumber_flag++;
+                 if(flash_t.saveDataNumber_flag >=1){
+                        f2r05_reg  =(((SpecDisplay_Number(AF205[4]))<<8)|((SpecDisplay_Number(AF205[3]))<<0));
                   
-                  f2r05_reg_next = (((SpecDisplay_Number( AF205[2]))<< 24)|((SpecDisplay_Number( AF205[1]))<< 16)  | ((SpecDisplay_Number( AF205[0]))<<8)) ;
-                  *(pfdata+18) = f2r05_reg_next |f2r06_reg;
+                         *(pfdata + 17) =f2r04_reg |(f2r03_reg ) |(f2r05_reg); 
+                 }
+                  if( flash_t.saveDataTheSecondNumber_flag >=1){
+                              f2r05_reg_next = (((SpecDisplay_Number( AF205[2]))<< 24)|((SpecDisplay_Number( AF205[1]))<< 16)  | ((SpecDisplay_Number( AF205[0]))<<8)) ;
+                              *(pfdata+18) = f2r05_reg_next |f2r06_reg;
+                   }
                   
                 
                   
@@ -1262,17 +1278,25 @@ static void KEY1_ZERIO_UP_Fun(void)
                         
                   // }
                   Number_Digital_5bit_AddSelect(AF206);
-                  f2r06_reg  =(((SpecDisplay_Number(AF206[4])) <<0));
-                  *(pfdata+18)= f2r06_reg |f2r05_reg_next ;
+                  flash_t.saveDataNumber_flag++;
+                  flash_t.saveDataTheSecondNumber_flag++;
+                  if(flash_t.saveDataNumber_flag>=1){
+                        
+                         f2r06_reg  =(((SpecDisplay_Number(AF206[4])) <<0));
+                        *(pfdata+18) = f2r05_reg_next |f2r06_reg;
+                  }
+                  if(flash_t.saveDataTheSecondNumber_flag >=1){
                   
-                   *(pfdata +19) = (((SpecDisplay_Number( AF206[3]))<< 24)|((SpecDisplay_Number( AF206[2]))<< 16)  | ((SpecDisplay_Number( AF206[1]))<<8)|((SpecDisplay_Number( AF206[0]))<<8)) ;
+                     *(pfdata +19) = (((SpecDisplay_Number( AF206[3]))<< 24)|((SpecDisplay_Number( AF206[2]))<< 16)  | ((SpecDisplay_Number( AF206[1]))<<8)
+                                    |((SpecDisplay_Number( AF206[0]))<<0)) ;
+                  }
                   
                   break;
 
 
-            }
+            
             break;
-
+/***********************************************************************************************************************************************************************************************************/
             case 0xf30://F3-01 ->Control F3-1.1 --KEY UP +
                   switch(menu_t.menu_F1Sub_03_xx_key){
                   case F301:
@@ -1468,7 +1492,7 @@ static void KEY1_ZERIO_UP_Fun(void)
      }
      
 }  
-
+}
 /*****************************************************
  * 
  * KEY DOWN 
