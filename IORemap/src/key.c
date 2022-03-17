@@ -19,6 +19,10 @@ uint32_t *pfInputData;
 
 uint8_t F305_tmp4,F305_tmp5,F305_tmp6,F305_tmp7;
 subNumbers_TypedDef submenStruct;
+
+static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r,f1temp;
+static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
+static uint32_t f1r01_reg,f1r02_reg,f1r02_temp;
 int8_t AF104[4];
 int8_t AF105[2];
 int8_t AF106[5];
@@ -690,9 +694,7 @@ static void KEY1_ZERIO_UP_Fun(void)
 {
 
       
-     static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f2r,f3r,f7r,f8r,f9r,f1temp;
-	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
-       static uint32_t f1r01_reg,f1r02_reg,f1r02_temp;
+    
 	// pfdata=flash_t.flashData;
        
        pfdata =  SRAM_Data_Buffer;
@@ -864,7 +866,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                               // AF104[2]++;
                               // AF104[1]++;
                               // AF104[0]++;
-                              // Number_Digital_4bit_AddSelect(AF104);
+                        Number_Digital_4bit_AddSelect(AF104);
                         }
                         else
                            Number_Digital_4bit_AddSelect(AF104);
@@ -1387,83 +1389,286 @@ static void KEY2_TRAE_DOWN_Fun(void)
                           switch(menu_t.menu_F1Sub_03_xx_key){
 
                               case 0x00:
-                                  menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
-                                  printf("f1sub_01_n_Top- = %d\n",menu_t.F1_Sub01_Top);
+                                 key_t.F1_0102FlashSave_flag=1;
+                                   if(f1r01 == 0) {
+                                    f1r01++;
+                                    //Flash_Read();
+                                    // menu_t.F1_Sub01_Top   = ( flash_t.flashData[0] & 0xff000000) >> 24;
+                                    menuFxSub_03_Top=menu_t.F1_Sub01_Top;
+                                    menu_t.F1_Sub01_Top=  PopSub_03_Menu(F101_01_01);
+                                    printf("f1sub_00_03_flash = %d\n",menu_t.F1_Sub01_Top);
+                                    }
+                                    else{
+                                          menu_t.F1_Sub01_Top=  PopSub_03_Menu(F101_01_01);
+                                    }
+                                    
+                                    Flash_Data_Buffer[0] = menu_t.F1_Sub01_Top <<    24 ; //SRAM_Data_Buffer[0]= menu_t.F1_Sub01_Top
+                                    f1r01_reg = menu_t.F1_Sub01_Top;
+                                    
+                                    
+                                    *pfdata =((SpecDisplay_Number(f1r01_reg)<<24) | f1r02_temp);
+                                    
+                                                
+                                                
+                                                
+                                    printf("f1sub_01_n_Top = %d\n",menu_t.F1_Sub01_Top);
                                     key_t.keyReturn_flag=1;
                               break;
 
-                              case 0x01:
-                             
-                                  RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
-                                  menu_t. F1_Sub02_unit= menu_t.unit;
-                                  menu_t.F1_Sub02_decade=menu_t.decade;
-                                  menu_t.F1_Sub02_hundred =menu_t.hundred;
+      case 0x01:
+            key_t.F1_0102FlashSave_flag=1;
+            if(f1r02== 0) {
+            f1r02++;
+            //Flash_Read();
+
+            //menu_t.unit=(flash_t.flashData[0] & 0xFF) >> 0; //form flas read data 
+            //      printf("f1sub_01_03_unit = %d\n",menu_t.unit);
+            // menu_t.decade=( flash_t.flashData[0]  & 0xff00) >> 8;
+            //    printf("f1sub_01_03_decade = %d\n",menu_t.decade);
+            // menu_t.hundred=(flash_t.flashData[0]  & 0xff0000) >> 16; 
+            menu_t.unit=menu_t.F1_Sub02_unit;
+            menu_t.decade=menu_t.F1_Sub02_decade;
+            menu_t.hundred=menu_t.F1_Sub02_hundred;
+            RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+            printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
+
+            }
+            else{
+
+            RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+
+            }
+            menu_t. F1_Sub02_unit= menu_t.unit;
+            menu_t.F1_Sub02_decade=menu_t.decade;
+            menu_t.F1_Sub02_hundred =menu_t.hundred;
+
+
+            f1r02_temp =(((SpecDisplay_Number(menu_t.hundred ))<< 16)  | ((SpecDisplay_Number(menu_t.decade))<<8) 
+            |((SpecDisplay_Number(menu_t.unit))<<0));
+            *pfdata =((SpecDisplay_Number(f1r01_reg)<<24)| f1r02_temp); 
+
+
+            printf("f1sub_01_03_n_Top = %d\n",menu_t.F1_Sub02_Top);
+            key_t.keyReturn_flag=1;
+      break;
+
+      case 0x02:
+            key_t.F1_0102FlashSave_flag=1;
+            if(f1r02==0){
+            f1r02++;
+
+            // menu_t.unit=(flash_t.flashData[4] & 0xFF) >> 0; //form flas read data 
+            //                   printf("f1sub_01_03_unit = %d\n",menu_t.unit);
+            // menu_t.decade=( flash_t.flashData[4]  & 0xff00) >> 8;
+            //                   printf("f1sub_01_03_decade = %d\n",menu_t.decade);
+            // menu_t.hundred=(flash_t.flashData[4]  & 0xff0000) >> 16; 
+            //       printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
+            menu_t.unit=menu_t. F1_Sub03_unit;
+
+            menu_t.decade =menu_t.F1_Sub03_decade;
+
+            menu_t.hundred=menu_t.F1_Sub03_hundred;
+
+            }
+
+            RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+
+            menu_t. F1_Sub03_unit= menu_t.unit;
+            menu_t.F1_Sub03_decade=menu_t.decade;
+            menu_t.F1_Sub03_hundred =menu_t.hundred;
+            key_t.keyReturn_flag=1;
+
+            *(pfdata+1) =(((SpecDisplay_Number(menu_t.hundred ))<< 16)  | ((SpecDisplay_Number(menu_t.decade))<<8) 
+            |((SpecDisplay_Number(menu_t.unit))<<0));
+
+      break;
+
+      case 0x03: //F1-04-01
+            key_t.F1_0102FlashSave_flag=1;
+            if(f1r03==0){
+            f1r03++;
+           
+             Number_Digital_4bit_DecSelect(AF104);
+            }
+            else
+              Number_Digital_4bit_DecSelect(AF104);
+
+
+
+            *(pfdata+2) =(((SpecDisplay_Number(AF104[3]))<<24)|((SpecDisplay_Number(AF104[2] ))<< 16)  | ((SpecDisplay_Number(AF104[1]))<<8) 
+            |((SpecDisplay_Number(AF104[0]))<<0));
+
+
+
+            key_t.keyReturn_flag=1;
+      break;
+
+      case 0x04: //F1-05-01
+             key_t.F1_0102FlashSave_flag=1;
+            if(f1r04==0){
+                  f1r04++;
+            // Flash_Read();
+            // AF105[1]=((flash_t.flashData[12] & 0xFF000000) >> 24); //form flas read data 
+            // AF105[0]=((flash_t.flashData[12] & 0x00ff0000) >> 16);
+                  Number_Digital_2bit_DecSelect(AF105);
+            }
+            else
+                   Number_Digital_2bit_DecSelect(AF105);
+
+
+            *(pfdata+3) =(((SpecDisplay_Number(AF105[1]))<<24)|((SpecDisplay_Number(AF105[0] ))<< 16));
+            printf("F1_01_05_AddKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
+            key_t.keyReturn_flag=1;
+      break;
+
+            case 0x05: //F1-06-01 --5bit
+                   key_t.F1_0102FlashSave_flag=1;
+                        if(f1r05 ==0){
+                              f1r05++;
+                    
+                              Number_Digital_5bit_DecSelect(AF106);
+                        }
+                        else
+                              Number_Digital_5bit_DecSelect(AF106);
                               
-                              key_t.keyReturn_flag=1;
-                              break;
+                  *(pfdata + 4) =(((SpecDisplay_Number(AF106[4]))<<24)|((SpecDisplay_Number(AF106[3] ))<< 16)  | ((SpecDisplay_Number(AF106[2]))<<8) 
+						      |((SpecDisplay_Number(AF106[1]))<<0));
+                  
+                  *(pfdata + 5) =((SpecDisplay_Number(AF106[0]))<<24);
 
-                               case 0x02:
-                               	 RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
-                                  menu_t. F1_Sub03_unit= menu_t.unit;
-                                  menu_t.F1_Sub03_decade=menu_t.decade;
-                                  menu_t.F1_Sub03_hundred =menu_t.hundred;
+                  key_t.keyReturn_flag=1;
+            break;
+
+            case 0x06: //F1-07-01
+           key_t.F1_0102FlashSave_flag=1;
+                        if(f1r06==0){
+                              f1r06++;
+                     
+                          Number_Digital_5bit_DecSelect(AF107);
+
+                        }
+                        else
+                             Number_Digital_5bit_DecSelect(AF107);
+
+
+                        *(pfdata + 5) =(((SpecDisplay_Number(AF107[4] ))<< 16)  | ((SpecDisplay_Number(AF107[3]))<<8) 
+						      |((SpecDisplay_Number(AF107[2]))<<0));
+                  
+                         *(pfdata + 6) =(((SpecDisplay_Number(AF107[1]))<<24)|((SpecDisplay_Number(AF107[0] ))<< 16));  
+                       
+
+                        key_t.keyReturn_flag=1;
+            break;
+
+            case 0x07://F1-08-01
+             key_t.F1_0102FlashSave_flag=1;
+                  if(f1r07==0){
+                        
+                        f1r07++;
+                        //  Flash_Read();
+                         
                               
-                              key_t.keyReturn_flag=1;
-                              break;
+                        // AF108[1]=((flash_t.flashData[28] & 0xFF000000) >> 24); //form flas read data 
+                        //        printf("f1sub_01_05_AF106[3] = %d\n",AF104[3]);
+                        // AF108[0]=((flash_t.flashData[28] & 0x00ff0000) >> 16);
+                        //         printf("f1sub_01_05_AF106[2] = %d\n",AF104[2]);
+                        Number_Digital_2bit_DecSelect(AF108);
+                        
+                  }
+                  else
+                       Number_Digital_2bit_DecSelect(AF108);
 
-                               case 0x03: //F1-04-01
-                                    Number_Digital_4bit_DecSelect(AF104);
-                                    key_t.keyReturn_flag=1;
-                              break;
+                  *(pfdata + 7) =(((SpecDisplay_Number(AF108[1]))<<24)|((SpecDisplay_Number(AF108[0] ))<< 16));  
 
-                                case 0x04: //F1-05-01
-                                  Number_Digital_2bit_DecSelect(AF105);
-                                  printf("F1_01_05_DecKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
-                                  key_t.keyReturn_flag=1;
-                              break;
+                  key_t.keyReturn_flag=1;
+            
+            key_t.keyReturn_flag=1;
+            break;
 
-                              case 0x05: //F1-06-01 --5bit
-                                    Number_Digital_5bit_DecSelect(AF106);
-                                    key_t.keyReturn_flag=1;
-                              break;
+            case 0x08://F1-09-01
+             key_t.F1_0102FlashSave_flag=1;
+                   if(f1r08==0){
+                       f1r08++; 
+                        Number_Digital_4bit_DecSelect(AF109);
 
-                               case 0x06: //F1-07-01
-                                   Number_Digital_5bit_DecSelect(AF107);
-                                   key_t.keyReturn_flag=1;
-                              break;
+                   }
+                   else
+                   Number_Digital_4bit_DecSelect(AF109);
 
-                               case 0x07://F1-08-01
-                                    Number_Digital_2bit_DecSelect(AF108);
-                                    key_t.keyReturn_flag=1;
-                              break;
 
-                              case 0x08://F1-09-01
-                                 Number_Digital_4bit_DecSelect(AF109);
-                                 key_t.keyReturn_flag=1;
-                              break;
+                  *(pfdata + 8) =(((SpecDisplay_Number(AF109[4]))<<24)|((SpecDisplay_Number(AF109[3] ))<< 16)  | ((SpecDisplay_Number(AF109[2]))<<8) 
+						      |((SpecDisplay_Number(AF109[1]))<<0));
+                  
+                  *(pfdata + 9) =((SpecDisplay_Number(AF109[0]))<<24);
 
-                              case 0x09://F1-10-01
-                                   Number_Digital_5bit_DecSelect(AF110);
-                                   key_t.keyReturn_flag=1;
-                              break;
+            
+            key_t.keyReturn_flag=1;
+            break;
 
-                               case 0x0A://F1-11-01
-                                     Number_Digital_F111_4bit_DecSelect(AF111);
-                                     key_t.keyReturn_flag=1;
-                              break;
+            case 0x09://F1-10-01
+             key_t.F1_0102FlashSave_flag=1;
+                  if(f1r09==0){
+                        f1r09++;
+                        
+                         Number_Digital_5bit_DecSelect(AF110);
+                  }
+                  else
+                    Number_Digital_5bit_DecSelect(AF110);
 
-                               case 0x0B: //F1-12-01
-                                       Number_Digital_2bit_DecSelect(AF112);
-                                       key_t.keyReturn_flag=1;
-                              break;
+            *(pfdata + 10) =(((SpecDisplay_Number(AF110[3]))<<24)|((SpecDisplay_Number(AF110[2] ))<< 16)  | ((SpecDisplay_Number(AF110[1]))<<8) 
+						      |((SpecDisplay_Number(AF110[0]))<<0));
+           
+            key_t.keyReturn_flag=1;
+            break;
 
-                               case 0x0C:
-                                   Number_Digital_2bit_DecSelect(AF113);
-                                   key_t.keyReturn_flag=1;
-                              break;
+            case 0x0A://F1-11-01
+             key_t.F1_0102FlashSave_flag=1;
+                  if(f1r10==0){
+                        f1r10++;
+                        //  Flash_Read(); 
+                        // AF111[0]=((flash_t.flashData[44] & 0xFF000000) >> 24); //form flas read data 
+                         Number_Digital_F111_4bit_DecSelect(AF111);
+                  }
+                  else
+                      Number_Digital_F111_4bit_DecSelect(AF111);
 
-                          }
-                    break;
+                  *(pfdata + 11) =(((SpecDisplay_Number(AF111[0]))<<24));
+						     
+          
+            key_t.keyReturn_flag=1;
+            break;
+
+            case 0x0B: //F1-12-01
+            key_t.F1_0102FlashSave_flag=1;
+                  if(f1r11==0){
+                        f1r11++;
+                          Flash_Read(); 
+                         Number_Digital_2bit_DecSelect(AF112);
+                        
+                  }
+                  else
+                     Number_Digital_2bit_DecSelect(AF112);
+
+                   *(pfdata + 12) =(((SpecDisplay_Number(AF112[1]))<<24)|((SpecDisplay_Number(AF112[0] ))<< 16));
+           
+            key_t.keyReturn_flag=1;
+            break;
+
+            case 0x0C:
+              key_t.F1_0102FlashSave_flag=1;
+                  if(f1r12==0){
+                       f1r12++; 
+                        Number_Digital_2bit_DecSelect(AF113);
+                  }
+                  else 
+                        Number_Digital_2bit_DecSelect(AF113);
+                  *(pfdata + 13) =(((SpecDisplay_Number(AF113[1]))<<24)|((SpecDisplay_Number(AF113[0] ))<< 16));
+       
+            key_t.keyReturn_flag=1;
+            break;
+
+            }
+            break;
 
                     case 0xf20:
                         switch(menu_t.menu_F1Sub_03_xx_key){
