@@ -753,18 +753,16 @@ static void KEY1_ZERIO_UP_Fun(void)
                   case 0x00: //F1-01-01  -8bit flash_t.pointer = 
                         if(f1r01 == 0) {
                         f1r01++;
-                         Flash_Read();
-                          menu_t.F1_Sub01_Top   = ( flash_t.flashData[0] & 0xff000000) >> 24;
-                        
-                        
+                         //Flash_Read();
+                         // menu_t.F1_Sub01_Top   = ( flash_t.flashData[0] & 0xff000000) >> 24;
+                             menuFxSub_03_Top=menu_t.F1_Sub01_Top;
+                             menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
                           printf("f1sub_00_03_flash = %d\n",menu_t.F1_Sub01_Top);
-                        }
-                        if(f1r01==1){ 
-                        f1r01++;
                         }
                         else{
                               menu_t.F1_Sub01_Top=  PushSub_03_Menu(F101_01_01);
                         }
+                        
                         Flash_Data_Buffer[0] = menu_t.F1_Sub01_Top <<    24 ; //SRAM_Data_Buffer[0]= menu_t.F1_Sub01_Top
                         f1r01_reg = menu_t.F1_Sub01_Top;
                         
@@ -782,20 +780,19 @@ static void KEY1_ZERIO_UP_Fun(void)
                         key_t.F1_0102FlashSave_flag=1;
                         if(f1r02== 0) {
                            f1r02++;
-                           Flash_Read();
+                           //Flash_Read();
 
-                              menu_t.unit=(flash_t.flashData[0] & 0xFF) >> 0; //form flas read data 
-                                                printf("f1sub_01_03_unit = %d\n",menu_t.unit);
-                              menu_t.decade=( flash_t.flashData[0]  & 0xff00) >> 8;
-                                                printf("f1sub_01_03_decade = %d\n",menu_t.decade);
-                              menu_t.hundred=(flash_t.flashData[0]  & 0xff0000) >> 16; 
+                              //menu_t.unit=(flash_t.flashData[0] & 0xFF) >> 0; //form flas read data 
+                                          //      printf("f1sub_01_03_unit = %d\n",menu_t.unit);
+                             // menu_t.decade=( flash_t.flashData[0]  & 0xff00) >> 8;
+                                            //    printf("f1sub_01_03_decade = %d\n",menu_t.decade);
+                             // menu_t.hundred=(flash_t.flashData[0]  & 0xff0000) >> 16; 
+                              menu_t.unit=menu_t.F1_Sub02_unit;
+                              menu_t.decade=menu_t.F1_Sub02_decade;
+                              menu_t.hundred=menu_t.F1_Sub02_hundred;
+                              RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
                               printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
                             
-                        }
-
-                        if(f1r02==1){
-                              f1r02++;
-
                         }
                         else{
 
