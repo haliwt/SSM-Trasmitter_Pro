@@ -425,7 +425,7 @@ void F2SubMenu_03_Item(void)
                 
                 case F205 : //"5BIT" has "-"
                         menu_t.F2SubMenu_Id=F205;
-                         menu_t.DisplaySmgBit_Select_Numbers =5;
+                        menu_t.DisplaySmgBit_Select_Numbers =5;
                           if(f2r05==0){
                         f2r05++;
                          Flash_Read(); 

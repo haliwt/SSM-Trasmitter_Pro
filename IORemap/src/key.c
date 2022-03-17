@@ -1847,6 +1847,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
             switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case F201:
+                       key_t.F2_0102FlashSave_flag=1;
                      Number_Digital_Set5bit_DecSelect(AF201,3);
                   f2r01_reg = ((SpecDisplay_Number(AF201[0]))<<24);
                   *(pfdata + 14) =f2r01_reg  | f2r02_reg;
@@ -1854,6 +1855,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
                   break;
 
                   case F202:
+                       key_t.F2_0102FlashSave_flag=1;
                   Number_Digital_5bit_DecSelect(AF202);
                   f2r02_reg  = ((SpecDisplay_Number(AF202[4]))<<0);
                   *(pfdata + 14) =f2r02_reg | f2r01_reg;
@@ -1863,6 +1865,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
                   break;
 
                   case F203:
+                       key_t.F2_0102FlashSave_flag=1;
                         Number_Digital_5bit_DecSelect(AF203);
                          *(pfdata+16) =(((SpecDisplay_Number( AF203[4]))<< 24)|((SpecDisplay_Number( AF203[3]))<< 16)  | ((SpecDisplay_Number( AF203[2]))<<8) 
                         |((SpecDisplay_Number( AF203[01]))<<0));
@@ -1872,12 +1875,14 @@ static void KEY2_TRAE_DOWN_Fun(void)
                   break;
 
                   case F204:
+                       key_t.F1_0102FlashSave_flag=1;
                         Number_Digital_Set5bit_DecSelect(AF204,3);
                          f2r04_reg = ((SpecDisplay_Number(AF204[0]))<<16);
                            *(pfdata +17)  =f2r04_reg |(f2r03_reg ) |(f2r05_reg);
                   break;
 
                   case F205:
+                       key_t.F1_0102FlashSave_flag=1;
                         Number_Digital_5bit_DecSelect(AF205);
                    f2r05_reg  =(((SpecDisplay_Number(AF205[4]))<<8)|((SpecDisplay_Number(AF205[3]))<<0));
                   
@@ -1888,11 +1893,13 @@ static void KEY2_TRAE_DOWN_Fun(void)
                   break;
 
                   case F206:
+                       key_t.F1_0102FlashSave_flag=1;
                         Number_Digital_5bit_DecSelect(AF206);
                          f2r06_reg  =(((SpecDisplay_Number(AF206[4])) <<0));
                   *(pfdata+18)= f2r06_reg |f2r05_reg_next ;
                   
-                   *(pfdata +19) = (((SpecDisplay_Number( AF206[3]))<< 24)|((SpecDisplay_Number( AF206[2]))<< 16)  | ((SpecDisplay_Number( AF206[1]))<<8)|((SpecDisplay_Number( AF206[0]))<<8)) ;
+                   *(pfdata +19) = (((SpecDisplay_Number( AF206[3]))<< 24)|((SpecDisplay_Number( AF206[2]))<< 16)  | ((SpecDisplay_Number( AF206[1]))<<8)
+                         |((SpecDisplay_Number( AF206[0]))<<0)) ;
                   break;
 
 
