@@ -119,13 +119,13 @@ void F1_Add_TheThirdMenu_KeyFunction(uint8_t f1mu)
                               menu_t.unit=menu_t.F1_Sub02_unit;
                               menu_t.decade=menu_t.F1_Sub02_decade;
                               menu_t.hundred=menu_t.F1_Sub02_hundred;
-                              RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                              RunDispDigital_Fun(Number_Digital_3bit_NoRefAddSelect);
                               printf("f1sub_01_03_hundred = %d\n",menu_t.hundred);
                             
                         }
                         else{
 
-                               RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                               RunDispDigital_Fun(Number_Digital_3bit_NoRefAddSelect);
 
                         }
                         menu_t. F1_Sub02_unit= menu_t.unit;
@@ -161,7 +161,7 @@ void F1_Add_TheThirdMenu_KeyFunction(uint8_t f1mu)
                         
                         }
                         
-                        RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                        RunDispDigital_Fun(Number_Digital_3bit_NoRefAddSelect);
                               
                         menu_t. F1_Sub03_unit= menu_t.unit;
                         menu_t.F1_Sub03_decade=menu_t.decade;

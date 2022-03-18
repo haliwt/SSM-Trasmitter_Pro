@@ -92,6 +92,8 @@ void F8SubMenu_03_02_StandDis(uint8_t mu);
 //F9 SubMenu List 
 void F9SubMenu_Master_01(void);
 
+void Number_5bit_Char_DIS(int8_t *pA);
+
 
 
 #endif 

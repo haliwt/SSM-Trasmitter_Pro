@@ -434,19 +434,19 @@ void F3_SubMenu_TheFourth_RunCmdDis(uint8_t f3mu)
 
                   case F3405://display 5bi digital with"-""
                        menu_t.DisplaySmgBit_Select_Numbers=5;
-                       F2SubMenu_F202_01_Select_DIS(AF3405);
+                       Number_5bit_Char_DIS(AF3405);
                         
                   break;
 
                   case F3406://display 5bi digital
                     menu_t.DisplaySmgBit_Select_Numbers=5;
-                     F2SubMenu_F202_01_Select_DIS(AF3406);
+                     Number_5bit_Char_DIS(AF3406);
                       
                   break;
 
                   case F3407://display 5bi digital
                     menu_t.DisplaySmgBit_Select_Numbers=5;
-                      F2SubMenu_F202_01_Select_DIS(AF3407);
+                      Number_5bit_Char_DIS(AF3407);
                       
                   break;
 
