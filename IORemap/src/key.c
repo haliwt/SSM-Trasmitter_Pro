@@ -476,7 +476,7 @@ static void KEY_SubMenuFun_Enter(void)
 
                 
           break;
-          
+          /*******************F3 ******************************/
           case F3:
             if(menu_t.menuF3Sub_first==0){  //F3-1.
 				menu_t.menuF3Sub_first++;
@@ -486,13 +486,13 @@ static void KEY_SubMenuFun_Enter(void)
 				menu_t.FxMainMenu_key =0xB0;
                         menu_t.FxSub_02_key=0xf30;
 				menu_t.F3_SubMenuTop= PushSub_Menu(F3Mnumbers);
-                      
+                      printf("F3_Keyreturn thirst = %d\n",key_t.keyReturn_F3_flag);
 		} 
             else{
                     key_t.keyReturn_F3_flag++;
                     printf("F3_Keyreturn = %d\n",key_t.keyReturn_F3_flag);
-                   // key_t.keyReturn_F3_flag = key_t.keyReturn_F3_flag ^ 0X01; 
-                    if(key_t.keyReturn_F3_flag==1){ //F3-1.1
+                  
+                    if(key_t.keyReturn_F3_flag==1){ //F3-1.1 
 
                       /*****************The third********************/
                         mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
@@ -544,7 +544,7 @@ static void KEY_SubMenuFun_Enter(void)
                         printf("F3_enter_04 = %d\n",menu_t.menuTitle_04);
                         printf("F3_03_xx_key_04 = %d\n",menu_t.menu_F1Sub_03_xx_key);
                      }
-                     else{
+                     else{ //Return F3  function
                         menu_t.menuId= F3;
                        
                         mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
@@ -735,8 +735,7 @@ static void KEY1_ZERIO_UP_Fun(void)
          break;
 
          case 0xB0: //the second Menu
-
-               switch(menu_t.FxSub_02_key){
+            switch(menu_t.FxSub_02_key){
 
                 case 0xf10:
 
@@ -767,12 +766,11 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                }
          break;
-
+     /**************************************************************/
       case 0xc0: //the third Menu
-        switch( menu_t.FxSub_03_key){
-
+      switch( menu_t.FxSub_03_key){
             case 0xf10:
-            switch(menu_t.menu_F1Sub_03_xx_key){
+                  switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case 0x00: //F1-01-01  -8bit flash_t.pointer = 
                      key_t.F1_0102FlashSave_flag=1;
@@ -1115,9 +1113,9 @@ static void KEY1_ZERIO_UP_Fun(void)
                   *(pfdata + 13) =(((SpecDisplay_Number(AF113[1]))<<24)|((SpecDisplay_Number(AF113[0] ))<< 16));
                        
             break;
-
             }
-            break;
+            
+        break;
       /*************************************************************
       **
       *F2
@@ -1293,18 +1291,20 @@ static void KEY1_ZERIO_UP_Fun(void)
                   
                   break;
 
-
+              }
             
             break;
-/***********************************************************************************************************************************************************************************************************/
+/*************************************************F3-1.1 ++++++**********************************************************************************************************************************************************/
             case 0xf30://F3-01 ->Control F3-1.1 --KEY UP +
                   switch(menu_t.menu_F1Sub_03_xx_key){
                   case F301:
                         AF3401[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_AddSelect(AF3401,7);
+                        printf("AF3401= %d\n",AF3401[0]);
                         break;
 
                   case F302:
                               AF3402[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_twoAddSelect(AF3402,7);
+                               printf("AF3402= %d\n",AF3401[0]);
                         break;
                   
 
@@ -1428,19 +1428,24 @@ static void KEY1_ZERIO_UP_Fun(void)
 
                   }
 
-                  break;
+             break;
 
                     case 0xf90:
 
                     break;
 
 
-       }
+      
                  
-         break;
+        
+        }//the  third F3 --END
+      
 
-         case 0xD0:
-              switch(menu_t.menu_F1Sub_03_xx_key){
+    
+      
+      /***********************************************************************************/    
+      case 0xD0:
+      switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case F3401:
                       AF301[0]= F3_05_PushSub_Item(3); //Number_Digital_Set5bit_ZeroAddSelect(AF301,3);
@@ -1480,19 +1485,19 @@ static void KEY1_ZERIO_UP_Fun(void)
                   break;
 
               }
-
-         break;
+      break;
 
          default:
             
          break;
 
 
+       }
+  }
+      
+ 
+ 
 
-     }
-     
-}  
-}
 /*****************************************************
  * 
  * KEY DOWN 
@@ -1837,13 +1842,14 @@ static void KEY2_TRAE_DOWN_Fun(void)
             break;
 
             }
-            break;
+            
+      break;
         /*********************************************************************************
         *
-        *F2
+        *F2-------
         *
         ********************************************************************************/
-            case 0xf20:
+      case 0xf20:
             switch(menu_t.menu_F1Sub_03_xx_key){
 
                   case F201:
@@ -1906,28 +1912,29 @@ static void KEY2_TRAE_DOWN_Fun(void)
             }
 
             break;
-/**************************************************************************************
-****************************************************/
+/***********************************F3-1.1 ---***************************************************
+********************************************************************************************/
                   //F3-1.1
-                    case 0xf30: //KEY - DOWN -
+      case 0xf30: //KEY - DOWN -
                         switch(menu_t.menu_F1Sub_03_xx_key){
                         case F301:
                             
                           AF3401[0]=F3_04_PopSub_Item(7);//Number_Digital_Set5bit_DecSelect(AF3401,7);
-                              
+                             printf("AF3401 key- = %d\n",AF3401[0]);  
                            break;
 
                         case F302:
                            AF3402[0]= F3_04_PopSub_Item(7);//Number_Digital_Set5bit_twoDecSelect(AF3402,7);
+                             printf("AF3402 key- = %d\n",AF3401[0]);
                          break;
 
                          }
-                        printf("F3f30_DecKey = %d\n",menu_t.menu_F1Sub_03_xx_key);
+                        printf("F3f30_DecKey - = %d\n",menu_t.menu_F1Sub_03_xx_key);
                     break;
 
                
-                   //F7 -01 -display
-                    case 0xf70:
+      //F7 -01 -display
+      case 0xf70:
                     switch(menu_t.menu_F1Sub_03_xx_key){
                               case 0x00: //F1-01-01
                                   f7menu_t.F7_03_00_Id=  PopSub_03_Menu(2);
@@ -2050,12 +2057,12 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
                    
 
-                }
+                
 
-     break; 
-
+       }
+      break; //end 0xC0 (The TheThird_Menu)
      /*********the fourth menu ************/
-
+     
      case 0xD0:
 
          switch(menu_t.menu_F1Sub_03_xx_key){
@@ -2098,7 +2105,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
 
               }
           
-        
+      break;
     }
 }
 

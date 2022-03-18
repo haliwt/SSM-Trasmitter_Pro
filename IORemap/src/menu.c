@@ -231,19 +231,14 @@ uint8_t F3_04_PushSub_Item(int8_t nsize)
 }
 uint8_t F3_04_PopSub_Item(int8_t nsize)
 {
-	 
+	F3_04_item_Top--; 
 	if(F3_04_item_Top == 0 || F3_04_item_Top ==-1 ){
 	    //printf("Error : no element to Pop \n");
 		//return;
 		F3_04_item_Top = nsize  ;
 	}
-    F3_04_item_Top--;
+    
 
-	if(F3_04_item_Top == 0 || F3_04_item_Top ==-1 ){
-	    //printf("Error : no element to Pop \n");
-		//return;
-		F3_04_item_Top = nsize  ;
-	}
 	
     return F3_04_item_Top ;
 }

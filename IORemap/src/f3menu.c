@@ -49,7 +49,7 @@ void F3SubMenu_03_Item(uint8_t mf301)
                break;
 
                 case 6:
-                        SmgDisplay(digital_5,0x07); // 0~100
+                        SmgDisplay(digital_5,0x06); // 0~100
                break;
 
                 case 7:
@@ -90,7 +90,7 @@ void F3SubMenu_03_Item(uint8_t mf301)
                break;
 
                 case 6:
-                        SmgDisplay(digital_5,0x07); // 0~100
+                        SmgDisplay(digital_5,0x06); // 0~100
                break;
 
                 case 7:
