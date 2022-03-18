@@ -70,14 +70,6 @@ void Number_Digital_Set5bit_twoDecSelect(int8_t *ap ,uint8_t n);
 void Number_Digital_Set5bit_ZeroAddSelect(int8_t *ap ,uint8_t n);
 void Number_Digital_Set5bit_ZeroDecSelect(int8_t *ap ,uint8_t n);
 
-static void Number_Digital_3bit_DecSelect(void);
-static void Number_Digital_3bit_AddSelect(void);
-
-
-
-
-
-
 
 //void RunDispDigital_Fun(void(*DisSmg)(void));
 static void KEY1_ZERIO_UP_Fun(void);
@@ -450,6 +442,7 @@ static void KEY1_ZERIO_UP_Fun(void)
                     //F8 - 01 -> the thrid menu
       case 0xf80:
 
+                 
                   F8_Add_TheThirdMenu_KeyFunction(menu_t.menu_F1Sub_03_xx_key);
 
                
@@ -471,8 +464,9 @@ static void KEY1_ZERIO_UP_Fun(void)
             switch(menu_t.FxSub_03_key){
 
             case 0xf3:
-
+                  
                   F3_Add_TheFourthMenu_KeyFunction(menu_t.menu_F1Sub_03_xx_key);
+                  printf("F3_enter_04 = %d\n",menu_t.menuTitle_04);
             
             break;
             }
@@ -593,7 +587,7 @@ static void KEY2_TRAE_DOWN_Fun(void)
      case 0xD0:
 
 
-       F3_SubMenu_TheFourth_Fun(menu_t.menu_F1Sub_03_xx_key);
+	  F3_Add_TheFourthMenu_KeyFunction(menu_t.menu_F1Sub_03_xx_key);
 
               
           
@@ -899,11 +893,6 @@ void Number_Digital_3bit_PointerAddSelect(int8_t *ap)
 
 
 }
-
-
-
-
-
 
 void Number_Digital_Set5bit_twoDecSelect(int8_t *ap,uint8_t n)
 {

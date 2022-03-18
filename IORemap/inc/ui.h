@@ -2,6 +2,22 @@
 #define __UI_H_
 #include "main.h"
 
+
+void Symbol_HrL(void);
+void Symbol_ECH(void);
+void Symbol_Por(void);
+void Symbol_EEr(void);
+void Symbol_PRS(void);
+void Symbol_CnoSS(void);
+void Symbol_nEt(void);
+void Symbol_PERH(void);
+void Symbol_uRLEy(void);
+void Symbol_p_u(void);
+void Symbol_uRLLE(void);
+ void Symbol_ERS(void);
+void Symbol_nonE(void);
+
+
 void DisplayMode_Normal(void);
 
 void Menu_F1(void);
@@ -63,11 +79,7 @@ void F2SubMenu_F206_01_Select_DIS(int8_t *pA);
 void F3SubMenu_F301_01_Select_DIS(int8_t *pA,uint8_t n);
 void F3SubMenu_F301_02_Select_DIS(int8_t *pA,uint8_t n);
 
-void F3SubMenu_F301_11_Select_DIS(int8_t *pA);
-void F3SubMenu_F301_12_Select_DIS(int8_t *pA);
-void F3SubMenu_F301_13_Select_DIS(int8_t *pA);
-void F3SubMenu_F301_14_Select_DIS(int8_t *pA);
-void F3SubMenu_F301_15_Select_DIS(int8_t *pA);
+
 void F3SubMenu_04_Item(int8_t *pA,int8_t *pt);
 
 //F7 SubMenu List 

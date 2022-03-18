@@ -2,7 +2,7 @@
 
 static int8_t one,two,three,four,five;
 
-void Number_Digital_3bit_DecSelect(void)
+void Number_Digital_3bit_NoRefDecSelect(void)
 {
       if(menu_t.inputNumber_Select==0){
              menu_t.unit--;
@@ -31,7 +31,7 @@ void Number_Digital_3bit_DecSelect(void)
       }
 }
 
-void Number_Digital_3bit_AddSelect(void)
+void Number_Digital_3bit_NoRefAddSelect(void)
 {
         if(menu_t.inputNumber_Select==0){
             menu_t.unit++ ;
@@ -253,6 +253,66 @@ void Number_Digital_5bitPoint_AddSelect(int8_t *ap)
                     }
 			*(ap+4) = five; 
       } 
+
+}
+
+/*********************************************************************
+**********************************************************************/
+void Number_Digital_3bit_AddSelect(int8_t *ap)
+{
+       if(menu_t.inputNumber_Select==0){
+            one++ ;
+            if(one >9){
+               one=0;
+            }
+			*ap = one;
+      }
+      else if(menu_t.inputNumber_Select==1){
+                  two++;
+                  if(two >9){
+                        two=0;
+                  }
+				  *(ap+1) = two;
+       }
+      else if(menu_t.inputNumber_Select==2){
+                  three++;  
+                  if(three >9){
+                      three=0;
+                   }
+				  *(ap+2)=three;
+      } 
+
+}
+
+void Number_Digital_3bit_DecSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+             one--;
+            if(one < 0){
+               one=9;
+            }
+			*ap= one;
+            printf("s_1 = %d\n",one);
+      }
+      else if(menu_t.inputNumber_Select==1){
+            two--;
+            if(two< 0){
+               two=9;
+            }
+			*(ap+1) = two;
+            printf("s_2 = %d\n",*(ap+1));
+      
+      }
+      else if(menu_t.inputNumber_Select==2){
+            three--;
+            if(three< 0){ 
+               three=9;
+            }
+			*(ap+2) = three;
+            printf("s_3 = %d\n",*(ap+2));
+          
+      }
+   
 
 }
 

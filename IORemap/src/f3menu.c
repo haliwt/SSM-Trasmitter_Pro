@@ -1,7 +1,22 @@
 #include "f3menu.h"
 f3classmenu f3menu_t;
 
-/*************************************************/
+static void Number_1bit_DIS(int8_t *pA);
+static void Number_3bit_twoPoint_DIS(int8_t *pA);
+
+int8_t AF3404[3];
+int8_t AF3405[5];
+int8_t AF3406[5];
+int8_t AF3407[5];
+
+
+/***********************************************************
+ * 
+ * Function Name: void F1SubMenu_Sub_03(void)
+ * Function: the third menu display nixie tube 
+ * 
+ * 
+***********************************************************/
 uint8_t F3_04_PushSub_Item(int8_t nsize)
 {
 	 F3_04_item_Top++;
@@ -117,11 +132,11 @@ void F3_MasterFunction_EnterKey(void)
                         mainitem_t.task_MainMenu=TheFourth_Menu; //open the Fourth  menu
 
 
-                        if(menu_t.F3_SubMenuTop_02==F301){
+                        if(menu_t.F3SubMenu_Id==F301){
 
                                 if(AF3401[0]==0){
 
-                                menu_t.menu_F1Sub_03_xx_key= 1;
+                                menu_t.menu_F1Sub_03_xx_key = f3menu_t.threeClass_menu_Id; //EDIT.202203.18//= 1;
                                 menu_t.menuTitle_04= 1; 
                                 }
                                 else{
@@ -137,15 +152,15 @@ void F3_MasterFunction_EnterKey(void)
                                 else{
 
                                 menu_t.menuTitle_04= AF3402[0];
-                                menu_t.menu_F1Sub_03_xx_key= AF3402[0]; 
+                                menu_t.menu_F1Sub_03_xx_key=f3menu_t.threeClass_menu_Id; //AF3402[0]; 
                         }
                         }
                         //runKey fun
                         menu_t.FxMainMenu_key =0xD0; //the FOURTH menu open 
-                        menu_t.FxSub_03_key=0xf30;  //F2-01 -> the third sub open
+                        menu_t.FxSub_03_key=0xf3;  //F2-01 -> the third sub open
 
 
-
+                     
                         printf("F3_enter_04 = %d\n",menu_t.menuTitle_04);
                         printf("F3_03_xx_key_04 = %d\n",menu_t.menu_F1Sub_03_xx_key);
                 }
@@ -167,24 +182,30 @@ void F3_MasterFunction_EnterKey(void)
 
         }   
 
-        
 }
+/***********************************************************
+ * 
+ * Function Name: void F1SubMenu_Sub_03(void)
+ * Function: the third menu display nixie tube 
+ * 
+ * 
+***********************************************************/
 void F3_Add_TheThirdMenu_KeyFunction(uint8_t f3mu)
 {
    switch(f3mu){
-                  case F301:
-                        AF3401[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_AddSelect(AF3401,7);
-                        printf("AF3401= %d\n",AF3401[0]);
-                        break;
+        case F301:
+        AF3401[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_AddSelect(AF3401,7);
+        printf("AF3401= %d\n",AF3401[0]);
+        break;
 
-                  case F302:
-                              AF3402[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_twoAddSelect(AF3402,7);
-                               printf("AF3402= %d\n",AF3401[0]);
-                        break;
-                  
+        case F302:
+                AF3402[0]= F3_04_PushSub_Item(7);    // Number_Digital_Set5bit_twoAddSelect(AF3402,7);
+                printf("AF3402= %d\n",AF3401[0]);
+        break;
 
-                  }
-                  printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
+
+        }
+        printf("f1f30_c_keyd+ = %d\n",menu_t.menu_F1Sub_03_xx_key);
 }
 /***********************************************************
  * 
@@ -241,37 +262,37 @@ void F3SubMenu_03_Item(uint8_t mf301)
 
                break;
 
-               case 1:
+               case F3401:
                         f3menu_t.threeClass_menu_Id = 1;
                         SmgDisplay(digital_5,0x01); // 0~100
                break;
 
-                case 2:
+                case F3402:
                         f3menu_t.threeClass_menu_Id = 2;
                         SmgDisplay(digital_5,0x02); // 0~100
                break;
 
-                case 3:
+                case F3403:
                         f3menu_t.threeClass_menu_Id = 3;
                         SmgDisplay(digital_5,0x03); // 0~100
                break;
 
-               case 4:
+               case F3404:
                         f3menu_t.threeClass_menu_Id = 4;
                         SmgDisplay(digital_5,0x04); // 0~100
                break;
 
-                case 5:
+                case F3405:
                         f3menu_t.threeClass_menu_Id = 5;
                         SmgDisplay(digital_5,0x05); // 0~100
                break;
 
-                case 6:
+                case F3406:
                         f3menu_t.threeClass_menu_Id = 6;
                         SmgDisplay(digital_5,0x06); // 0~100
                break;
 
-                case 7:
+                case F3407:
                         f3menu_t.threeClass_menu_Id = 7;
                         SmgDisplay(digital_5,0x07); // 0~100
                break;
@@ -289,31 +310,38 @@ void F3SubMenu_03_Item(uint8_t mf301)
 
                break;
 
-               case 1:
+               case F3401:
+                        f3menu_t.threeClass_menu_Id = 1;
                         SmgDisplay(digital_5,0x01); // 0~100
                break;
 
-                case 2:
+                case F3402:
+                         f3menu_t.threeClass_menu_Id = 2;
                         SmgDisplay(digital_5,0x02); // 0~100
                break;
 
-             case 3:
+             case F3403:
+                         f3menu_t.threeClass_menu_Id = 3;
                         SmgDisplay(digital_5,0x03); // 0~100
                break;
 
-               case 4:
+               case F3404:
+                         f3menu_t.threeClass_menu_Id = 4;
                         SmgDisplay(digital_5,0x04); // 0~100
                break;
 
-                case 5:
+                case F3405:
+                         f3menu_t.threeClass_menu_Id = 5;
                         SmgDisplay(digital_5,0x05); // 0~100
                break;
 
-                case 6:
+                case F3406:
+                        f3menu_t.threeClass_menu_Id = 6;
                         SmgDisplay(digital_5,0x06); // 0~100
                break;
 
-                case 7:
+                case F3407:
+                         f3menu_t.threeClass_menu_Id = 7;
                         SmgDisplay(digital_5,0x07); // 0~100
                break;
 
@@ -340,39 +368,89 @@ void F3SubMenu_03_Item(uint8_t mf301)
 *
 *
 *************************************************************************************/
-void F3_SubMenu_TheFourth_Fun(uint8_t f3mu)
+void F3_SubMenu_TheFourth_RunCmdDis(uint8_t f3mu)
 {
       switch(f3mu){
 
                   case F3401:
-                       AF301[0]= F3_05_PopSub_Item(3);  //Number_Digital_Set5bit_ZeroDecSelect(AF301,3);
+                       switch(f3menu_t.F3_theFourth_Id){
+
+                               case 0: //
+                                   Symbol_nonE();
+                               break;
+
+                               case 1:
+                                   Symbol_Por();
+                               break;
+
+                               case 2:
+                                 Symbol_EEr();
+                               break;
+
+                       }
                   break;
 
                   case F3402:
-                       AF302[0]= F3_05_PopSub_Item(1);  //Number_Digital_Set5bit_ZeroDecSelect(AF302,1);
+                        switch(f3menu_t.F3_theFourth_Id){
+
+                           case 0:
+                                Number_1bit_DIS(AF3402);
+                           break;
+
+                        }
+                    
                   break;
 
                   case F3403:
-                       AF303[0]= F3_05_PopSub_Item(6);   //Number_Digital_Set5bit_ZeroDecSelect(AF303,6);
+                           switch(f3menu_t.F3_theFourth_Id){
+
+                               case 0: //
+                                    Symbol_PRS();
+                               break;
+
+                               case 1:
+                                Symbol_nEt();
+                               break;
+
+                               case 2:
+                                 Symbol_uRLEy();
+                               break;
+
+                              case 3:
+                                Symbol_CnoSS();
+                               break;
+
+                               case 4:
+                                 Symbol_PERH();
+                               break;
+
+                                case 5:
+                                 Symbol_p_u();
+                               break;
+
+                             
+
+                       }
+                       
                   break;
 
-                  case F3404:
-                   //   AF304[F305_tmp4]= F3_05_PopSub_Item(3); 
-                      
+                  case F3404: //display 3 bit digital 
+                       
+                      Number_3bit_twoPoint_DIS(AF3404);
                   break;
 
-                  case F3405:
-                     //  AF305[F305_tmp5]= F3_05_PopSub_Item(5); Number_Digital_Set5bit_ZeroDecSelect(AF305,5);
+                  case F3405://display 5bi digital with"-""
+                       F2SubMenu_F202_01_Select_DIS(AF3405);
                         
                   break;
 
-                  case F3406:
-                      // AF306[F305_tmp6]= F3_05_PopSub_Item(5);   //Number_Digital_Set5bit_ZeroDecSelect(AF306,5);
+                  case F3406://display 5bi digital
+                     F2SubMenu_F202_01_Select_DIS(AF3406);
                       
                   break;
 
-                  case F3407:
-                       //   AF307[F305_tmp7]= F3_05_PopSub_Item(5);//Number_Digital_Set5bit_ZeroDecSelect(AF307,5);
+                  case F3407://display 5bi digital
+                      F2SubMenu_F202_01_Select_DIS(AF3407);
                       
                   break;
 
@@ -381,14 +459,13 @@ void F3_SubMenu_TheFourth_Fun(uint8_t f3mu)
         
 }
 
-/*******************F3***************************************
+/***********************************************************
  * 
- * F3 ITEM MENU 
+ * Function Name: void F1SubMenu_Sub_03(void)
+ * Function: the third menu display nixie tube 
  * 
  * 
- * 
- * 
-************************************************************/
+***********************************************************/
 void F3SubMenu_01(void)
 {
    SmgDisplay_Character(digital_3,0x0f); //"-"
@@ -428,46 +505,46 @@ void F3SubMenu_Master_01(void)
   
 
 }
-
+/************************************************************************
+ * 
+ * Function Name:void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
+ * Function:F3 menu by input by key be pressd ad add 
+ * 
+ * 
+ ***********************************************************************/
 void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
 {
         switch(f3mu4){
 
                   case F3401:
-                      AF301[0]= F3_05_PushSub_Item(3); //Number_Digital_Set5bit_ZeroAddSelect(AF301,3);
+                      f3menu_t.F3_theFourth_Id = F3_05_PushSub_Item(3); //Number_Digital_Set5bit_ZeroAddSelect(AF301,3);
                   break;
 
                   case F3402:
-                       AF302[0] = F3_05_PushSub_Item(1);//Number_Digital_Set5bit_ZeroAddSelect(AF302,1);
+                     f3menu_t.F3_theFourth_Id=0;
+                       AF302[0] = Number_Digital_Set5bit_ZeroAddSelect(AF302,1);
                   break;
 
                   case F3403:
-                       AF303[0] = F3_05_PushSub_Item(6);  //Number_Digital_Set5bit_ZeroAddSelect(AF303,6);
+                     
+                       f3menu_t.F3_theFourth_Id = F3_05_PushSub_Item(6);  //Number_Digital_Set5bit_ZeroAddSelect(AF303,6);
                   break;
 
                   case F3404:
-                     //  AF304[F305_tmp4] = F3_05_PushSub_Item(3);  //Number_Digital_Set5bit_ZeroAddSelect(AF304,3);
-                     //  F305_tmp4++;
-                     //  if(F305_tmp4>2)F305_tmp4=0;
+                        Number_Digital_3bit_AddSelect(AF3404);
                   break;
 
                   case F3405:
-                     // AF305[F305_tmp5] = F3_05_PushSub_Item(5);  //Number_Digital_Set5bit_ZeroAddSelect(AF305,5);
-                     // F305_tmp5++;
-                    //  if(F305_tmp5>4)F305_tmp5=0;
+                        Number_Digital_5bit_AddSelect(AF3405);
                   break;
 
                   case F3406:
-                     // AF306[F305_tmp6] = F3_05_PushSub_Item(5);  //Number_Digital_Set5bit_ZeroAddSelect(AF306,5);
-                     // F305_tmp6++;
-                     // if(F305_tmp6>4)F305_tmp6=0;
+                     Number_Digital_5bit_AddSelect(AF3406);
                   break;
 
                   case F3407:
-                
-                     //AF307[F305_tmp7] = F3_05_PushSub_Item(5);//   Number_Digital_Set5bit_ZeroAddSelect(AF307,5);
-                    // F305_tmp7++;
-                    // if(F305_tmp7>4)F305_tmp7=0;
+                         Number_Digital_5bit_AddSelect(AF3407);
+                  
                   break;
 
 
@@ -496,3 +573,29 @@ void F3_Dec_TheThirdMenu_KeyFunction(uint8_t f3mu3)
 }
 
 
+
+/***********************************************
+*
+*Smg F1-05 display  2 bit 1-5.0
+*
+**********************************************/
+static void Number_1bit_DIS(int8_t *pA)
+{
+   
+   SmgDisplay(digital_1,0x0b); // null
+   SmgDisplay(digital_2,0x0b); // null
+   SmgDisplay(digital_3,0x0b); // null
+   SmgDisplay(digital_4,0x0b); // null
+   SmgDisplay(digital_5,*pA); // 0~100
+  
+
+}
+
+void Number_3bit_twoPoint_DIS(int8_t *pA)
+{
+    SmgDisplay(digital_1,0x0b); // null
+   SmgDisplay(digital_2,0x0b); // null
+   SmgDisplay(digital_3,*(pA+2)); // 0~100
+   SmgDisplay_Point(digital_4,*(pA+1));  // 0~100
+   SmgDisplay(digital_5,*pA); // 0~100
+}

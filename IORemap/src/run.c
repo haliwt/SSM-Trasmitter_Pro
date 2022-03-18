@@ -116,7 +116,7 @@ void RunCommand(void)
          
          case TheFourth_Menu: //F3->F3-1->F3-1.1 -> ;F3-2 ->F3-2.1
               
-           F3_SubMenu_TheFourth_Fun(menu_t.menuTitle_04);
+             F3_SubMenu_TheFourth_RunCmdDis( menu_t.menu_F1Sub_03_xx_key);
             
                          
         break;

@@ -1,9 +1,13 @@
 #ifndef __F1MENU_H_
 #define __F1MENU_H_
+
 #include "main.h"
 
-typedef struct _F1MENU{
+
+
+typedef struct F1MENUNEW{
   
+   
    uint8_t f1r01;
    uint8_t f1r02;
    uint8_t f1r03;
@@ -21,7 +25,7 @@ typedef struct _F1MENU{
    uint8_t f1r12;
 
    uint8_t f1r13;
-
+ 
  
 
    uint32_t f2r06_reg;
@@ -33,14 +37,13 @@ typedef struct _F1MENU{
 
    uint32_t f1r01_reg;
    uint32_t f1r02_reg;
-   uint32_t f1r12_reg  ;
+   uint32_t f1r12_reg ;
 
   uint32_t f2r05_reg_next;
 
-}F1MENU;
+}f1menunew;
 
-
-extern F1MENU f1menu_t;
+extern f1menunew f1menu_t;
 
 void F1_MasterFunction_EnterKey(void);
 void F1_Add_TheThirdMenu_KeyFunction(uint8_t f1mu);
