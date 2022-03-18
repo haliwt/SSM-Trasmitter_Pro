@@ -2,6 +2,8 @@
 #define __DIS_H_
 #include "main.h"
 
+void Number_Digital_1bit_AddSelect(int8_t *ap);
+void Number_Digital_1bit_DecSelect(int8_t *ap);
 
 void Number_Digital_5bit_DecSelect(int8_t *ap);
 void Number_Digital_5bit_AddSelect(int8_t *ap);

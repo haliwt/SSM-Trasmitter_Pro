@@ -373,6 +373,7 @@ void F3_SubMenu_TheFourth_RunCmdDis(uint8_t f3mu)
       switch(f3mu){
 
                   case F3401:
+                      menu_t.DisplaySmgBit_Select_Numbers=3;
                        switch(f3menu_t.F3_theFourth_Id){
 
                                case 0: //
@@ -391,17 +392,14 @@ void F3_SubMenu_TheFourth_RunCmdDis(uint8_t f3mu)
                   break;
 
                   case F3402:
-                        switch(f3menu_t.F3_theFourth_Id){
-
-                           case 0:
-                                Number_1bit_DIS(AF3402);
-                           break;
-
-                        }
+                       
                     
-                  break;
+                        Number_1bit_DIS(AF3402);
+                         
+                break;
 
                   case F3403:
+                          menu_t.DisplaySmgBit_Select_Numbers=0;
                            switch(f3menu_t.F3_theFourth_Id){
 
                                case 0: //
@@ -435,21 +433,24 @@ void F3_SubMenu_TheFourth_RunCmdDis(uint8_t f3mu)
                   break;
 
                   case F3404: //display 3 bit digital 
-                       
+                      menu_t.DisplaySmgBit_Select_Numbers=3;
                       Number_3bit_twoPoint_DIS(AF3404);
                   break;
 
                   case F3405://display 5bi digital with"-""
+                        menu_t.DisplaySmgBit_Select_Numbers=5;
                        F2SubMenu_F202_01_Select_DIS(AF3405);
                         
                   break;
 
                   case F3406://display 5bi digital
+                    menu_t.DisplaySmgBit_Select_Numbers=5;
                      F2SubMenu_F202_01_Select_DIS(AF3406);
                       
                   break;
 
                   case F3407://display 5bi digital
+                    menu_t.DisplaySmgBit_Select_Numbers=5;
                       F2SubMenu_F202_01_Select_DIS(AF3407);
                       
                   break;
@@ -521,8 +522,9 @@ void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
                   break;
 
                   case F3402:
-                     f3menu_t.F3_theFourth_Id=0;
-                       AF302[0] = Number_Digital_Set5bit_ZeroAddSelect(AF302,1);
+                      
+                        Number_Digital_1bit_AddSelect(AF302);
+                        printf("AF302[0] + = %d\n",AF302[0]);
                   break;
 
                   case F3403:
@@ -550,7 +552,52 @@ void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
 
         }
 }
+/************************************************************************
+ * 
+ * Function Name:void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
+ * Function:F3 menu by input by key be pressd ad add 
+ * 
+ * 
+ ***********************************************************************/
+void F3_Dec_TheFourthMenu_KeyFunction(uint8_t f3mu4)
+{
+        switch(f3mu4){
 
+                  case F3401:
+                      f3menu_t.F3_theFourth_Id = F3_05_PopSub_Item(3); //Number_Digital_Set5bit_ZeroAddSelect(AF301,3);
+                  break;
+
+                  case F3402:
+                   
+                      Number_Digital_1bit_DecSelect(AF302);
+                      printf("AF302[0] - = %d\n",AF302[0]);
+                  break;
+
+                  case F3403:
+                     
+                       f3menu_t.F3_theFourth_Id = F3_05_PopSub_Item(6);  //Number_Digital_Set5bit_ZeroAddSelect(AF303,6);
+                  break;
+
+                  case F3404:
+                        Number_Digital_3bit_DecSelect(AF3404);
+                  break;
+
+                  case F3405:
+                        Number_Digital_5bit_DecSelect(AF3405);
+                  break;
+
+                  case F3406:
+                     Number_Digital_5bit_DecSelect(AF3406);
+                  break;
+
+                  case F3407:
+                         Number_Digital_5bit_DecSelect(AF3407);
+                  
+                  break;
+
+
+        }
+}
 void F3_Dec_TheThirdMenu_KeyFunction(uint8_t f3mu3)
 {
     switch(f3mu3){

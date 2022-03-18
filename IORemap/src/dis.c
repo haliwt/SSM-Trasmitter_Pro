@@ -2,6 +2,30 @@
 
 static int8_t one,two,three,four,five;
 
+void Number_Digital_1bit_AddSelect(int8_t *ap)
+{
+      
+            one++ ;
+           if(one >9){
+               one=0;
+            }
+		*ap = one;
+      
+    
+}
+
+void Number_Digital_1bit_DecSelect(int8_t *ap)
+{
+            one--;
+            if(one < 0){
+               one=9;
+            }
+		*ap= one; 
+
+}
+
+
+
 void Number_Digital_3bit_NoRefDecSelect(void)
 {
       if(menu_t.inputNumber_Select==0){
