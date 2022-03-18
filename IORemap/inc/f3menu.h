@@ -9,7 +9,9 @@ typedef struct _f3class_3_{
     
 }f3classmenu;
 
-
+extern int8_t AF3401[1];
+extern int8_t AF3402[1];
+extern int8_t AF3402_2[1];
 extern int8_t AF3404[3];
 extern int8_t AF3405[5];
 extern int8_t AF3406[5];

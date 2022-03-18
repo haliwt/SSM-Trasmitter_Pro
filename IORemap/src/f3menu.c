@@ -4,6 +4,9 @@ f3classmenu f3menu_t;
 static void Number_1bit_DIS(int8_t *pA);
 static void Number_3bit_twoPoint_DIS(int8_t *pA);
 
+int8_t AF3401[1];
+int8_t AF3402[1];
+int8_t AF3402_2[1];
 int8_t AF3404[3];
 int8_t AF3405[5];
 int8_t AF3406[5];
@@ -134,26 +137,17 @@ void F3_MasterFunction_EnterKey(void)
 
                         if(menu_t.F3SubMenu_Id==F301){
 
-                                if(AF3401[0]==0){
-
+                               
                                 menu_t.menu_F1Sub_03_xx_key = f3menu_t.threeClass_menu_Id; //EDIT.202203.18//= 1;
-                                menu_t.menuTitle_04= 1; 
-                                }
-                                else{
-                                menu_t.menu_F1Sub_03_xx_key= AF3401[0];
-                                menu_t.menuTitle_04= AF3402[0]; 
-                                }
+                             
+                              
                         }
                         else{  
-                        if(AF3402[0]==0){
-                                menu_t.menu_F1Sub_03_xx_key= 1;
-                                menu_t.menuTitle_04= 1; 
-                                }
-                                else{
+                      
 
-                                menu_t.menuTitle_04= AF3402[0];
+                          
                                 menu_t.menu_F1Sub_03_xx_key=f3menu_t.threeClass_menu_Id; //AF3402[0]; 
-                        }
+                        
                         }
                         //runKey fun
                         menu_t.FxMainMenu_key =0xD0; //the FOURTH menu open 
@@ -393,8 +387,9 @@ void F3_SubMenu_TheFourth_RunCmdDis(uint8_t f3mu)
 
                   case F3402:
                        
-                    
-                        Number_1bit_DIS(AF3402);
+                       menu_t.DisplaySmgBit_Select_Numbers=0;
+                        Number_1bit_DIS(AF3402_2);
+                       
                          
                 break;
 
@@ -523,8 +518,8 @@ void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
 
                   case F3402:
                       
-                        Number_Digital_1bit_AddSelect(AF302);
-                        printf("AF302[0] + = %d\n",AF302[0]);
+                        Number_Digital_1bit_AddSelect(AF3402_2);
+                     
                   break;
 
                   case F3403:
@@ -569,8 +564,8 @@ void F3_Dec_TheFourthMenu_KeyFunction(uint8_t f3mu4)
 
                   case F3402:
                    
-                      Number_Digital_1bit_DecSelect(AF302);
-                      printf("AF302[0] - = %d\n",AF302[0]);
+                      Number_Digital_1bit_DecSelect(AF3402_2);
+                     
                   break;
 
                   case F3403:
