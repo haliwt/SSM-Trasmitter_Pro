@@ -215,78 +215,7 @@ uint8_t F1_PopSub_03_Item_Top(void)
 	
 }
 
-/*************************************************/
-uint8_t F3_04_PushSub_Item(int8_t nsize)
-{
-	 F3_04_item_Top++;
-	 if(F3_04_item_Top > nsize){
-	     // printf("Error :stack overflow \n");
-	     //return ;
-	  
-	   F3_04_item_Top=1;
-	}
-	
-	//F1SubMenu(menuF1SubTop);
-	return F3_04_item_Top;
-}
-uint8_t F3_04_PopSub_Item(int8_t nsize)
-{
-	F3_04_item_Top--; 
-	if(F3_04_item_Top == 0 || F3_04_item_Top ==-1 ){
-	    //printf("Error : no element to Pop \n");
-		//return;
-		F3_04_item_Top = nsize  ;
-	}
-    
 
-	
-    return F3_04_item_Top ;
-}
-uint8_t F3_04_Item_Top(void)
-{
-	   return F3_04_item_Top ;
-	
-}
-
-/*************************************************
-*
-*The F1 ->F1-01-> F1-01-01,F1-01-02,F1-01-03
-*F1-01-04,F1-01-05,F1-01-06.....F1-01-13
-*
-*
-*
-
-*************************************************/
-uint8_t F3_05_PushSub_Item(int8_t nsize)
-{
-	 if(F3_05_item_Top >= nsize){
-	     // printf("Error :stack overflow \n");
-	     //return ;
-	  
-	   F3_05_item_Top=0;
-	}
-	else{
-		F3_05_item_Top++;
-	}
-	//F1SubMenu(menuF1SubTop);
-	return F3_05_item_Top;
-}
-uint8_t F3_05_PopSub_Item(int8_t nsize)
-{
-	
-	if(F3_05_item_Top== -1){
-	    //printf("Error : no element to Pop \n");
-		//return;
-		F3_05_item_Top = nsize -1 ;
-	}
-    F3_05_item_Top--;
-    return F3_05_item_Top ;
-}
-uint8_t F3_05_PopSub_Item_Top(void)
-{
-	   return F3_05_item_Top ;
-	
-}
 /***********************************************************
  * 
  * Function Name: void F1SubMenu(F1submenuList f1sub)
@@ -469,36 +398,7 @@ void F2SubMenu_02(uint8_t mn)
 		}
 
 }
-/***********************************************************
- * 
- * Function Name: void F3SubMenu_03(F1submenuList f1sub)
- * Function :display nixie tube character
- * Input Ref: F1 menu submenu item
- * Retern Ref: No
- * 
-************************************************************/
-void F3SubMenu_02_DispSelect(uint8_t mn)
-{
-        switch(mn){
 
-	        case F301:
-			    menu_t.F3SubMenu_Id = F301;
-				F3SubMenu_01(); //"F1 - 1."
-			break;
-
-			case F302:
-			  //  F2SubMenu_Master_01();
-			     menu_t.F3SubMenu_Id = F302;
-				 F3SubMenu_02(); //"F1-2."
-			break;
-			
-			default:
-
-			break;
-
-		}
-
-}
 
 uint8_t SpecDisplay_Number(uint8_t ns)
 {

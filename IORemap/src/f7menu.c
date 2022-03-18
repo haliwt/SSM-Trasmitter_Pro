@@ -8,6 +8,54 @@ static void F7SubMenu_03_05_Dis(int8_t unit,int8_t decade,int8_t hundred);
 static void F7SubMenu_03_06_Dis(uint8_t mu);
 static void F7SubMenu_03_07_Dis(uint8_t mu);
 
+void F7_MasterFunction_EnterKey(void)
+{
+ if(f7menu_t.menuF7Sub_first==0){  //F7- 01 
+                  f7menu_t.menuF7Sub_first++;
+                  menuFxSubTop=-1;
+                  mainitem_t.task_MainMenu=TheSecond_Menu;
+
+                  menu_t.menuTitle_02=7; //the second menu 
+                  menu_t.FxMainMenu_key =0xB0;
+                   menu_t.FxSub_02_key=0xf70;
+                  f7menu_t.F7_SubMenuTop = PushSub_Menu(7);
+                   printf("f7_theFirst_enkey = %d\n", menu_t.menuTitle_02);
+		} 
+            else{ //F7-01-> 01
+                  key_t.f7keyReturn_flag = key_t.f7keyReturn_flag^ 0x01;
+                  printf("f7keyenter = %d\n",key_t.f7keyReturn_flag);
+                  if(key_t.f7keyReturn_flag== 1){
+                 
+                        /*****************The third********************/
+                        mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                       
+                      //  menu_t.FxSub_02_key=7;
+                         menu_t.menuTitle_03=submenu_F7;
+                        //runKey fun
+                        menu_t.FxMainMenu_key =0xC0; //the third menu open 
+                        menu_t.FxSub_03_key=0xf70;  //the third sub open
+            
+                       //f7menu_t.F7_03_subMenuTop=f7menu_t.F7SubMenu_Id;
+                        menu_t.menu_F1Sub_03_xx_key=f7menu_t.F7SubMenu_Id;
+                        printf("f7_03_Top = %d\n",f7menu_t.F7_03_subMenuTop);
+                  }    
+                  else{
+                        
+                        menu_t.menuId= F7;
+                        mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
+                        menu_t.FxMainMenu_key =0xB0; 
+                       menu_t.FxSub_02_key=0xf70; 
+                        menu_t.menuTitle_03=0;
+				menu_t.menuTitle_02=7; 
+                        f7menu_t.F7_SubMenuTop=f7menu_t.F7SubMenu_Id;
+                     
+                        printf("f7_04_enkey = %d\n",f7menu_t.F7_03_subMenuTop);
+                    }
+
+            } 
+
+
+}
 /*********F7-01************/
 void F7SubMenu_02_DIS(uint8_t f7m2)
 {  
@@ -361,5 +409,110 @@ static void F7SubMenu_03_07_Dis(uint8_t mu)
 
 
 
+}
+
+void F7_Add_TheThirdMenu_KeyFunction(uint8_t f7mu)
+{
+
+	switch(f7mu){
+ 		case 0x00: //F1-01-01
+                  f7menu_t.F7_03_00_Id=  PushSub_03_Menu(2);
+                  printf("f7_03_Upkey = %d\n",f7menu_t.F7_03_01_Id);
+                  key_t.f7keyReturn_flag=1;
+                  break;
+
+                  case 0x01: //F1-02-01
+                  f7menu_t.F7_03_01_Id=  PushSub_03_Menu(8);
+
+                  printf("f7_03_upkey = %d\n",menu_t.F1_Sub02_Top);
+                  key_t.f7keyReturn_flag=1;
+                  break;
+
+                  case 0x02: //F1-03-01
+                  RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                  f7menu_t.unit= menu_t.unit;
+                  f7menu_t.decade=menu_t.decade;
+                  f7menu_t.hundred =menu_t.hundred;
+                  key_t.f7keyReturn_flag=1;
+
+                  break;
+
+                  case 0x03: //F1-04-01
+                  f7menu_t.F7_03_03_Id=PushSub_03_Menu(7);
+                  key_t.f7keyReturn_flag=1;
+                  break;
+
+                  case 0x04://F1-05-01
+                  RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                  f7menu_t.unit= menu_t.unit;
+                  f7menu_t.decade=menu_t.decade;
+                  f7menu_t.hundred =menu_t.hundred;
+                  key_t.f7keyReturn_flag=1;
+
+                  break;
+
+                  case 0x05://F1-06-01
+                  f7menu_t.F7_03_05_Id=PushSub_03_Menu(2);
+                  key_t.f7keyReturn_flag=1;
+                  break;
+
+                  case 0x06: //F1-07-01
+
+                  key_t.f7keyReturn_flag=1;
+                  break;
+
+}
+}
+
+void F7_Dec_TheThirdMenu_KeyFunction(uint8_t f7mu3)
+{
+   switch(f7mu3){
+      case 0x00: //F1-01-01
+          f7menu_t.F7_03_00_Id=  PopSub_03_Menu(2);
+          printf("f7_03_Upkey = %d\n",f7menu_t.F7_03_01_Id);
+           key_t.f7keyReturn_flag=1;
+      break;
+
+      case 0x01: //F1-02-01
+            f7menu_t.F7_03_01_Id=  PopSub_03_Menu(8);
+        
+            printf("f7_03_upkey = %d\n",menu_t.F1_Sub02_Top);
+           key_t.f7keyReturn_flag=1;
+      break;
+
+       case 0x02: //F1-03-01
+           RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+           f7menu_t.unit= menu_t.unit;
+           f7menu_t.decade=menu_t.decade;
+           f7menu_t.hundred =menu_t.hundred;
+           key_t.f7keyReturn_flag=1;
+           
+      break;
+
+       case 0x03: //F1-04-01
+            f7menu_t.F7_03_03_Id=PushSub_03_Menu(7);
+             key_t.f7keyReturn_flag=1;
+      break;
+
+        case 0x04://F1-05-01
+            RunDispDigital_Fun(Number_Digital_3bit_DecSelect);
+           f7menu_t.unit= menu_t.unit;
+           f7menu_t.decade=menu_t.decade;
+           f7menu_t.hundred =menu_t.hundred;
+           key_t.f7keyReturn_flag=1;
+         
+      break;
+
+      case 0x05://F1-06-01
+           f7menu_t.F7_03_05_Id=PopSub_03_Menu(2);
+            key_t.f7keyReturn_flag=1;
+      break;
+
+       case 0x06: //F1-07-01
+            
+           key_t.f7keyReturn_flag=1;
+      break;
+
+}
 }
 

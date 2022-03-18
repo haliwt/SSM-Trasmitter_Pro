@@ -32,9 +32,15 @@ typedef struct _F7menu{
 }F7menu;
 extern F7menu f7menu_t;
 
+void F7_MasterFunction_EnterKey(void);
+
 void F7SubMenu_02_DIS(uint8_t mu);
 
 void F7SubMenu_03_DIS(uint8_t f7mu);
+
+void F7_Add_TheThirdMenu_KeyFunction(uint8_t f7mu);
+
+void F7_Dec_TheThirdMenu_KeyFunction(uint8_t f7mu3);
 
 #endif 
 

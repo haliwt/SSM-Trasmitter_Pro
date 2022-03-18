@@ -430,13 +430,7 @@ void F2SubMenu_Master_01(void)
 
 }
 
-void F3SubMenu_Master_01(void)
-{
-   SmgDisplay_Character(digital_1,0x04); //"F"
-   SmgDisplay(digital_2,0x03); //'3'
-  
 
-}
 
 void F7SubMenu_Master_01(void)
 {
@@ -622,46 +616,6 @@ void F2SubMenu_F203_01_Select_DIS(int8_t *pA)
 
 }
 
-/*******************F3***************************************
- * 
- * F3 ITEM MENU 
- * 
- * 
- * 
- * 
-************************************************************/
-void F3SubMenu_01(void)
-{
-   SmgDisplay_Character(digital_3,0x0f); //"-"
-   SmgDisplay_Point(digital_4,0x01); //'1.'
-   SmgDisplay(digital_5,0x0B); //'NULL'
-
-}
-void F3SubMenu_02(void)
-{
-   SmgDisplay_Character(digital_3,0x0f); //"-"
-   SmgDisplay_Point(digital_4,0x02); //'1.'
-   SmgDisplay(digital_5,0x0B); //'NULL'
-}
-void F3SubMenu_F301_01_Select_DIS(int8_t *pA,uint8_t n)
-{
-     static uint8_t i=0;
-     if(i==0){
-        if(*pA==0)*pA =1;
-         i++;
-     }
-      SmgDisplay(digital_5,*pA); // 0~100
-       
-}
-void F3SubMenu_F302_02_Select_DIS(int8_t *pA,uint8_t n)
-{
-      static uint8_t i=0;
-     if(i==0){
-        if(*pA==0)*pA =1;
-         i++;
-     }
-      SmgDisplay(digital_5,*pA); // 0~100
-}
 
 
 /*****************F3 the furth menu*****************************/

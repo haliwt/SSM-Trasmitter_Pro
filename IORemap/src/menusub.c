@@ -64,7 +64,7 @@ int8_t subTop_03(Stacksubmenu_03 *s)
 ************************************************/
 void TheThird_F1_03_Menu(void)
 {
-     static uint8_t f1r01,f1r02,f1r03,f1r04,f1r05,f1temp;
+     static uint8_t f1r00,f1r01,f1r02,f1r03,f1r04,f1r05,f1temp;
 	 static uint8_t f1r06,f1r07,f1r08,f1r09,f1r10,f1r11,f1r12;
      
 
@@ -73,16 +73,16 @@ void TheThird_F1_03_Menu(void)
 				   
 				   case 0: //F1-01-01
                        menu_t.F1SubMenu_Sub_02_Id =0;
-                        if(f1r01 == 0) {
-                        f1r01++;
+                        if(f1r00 == 0) {
+                        f1r00++;
                          Flash_Read();
                           menu_t.F1_Sub01_Top= ( flash_t.flashData[0] & 0xff000000) >> 24;
                         
 
                           printf("f1sub_00_03_flash = %d\n",menu_t.F1_Sub01_Top);
                         }
-                        if(f1r01==1){ 
-                        f1r01++;
+                        if(f1menu_t.f1r01==1){ 
+                        f1menu_t.f1r01++;
                         }
                         else{
                             F1SubMenu_F101_01_Select_DIS(menu_t.F1_Sub01_Top);
@@ -96,8 +96,8 @@ void TheThird_F1_03_Menu(void)
 				   case 0x01: //F1-02-01 ->
                        menu_t.F1SubMenu_Sub_02_Id =0x01;
                        menu_t.DisplaySmgBit_Select_Numbers =3;
-                           if(f1r02== 0) {
-                        f1r02++;
+                           if(f1r01== 0) {
+                        f1r01++;
                         Flash_Read();
 
                         menu_t.F1_Sub02_unit=(flash_t.flashData[0] & 0xFF) >> 0; //form flas read data 
@@ -250,7 +250,7 @@ void TheThird_F1_03_Menu(void)
                          menu_t.F1SubMenu_Sub_02_Id =0x08;
                         menu_t.DisplaySmgBit_Select_Numbers =5;
                         if(f1r08==0){
-                       f1r08++; 
+                      f1r08++; 
                        Flash_Read(); 
                         AF109[4]=((flash_t.flashData[32] & 0xFF000000) >> 24); //form flas read data 
                         printf("f1sub_01_05_AF106[3] = %d\n",AF109[3]);
@@ -324,7 +324,7 @@ void TheThird_F1_03_Menu(void)
                         menu_t.F1SubMenu_Sub_02_Id =0x0C;
                          menu_t.DisplaySmgBit_Select_Numbers =2;
                        if(f1r12==0){
-                       f1r12++; 
+                      f1r12++; 
                         Flash_Read(); 
                         AF113[1]=((flash_t.flashData[52] & 0xFF000000) >> 24); //form flas read data 
                         printf("f1sub_01_05_AF106[3] = %d\n",AF113[1]);

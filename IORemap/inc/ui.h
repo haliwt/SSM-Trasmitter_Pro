@@ -58,10 +58,7 @@ void F2SubMenu_F204_01_Select_DIS(int8_t *pA);
 void F2SubMenu_F205_01_Select_DIS(int8_t *pA);
 void F2SubMenu_F206_01_Select_DIS(int8_t *pA);
 
-//F3 SubMenu List
-void F3SubMenu_01(void);
-void F3SubMenu_02(void);
-void F3SubMenu_Master_01(void);
+
 
 void F3SubMenu_F301_01_Select_DIS(int8_t *pA,uint8_t n);
 void F3SubMenu_F301_02_Select_DIS(int8_t *pA,uint8_t n);

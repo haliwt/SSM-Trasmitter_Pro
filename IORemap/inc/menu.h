@@ -257,13 +257,7 @@ extern uint8_t PushSub_03_Menu(int8_t msize);
 extern uint8_t PopSub_03_Menu(int8_t msize);
 int8_t submenu_03_Top(void);
 
-uint8_t F3_04_PushSub_Item(int8_t nsize);
-uint8_t F3_04_PopSub_Item(int8_t nsize);
-uint8_t F3_04_Item_Top(void);
 
-uint8_t F3_05_PushSub_Item(int8_t nsize);
-uint8_t F3_05_PophSub_Item(int8_t nsize);
-uint8_t F3_05_Item_Top(void);
 //F1 MENU the third menu 
 void F1SubMenu_F101_01_Select_DIS(uint8_t subm3);
 
@@ -282,7 +276,7 @@ void F1SubMenu_F101_02_Select_DIS(uint8_t subm3);
 void F2SubMenu_02(uint8_t mn);
 
 /******************F3-01*****************************/
-void F3SubMenu_02_DispSelect(uint8_t mn);
+
 
 uint8_t SpecDisplay_Number(uint8_t number);
 

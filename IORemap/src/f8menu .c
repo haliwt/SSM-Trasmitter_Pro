@@ -10,6 +10,57 @@ static void F8SubMenu_03_05_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t 
 static void F8SubMenu_03_06_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
 static void F8SubMenu_03_07_Dis(uint8_t mu);
 static void F8SubMenu_03_08_Dis(uint8_t mu);
+
+void F8_MasterFunction_EnterKey(void)
+{
+
+ if(f8menu_t.menuF8Sub_first==0){  //F8- 01 
+                  f8menu_t.menuF8Sub_first++;
+                  menuFxSubTop=-1;
+                  mainitem_t.task_MainMenu=TheSecond_Menu;
+
+                  menu_t.menuTitle_02=8; //the second menu 
+                  menu_t.FxMainMenu_key =0xB0;
+                   menu_t.FxSub_02_key=0xf80;
+                  f8menu_t.F8_SubMenuTop = PushSub_Menu(F8Mnumbers);
+                  printf("f8_theFirst_enkey = %d\n",menu_t.menuTitle_02);
+	} 
+    else{ //F801-> 01
+                  key_t.f8keyReturn_flag = key_t.f8keyReturn_flag^ 0x01;
+                  printf("f8keyenter = %d\n",key_t.f8keyReturn_flag);
+                  if(key_t.f8keyReturn_flag== 1){
+                 
+                        /*****************The third********************/
+                        mainitem_t.task_MainMenu=TheThird_Menu; //open the third menu
+                       
+                         menu_t.menuTitle_03=submenu_F8;
+                        //runKey fun
+                        menu_t.FxMainMenu_key =0xC0; //the third menu open 
+                        menu_t.FxSub_03_key=0xf80;  //the third sub open
+            
+                       //f7menu_t.F7_03_subMenuTop=f7menu_t.F7SubMenu_Id;
+                        menu_t.menu_F1Sub_03_xx_key=f8menu_t.F8SubMenu_Id;
+                        printf("f8_03_Top = %d\n",f8menu_t.F8_03_subMenuTop);
+                  }    
+                  else{
+                        
+                        menu_t.menuId= F8;
+                        mainitem_t.task_MainMenu=TheSecond_Menu; //OPEN the second menu
+                        menu_t.FxMainMenu_key =0xB0; 
+                       menu_t.FxSub_02_key=0xf80; 
+                        menu_t.menuTitle_03=0;
+				menu_t.menuTitle_02=8; 
+                        f8menu_t.F8_SubMenuTop=f8menu_t.F8SubMenu_Id;
+                     
+                        printf("f8_04_enkey = %d\n",f8menu_t.F8_03_subMenuTop);
+                    }
+
+    }          
+
+
+
+}
+
 void F8SubMenu_02_DIS(uint8_t mu)
 {
 	switch(mu){
@@ -216,5 +267,136 @@ void F8SubMenu_03_08_Dis(uint8_t um)
      SmgDisplay(digital_3,0x0b); //'null'
      SmgDisplay_Character(digital_4,0x00); //'A'
 	 SmgDisplay_Character(digital_5,0x2); //"d"
+
+}
+
+
+void F8_Add_TheThirdMenu_KeyFunction(uint8_t f8mu)
+{
+
+	  switch(f8mu){
+
+		case 0:
+		f8menu_t.F8_03_01_Id=  PushSub_03_Menu(3);
+		break;
+
+		case 1:
+		f8menu_t.F8_03_02_Id =  PushSub_03_Menu(6);
+		break;
+
+		case 2:
+		Number_Digital_5bitPoint_AddSelect(AF803);
+		f8menu_t.unit =AF803[0];
+		f8menu_t.decade = AF803[1];
+		f8menu_t.hundred = AF803[2];
+		f8menu_t.onethousand= AF803[3];
+		f8menu_t.tenthousand= AF803[4];
+		break;
+
+		case 3:
+		Number_Digital_5bitPoint_AddSelect(AF804);
+		f8menu_t.unit =AF804[0];
+		f8menu_t.decade = AF804[1];
+		f8menu_t.hundred = AF804[2];
+		f8menu_t.onethousand= AF804[3];
+		f8menu_t.tenthousand= AF804[4];
+
+
+		break;
+
+		case 4:
+		Number_Digital_5bitPoint_AddSelect(AF805);
+		f8menu_t.unit =AF805[0];
+		f8menu_t.decade = AF805[1];
+		f8menu_t.hundred = AF805[2];
+		f8menu_t.onethousand= AF805[3];
+		f8menu_t.tenthousand= AF805[4];
+
+		break;
+
+		case 5:
+		Number_Digital_5bitPoint_AddSelect(AF806);
+		f8menu_t.unit =AF806[0];
+		f8menu_t.decade = AF806[1];
+		f8menu_t.hundred = AF806[2];
+		f8menu_t.onethousand= AF806[3];
+		f8menu_t.tenthousand= AF806[4];
+
+		break;
+
+		case 6:
+		f8menu_t.F8_03_07_Id= PushSub_03_Menu(3);
+		break;
+
+		case 7:
+		f8menu_t.F8_03_08_Id= PushSub_03_Menu(3);
+		break;
+
+        }
+
+}
+
+void F8_Dec_TheThirdMenu_KeyFunction(uint8_t f8mu3)
+{
+	switch(f8mu3){
+
+                              case 0:
+                                    f8menu_t.F8_03_01_Id=  PopSub_03_Menu(3);
+                              break;
+
+                              case 1:
+                                    f8menu_t.F8_03_02_Id =  PopSub_03_Menu(6);
+                              break;
+
+                              case 2:
+                                      Number_Digital_5bitPoint_DecSelect(AF803);
+                                      f8menu_t.unit =AF803[0];
+                                      f8menu_t.decade = AF803[1];
+                                      f8menu_t.hundred = AF803[2];
+                                      f8menu_t.onethousand= AF803[3];
+                                      f8menu_t.tenthousand= AF803[4];
+                              break;
+
+                              case 3:
+                                    Number_Digital_5bitPoint_DecSelect(AF804);
+                                      f8menu_t.unit =AF804[0];
+                                      f8menu_t.decade = AF804[1];
+                                      f8menu_t.hundred = AF804[2];
+                                      f8menu_t.onethousand= AF804[3];
+                                      f8menu_t.tenthousand= AF804[4];
+                                     
+
+                              break;
+
+                               case 4:
+                                 Number_Digital_5bitPoint_DecSelect(AF805);
+                                      f8menu_t.unit =AF805[0];
+                                      f8menu_t.decade = AF805[1];
+                                      f8menu_t.hundred = AF805[2];
+                                      f8menu_t.onethousand= AF805[3];
+                                      f8menu_t.tenthousand= AF805[4];
+
+                              break;
+
+                              case 5:
+                                      Number_Digital_5bitPoint_DecSelect(AF806);
+                                      f8menu_t.unit =AF806[0];
+                                      f8menu_t.decade = AF806[1];
+                                      f8menu_t.hundred = AF806[2];
+                                      f8menu_t.onethousand= AF806[3];
+                                      f8menu_t.tenthousand= AF806[4];
+
+                              break;
+
+                              case 6:
+                                    f8menu_t.F8_03_07_Id= PopSub_03_Menu(3);
+                              break;
+
+                               case 7:
+                                    f8menu_t.F8_03_08_Id= PopSub_03_Menu(3);
+                              break;
+
+      }
+
 
 }

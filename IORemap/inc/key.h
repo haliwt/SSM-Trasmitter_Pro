@@ -2,6 +2,11 @@
 #define __KEY_H_
 #include  "main.h"
 
+
+
+
+
+
 typedef struct _KEY_{
 	     
 	   uint8_t keyTimes;

@@ -33,12 +33,15 @@ typedef struct _F8menu{
 }F8menu;
 extern F8menu f8menu_t;
 
+void F8_MasterFunction_EnterKey(void);
+
 void F8SubMenu_03_02_DIS(uint8_t mu);
 
 
 void F8SubMenu_03_DIS(uint8_t mu);
 
-
+void F8_Add_TheThirdMenu_KeyFunction(uint8_t f8mu);
+void F8_Dec_TheThirdMenu_KeyFunction(uint8_t f8mu3);
 
 
 
