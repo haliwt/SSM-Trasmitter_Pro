@@ -6,8 +6,12 @@ typedef struct _f3class_3_{
     
     uint8_t threeClass_menu_Id;
     uint8_t F3_theFourth_Id;
+    uint8_t numberChar_flag;
+
     
 }f3classmenu;
+
+extern f3classmenu f3menu_t;
 
 extern int8_t AF3401[1];
 extern int8_t AF3402[1];
@@ -16,8 +20,6 @@ extern int8_t AF3404[3];
 extern int8_t AF3405[5];
 extern int8_t AF3406[5];
 extern int8_t AF3407[5];
-
-extern f3classmenu f3menu_t;
 
 
 void F3_Add_TheThirdMenu_KeyFunction(uint8_t f3mu);

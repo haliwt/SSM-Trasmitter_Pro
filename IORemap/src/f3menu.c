@@ -433,7 +433,7 @@ void F3_SubMenu_TheFourth_RunCmdDis(uint8_t f3mu)
                   break;
 
                   case F3405://display 5bi digital with"-""
-                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                       menu_t.DisplaySmgBit_Select_Numbers=5;
                        F2SubMenu_F202_01_Select_DIS(AF3405);
                         
                   break;
@@ -519,7 +519,7 @@ void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
                   case F3402:
                       
                         Number_Digital_1bit_AddSelect(AF3402_2);
-                     
+
                   break;
 
                   case F3403:
@@ -532,15 +532,21 @@ void F3_Add_TheFourthMenu_KeyFunction(uint8_t f3mu4)
                   break;
 
                   case F3405:
-                        Number_Digital_5bit_AddSelect(AF3405);
+                        
+                        //Number_Digital_5bit_AddSelect(AF3405);
+                        Number_Digital_5bit_SymAddSelect(AF3405);
                   break;
 
                   case F3406:
-                     Number_Digital_5bit_AddSelect(AF3406);
+                   
+                    // Number_Digital_5bit_AddSelect(AF3406);
+                      Number_Digital_5bit_SymAddSelect(AF3406);
                   break;
 
                   case F3407:
-                         Number_Digital_5bit_AddSelect(AF3407);
+                       
+                       //  Number_Digital_5bit_AddSelect(AF3407);
+                         Number_Digital_5bit_SymAddSelect(AF3407);
                   
                   break;
 
@@ -578,15 +584,20 @@ void F3_Dec_TheFourthMenu_KeyFunction(uint8_t f3mu4)
                   break;
 
                   case F3405:
-                        Number_Digital_5bit_DecSelect(AF3405);
+                     
+                        //Number_Digital_5bit_DecSelect(AF3405);
+                          Number_Digital_5bit_SymDecSelect(AF3405);
                   break;
 
                   case F3406:
-                     Number_Digital_5bit_DecSelect(AF3406);
+                       // Number_Digital_5bit_DecSelect(AF3406);
+                         Number_Digital_5bit_SymDecSelect(AF3406);
                   break;
 
                   case F3407:
-                         Number_Digital_5bit_DecSelect(AF3407);
+                     
+                        // Number_Digital_5bit_DecSelect(AF3407);
+                          Number_Digital_5bit_SymDecSelect(AF3407);
                   
                   break;
 

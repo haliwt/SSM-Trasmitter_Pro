@@ -596,15 +596,15 @@ void F1SubMenu_F112_01_Select_DIS(int8_t *pA)
 
 void F2SubMenu_F202_01_Select_DIS(int8_t *pA)
 {
-   static uint8_t si;
-   si++;
-   if(si==1){
-      SmgDisplay(digital_1,*(pA+4)); // 0~100
+  
+   
+   if(*(pA+4)==10 || *(pA+4)==-1){
+        SmgDisplay_Character(digital_1,0x0f); //"-"
    }
    else{
-       si =0;
-       SmgDisplay_Character(digital_1,0x0f); //"-"
+      SmgDisplay(digital_1,*(pA+4)); // 0~100
    }
+ 
    SmgDisplay(digital_2,*(pA+3)); // 0~100
    SmgDisplay(digital_3,*(pA+2)); // pointer "."
    SmgDisplay(digital_4,*(pA+1)); // pointer "."

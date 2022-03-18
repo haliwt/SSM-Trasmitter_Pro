@@ -340,3 +340,93 @@ void Number_Digital_3bit_DecSelect(int8_t *ap)
 
 }
 
+/*********************************************************************
+**********************************************************************/
+void Number_Digital_5bit_SymAddSelect(int8_t *ap)
+{
+       if(menu_t.inputNumber_Select==0){
+            one++ ;
+           if(one >9 ){
+               one=0;
+           }
+		*ap = one;
+      }
+      else if(menu_t.inputNumber_Select==1){
+                  two++;
+                  if(two >9){
+                        two=0;
+                  }
+				  *(ap+1) = two;
+       }
+      else if(menu_t.inputNumber_Select==2){
+                  three++;  
+                  if(three >9){
+                      three=0;
+                   }
+				  *(ap+2)=three;
+      } 
+      else if(menu_t.inputNumber_Select==3){
+                  four++;  
+                  if(four >9){
+                      four=0;
+                    }
+				  *(ap+3) = four; 
+      } 
+      else if(menu_t.inputNumber_Select ==4){
+                  five++;  
+                  if(five >10){
+                      five=0;
+                    }
+			*(ap+4) = five; 
+      } 
+
+}
+
+void Number_Digital_5bit_SymDecSelect(int8_t *ap)
+{
+      if(menu_t.inputNumber_Select==0){
+             one--;
+            if(one <0){
+                 one=9;
+            }
+		*ap= one;
+            printf("s_1 = %d\n",one);
+      }
+      else if(menu_t.inputNumber_Select==1){
+            two--;
+            if(two< 0){
+               two=9;
+            }
+			*(ap+1) = two;
+            printf("s_2 = %d\n",*(ap+1));
+      
+      }
+      else if(menu_t.inputNumber_Select==2){
+            three--;
+            if(three< 0){ 
+               three=9;
+            }
+			*(ap+2) = three;
+            printf("s_3 = %d\n",*(ap+2));
+          
+      }
+      else if(menu_t.inputNumber_Select==3){
+             four--;
+            if( four < 0){ 
+               four=9;
+            }
+			*(ap+3) = four;
+            printf("s_4 = %d\n", *(ap+3));
+          
+      }
+      else if(menu_t.inputNumber_Select ==4){
+             five--;
+            if(five == -2){ 
+                five=9;
+            }
+		*(ap+4) = five;
+            printf("s_4 = %d\n", *(ap+4));
+          
+      }
+
+}
