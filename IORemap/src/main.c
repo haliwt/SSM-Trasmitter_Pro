@@ -76,7 +76,7 @@ int main(void)
 		   		  printf(" enterKey = %d \n", scanvalue);
 				  
 			       key_t.keyTimes=1;
-				  key_t.keyPressedLongTimes++ ;
+				   key_t.keyPressedLongTimes++ ;
 				 
 				   
                     
@@ -86,7 +86,7 @@ int main(void)
 					   
 					 } 
 
-				      printf("  keylong1  = %d \n",   key_t.keyPressedLongTimes );
+				    printf("  keylong1  = %d \n",   key_t.keyPressedLongTimes );
 			   }
 				   
 		    }
@@ -98,12 +98,13 @@ int main(void)
 					 key_t.keyGetLong_Numbers=0;
 					 run_t.Fx_Menu_Function=0;
 					  key_t.keyPressedTimes=0;
-					     key_t.keyTimes=0;
+					  key_t.keyTimes=0;
 				      key_t.keyPressedLongTimes++ ;
 					   run_t.EnterKey_flag=0; //
+					  key_t.caliKeyFun=0;
 			}
 
-			 if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
+			if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
 				    Get_Weight();
 			        Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;
 				    SysTick_Delay_Ms(200);
@@ -141,7 +142,7 @@ int main(void)
 			   else if(key_t.keyadjust_flag ==1  ){
                           key_t.RunCmd_flag=1;
 						    key_t.keyTimes=0;
-				  key_t.keyPressedLongTimes=0;
+				  			key_t.keyPressedLongTimes=0;
 						
 							run_t.EnterKey_flag =1;
 							KEY4_SET_ENTER_Fun();

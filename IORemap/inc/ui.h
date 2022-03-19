@@ -94,7 +94,7 @@ void F9SubMenu_Master_01(void);
 
 void Number_5bit_Char_DIS(int8_t *pA);
 
-
+void Number_5bit_DIS(int8_t *pA);
 
 #endif 
 

@@ -616,8 +616,6 @@ void Number_5bit_Char_DIS(int8_t *pA)
 void F2SubMenu_F202_01_Select_DIS(int8_t *pA)
 {
   
-   
-  
    SmgDisplay(digital_1,*(pA+4)); // 0~100
    SmgDisplay(digital_2,*(pA+3)); // 0~100
    SmgDisplay(digital_3,*(pA+2)); // pointer "."
@@ -627,6 +625,16 @@ void F2SubMenu_F202_01_Select_DIS(int8_t *pA)
 
 }
 
+void Number_5bit_DIS(int8_t *pA)
+{
+   SmgDisplay(digital_1,*(pA+4)); // 
+   SmgDisplay(digital_2,*(pA+3)); //
+   SmgDisplay(digital_3,*(pA+2)); // 
+   SmgDisplay(digital_4,*(pA+1)); //
+   SmgDisplay(digital_5,*pA); // 0~100
+
+
+}
 void F2SubMenu_F203_01_Select_DIS(int8_t *pA)
 {
     F1SubMenu_F106_01_Select_DIS(pA);
@@ -638,10 +646,10 @@ void F2SubMenu_F203_01_Select_DIS(int8_t *pA)
 
  void F3SubMenu_F301_12_Select_DIS(int8_t *pA)
  {
-   SmgDisplay(digital_1,0x0B); // 0~100
-   SmgDisplay(digital_2,0x0B); // 0~100
-   SmgDisplay(digital_3,0x0B); // pointer "."
-   SmgDisplay(digital_4,0x0B); // pointer "."
+   SmgDisplay(digital_1,0x0B); // 
+   SmgDisplay(digital_2,0x0B); // 
+   SmgDisplay(digital_3,0x0B); // 
+   SmgDisplay(digital_4,0x0B); // 
    SmgDisplay(digital_5,*pA); // 0~100
 
  }

@@ -170,12 +170,7 @@ void KEY_Function(uint8_t keydata)
                     key_t.keyzero++; 
               break;
               
-              
-              
-              
-              
-              
-               case 0xf4://KEY1-ZERO--up
+      case 0xf4://KEY1-ZERO--up
                 
                     Net_KeyLed();
                    
@@ -194,7 +189,7 @@ void KEY_Function(uint8_t keydata)
                   
                break;
                    
-               case 0xf6://KEY2 -TARE-donwn
+      case 0xf6://KEY2 -TARE-donwn
                   
                     // Peak_KeyLed();
                      Mot_KeyLed();
@@ -232,10 +227,10 @@ void KEY_Function(uint8_t keydata)
 							 	      
                break;
 
-                 case 0xf7://KEY4-SET/CAL-->Enter
+      case 0xf7://KEY4-SET/CAL-->Enter
                       CH2_KeyLed();
 					  
-                     if(run_t.EnterKey_flag ==1){
+                    // if(run_t.EnterKey_flag ==1){
                      if(key_t.keyset !=key_t.currkeyset){
                         
                           key_t.keyset = key_t.currkeyset;
@@ -246,21 +241,22 @@ void KEY_Function(uint8_t keydata)
                         else{
                               
                              CAL_KEY4_ENTER_Fun() ;
+                             printf("CAL KEY4 ENTER Fun()\n");
                               
                         }
                        CH4_KeyLed();
                           
                      
                  
-                    
+                  } 
                      
                  key_t.keyswitch++;
                  key_t.keytrae++;
                  key_t.keyzero++; 
-                  }
+                  
               
 								      
-               break;
+      break;
                
              
                default:     
@@ -272,7 +268,7 @@ void KEY_Function(uint8_t keydata)
                break;
 
                
-            }
+            
 		}
 
 

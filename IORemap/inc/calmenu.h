@@ -12,7 +12,9 @@ typedef struct _CALI{
     uint8_t CaliMenu_Sub_Item;
     uint8_t CaliSub_Menu_02_Title;
     uint8_t CaliSub_Menu_03_Title;
-
+    uint8_t runCmd_flag;
+    uint8_t CAL1_Sub_Id;
+    uint8_t CAL1_Id;
 
     uint8_t CaliMenu_01_Id;
     uint8_t CaliMenu_02_Id;
@@ -74,6 +76,11 @@ extern int8_t caliSun_02_Top  ;
 
 extern int8_t caliSubMenu_03_Top ;
 
+extern int8_t ACAL1_00[1];
+extern int8_t ACAL1_01[5];
+extern int8_t ACAL1_02[5];
+extern int8_t ACAL1_03[5];
+
 
 extern int8_t ACAL301[3];
 extern int8_t ACAL302[5];
@@ -99,7 +106,7 @@ uint8_t CaliMain_stackTop(void);
 
 int8_t Push_stackCaliMain_02(int8_t maxize);
 int8_t Pop_stackCaliMain_02(int8_t maxize);
-int8_t CaliSub_02_stackTop(void);
+int8_t CaliSub_02_stackTop(int8_t maxize);
 
 void KEY4_InputCalibration_Mode(void);
  void CALI_KEY3_SWITCH_Fun(void );
@@ -108,8 +115,8 @@ void CALI_KEY2_DOWN_Fun(void );
 void CAL_KEY4_ENTER_Fun(void);
 
 void CALI_MENU_01_DIS(uint8_t mu);
-void CALI_MENU_SUB_02_DIS(uint8_t mu);
+void CALI_MENU_SUB_02_DIS(void);
  void CALI_MENU_SUB_03_DIS(uint8_t mu); //speical numbers "0000 000 1000"
- 
+void Calibration_RunDisCmd(void);
 
 #endif 

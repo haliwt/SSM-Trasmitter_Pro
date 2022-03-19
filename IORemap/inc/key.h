@@ -14,6 +14,7 @@ typedef struct _KEY_{
 	   uint8_t keyTimes_1s;
 	   uint8_t keyPressedTimes;
 	   uint8_t keyRunTimes;
+	   uint8_t caliKeyFun;
 	   
 	   uint8_t keyGetLong_Numbers;
 	   uint8_t RunCmd_flag; 
@@ -40,6 +41,7 @@ typedef struct _KEY_{
 	   uint8_t  f7keyReturn_flag;
 	   uint8_t	f8keyReturn_flag;
 	   uint8_t	f9keyReturn_flag;
+
 	   uint32_t keyPressedLongTimes;
 	  
 }KEY;
