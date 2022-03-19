@@ -119,7 +119,7 @@ void DMA_IRQ_HANDLER(void)
  */
 void TIM1_UP_IRQHandler(void)
 {
-    static uint32_t i;
+    static uint32_t i,j,z,n;
     
     if (TIM_GetIntStatus(TIM1, TIM_INT_UPDATE) != RESET)
     {
@@ -127,24 +127,46 @@ void TIM1_UP_IRQHandler(void)
 
         /* Pin PC.06 toggling */
        // GPIO_WriteBit(GPIOB, GPIO_PIN_9, (Bit_OperateType)(1 - GPIO_ReadOutputDataBit(GPIOB, GPIO_PIN_9)));
-		
+		j++;
+		if(key_t.keyTimes_1s==1){
+		   if(j>199){
+				j=0;
+				z++;
+		       if(z==5){
+			   	 z=0;
+				 key_t.keyTimes_ms++;
+			     printf("timers_1s %d\n",key_t.keyTimes_ms);
+				   if(key_t.keyPressedLongTimes <30){
+					 run_t.timerOver_flag =3;
+                     printf("timerOver_flag = 1sssssssssssss\n");
+                     run_t.dispCmd=1;
+				     key_t.RunCmd_flag= 1;
+					  key_t.keyadjust_flag =3;
+
+				   }
+				 
+		       	} 
+
+		  }
+		}
+
 		if(key_t.keyTimes ==1) {
             i++;
-            if(i>499){ //500ms
+            if(i>299){//if(i>499){ //500ms
                 i=0;
                 key_t.keyPressedTimes++;
 				
-		        if(key_t.keyPressedLongTimes > 63)
+		        if(key_t.keyPressedLongTimes >30) //54)//63)
 		        {
 		        	  printf("adjust is long key times!!!!!!!!!!!!!!!! \n");
 					 // key_t.keyPressedLongTimes=0;
-					  key_t.RunCmd_flag = 2;
+					  key_t.RunCmd_flag = 1;
 					  run_t.dispCmd=1;
 					  key_t.keyadjust_flag =2;
 					  run_t.timerOver_flag =2;
 
 				}
-				else if(key_t.keyPressedLongTimes > 20 && key_t.keyPressedLongTimes <22){
+				if(key_t.keyPressedLongTimes >15  && key_t.keyPressedLongTimes <17){
 
 					 printf("adjust is shot key times !!!!!!!!!!!!!!! \n");
 					 run_t.dispCmd=1;
@@ -157,7 +179,10 @@ void TIM1_UP_IRQHandler(void)
                 if(run_t.timerOver_flag !=2 &&  run_t.timerOver_flag !=1){
                      run_t.timerOver_flag =3;
                      printf("timerOver_flag = 3$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
-                     run_t.dispCmd=1;
+					
+					 key_t.keyadjust_flag =3;
+
+					 run_t.dispCmd=1;
 				     key_t.RunCmd_flag= 1;
                 }
 				

@@ -15,6 +15,10 @@ typedef struct _CALI{
     uint8_t runCmd_flag;
     uint8_t CAL1_Sub_Id;
     uint8_t CAL1_Id;
+    uint8_t cali_CAL1_sequence;
+    uint8_t cali_CAL2_sequence;
+    uint8_t cali_CAL3_sequence;
+    uint8_t cali_CAL1_sequence_flag;
 
     uint8_t CaliMenu_01_Id;
     uint8_t CaliMenu_02_Id;
@@ -119,7 +123,9 @@ void CALI_MENU_01_DIS(uint8_t mu);
 void CALI_MENU_SUB_02_DIS(void);
  void CALI_MENU_SUB_03_DIS(uint8_t mu); //speical numbers "0000 000 1000"
 void Calibration_RunDisCmd(void);
-void Calibration_TheSecondRunDisCmd(void );
-void Calibration_TheThirdRunDisCmd(void );
+void Calibration_TheSecondRunDis_Cmd(void );
+void Calibration_TheThirdRunDis_Cmd(void );
+
+void  Calibration_TheFourthRunDis_Cmd(void);
 
 #endif 

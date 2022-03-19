@@ -73,20 +73,20 @@ int main(void)
 		          if(keydata == 0xf7 && run_t.EnterKey_flag ==0){
 
 		          scanvalue = Scan_EnterKey(keydata);
-		   		  printf(" enterKey = %d \n", scanvalue);
-				  
-			       key_t.keyTimes=1;
-				   key_t.keyPressedLongTimes++ ;
+				  key_t.getEnterValue = scanvalue;
+				  key_t.keyTimes =1;
+				  key_t.keyTimes_1s=1;
+
+				  key_t.keyPressedLongTimes++;
+		   	
 				 
-				   
-                    
-					if(key_t.keyPressedLongTimes > 10000 ){
+				   if(key_t.keyPressedLongTimes > 48 ){
 					       run_t.dispCmd=1;
 						 
-					   
-					 } 
-
-				    printf("  keylong1  = %d \n",   key_t.keyPressedLongTimes );
+					 }
+					
+					printf("key_t.getEnterValue = %d \n", key_t.getEnterValue );
+				    printf("keyPressedTimes  = %d \n",   key_t.keyPressedLongTimes );
 			   }
 				   
 		    }
@@ -99,9 +99,10 @@ int main(void)
 					 run_t.Fx_Menu_Function=0;
 					  key_t.keyPressedTimes=0;
 					  key_t.keyTimes=0;
-				      key_t.keyPressedLongTimes++ ;
+				      key_t.keyPressedLongTimes=0 ;
 					   run_t.EnterKey_flag=0; //
 					  key_t.caliKeyFun=0;
+					   key_t.keyadjust_flag =0;
 			}
 
 			if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
@@ -117,6 +118,11 @@ int main(void)
 				    run_t.keySetValue=0;
 					cali_t.keyEnter_flag=0;
 					 key_t.keyPressedLongTimes =0 ;//edit.2022.03.14
+					  key_t.keyTimes=0;
+					  key_t.keyTimes_1s=0;
+					  key_t.keyTimes_ms=0;
+					  run_t.EnterKey_flag =0;
+					   key_t.keyPressedLongTimes=0;
 					
 
 			}
@@ -126,43 +132,43 @@ int main(void)
 
 			 if(run_t.dispCmd ==1){
 
-				
-               if(run_t.EnterKey_flag ==0){
-			   if(key_t.keyadjust_flag ==2){
-						
-						KEY4_InputCalibration_Mode();
-						cali_t.CaliControl_key =1;
-						key_t.keyPressedLongTimes =0;
-				run_t.EnterKey_flag =1;
-						key_t.keyTimes=0;
-				        key_t.keyPressedLongTimes=0;
-
-									
-			   } 
-			   else if(key_t.keyadjust_flag ==1  ){
-                          key_t.RunCmd_flag=1;
-						    key_t.keyTimes=0;
-				  			key_t.keyPressedLongTimes=0;
-						
-							run_t.EnterKey_flag =1;
-							KEY4_SET_ENTER_Fun();
-                            key_t.keyPressedLongTimes =0;
-					
-
-			   }
-			   else{
-					 if(run_t.timerOver_flag ==3 || key_t.keyPressedLongTimes !=0) 	{
-						 	run_t.timerOver_flag=0;
-							key_t.keyTimes=0;
-				             key_t.keyPressedLongTimes=0;
-							run_t.EnterKey_flag =1;
-							KEY4_SET_ENTER_Fun();
-                           
-					
-						 }
+				key_t.keyTimes_1s=0;
+              if(run_t.EnterKey_flag ==0){
+				   if(key_t.keyadjust_flag ==2){
 							
+							KEY4_InputCalibration_Mode();
+							cali_t.CaliControl_key =1;
+							key_t.keyPressedLongTimes =0;
+					run_t.EnterKey_flag =1;
+							key_t.keyTimes=0;
+					        key_t.keyPressedLongTimes=0;
 
-			   }
+										
+				   } 
+				   else if(key_t.keyadjust_flag ==1  ){
+	                          key_t.RunCmd_flag=1;
+							    key_t.keyTimes=0;
+					  			key_t.keyPressedLongTimes=0;
+							
+								run_t.EnterKey_flag =1;
+								KEY4_SET_ENTER_Fun();
+	                            key_t.keyPressedLongTimes =0;
+						
+
+				   }
+				   else{
+						 if(run_t.timerOver_flag ==3 || key_t.keyPressedLongTimes !=0) 	{
+							 	run_t.timerOver_flag=0;
+								key_t.keyTimes=0;
+					             key_t.keyPressedLongTimes=0;
+								run_t.EnterKey_flag =1;
+								KEY4_SET_ENTER_Fun();
+	                           
+						
+							 }
+								
+
+				   }
 			}
 			if(run_t.keySetValue == 1){
 					run_t.dispCmd=0;

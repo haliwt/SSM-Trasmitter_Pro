@@ -17,7 +17,7 @@ void RunCommand(void)
 
         
          case TheFirst_Menu:
-              
+                  key_t.keyTimes=0;
                  MainMenu(menu_t.mainTop);
          break;
 
@@ -29,6 +29,7 @@ void RunCommand(void)
                  break;
                
                  case 1://F1-01
+                      key_t.keyTimes=0;
                      menu_t.F1_Submenu_Check_flag =0x01;
                      F1_DIS();
                     F1SubMenu(menu_t.F1_SubMenuTop); //"Fx - 01"
@@ -158,26 +159,26 @@ void RunCalibration_Command(void)
           
            case caliTheFirst_Menu: //Calibration Function //CAL1 ,CAL2,CAL3 ,CAL5
          
-                  CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
+			 key_t.keyTimes=0;
+	         CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
                   cali_t.keyEnter_flag =0;
                   //printf("Cali_theFirstMenu = %d\n",cali_t.CaliMenu_Item);
             break;
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
-                   Calibration_TheSecondRunDisCmd();
+                   Calibration_TheSecondRunDis_Cmd();
                   printf("Cali_runCmd_theSencodMenu = %d\n",cali_t.CAL1_Id);
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
                     
-                   Calibration_TheThirdRunDisCmd();
+                   Calibration_TheThirdRunDis_Cmd();
                     printf("RunThethird_run \n");
                     
             break;
 
              case caliTheFourth_Menu: //Calibration Function //0000,1.230,0000
-                    
-                  
+                 
             break;
 
 

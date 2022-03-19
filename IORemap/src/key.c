@@ -191,7 +191,7 @@ void KEY_Function(uint8_t keydata)
                    
       case 0xf6://KEY2 -TARE-donwn
                   
-                    // Peak_KeyLed();
+                   
                      Mot_KeyLed();
                      if(key_t.currkeytrae != key_t.keytrae){
                            key_t.currkeytrae = key_t.keytrae;
@@ -209,9 +209,9 @@ void KEY_Function(uint8_t keydata)
 
                case 0xf5: //KEY3 -SWITCH   <-
                
-                    // CH1_KeyLed();
+                
                      CH3_KeyLed();
-                     key_t.keyTimes=1;
+                    
                      if(key_t.currkeyswitch !=key_t.keyswitch){
                             key_t.currkeyswitch = key_t.keyswitch;
                              if(cali_t.CaliControl_key==0)
@@ -230,8 +230,7 @@ void KEY_Function(uint8_t keydata)
       case 0xf7://KEY4-SET/CAL-->Enter
                       CH2_KeyLed();
 					  
-                    // if(run_t.EnterKey_flag ==1){
-                     if(key_t.keyset !=key_t.currkeyset){
+               		if(key_t.keyset !=key_t.currkeyset){
                         
                           key_t.keyset = key_t.currkeyset;
                         if(cali_t.CaliControl_key == 0){
@@ -260,7 +259,7 @@ void KEY_Function(uint8_t keydata)
                
              
                default:     
-			 key_t.keyset++;
+			 		key_t.keyset++;
                     key_t.keyswitch++;
                     key_t.keytrae++;
                     key_t.keyzero++; 

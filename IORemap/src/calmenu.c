@@ -692,10 +692,12 @@ void KEY4_InputCalibration_Mode(void)
  ***************************************************************/
 void CAL_KEY4_ENTER_Fun(void)
 {
+    static uint8_t adjkey;
     if( key_t.caliKeyFun !=1){
        return ;
     }
     cali_t.keyEnter_flag ++; 
+    if(cali_t.keyEnter_flag >6)cali_t.keyEnter_flag=0;
     printf("cali enterKey = %d \n", cali_t.keyEnter_flag);
      switch(cali_t.keyEnter_flag){
 
@@ -714,11 +716,15 @@ void CAL_KEY4_ENTER_Fun(void)
             break;
 
             case CAL2:
+            cali_t.cali_CAL1_sequence=0;
+            cali_t.cali_CAL2_sequence=1;
                 cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
               printf("CAL2_1enterKey = %d \n",  cali_t.CaliSub_02_02_Item);
             break;
 
             case CAL3:
+            cali_t.cali_CAL1_sequence=0;
+            cali_t.cali_CAL3_sequence=1;
                 cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(3);
             break;
 
@@ -726,52 +732,98 @@ void CAL_KEY4_ENTER_Fun(void)
         }
      break;
 
-     case 2:// opertaion input number EnterKey
+     case 2:// the second step -> opertaion input number EnterKey
        mainitem_t.task_MainMenu = caliTheThird_Menu; 
        cali_t.runKeyMenu=mainitem_t.task_MainMenu;
-        switch( cali_t.CaliMenu_Item ){
+        switch( cali_t.CaliMenu_Item){
 
             case CAL1:
+            
               cali_t.CaliSub_02_01_Item=CaliSub_CAL1_stackTop(4);
               printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
             break;
 
             case CAL2:
+                  cali_t.cali_CAL2_sequence=1;
                   cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
             break;
 
             case CAL3:
+             cali_t.cali_CAL3_sequence=1;
               cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(3);
             break;
         }
       break;
 
-      case 3://
-      
-           switch( cali_t.CaliMenu_Item ){
+      case 3://the third step
+            if(cali_t.cali_CAL1_sequence!=1){
+               mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+               cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+               cali_t.keyEnter_flag= 0;
+            
+            }
 
-            case CAL1:
-                
+           switch(cali_t.cali_CAL1_sequence==1){
+           
+             case 1:
+                 cali_t.cali_CAL1_sequence_flag++;
+                if( cali_t.cali_CAL1_sequence_flag >3) cali_t.cali_CAL1_sequence_flag=0;
+                mainitem_t.task_MainMenu = caliTheThird_Menu; 
+                cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                switch(cali_t.cali_CAL1_sequence_flag ){
 
-                cali_t.CaliSub_02_01_Item=CaliSub_CAL1_stackTop(4);
+                  case 0:
+                        CAL1_Top =0;
+                  break;
+                  
+                  case 1:
+                     //cali_t.CaliSub_02_01_Item = 1;
+                     CAL1_Top =1;
+                  break;
 
-            break;
+                  case 2:
+                      // cali_t.CaliSub_02_01_Item = 2;
+                      CAL1_Top =2;
+                  break;
 
-            case CAL2:
-                 cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
-            break;
+                  case 3:
+                    // cali_t.CaliSub_02_01_Item = 3;
+                     CAL1_Top=3;
+                     cali_t.cali_CAL1_sequence_flag =0;
 
-            case CAL3:
-                cali_t.CaliSub_02_03_Item= CaliSub_CAL3_stackTop(3);
-            break;
+                    if(adjkey==1){
+                          adjkey =0;
+                         cali_t.keyEnter_flag= 0;
+
+                    }
+              break;
+            
+            } 
+             break;                
+            
         }
+        
+
+     
 
 
+    
       break;
+         
 
       case 4:
-         cali_t.keyEnter_flag =0;
+         cali_t.keyEnter_flag =3;
+      break;
 
+      case 5:
+          cali_t.keyEnter_flag =3;
+
+         
+      break;
+
+      case 6:
+          cali_t.keyEnter_flag =3;
+          adjkey =1;
       break;
         
     }
@@ -799,17 +851,18 @@ void CAL_KEY4_ENTER_Fun(void)
     
           case CAL1:
                   
-                  cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_CAL1(4);
+              cali_t.CaliSub_02_01_Item  =  Push_stackCaliMain_CAL1(4);
                  
-                
-              break;
+          break;
 
           case CAL2:
+                  cali_t.cali_CAL1_sequence=0;
                   cali_t.CaliSub_02_02_Item  =  Push_stackCaliMain_CAL2(5);
                  
           break;
 
           case CAL3:
+              cali_t.cali_CAL1_sequence=0;
               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_CAL3(3);
              
 
@@ -831,14 +884,17 @@ void CAL_KEY4_ENTER_Fun(void)
                   break;
 
                   case 1:
+                      cali_t.cali_CAL1_sequence++;
                       Number_Digital_5bit_AddSelect(ACAL1_01);
                   break;
 
                   case 2:
+                     cali_t.cali_CAL1_sequence++;
                       Number_Digital_5bitPoint_AddSelect(ACAL1_02);
                   break;
 
                   case 3:
+                      cali_t.cali_CAL1_sequence++;
                        Number_Digital_5bit_AddSelect(ACAL1_03);
                   break;
               }       
@@ -871,168 +927,7 @@ void CAL_KEY4_ENTER_Fun(void)
     
 }
 
-#if 0
-     case caliTheThird_Menu:
-         
-          switch(cali_t.CaliMenu_Item){
-                case CAL1:
 
-                  switch(cali_t.CaliSub_Menu_03_Title){
-
-                     case 0:
-                       printf("upkey_03_cal_0 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                      Number_Digital_3bit_PointerAddSelect(ACAL301);
-                        cali_t.unit =ACAL301[0];
-                        cali_t.decade = ACAL301[1];
-                        cali_t.hundred = ACAL301[2];
-                        
-                break;
-
-                case 1: //up+
-                  printf("upkey_03_cal_1 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                    caliNumber_Digital_5bit_AddSelect(ACAL302);
-                        cali_t.unit =ACAL302[0];
-                        cali_t.decade = ACAL302[1];
-                        cali_t.hundred = ACAL302[2];
-                        cali_t.onethousand=ACAL302[3];
-                        cali_t.tenthousand =ACAL302[4];
-
-                        break;
-
-                case 2:
-                  printf("upkey_03_cal_2 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                    Number_Digital_3bit_PointerAddSelect(ACAL303);
-                    cali_t.unit =ACAL303[0];
-                        cali_t.decade = ACAL303[1];
-                        cali_t.hundred = ACAL303[2];
-                    
-
-                break;
-
-                case 3:
-                          printf("upkey_03_cal_3 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                        Number_Digital_4bit_AddSelect(ACAL304);
-                        cali_t.unit =ACAL304[0];
-                        cali_t.decade = ACAL304[1];
-                        cali_t.hundred = ACAL304[2];
-                        cali_t.onethousand= ACAL304[3];
-                        
-
-                break;
-
-
-
-
-                  }
-            break;
-           //CAL2 -------------------------------
-           case CAL2:
-           
-            switch(cali_t.CaliSub_Menu_03_Title){
-
-                     case 0: //dC-u
-                       printf("upkey_03_cal_0 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                      Number_Digital_3bit_PointerAddSelect(ACAL30201);
-                        cali_t.unit =ACAL30201[0];
-                        cali_t.decade = ACAL30201[1];
-                        cali_t.hundred = ACAL30201[2];
-                        
-                break;
-
-                case 1: //up+ //CAP
-                  printf("upkey_03_cal_1 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                    Number_Digital_4bit_AddSelect(ACAL30202);
-                        cali_t.unit =ACAL30202[0];
-                        cali_t.decade = ACAL30202[1];
-                        cali_t.hundred = ACAL30202[2];
-                        cali_t.onethousand=ACAL30202[3];
-                      
-
-                        break;
-
-                case 2: //2Ero
-                  printf("upkey_03_cal_2 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                     caliNumber_Digital_5bit_AddSelect(ACAL30203);
-                    cali_t.unit =ACAL30203[0];
-                        cali_t.decade = ACAL30203[1];
-                        cali_t.hundred = ACAL30203[2];
-                         cali_t.onethousand = ACAL30203[3];
-                           cali_t.tenthousand = ACAL30203[4];
-                    
-
-                break;
-
-                case 3:
-                
-                          printf("upkey_03_cal_3 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                        caliNumber_Digital_5bit_AddSelect(ACAL30204);
-                        cali_t.unit =ACAL30204[0];
-                        cali_t.decade = ACAL30204[1];
-                        cali_t.hundred = ACAL30204[2];
-                        cali_t.onethousand= ACAL30204[3];
-                         cali_t.tenthousand= ACAL30204[4];
-
-                break;
-                case 4:
-                          printf("upkey_03_cal_3 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                        Number_Digital_4bit_AddSelect(ACAL30205); //  Number_Digital_4bit_AddSelect(ACAL304);
-                        cali_t.unit =ACAL30205[0];
-                        cali_t.decade = ACAL30205[1];
-                        cali_t.hundred = ACAL30205[2];
-                        cali_t.onethousand= ACAL30205[3];
-                        
-
-                break;
-           
-
-		 }
-        break;
-        
-        
-        //CAL3------------------------------------------------------------
-        case CAL3:
-            switch(cali_t.CaliSub_Menu_03_Title){
-                    case 0: //dC-u
-                       printf("upkey_03_cal_0 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                     Number_Digital_2bit_AddSelect(ACAL30301);
-                        cali_t.unit =ACAL30301[0];
-                        cali_t.decade = ACAL30301[1];
-                      
-                        
-                break;
-
-                case 1: //up+ //CAP
-                  printf("upkey_03_cal_2 = %d\n" ,cali_t.CaliSub_Menu_03_Title);
-                    caliNumber_Digital_5bit_AddSelect(ACAL30302);
-                    cali_t.unit =ACAL30302[0];
-                        cali_t.decade = ACAL30302[1];
-                        cali_t.hundred = ACAL30302[2];
-                         cali_t.onethousand= ACAL30302[3];
-                           cali_t.tenthousand = ACAL30302[4];
-                    
-
-                        break;
-
-                case 2: //2Ero
-                      Number_Digital_3bit_PointerAddSelect(ACAL30303);
-                        cali_t.unit =ACAL30303[0];
-                        cali_t.decade = ACAL30303[1];
-                        cali_t.hundred = ACAL30303[2];
-                        
-
-                break;
-                
-                case 3:
-                    Number_Digital_0bit_(0);
-                       
-                break;
-            }
-        
-        break;
-        
-     
-      }
-  #endif 
 
 /***************************************************************************
 *
@@ -1080,10 +975,10 @@ void CALI_KEY2_DOWN_Fun(void)
         }
       break;
 
-      case 2: //display number the second enter key by pressed
-           switch(cali_t.CaliMenu_Item){
+     case caliTheThird_Menu:
+          switch(cali_t.CaliMenu_Item){
             case CAL1:
-                switch(cali_t.CAL1_Id){
+                switch( cali_t.CaliSub_02_01_Item){
 
                   case 0:
                         ACAL1_00[0] --;
@@ -1102,10 +997,7 @@ void CALI_KEY2_DOWN_Fun(void)
                   case 3:
                        Number_Digital_5bit_DecSelect(ACAL1_03);
                   break;
-
-
-
-                }       
+              }       
 
             break;
 
@@ -1319,6 +1211,7 @@ void CALI_KEY2_DOWN_Fun(void)
          key_t.keyGetLong_Numbers=0;
         cali_t.keyEnter_flag =0; //
          run_t.EnterKey_flag =0;
+		 key_t.keyadjust_flag =0;
         
        
           printf("key3_switch_dispCmd=0= %d\n", run_t.keySetValue);
@@ -1557,7 +1450,7 @@ static void Number_Digital_0bit_(uint8_t unit)
 }
 
 
- void Calibration_TheSecondRunDisCmd(void )
+ void Calibration_TheSecondRunDis_Cmd(void )
 {
  
 
@@ -1565,7 +1458,7 @@ static void Number_Digital_0bit_(uint8_t unit)
       
 }  
   
-void Calibration_TheThirdRunDisCmd(void)
+void Calibration_TheThirdRunDis_Cmd(void)
 {
 
     switch(cali_t.CaliMenu_Item){
@@ -1574,39 +1467,49 @@ void Calibration_TheThirdRunDisCmd(void)
         switch(cali_t.CaliSub_02_01_Item){
 
                   case 0: //dCu numbers display
+                    cali_t.cali_CAL1_sequence =1;
                     menu_t.DisplaySmgBit_Select_Numbers=0;
+                    cali_t.CAL1_Id = 0;
                      Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
                      printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
                   break;
                   
                   case 1: //CAP number display
+                     cali_t.CAL1_Id =1;
+                     cali_t.cali_CAL1_sequence =2;
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                       Number_5bit_DIS(ACAL1_01);
                   break;
 
                   case 2://2Ero number display 
+                  cali_t.CAL1_Id =2;
+                    cali_t.cali_CAL1_sequence =3;
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                       Number_5bit_Char_DIS(ACAL1_02);
                   break;
 
                   case 3: //SPARn
+                      cali_t.CAL1_Id =3;
+                      cali_t.cali_CAL1_sequence =4;
                         menu_t.DisplaySmgBit_Select_Numbers=5;
                           Number_5bit_DIS(ACAL1_03);
                   break;
              
       break;
 
-   
-
-        
       }
-
-
   break;
 
 }
 }
 
+void Calibration_TheFourthRunDis_Cmd(void)
+{
+
+
+
+
+}
  
 
 void Cali_CAL1_ducNumberDis(int8_t cal1)
