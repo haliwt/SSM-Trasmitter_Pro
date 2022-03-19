@@ -609,6 +609,7 @@ static void KEY3_SWITCH_LEFT_Fun(void)
            key_t.keyGetLong_Numbers=0;
            menu_t.menuFirst=0;
            run_t.EnterKey_flag=0;
+		   key_t.keyTimes=0;
            printf("key3_switch_TheFirst_Menu\n");
            return ;
      }
@@ -631,6 +632,18 @@ static void KEY3_SWITCH_LEFT_Fun(void)
           printf("key3_switch_TheSecond_Menu\n");
           return ;
       }
+
+	  if(mainitem_t.task_MainMenu==TheThird_Menu && menu_t.DisplaySmgBit_Select_Numbers==0){
+
+	        mainitem_t.task_MainMenu=TheSecond_Menu;
+
+	 		 menu_t.FxMainMenu_key =0xB0;
+
+			
+
+
+
+	  }
 
       //2BIT
       

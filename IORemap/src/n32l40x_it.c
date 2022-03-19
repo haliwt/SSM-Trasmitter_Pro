@@ -166,7 +166,7 @@ void TIM1_UP_IRQHandler(void)
 					  run_t.timerOver_flag =2;
 
 				}
-				if(key_t.keyPressedLongTimes >25  && key_t.keyPressedLongTimes <27){
+				if(key_t.keyPressedLongTimes >29  && key_t.keyPressedLongTimes <30){
 
 					 printf("adjust is shot key times !!!!!!!!!!!!!!! \n");
 					 run_t.dispCmd=1;
@@ -176,7 +176,7 @@ void TIM1_UP_IRQHandler(void)
 					 run_t.timerOver_flag =1;
 					 
 				}
-                if(run_t.timerOver_flag !=2 &&  run_t.timerOver_flag !=1){
+                if(run_t.timerOver_flag !=2 &&  run_t.timerOver_flag !=1 && key_t.keyPressedLongTimes >20){
                      run_t.timerOver_flag =3;
                      printf("timerOver_flag = 3$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
 					

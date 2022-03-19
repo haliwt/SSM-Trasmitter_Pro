@@ -104,6 +104,7 @@ int main(void)
 					   run_t.EnterKey_flag=0; //
 					  key_t.caliKeyFun=0;
 					   key_t.keyadjust_flag =0;
+				      key_t.keyTimes_1s=0;
 			}
 
 			if(run_t.dispCmd ==0  &&  keydata == 0xff  && key_t.RunCmd_flag==0){
