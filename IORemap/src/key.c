@@ -639,10 +639,6 @@ static void KEY3_SWITCH_LEFT_Fun(void)
 
 	 		 menu_t.FxMainMenu_key =0xB0;
 
-			
-
-
-
 	  }
 
       //2BIT

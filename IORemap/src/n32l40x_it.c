@@ -129,14 +129,14 @@ void TIM1_UP_IRQHandler(void)
        // GPIO_WriteBit(GPIOB, GPIO_PIN_9, (Bit_OperateType)(1 - GPIO_ReadOutputDataBit(GPIOB, GPIO_PIN_9)));
 		j++;
 		if(key_t.keyTimes_1s==1){
-		   if(j>199){
+		   if(j>100){
 				j=0;
 				z++;
-		       if(z==5){
+		       if(z==4){
 			   	 z=0;
 				 key_t.keyTimes_ms++;
 			     printf("timers_1s %d\n",key_t.keyTimes_ms);
-				   if(key_t.keyPressedLongTimes <29){
+				   if(key_t.keyPressedLongTimes <15){
 					 run_t.timerOver_flag =3;
                      printf("timerOver_flag = 1sssssssssssss\n");
                      run_t.dispCmd=1;
