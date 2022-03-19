@@ -133,7 +133,7 @@ int main(void)
 			
 
 			 if(run_t.dispCmd ==1){
-
+				key_t.keyPressedLongTimes=0;
 				key_t.keyTimes_1s=0;
               if(run_t.EnterKey_flag ==0){
 				   if(key_t.keyadjust_flag ==2){

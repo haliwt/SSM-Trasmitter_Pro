@@ -132,7 +132,7 @@ void TIM1_UP_IRQHandler(void)
 		   if(j>100){
 				j=0;
 				z++;
-		       if(z==4){
+		       if(z==3){
 			   	 z=0;
 				 key_t.keyTimes_ms++;
 			     printf("timers_1s %d\n",key_t.keyTimes_ms);
