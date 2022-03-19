@@ -80,8 +80,9 @@ int main(void)
 				  key_t.keyPressedLongTimes++;
 		   	
 				 
-				   if(key_t.keyPressedLongTimes > 48 ){
+				   if(key_t.keyPressedLongTimes > 30 ){
 					       run_t.dispCmd=1;
+						   key_t.keyadjust_flag =2;
 						 
 					 }
 					
@@ -123,7 +124,7 @@ int main(void)
 					  key_t.keyTimes_ms=0;
 					  run_t.EnterKey_flag =0;
 					   key_t.keyPressedLongTimes=0;
-					
+                    
 
 			}
 
