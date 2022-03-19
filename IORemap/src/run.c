@@ -164,14 +164,20 @@ void RunCalibration_Command(void)
             break;
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
-                   Calibration_RunDisCmd();
+                   Calibration_TheSecondRunDisCmd();
+                  printf("Cali_runCmd_theSencodMenu = %d\n",cali_t.CAL1_Id);
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000
                     
-                    CALI_MENU_SUB_03_DIS( cali_t.CaliMenu_02_sub_Id);
-                    printf("RunThethird  = %d\n",  cali_t.CaliMenu_Item);
-                     //printf("RunThird_sub  = %d\n",  cali_t.CaliMenu_02_sub_Id);
+                   Calibration_TheThirdRunDisCmd();
+                    printf("RunThethird_run \n");
+                    
+            break;
+
+             case caliTheFourth_Menu: //Calibration Function //0000,1.230,0000
+                    
+                  
             break;
 
 

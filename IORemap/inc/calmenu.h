@@ -56,7 +56,8 @@ enum calimenu{
     caliTheSecond_Menu,
     caliTheThird_Menu,
     caliTheFourth_Menu,
-    caliTheFifth_Menu
+    caliTheFifth_Menu,
+    caliTheSixth_Menu
 };
 
 enum cali{
@@ -118,5 +119,7 @@ void CALI_MENU_01_DIS(uint8_t mu);
 void CALI_MENU_SUB_02_DIS(void);
  void CALI_MENU_SUB_03_DIS(uint8_t mu); //speical numbers "0000 000 1000"
 void Calibration_RunDisCmd(void);
+void Calibration_TheSecondRunDisCmd(void );
+void Calibration_TheThirdRunDisCmd(void );
 
 #endif 

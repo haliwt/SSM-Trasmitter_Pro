@@ -69,7 +69,7 @@ static void caliNumber_Digital_5bit_DecSelect(int8_t *ap);
 
 static void caliSubMenu_onePoint_5bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
  
- static void Cali_CAL1_ducNumberDis(uint8_t cal1);
+ static void Cali_CAL1_ducNumberDis(int8_t cal1);
 uint8_t cmu,*pA;
 
 static void Symbol_CAL1(void)
@@ -705,6 +705,7 @@ void CAL_KEY4_ENTER_Fun(void)
 
        case 1://CAL1->dC-u,-》display "dC-u"
         mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+        cali_t.runKeyMenu=mainitem_t.task_MainMenu;
         switch(cali_t.CaliMenu_Item){
 
             case CAL1:
@@ -726,52 +727,55 @@ void CAL_KEY4_ENTER_Fun(void)
      break;
 
      case 2:// opertaion input number EnterKey
-       mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+       mainitem_t.task_MainMenu = caliTheThird_Menu; 
        cali_t.runKeyMenu=mainitem_t.task_MainMenu;
-      switch( cali_t.CaliMenu_Item ){
+        switch( cali_t.CaliMenu_Item ){
 
             case CAL1:
-                  switch(cali_t.CaliSub_02_01_Item){
+              cali_t.CaliSub_02_01_Item=CaliSub_CAL1_stackTop(4);
+              printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+            break;
 
-                  case 0: //dCu
-                       cali_t.CAL1_Id =0;
-                  break;
+            case CAL2:
+                  cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
+            break;
 
-                  case 1: //dCu
-                       cali_t.CAL1_Id =1;
-                  break;
+            case CAL3:
+              cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(3);
+            break;
+        }
+      break;
 
-                   case 2: //dCu
-                       cali_t.CAL1_Id =2;
-                  break;
+      case 3://
+      
+           switch( cali_t.CaliMenu_Item ){
 
-                  case 3: //dCu
-                       cali_t.CAL1_Id =3;
-                  break;
+            case CAL1:
+                
 
-
-
-                }       
+                cali_t.CaliSub_02_01_Item=CaliSub_CAL1_stackTop(4);
 
             break;
 
             case CAL2:
-                 cali_t.CaliSub_02_02_Item =cali_t.runCmd_flag = CAL2;
+                 cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
             break;
 
             case CAL3:
-                cali_t.CaliSub_02_03_Item= cali_t.runCmd_flag = CAL3;
+                cali_t.CaliSub_02_03_Item= CaliSub_CAL3_stackTop(3);
             break;
-
-
         }
-        
-       
 
-     
-     break;
-      
+
+      break;
+
+      case 4:
+         cali_t.keyEnter_flag =0;
+
+      break;
+        
     }
+    cali_t.runKeyMenu= mainitem_t.task_MainMenu;
 }
 /*******************************************************************
 *
@@ -790,9 +794,7 @@ void CAL_KEY4_ENTER_Fun(void)
 
     case caliTheSecond_Menu:
          
-    switch(cali_t.keyEnter_flag){
-
-      case 1:
+   
           switch(cali_t.CaliMenu_Item){
     
           case CAL1:
@@ -816,10 +818,11 @@ void CAL_KEY4_ENTER_Fun(void)
         }
       break;
 
-      case 2: //display number the second enter key by pressed
-           switch(cali_t.CaliMenu_Item){
+    case caliTheThird_Menu:
+
+    switch(cali_t.CaliMenu_Item){
             case CAL1:
-                switch(cali_t.CAL1_Id){
+                switch( cali_t.CaliSub_02_01_Item){
 
                   case 0:
                         ACAL1_00[0] ++;
@@ -838,14 +841,19 @@ void CAL_KEY4_ENTER_Fun(void)
                   case 3:
                        Number_Digital_5bit_AddSelect(ACAL1_03);
                   break;
-
-
-
-                }       
+              }       
 
             break;
 
             case CAL2:
+             switch( cali_t.CaliSub_02_02_Item){
+
+               case 0:
+
+               break;
+
+
+             }
 
             break;
 
@@ -854,20 +862,16 @@ void CAL_KEY4_ENTER_Fun(void)
             break;
 
           }
-
-
       break;
 
-      case 3: //(Enter be pressed 3 times) Up +
-
-
-      break;
+     
     } 
             
         
-    break;
+    
+}
 
-
+#if 0
      case caliTheThird_Menu:
          
           switch(cali_t.CaliMenu_Item){
@@ -1028,8 +1032,8 @@ void CAL_KEY4_ENTER_Fun(void)
         
      
       }
-}
-}
+  #endif 
+
 /***************************************************************************
 *
 *Function KEY ---
@@ -1313,7 +1317,7 @@ void CALI_KEY2_DOWN_Fun(void)
          cali_t.CaliControl_key=0; //F1~F9 function and calibration funcont flag
          cali_t.Thefirst_InputKeyValue=0;
          key_t.keyGetLong_Numbers=0;
-        
+        cali_t.keyEnter_flag =0; //
          run_t.EnterKey_flag =0;
         
        
@@ -1553,30 +1557,28 @@ static void Number_Digital_0bit_(uint8_t unit)
 }
 
 
-void Calibration_RunDisCmd(void)
+ void Calibration_TheSecondRunDisCmd(void )
 {
  
- 
- switch(cali_t.keyEnter_flag){
- 
- case 1:
 
     CALI_MENU_SUB_02_DIS();
       
-    
-  break;
+}  
+  
+void Calibration_TheThirdRunDisCmd(void)
+{
 
-  case 2://
-    switch(cali_t.runCmd_flag){
+    switch(cali_t.CaliMenu_Item){
 
       case CAL1:
         switch(cali_t.CaliSub_02_01_Item){
 
                   case 0: //dCu numbers display
                     menu_t.DisplaySmgBit_Select_Numbers=0;
-                     Cali_CAL1_ducNumberDis((uint8_t)ACAL1_00);  
+                     Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
+                     printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
                   break;
-
+                  
                   case 1: //CAP number display
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                       Number_5bit_DIS(ACAL1_01);
@@ -1603,11 +1605,11 @@ void Calibration_RunDisCmd(void)
   break;
 
 }
-
 }
-}  
 
-void Cali_CAL1_ducNumberDis(uint8_t cal1)
+ 
+
+void Cali_CAL1_ducNumberDis(int8_t cal1)
  {
      
      switch(cal1){
