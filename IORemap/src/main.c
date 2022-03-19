@@ -73,7 +73,8 @@ int main(void)
 		          if(keydata == 0xf7 && run_t.EnterKey_flag ==0){
 
 		          scanvalue = Scan_EnterKey(keydata);
-				  key_t.getEnterValue = scanvalue;
+				  key_t.getEnterValue = 0;
+				  key_t.getEnter_Fx=0;
 				  key_t.keyTimes =1;
 				  key_t.keyTimes_1s=1;
 
@@ -86,7 +87,7 @@ int main(void)
 						 
 					 }
 					
-					printf("key_t.getEnterValue = %d \n", key_t.getEnterValue );
+					
 				    printf("keyPressedTimes  = %d \n",   key_t.keyPressedLongTimes );
 			   }
 				   
@@ -141,7 +142,7 @@ int main(void)
 							KEY4_InputCalibration_Mode();
 							cali_t.CaliControl_key =1;
 							key_t.keyPressedLongTimes =0;
-					run_t.EnterKey_flag =1;
+					        run_t.EnterKey_flag =1;
 							key_t.keyTimes=0;
 					        key_t.keyPressedLongTimes=0;
 

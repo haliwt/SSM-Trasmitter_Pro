@@ -673,16 +673,16 @@ int8_t CaliSub_CAL3_stackTop(int8_t maxize)
 void KEY4_InputCalibration_Mode(void)
 {
      if(cali_t.Thefirst_InputKeyValue==0){
-     cali_t.Thefirst_InputKeyValue++;
-     cali_t.CaliControl_key=1; 
-     mainitem_t.task_MainMenu = caliTheFirst_Menu ;
-     caliMainTop=-1;
-     cali_t.CaliMenu_Item = Push_stackCaliMain(3);
-     key_t.keyPressedLongTimes=1;
-     key_t.caliKeyFun =1;
-
-     printf("Cali_keyEnter_1 = %d\n",cali_t.CaliMenu_Item);
-	   printf("task_MainMenu_1 = %d\n", caliTheFirst_Menu);
+	     cali_t.Thefirst_InputKeyValue++;
+	     cali_t.CaliControl_key=1; 
+	     mainitem_t.task_MainMenu = caliTheFirst_Menu ;
+	     caliMainTop=-1;
+	     cali_t.CaliMenu_Item = Push_stackCaliMain(3);
+	     key_t.keyPressedLongTimes=1;
+	     key_t.caliKeyFun = 1;
+          mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+	     printf("Cali_keyEnter_1 = %d\n",cali_t.CaliMenu_Item);
+		   printf("task_MainMenu_1 = %d\n", caliTheFirst_Menu);
      }
 
 	 
@@ -693,10 +693,16 @@ void KEY4_InputCalibration_Mode(void)
 void CAL_KEY4_ENTER_Fun(void)
 {
     static uint8_t adjkey;
-    if( key_t.caliKeyFun !=1){
-       return ;
-    }
-    cali_t.keyEnter_flag ++; 
+
+	 if(cali_t.Thefirst_InputKeyValue==1){
+          key_t.getEnterValue > 7 ;
+		  cali_t.Thefirst_InputKeyValue++;
+		  SysTick_Delay_Ms(500);
+		 mainitem_t.task_MainMenu = caliTheFirst_Menu ;
+			 return ;
+	}
+	
+    cali_t.keyEnter_flag++;
     if(cali_t.keyEnter_flag >6)cali_t.keyEnter_flag=0;
     printf("cali enterKey = %d \n", cali_t.keyEnter_flag);
      switch(cali_t.keyEnter_flag){
@@ -706,6 +712,7 @@ void CAL_KEY4_ENTER_Fun(void)
        break;
 
        case 1://CAL1->dC-u,-》display "dC-u"
+       
         mainitem_t.task_MainMenu = caliTheSecond_Menu; 
         cali_t.runKeyMenu=mainitem_t.task_MainMenu;
         switch(cali_t.CaliMenu_Item){

@@ -136,7 +136,7 @@ void TIM1_UP_IRQHandler(void)
 			   	 z=0;
 				 key_t.keyTimes_ms++;
 			     printf("timers_1s %d\n",key_t.keyTimes_ms);
-				   if(key_t.keyPressedLongTimes <15){
+				   if(key_t.keyPressedLongTimes <10){
 					 run_t.timerOver_flag =3;
                      printf("timerOver_flag = 1sssssssssssss\n");
                      run_t.dispCmd=1;

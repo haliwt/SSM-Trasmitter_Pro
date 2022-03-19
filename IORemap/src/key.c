@@ -229,18 +229,29 @@ void KEY_Function(uint8_t keydata)
 
       case 0xf7://KEY4-SET/CAL-->Enter
                       CH2_KeyLed();
+
+	                key_t.getEnterValue++;
+	                printf("getEnterValue = %d \n",key_t.getEnterValue);
 					  
                		if(key_t.keyset !=key_t.currkeyset){
                         
                           key_t.keyset = key_t.currkeyset;
                         if(cali_t.CaliControl_key == 0){
 
-                            KEY4_SET_ENTER_Fun();      
+							key_t.getEnter_Fx++ ;
+						   printf("getEnterValue = %d \n",key_t.getEnter_Fx);
+
+							KEY4_SET_ENTER_Fun();  
+							
                         }
                         else{
                               
-                             CAL_KEY4_ENTER_Fun() ;
-                             printf("CAL KEY4 ENTER Fun()\n");
+							
+							 key_t.getEnterValue++;
+							printf("getEnterValue = %d \n",key_t.getEnterValue);
+
+							 CAL_KEY4_ENTER_Fun() ;
+                             
                               
                         }
                        CH4_KeyLed();
@@ -293,6 +304,14 @@ void KEY_Function(uint8_t keydata)
                                    
        }
        else{
+	   	  if(menu_t.menuFirst ==1){
+	   	     key_t.getEnter_Fx>3;
+			 menu_t.menuFirst++;
+		     SysTick_Delay_Ms(200);
+		     return ;
+
+	   	 }
+		 
          KEY_SubMenuFun_Enter();
 
        }

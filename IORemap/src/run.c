@@ -159,8 +159,8 @@ void RunCalibration_Command(void)
           
            case caliTheFirst_Menu: //Calibration Function //CAL1 ,CAL2,CAL3 ,CAL5
          
-			 key_t.keyTimes=0;
-	         CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
+			 
+	              CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
                   cali_t.keyEnter_flag =0;
                   //printf("Cali_theFirstMenu = %d\n",cali_t.CaliMenu_Item);
             break;
