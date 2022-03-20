@@ -16,7 +16,9 @@ int cone,ctwo,cthree,cfour,cfive;
 int8_t ACAL1_00[1];
 int8_t ACAL1_01[5];
 int8_t ACAL1_02[5];
+int8_t ACAL1_021[5];
 int8_t ACAL1_03[5];
+int8_t ACAL1_031[5];
 
 int8_t ACAL301[3];
 int8_t ACAL302[5];
@@ -26,6 +28,7 @@ int8_t ACAL305[5];
 
 int8_t ACAL30201[3];
 int8_t ACAL30202[4];
+
 int8_t ACAL30203[5];
 int8_t ACAL30204[5];
 int8_t ACAL30205[4];
@@ -767,6 +770,8 @@ void CAL_KEY4_ENTER_Fun(void)
         }
       break;
 
+    case 12:
+    case 11:
     case 10:
     case 9:
     case 8:
@@ -797,7 +802,7 @@ void CAL_KEY4_ENTER_Fun(void)
               }
               cali_t.CAL1_sequence_flag ++;
 
-             if( cali_t.CAL1_sequence_flag  >7){
+             if( cali_t.CAL1_sequence_flag  >9){
                 cali_t.CAL1_sequence_flag=-1;
                 cali_t.keyEnter_flag=1;
                 mainitem_t.task_MainMenu = caliTheFirst_Menu ; 
@@ -969,7 +974,12 @@ void CAL_KEY4_ENTER_Fun(void)
                       Number_Digital_5bitPoint_AddSelect(ACAL1_02);
                   break;
 
-                  case 6:
+                case 6:
+                    
+                      Number_Digital_5bitPoint_AddSelect(ACAL1_021);
+                  break;
+
+                  case 7:
                      mainitem_t.task_MainMenu=caliTheSecond_Menu;
                      cali_t.runKeyMenu=caliTheSecond_Menu;
                      CAL1_Top=3;
@@ -977,10 +987,16 @@ void CAL_KEY4_ENTER_Fun(void)
 
                   break;
 
-                  case 7:
+                  case 8:
                       
                       Number_Digital_5bit_AddSelect(ACAL1_03);
                   break;
+
+                 case 9:
+                      
+                      Number_Digital_5bit_AddSelect(ACAL1_031);
+                  break;
+
               }       
 
          break;
@@ -1081,28 +1097,74 @@ void CALI_KEY2_DOWN_Fun(void)
 
       break;
 
-      case caliTheFourth_Menu:
+      case caliTheFourth_Menu: //key Down --
        switch(cali_t.CaliMenu_Item){
 
          case CAL1:
                 switch(cali_t.CAL1_sequence_flag){
 
-                  case 0:
+                case 0:
+                        mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+                        cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                        cali_t.keyEnter_flag=0;
+                        CAL1_Top=0;
+                        printf("CAL1_Top = %d\n",CAL1_Top);
+
+                  break;
+
+
+                  case 1:
                         ACAL1_00[0] --;
                         if(ACAL1_00[0]==-1) ACAL1_00[0]=15;
                         printf("key down - = %d\n", ACAL1_00[0]);
+                  break;
+
+                   case 2:
+                      mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+                      cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                      cali_t.keyEnter_flag=0;
+                  
+                     CAL1_Top=1;
+                     printf("CAL1_Top = %d\n",CAL1_Top);
+
                   break;
 
                   case 3:
                       Number_Digital_5bit_DecSelect(ACAL1_01);
                   break;
 
+                  case 4:
+                     mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+                     cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                     cali_t.keyEnter_flag=0;
+                     CAL1_Top=2;
+
+                  break;
+
+
                   case 5:
                       Number_Digital_5bitPoint_DecSelect(ACAL1_02);
                   break;
 
+                   case 6:
+                    
+                      Number_Digital_5bitPoint_DecSelect(ACAL1_021);
+                  break;
+
                   case 7:
+                     mainitem_t.task_MainMenu=caliTheSecond_Menu;
+                     cali_t.runKeyMenu=caliTheSecond_Menu;
+                     CAL1_Top=3;
+                    printf("CAL1_Top = %d\n",CAL1_Top);
+
+                  break;
+
+                    case 8:
                        Number_Digital_5bit_DecSelect(ACAL1_03);
+                  break;
+
+                  case 9:
+                       Number_Digital_5bit_DecSelect(ACAL1_031);
                   break;
               }       
 
@@ -1492,17 +1554,34 @@ void Calibration_TheFourthRunDis_Cmd(void)
                       Number_5bit_Char_DIS(ACAL1_02);
                   break;
 
-                  case 6:
+                  case 6://2Ero number display 
+                    cali_t.CAL1_Id =2;
+                    cali_t.cali_CAL1_sequence =3;
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                    
+                      Number_5bit_Char_DIS(ACAL1_021);
+                  break;
+
+
+                  case 7://2Ero number 2 display
                         menu_t.DisplaySmgBit_Select_Numbers=0;
                         Symbol_SPAn();
                   break;
 
-                  case 7: //SPARn
+                  case 8: //SPARn
                       cali_t.CAL1_Id =3;
                       cali_t.cali_CAL1_sequence =4;
                         menu_t.DisplaySmgBit_Select_Numbers=5;
                         
                         Number_5bit_DIS(ACAL1_03);
+                  break;
+
+                   case 9: //SPARn number display 
+                      cali_t.CAL1_Id =3;
+                      cali_t.cali_CAL1_sequence =4;
+                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                        
+                        Number_5bit_DIS(ACAL1_031);
                   break;
              
      

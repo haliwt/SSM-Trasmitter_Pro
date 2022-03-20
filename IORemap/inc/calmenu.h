@@ -86,6 +86,9 @@ extern int8_t ACAL1_00[1];
 extern int8_t ACAL1_01[5];
 extern int8_t ACAL1_02[5];
 extern int8_t ACAL1_03[5];
+extern int8_t ACAL1_021[5];
+
+extern int8_t ACAL1_031[5];
 
 
 extern int8_t ACAL301[3];

@@ -6,8 +6,8 @@ static void F8SubMenu_03_01_Dis(uint8_t mu);
 static void F8SubMenu_03_02_Dis(uint8_t mu);
 static void F8SubMenu_03_03_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
 static void F8SubMenu_03_04_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
-static void F8SubMenu_03_05_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
-static void F8SubMenu_03_06_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
+//static void F8SubMenu_03_05_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
+//static void F8SubMenu_03_06_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
 static void F8SubMenu_03_07_Dis(uint8_t mu);
 static void F8SubMenu_03_08_Dis(uint8_t mu);
 
