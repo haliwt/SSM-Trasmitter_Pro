@@ -29,12 +29,7 @@ int8_t ACAL2_031[5];
 int8_t ACAL2_04[5];
 int8_t ACAL2_041[5];
 int8_t ACAL3_02[5];
-
-
-
-
-
-
+int8_t ACAL3_021[5];
 
 static void Symbol_CAL1(void);
 static void Symbol_CAL2(void);
@@ -695,7 +690,7 @@ void KEY4_InputCalibration_Mode(void)
  ***************************************************************/
 void CAL_KEY4_ENTER_Fun(void)
 {
-    static uint8_t currkey=0xff,currkey2=0xff;
+    static uint8_t currkey=0xff,currkey2=0xff,currkey3=0xff;
 
 	 if(cali_t.Thefirst_InputKeyValue==1){
           key_t.getEnterValue > 7 ;
@@ -737,12 +732,13 @@ void CAL_KEY4_ENTER_Fun(void)
             case CAL3:
           
                 cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(3);
+             printf("CAL3_1enterKey = %d \n", cali_t.CaliSub_02_03_Item);
             break;
 
 
         }
     }
-    else if(cali_t.keyEnter_flag ==2){
+    else if(cali_t.keyEnter_flag ==2){ //caliTheThird_Menu 
 
      //case 2:// the second step -> opertaion input number EnterKey
        mainitem_t.task_MainMenu = caliTheThird_Menu; 
@@ -761,8 +757,9 @@ void CAL_KEY4_ENTER_Fun(void)
             break;
 
             case CAL3:
-          
-              cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(3);
+               cali_t.keyEnter_flag=1;
+              cali_t.CaliSub_02_03_Item ++;
+              if(cali_t.CaliSub_02_03_Item >2)cali_t.CaliSub_02_03_Item=0;
             break;
         }
       
@@ -844,9 +841,35 @@ void CAL_KEY4_ENTER_Fun(void)
 
         //CAL3 MENU
         case CAL3:
+            if(currkey3 != cali_t.CAL3_Id){
+                   currkey3= cali_t.CAL3_Id;
+                   if(cali_t.CAL3_Id==0)
+                     cali_t.CAL3_sequence_flag = cali_t.CAL3_Id;
+                   else if(cali_t.CAL3_Id==1)
+                        cali_t.CAL3_sequence_flag = cali_t.CAL3_Id;
+                   else if(cali_t.CAL3_Id==2)
+                       cali_t.CAL3_sequence_flag = cali_t.CAL3_Id+2;
+                printf("CaliSub_02_03_Item = %d\n",cali_t.CaliSub_02_03_Item);
+              }
+              else{
+                cali_t.CAL2_sequence_flag++;
+              }
+
+            if(cali_t.CAL3_Id==2)cali_t.CAL2_sequence_flag++;
+              
+
+             if( cali_t.CAL2_sequence_flag >4){
+                cali_t.CAL2_sequence_flag=-1;
+                cali_t.keyEnter_flag=0;
+                mainitem_t.task_MainMenu = caliTheFirst_Menu ; 
+                cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                caliMainTop=-1;
+                cali_t.CaliMenu_Item = Push_stackCaliMain(3);
+              }
+            printf("CAL2_sequence_flag = %d\n",cali_t.CAL2_sequence_flag);
            
-              cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(3);
-            break;
+              
+        break;
 
 
       }
@@ -890,7 +913,7 @@ void CAL_KEY4_ENTER_Fun(void)
           case CAL3:
              
               cali_t.CaliSub_02_03_Item  =  Push_stackCaliMain_CAL3(3);
-             
+              printf("keyUp_CAL2_theSecond_Menu = %d\n", cali_t.CaliSub_02_03_Item );
 
           break;
 
@@ -956,9 +979,37 @@ void CAL_KEY4_ENTER_Fun(void)
              }
 
             break;
-
+         //CAL3 MENU ---theThird_Menu
             case CAL3:
+               switch(cali_t.CAL3_sequence_flag){
+                case 0:
+                       
+                break;
 
+                case 1:
+                        
+                break;
+
+                case 2:
+                 
+                break;
+
+                case 3:
+                      Number_Digital_5bit_AddSelect(ACAL3_02);
+                break;
+
+                case 4:
+                     Number_Digital_5bitPoint_AddSelect(ACAL3_021);
+                break;
+
+
+                case 5:
+                      
+                break;
+
+
+            }     
+            
             break;
 
           }
@@ -1128,8 +1179,17 @@ void CAL_KEY4_ENTER_Fun(void)
          break;
 
 
+         //CAL3 MENU
+        case CAL3:
+              
+
+
+
+        break;
+
+
     }
-    break;
+   
 
      
     } 
@@ -1237,6 +1297,21 @@ void CALI_KEY2_DOWN_Fun(void)
             break;
 
             case CAL3:
+                 switch( cali_t.CaliSub_02_03_Item){
+                case 0:
+                       
+                break;
+
+                case 1:
+                      
+                break;
+
+                case 2:
+                    
+                    Number_Digital_5bitPoint_DecSelect(ACAL3_02);
+                break;
+
+            }
 
             break;
 
@@ -1406,11 +1481,39 @@ void CALI_KEY2_DOWN_Fun(void)
 
             case CAL3:
 
+                switch(cali_t.CAL3_sequence_flag){
+                case 0:
+                       
+                break;
+
+                case 1:
+                        
+                break;
+
+                case 2:
+                 
+                break;
+
+                case 3:
+                      Number_Digital_5bit_DecSelect(ACAL3_02);
+                break;
+
+                case 4:
+                     Number_Digital_5bitPoint_DecSelect(ACAL3_021);
+                break;
+
+
+                case 5:
+                      
+                break;
+
+
+            }
             break;
 
         }
 
-      break;
+    
 
      
  }
@@ -1598,37 +1701,35 @@ void Calibration_TheThirdRunDis_Cmd(void)
       case CAL1:
         switch(cali_t.CaliSub_02_01_Item){
 
-                  case 0: //dCu numbers display
-                    menu_t.DisplaySmgBit_Select_Numbers=0;
-                    cali_t.CAL1_Id = 0;
-                    Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
-                    // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
-                  break;
-                  
-                  case 1: //CAP number display
-                     cali_t.CAL1_Id =1;
-              
-                     menu_t.DisplaySmgBit_Select_Numbers=5;
-                      Number_5bit_DIS(ACAL1_01);
-                  break;
+        case 0: //dCu numbers display
+        menu_t.DisplaySmgBit_Select_Numbers=0;
+        cali_t.CAL1_Id = 0;
+        Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
+        // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+        break;
 
-                  case 2://2Ero number display 
-                  cali_t.CAL1_Id =2;
-                
-                     menu_t.DisplaySmgBit_Select_Numbers=5;
-                      Number_5bit_Char_DIS(ACAL1_02);
-                  break;
+        case 1: //CAP number display
+        cali_t.CAL1_Id =1;
 
-                  case 3: //SPARn
-                      cali_t.CAL1_Id =3;
+        menu_t.DisplaySmgBit_Select_Numbers=5;
+        Number_5bit_DIS(ACAL1_01);
+        break;
+
+        case 2://2Ero number display 
+        cali_t.CAL1_Id =2;
+
+        menu_t.DisplaySmgBit_Select_Numbers=5;
+        Number_5bit_Char_DIS(ACAL1_02);
+        break;
+
+        case 3: //SPARn
+        cali_t.CAL1_Id =3;
+
+        menu_t.DisplaySmgBit_Select_Numbers=5;
+        Number_5bit_DIS(ACAL1_03);
+        break;
              
-                        menu_t.DisplaySmgBit_Select_Numbers=5;
-                          Number_5bit_DIS(ACAL1_03);
-                  break;
-             
-     
-
-      }
+    }
   break;
 
     //CAL2 MENU
@@ -1682,8 +1783,7 @@ void Calibration_TheThirdRunDis_Cmd(void)
                     menu_t.DisplaySmgBit_Select_Numbers=0;
                     cali_t.CAL3_Id = 0;
                     Symbol_CLS();
-                    //Cali_CAL1_ducNumberDis(ACAL3_00[0]);  
-                    // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+                   
                   break;
                   
                   case 1: //CAP number display
@@ -1697,7 +1797,7 @@ void Calibration_TheThirdRunDis_Cmd(void)
                   case 2://2Ero number display 
                      cali_t.CAL3_Id =2;
                 
-                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                      menu_t.DisplaySmgBit_Select_Numbers=5;
                       Number_5bit_Char_DIS(ACAL3_02);
                   break;
 
@@ -1909,11 +2009,28 @@ void Calibration_TheFourthRunDis_Cmd(void)
                  // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
                   break;
 
-                  case 2:
+                  case 2: //CnS
+                      menu_t.DisplaySmgBit_Select_Numbers=0;
+                     Symbol_C_nS();
+
+                  break;
+
+                  case 3:
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                      Number_5bit_Char_DIS(ACAL3_02);
+                  break;
 
-                    break;;
+                  case 4:
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                    Number_5bit_Char_DIS(ACAL3_021);
+                  break;
+
+                case 5:
+                     menu_t.DisplaySmgBit_Select_Numbers=0;
+                     Symbol_ContC();
+                break;
+
+
          }
 
 

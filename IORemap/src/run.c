@@ -107,13 +107,9 @@ void RunCommand(void)
                           F9SubMenu_03_DIS(menu_t.menu_F1Sub_03_xx_key);
                     break;
 
-                   
-
-              }
+        }
               
-             
-
-         break;
+        break;
          
          case TheFourth_Menu: //F3->F3-1->F3-1.1 -> ;F3-2 ->F3-2.1
               
