@@ -680,6 +680,7 @@ void KEY4_InputCalibration_Mode(void)
 	     cali_t.CaliMenu_Item = Push_stackCaliMain(3);
 	     key_t.keyPressedLongTimes=1;
 	     key_t.caliKeyFun = 1;
+         cali_t.runKeyMenu=mainitem_t.task_MainMenu;
 	     printf("Cali_keyEnter_1 = %d\n",cali_t.CaliMenu_Item);
 		   printf("task_MainMenu_1 = %d\n", caliTheFirst_Menu);
      }
@@ -788,14 +789,15 @@ void CAL_KEY4_ENTER_Fun(void)
                         cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+3;
                    else if(cali_t.CaliSub_02_01_Item==3)
                         cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+4;
-                   
+                  printf("cali_t.CaliSub_02_01_Item = %d\n",cali_t.CaliSub_02_01_Item);
               }
               cali_t.CAL1_sequence_flag ++;
               if( cali_t.CAL1_sequence_flag  >7){
                 cali_t.CAL1_sequence_flag=0;
                 cali_t.CaliSub_02_01_Item=0;
-                cali_t.keyEnter_flag=0;
-                mainitem_t.task_MainMenu = caliTheFirst_Menu ;
+                cali_t.keyEnter_flag=1;
+                mainitem_t.task_MainMenu = caliTheFirst_Menu ; 
+                cali_t.runKeyMenu=mainitem_t.task_MainMenu;
                 caliMainTop=-1;
                 cali_t.CaliMenu_Item = Push_stackCaliMain(3);
 
@@ -1036,16 +1038,53 @@ void CALI_KEY2_DOWN_Fun(void)
 
             break;
 
-          }
+        }
 
 
       break;
 
-     
-      
-  }
- }
+      case caliTheFourth_Menu:
+       switch(cali_t.CaliMenu_Item){
 
+         case CAL1:
+                switch(cali_t.CAL1_sequence_flag){
+
+                  case 0:
+                        ACAL1_00[0] --;
+                        if(ACAL1_00[0]==-1) ACAL1_00[0]=15;
+                        printf("key down - = %d\n", ACAL1_00[0]);
+                  break;
+
+                  case 3:
+                      Number_Digital_5bit_DecSelect(ACAL1_01);
+                  break;
+
+                  case 5:
+                      Number_Digital_5bitPoint_DecSelect(ACAL1_02);
+                  break;
+
+                  case 7:
+                       Number_Digital_5bit_DecSelect(ACAL1_03);
+                  break;
+              }       
+
+         break;
+
+            case CAL2:
+
+            break;
+
+            case CAL3:
+
+            break;
+
+        }
+
+      break;
+
+     
+ }
+}
  
 /**********************************************************************
  *
