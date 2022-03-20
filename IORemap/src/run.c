@@ -178,7 +178,8 @@ void RunCalibration_Command(void)
             break;
 
              case caliTheFourth_Menu: //Calibration Function //0000,1.230,0000
-                 
+
+                    Calibration_TheFourthRunDis_Cmd();
             break;
 
 

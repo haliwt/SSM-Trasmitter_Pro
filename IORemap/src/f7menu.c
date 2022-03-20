@@ -429,7 +429,7 @@ void F7_Add_TheThirdMenu_KeyFunction(uint8_t f7mu)
                   break;
 
                   case 0x02: //F1-03-01
-                  RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                  RunDispDigital_Fun(Number_Digital_3bit_NoRefAddSelect);
                   f7menu_t.unit= menu_t.unit;
                   f7menu_t.decade=menu_t.decade;
                   f7menu_t.hundred =menu_t.hundred;
@@ -443,7 +443,7 @@ void F7_Add_TheThirdMenu_KeyFunction(uint8_t f7mu)
                   break;
 
                   case 0x04://F1-05-01
-                  RunDispDigital_Fun(Number_Digital_3bit_AddSelect);
+                  RunDispDigital_Fun(Number_Digital_3bit_NoRefAddSelect);
                   f7menu_t.unit= menu_t.unit;
                   f7menu_t.decade=menu_t.decade;
                   f7menu_t.hundred =menu_t.hundred;

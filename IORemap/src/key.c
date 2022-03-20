@@ -230,8 +230,7 @@ void KEY_Function(uint8_t keydata)
       case 0xf7://KEY4-SET/CAL-->Enter
                       CH2_KeyLed();
 
-	                key_t.getEnterValue++;
-	                printf("getEnterValue = %d \n",key_t.getEnterValue);
+	         
 					  
                		if(key_t.keyset !=key_t.currkeyset){
                         
@@ -248,7 +247,7 @@ void KEY_Function(uint8_t keydata)
                               
 							
 							 key_t.getEnterValue++;
-							printf("getEnterValue = %d \n",key_t.getEnterValue);
+							// printf("getEnterValue = %d \n",key_t.getEnterValue);
 
 							 CAL_KEY4_ENTER_Fun() ;
                              
