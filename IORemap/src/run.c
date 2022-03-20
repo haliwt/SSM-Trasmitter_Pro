@@ -167,7 +167,7 @@ void RunCalibration_Command(void)
 
             case caliTheSecond_Menu: //Calibration Function //dC-u CAP,2Ero
                    Calibration_TheSecondRunDis_Cmd();
-                 // printf("Cali_runCmd_theSencodMenu = %d\n",cali_t.CAL1_Id);
+                
             break;
 
             case caliTheThird_Menu: //Calibration Function //0000,1.230,0000

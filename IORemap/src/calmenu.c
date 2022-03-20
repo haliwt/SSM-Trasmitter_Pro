@@ -26,6 +26,8 @@ int8_t ACAL2_02[5];
 int8_t ACAL2_021[5];
 int8_t ACAL2_03[5];
 int8_t ACAL2_031[5];
+int8_t ACAL2_04[5];
+int8_t ACAL2_041[5];
 
 
 
@@ -58,7 +60,7 @@ static void Symbol_qtY(void);
 static void Symbol_C_nS(void);
 static void Symbol_ContC(void);
 
- static void Number_Digital_0bit_(uint8_t unit);
+
 
 static void CaliSubMenu_fourPoint_3bitPoint_Dis(int8_t unit,int8_t decade,int8_t hundred);
 static void CaliSubMenu_fourPoint_2bitPoint_Dis(int8_t unit,int8_t decade);
@@ -69,15 +71,14 @@ static void CaliSubMenu_fourPoint_5bitPoint_Dis(int8_t unit,int8_t decade,int8_t
 static void CaliSubMenu_02_02_Dis(uint8_t n);
 
 static void CaliSubMenu_02_03_Dis(uint8_t);
-static void CaliSubMenu_03_05_Dis(void);
+
 
  
  static void caliSubMenu_03_01_3bit_Dis(int8_t unit,int8_t decade,int8_t hundred);
  static void caliSubMenu_03_02_5bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand); //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
  static void caliSubMenu_03_4bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand); //CaliSubMenu_03_01_01_3bitPoint(ACAL303);   
 
-static void caliNumber_Digital_5bit_AddSelect(int8_t *ap);
-static void caliNumber_Digital_5bit_DecSelect(int8_t *ap);
+
 
 static void caliSubMenu_onePoint_5bit_Dis(int8_t unit,int8_t decade,int8_t hundred,int8_t onethousand,int8_t tenthousand);
  
@@ -788,14 +789,14 @@ void CAL_KEY4_ENTER_Fun(void)
         case CAL1:
               if(currkey != cali_t.CaliSub_02_01_Item){
                    currkey= cali_t.CaliSub_02_01_Item;
-                   if(cali_t.CaliSub_02_01_Item==0)
-                     cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+1;
-                   else if(cali_t.CaliSub_02_01_Item==1)
-                        cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+2;
-                   else if(cali_t.CaliSub_02_01_Item==2)
-                        cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+3;
-                   else if(cali_t.CaliSub_02_01_Item==3)
-                        cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+4;
+                   if(cali_t.CAL1_Id==0)
+                     cali_t.CAL1_sequence_flag = cali_t.CAL1_Id;
+                   else if(cali_t.CAL1_Id==1)
+                        cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+1;
+                   else if(cali_t.CAL1_Id==2)
+                        cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+2;
+                   else if(cali_t.CAL1_Id==3)
+                        cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+4;
                  
                   
                   printf("CaliSub_02_01_Item = %d\n",cali_t.CaliSub_02_01_Item);
@@ -818,21 +819,23 @@ void CAL_KEY4_ENTER_Fun(void)
         case CAL2:
               if(currkey2 != cali_t.CaliSub_02_02_Item){
                    currkey2= cali_t.CaliSub_02_02_Item;
-                   if(cali_t.CaliSub_02_02_Item==0)
-                     cali_t.CAL2_sequence_flag = cali_t.CaliSub_02_02_Item+1;
-                   else if(cali_t.CaliSub_02_02_Item==1)
-                        cali_t.CAL2_sequence_flag = cali_t.CaliSub_02_02_Item+2;
-                   else if(cali_t.CaliSub_02_02_Item==2)
-                        cali_t.CAL2_sequence_flag = cali_t.CaliSub_02_02_Item+3;
-                   else if(cali_t.CaliSub_02_02_Item==3)
-                        cali_t.CAL2_sequence_flag = cali_t.CaliSub_02_02_Item+4;
+                   if(cali_t.CAL2_Id==0)
+                     cali_t.CAL2_sequence_flag = cali_t.CAL2_Id;
+                   else if(cali_t.CAL2_Id==1)
+                        cali_t.CAL2_sequence_flag = cali_t.CAL2_Id+1;
+                   else if(cali_t.CAL2_Id==2)
+                        cali_t.CAL2_sequence_flag = cali_t.CAL2_Id+2;
+                   else if(cali_t.CAL2_Id==3)
+                        cali_t.CAL2_sequence_flag = cali_t.CAL2_Id+4;
+                  else if(cali_t.CAL2_Id==4)
+                        cali_t.CAL2_sequence_flag = cali_t.CAL2_Id+5;
                  
                   
                   printf("CaliSub_02_02_Item = %d\n",cali_t.CaliSub_02_02_Item);
               }
               cali_t.CAL2_sequence_flag ++;
 
-             if( cali_t.CAL2_sequence_flag  >9){
+             if( cali_t.CAL2_sequence_flag  >11){
                 cali_t.CAL2_sequence_flag=-1;
                 cali_t.keyEnter_flag=1;
                 mainitem_t.task_MainMenu = caliTheFirst_Menu ; 
@@ -1110,8 +1113,21 @@ void CAL_KEY4_ENTER_Fun(void)
                   break;
 
                  case 9:
-                      
-                      Number_Digital_5bit_AddSelect(ACAL2_031);
+                    mainitem_t.task_MainMenu=caliTheSecond_Menu;
+                     cali_t.runKeyMenu=caliTheSecond_Menu;
+                     CAL2_Top=4;
+                    printf("CAL2_Top = %d\n",CAL2_Top);
+                     
+                  break;
+
+                  case 10:
+                     Number_Digital_5bit_AddSelect(ACAL2_04);
+
+                  break;
+
+                  case 11:
+
+                       Number_Digital_5bit_AddSelect(ACAL2_041);
                   break;
 
               }       
@@ -1368,12 +1384,27 @@ void CALI_KEY2_DOWN_Fun(void)
 
                   break;
 
-                    case 8:
-                       Number_Digital_5bit_DecSelect(ACAL2_03);
+                 case 8:
+                      
+                      Number_Digital_5bit_AddSelect(ACAL2_03);
                   break;
 
-                  case 9:
-                       Number_Digital_5bit_DecSelect(ACAL2_031);
+                 case 9:
+                    mainitem_t.task_MainMenu=caliTheSecond_Menu;
+                     cali_t.runKeyMenu=caliTheSecond_Menu;
+                     CAL2_Top=4;
+                    printf("CAL2_Top = %d\n",CAL2_Top);
+                     
+                  break;
+
+                  case 10:
+                     Number_Digital_5bit_DecSelect(ACAL2_04);
+
+                  break;
+
+                  case 11:
+
+                       Number_Digital_5bit_DecSelect(ACAL2_041);
                   break;
               }       
 
@@ -1490,93 +1521,7 @@ void CALI_KEY2_DOWN_Fun(void)
 /**************************************************************************
 **************************************************************************/
 
-static void caliNumber_Digital_5bit_AddSelect(int8_t *ap)
-{
-       if(menu_t.inputNumber_Select==0){
-            cone++ ;
-            if(cone >9){
-               cone=0;
-            }
-			*ap = cone;
-      }
-      else if(menu_t.inputNumber_Select==1){
-                  ctwo++;
-                  if(ctwo >9){
-                        ctwo=0;
-                  }
-				  *(ap+1) = ctwo;
-       }
-      else if(menu_t.inputNumber_Select==2){
-                  cthree++;  
-                  if(cthree >9){
-                      cthree=0;
-                   }
-				  *(ap+2)=cthree;
-      } 
-      else if(menu_t.inputNumber_Select==3){
-                  cfour++;  
-                  if(cfour >9){
-                      cfour=0;
-                    }
-				  *(ap+3) = cfour; 
-      } 
-      else if(menu_t.inputNumber_Select ==4){
-                  cfive++;  
-                  if(cfive >9){
-                      cfive=0;
-                    }
-			*(ap+4) = cfive; 
-      } 
 
-}
-static void caliNumber_Digital_5bit_DecSelect(int8_t *ap)
-{
-      if(menu_t.inputNumber_Select==0){
-             cone--;
-            if(cone < 0){ //one == -1 ->display "-"
-               cone=9;
-            }
-		*ap= cone;
-            printf("s_1 = %d\n",cone);
-      }
-      else if(menu_t.inputNumber_Select==1){
-            ctwo--;
-            if(ctwo< 0){
-               ctwo=9;
-            }
-			*(ap+1) = ctwo;
-            printf("s_2 = %d\n",*(ap+1));
-      
-      }
-      else if(menu_t.inputNumber_Select==2){
-            cthree--;
-            if(cthree< 0){ 
-               cthree=9;
-            }
-			*(ap+2) = cthree;
-            printf("s_3 = %d\n",*(ap+2));
-          
-      }
-      else if(menu_t.inputNumber_Select==3){
-             cfour--;
-            if( cfour < 0){ 
-               cfour=9;
-            }
-			*(ap+3) = cfour;
-            printf("s_4 = %d\n", *(ap+3));
-          
-      }
-      else if(menu_t.inputNumber_Select ==4){
-             cfive--;
-            if( cfive <0){ 
-                cfive=9;
-            }
-		*(ap+4) = cfive;
-            printf("s_4 = %d\n", *(ap+4));
-          
-      }
-
-}
 /***********************************************************************
  *
  * The third menu display Numbers 
@@ -1640,18 +1585,8 @@ static void caliSubMenu_onePoint_5bit_Dis(int8_t unit,int8_t decade,int8_t hundr
     
 }
 
-static void CaliSubMenu_03_05_Dis(void)
-{
-   Symbol_ContC(); 
 
-}
 
-static void Number_Digital_0bit_(uint8_t unit)
-{
-    
-    unit =0;
-    
-}
 
 
  void Calibration_TheSecondRunDis_Cmd(void )
@@ -1703,6 +1638,53 @@ void Calibration_TheThirdRunDis_Cmd(void)
       }
   break;
 
+    //CAL2 MENU
+
+    case CAL2:
+       switch(cali_t.CaliSub_02_02_Item){
+
+                  case 0: //dCu numbers display
+                    menu_t.DisplaySmgBit_Select_Numbers=0;
+                    cali_t.CAL2_Id = 0;
+                    Cali_CAL1_ducNumberDis(ACAL2_00[0]);  
+                    // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+                  break;
+                  
+                  case 1: //CAP number display
+                     cali_t.CAL2_Id =1;
+              
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                      Number_5bit_DIS(ACAL2_01);
+                  break;
+
+                  case 2://2Ero number display 
+                  cali_t.CAL2_Id =2;
+                
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                      Number_5bit_Char_DIS(ACAL2_02);
+                  break;
+
+                  case 3: //SEn 
+                        cali_t.CAL2_Id =3;
+                        Number_5bit_DIS(ACAL2_03);
+                  break;
+
+                  case 4: //SPARn
+                      cali_t.CAL2_Id =4;
+             
+                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                          Number_5bit_DIS(ACAL2_04);
+                  break;
+             
+     
+
+      }
+
+
+
+
+    break;
+
 }
 }
 /*******************************************************************
@@ -1720,7 +1702,7 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 0:
                      menu_t.DisplaySmgBit_Select_Numbers=0;
-                    Symbol_dC_u();
+                    Symbol_dC_u(); //---0
                   break;
 
 
@@ -1735,7 +1717,7 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 2:
                     menu_t.DisplaySmgBit_Select_Numbers=0;
-                       Symbol_CAP();
+                       Symbol_CAP();  ///---1
                   break;
                   
                   case 3: //CAP number display
@@ -1747,7 +1729,7 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 4:
                      menu_t.DisplaySmgBit_Select_Numbers=0;
-                      Symbol_2Ero();
+                      Symbol_2Ero();  ///---2
                   break;
 
                   case 5://2Ero number display 
@@ -1769,7 +1751,7 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 7://2Ero number 2 display
                         menu_t.DisplaySmgBit_Select_Numbers=0;
-                        Symbol_SPAn();
+                        Symbol_SPAn(); ///----3
                   break;
 
                   case 8: //SPARn
@@ -1790,10 +1772,98 @@ void Calibration_TheFourthRunDis_Cmd(void)
              
      
 
-      }
-  break;
+        }
+        break;
 
-}
+        case CAL2:
+            switch(cali_t.CAL2_sequence_flag){
+
+                  case 0:
+                     menu_t.DisplaySmgBit_Select_Numbers=0;
+                    Symbol_dC_u(); ///--1
+                  break;
+
+
+                  case 1: //dCu numbers display
+         
+                    menu_t.DisplaySmgBit_Select_Numbers=0;
+                  
+                    
+                    Cali_CAL1_ducNumberDis(ACAL2_00[0]);  
+                    // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+                  break;
+
+                  case 2:
+                    menu_t.DisplaySmgBit_Select_Numbers=0;
+                       Symbol_CAP();  //---2
+                  break;
+                  
+                  case 3: //CAP number display
+                    
+               
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                      Number_5bit_DIS(ACAL2_01);
+                  break;
+
+                  case 4:
+                     menu_t.DisplaySmgBit_Select_Numbers=0;
+                      Symbol_2Ero();  //---3
+                  break;
+
+                  case 5://2Ero number display 
+                
+              
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                    
+                      Number_5bit_Char_DIS(ACAL2_02);
+                  break;
+
+                  case 6://2Ero number display 
+                
+            
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                    
+                      Number_5bit_Char_DIS(ACAL2_021);
+                  break;
+
+                  case 7:
+                     Symbol_SEn();
+                  break;
+
+                  case 8:
+                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                         Number_5bit_DIS(ACAL2_03);
+                  break;
+
+
+                  case 9://2Ero number 2 display
+                        menu_t.DisplaySmgBit_Select_Numbers=0;
+                        Symbol_SPAn();
+                  break;
+
+                  case 10: //SPARn
+                    
+         
+                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                        
+                        Number_5bit_DIS(ACAL2_04);
+                  break;
+
+                   case 11: //SPARn number display 
+                     
+       
+                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                        
+                        Number_5bit_DIS(ACAL2_041);
+                  break;
+             
+     
+
+        }
+
+        break;
+
+    }
     
 }
  

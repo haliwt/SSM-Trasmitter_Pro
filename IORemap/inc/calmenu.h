@@ -15,7 +15,7 @@ typedef struct _CALI{
     uint8_t runCmd_flag;
     uint8_t CAL1_Sub_Id;
     uint8_t CAL1_Id;
-   
+    uint8_t CAL2_Id ;
     
     
 
@@ -95,6 +95,8 @@ extern int8_t ACAL2_02[5];
 extern int8_t ACAL2_021[5];
 extern int8_t ACAL2_03[5];
 extern int8_t ACAL2_031[5];
+extern int8_t ACAL2_04[5];
+extern int8_t ACAL2_041[5];
 
 
 extern int8_t ACAL301[3];
