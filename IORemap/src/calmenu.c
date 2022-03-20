@@ -762,60 +762,32 @@ void CAL_KEY4_ENTER_Fun(void)
         }
       break;
 
-      case 3://the third step
-            if(cali_t.cali_CAL1_sequence!=1){
-               mainitem_t.task_MainMenu = caliTheSecond_Menu; 
-               cali_t.runKeyMenu=mainitem_t.task_MainMenu;
-               cali_t.keyEnter_flag= 0;
+      case 3://the third step continu
+      	   mainitem_t.task_MainMenu = caliTheThird_Menu; 
+           cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+           switch(cali_t.CaliMenu_Item){
+
+            case CAL1:
             
-            }
+              cali_t.CaliSub_02_01_Item=CaliSub_CAL1_stackTop(4);
+              printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+            break;
 
-           switch(cali_t.cali_CAL1_sequence==1){
-           
-             case 1:
-                 cali_t.cali_CAL1_sequence_flag++;
-                if( cali_t.cali_CAL1_sequence_flag >3) cali_t.cali_CAL1_sequence_flag=0;
-                mainitem_t.task_MainMenu = caliTheThird_Menu; 
-                cali_t.runKeyMenu=mainitem_t.task_MainMenu;
-                switch(cali_t.cali_CAL1_sequence_flag ){
+            case CAL2:
+                  cali_t.cali_CAL2_sequence=1;
+                  cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
+            break;
 
-                  case 0:
-                        CAL1_Top =0;
-                  break;
-                  
-                  case 1:
-                     //cali_t.CaliSub_02_01_Item = 1;
-                     CAL1_Top =1;
-                  break;
-
-                  case 2:
-                      // cali_t.CaliSub_02_01_Item = 2;
-                      CAL1_Top =2;
-                  break;
-
-                  case 3:
-                    // cali_t.CaliSub_02_01_Item = 3;
-                     CAL1_Top=3;
-                     cali_t.cali_CAL1_sequence_flag =0;
-
-                    if(adjkey==1){
-                          adjkey =0;
-                         cali_t.keyEnter_flag= 0;
-
-                    }
-              break;
-            
-            } 
-             break;                
-            
+            case CAL3:
+             cali_t.cali_CAL3_sequence=1;
+              cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(3);
+            break;
         }
-        
-
-     
-
-
-    
       break;
+            
+      break;
+            
+          
          
 
       case 4:
@@ -878,7 +850,7 @@ void CAL_KEY4_ENTER_Fun(void)
         }
       break;
 
-    case caliTheThird_Menu:
+    case caliTheThird_Menu: //key Up ++
 
     switch(cali_t.CaliMenu_Item){
             case CAL1:
@@ -956,10 +928,7 @@ void CALI_KEY2_DOWN_Fun(void)
 
     case caliTheSecond_Menu:
           
-          switch(cali_t.keyEnter_flag){
-
-      case 1:
-          switch(cali_t.CaliMenu_Item){
+     switch(cali_t.CaliMenu_Item){ //dwon Key  ---
     
           case CAL1:
                   
@@ -982,15 +951,16 @@ void CALI_KEY2_DOWN_Fun(void)
         }
       break;
 
-     case caliTheThird_Menu:
+     case caliTheThird_Menu:  //Key Up --
+          
           switch(cali_t.CaliMenu_Item){
             case CAL1:
                 switch( cali_t.CaliSub_02_01_Item){
 
                   case 0:
                         ACAL1_00[0] --;
-                        if(ACAL1_00[0]==-1) ACAL1_00[0]=0;
-                      
+                        if(ACAL1_00[0]==-1) ACAL1_00[0]=15;
+                        printf("key down - = %d\n", ACAL1_00[0]);
                   break;
 
                   case 1:
@@ -1021,15 +991,13 @@ void CALI_KEY2_DOWN_Fun(void)
 
       break;
 
-      case 3: //(Enter be pressed 3 times) Up +
+     
+      
+  }
+ }
 
-
-      break;
-    } 
-
-      break;
-
-
+ #if 0
+    
      case caliTheThird_Menu:
          
           switch(cali_t.CaliMenu_Item){
@@ -1194,7 +1162,7 @@ void CALI_KEY2_DOWN_Fun(void)
 
 }
 }
-
+#endif 
 /**********************************************************************
  *
  * Return KEY
@@ -1502,7 +1470,7 @@ void Calibration_TheThirdRunDis_Cmd(void)
                           Number_5bit_DIS(ACAL1_03);
                   break;
              
-      break;
+     
 
       }
   break;
