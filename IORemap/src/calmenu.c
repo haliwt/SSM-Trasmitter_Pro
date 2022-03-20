@@ -923,10 +923,29 @@ void CAL_KEY4_ENTER_Fun(void)
           case CAL1:
                 switch(cali_t.CAL1_sequence_flag){
 
+                  case 0:
+                        mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+                        cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                        cali_t.keyEnter_flag=0;
+                        CAL1_Top=0;
+                        printf("CAL1_Top = %d\n",CAL1_Top);
+
+                  break;
+
                   case 1:
                         ACAL1_00[0] ++;
                         if(ACAL1_00[0]>15) ACAL1_00[0]=0;
                       
+                  break;
+
+                  case 2:
+                      mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+                      cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                      cali_t.keyEnter_flag=0;
+                  
+                     CAL1_Top=1;
+                     printf("CAL1_Top = %d\n",CAL1_Top);
+
                   break;
 
                   case 3:
@@ -934,9 +953,25 @@ void CAL_KEY4_ENTER_Fun(void)
                       Number_Digital_5bit_AddSelect(ACAL1_01);
                   break;
 
+                  case 4:
+                     mainitem_t.task_MainMenu = caliTheSecond_Menu; 
+                     cali_t.runKeyMenu=mainitem_t.task_MainMenu;
+                     cali_t.keyEnter_flag=0;
+                     CAL1_Top=2;
+
+                  break;
+
                   case 5:
                     
                       Number_Digital_5bitPoint_AddSelect(ACAL1_02);
+                  break;
+
+                  case 6:
+                     mainitem_t.task_MainMenu=caliTheSecond_Menu;
+                     cali_t.runKeyMenu=caliTheSecond_Menu;
+                     CAL1_Top=3;
+                    printf("CAL1_Top = %d\n",CAL1_Top);
+
                   break;
 
                   case 7:
@@ -1401,7 +1436,12 @@ void Calibration_TheThirdRunDis_Cmd(void)
 
 }
 }
-
+/*******************************************************************
+ * 
+ * Function :display 
+ * 
+ * 
+********************************************************************/
 void Calibration_TheFourthRunDis_Cmd(void)
 {
      switch(cali_t.CaliMenu_Item){
