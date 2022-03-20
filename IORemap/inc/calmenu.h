@@ -15,9 +15,7 @@ typedef struct _CALI{
     uint8_t runCmd_flag;
     uint8_t CAL1_Sub_Id;
     uint8_t CAL1_Id;
-    uint8_t cali_CAL1_sequence;
-    uint8_t cali_CAL2_sequence;
-    uint8_t cali_CAL3_sequence;
+   
     
     
 
@@ -48,7 +46,9 @@ typedef struct _CALI{
     uint8_t onethousand;
     uint8_t tenthousand; //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
 
-     int8_t CAL1_sequence_flag;
+   int8_t CAL1_sequence_flag;
+   int8_t CAL2_sequence_flag;
+   int8_t CAL3_sequence_flag;
 
     int8_t stackCali_03_01_Tp;
     int8_t stackCali_03_02_Tp;
@@ -87,8 +87,14 @@ extern int8_t ACAL1_01[5];
 extern int8_t ACAL1_02[5];
 extern int8_t ACAL1_03[5];
 extern int8_t ACAL1_021[5];
-
 extern int8_t ACAL1_031[5];
+
+extern int8_t ACAL2_00[1];
+extern int8_t ACAL2_01[5];
+extern int8_t ACAL2_02[5];
+extern int8_t ACAL2_021[5];
+extern int8_t ACAL2_03[5];
+extern int8_t ACAL2_031[5];
 
 
 extern int8_t ACAL301[3];

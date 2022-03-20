@@ -161,7 +161,7 @@ void RunCalibration_Command(void)
          
 			 
 	              CALI_MENU_01_DIS(cali_t.CaliMenu_Item);
-                  cali_t.keyEnter_flag =0;
+              
                   //printf("Cali_theFirstMenu = %d\n",cali_t.CaliMenu_Item);
             break;
 
