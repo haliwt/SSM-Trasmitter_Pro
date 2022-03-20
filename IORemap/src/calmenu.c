@@ -787,25 +787,27 @@ void CAL_KEY4_ENTER_Fun(void)
         switch(cali_t.CaliMenu_Item){
 
         case CAL1:
-              if(currkey != cali_t.CaliSub_02_01_Item){
-                   currkey= cali_t.CaliSub_02_01_Item;
-                   if(cali_t.CAL1_Id==0)
-                     cali_t.CAL1_sequence_flag = cali_t.CAL1_Id;
-                   else if(cali_t.CAL1_Id==1)
-                        cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+1;
-                   else if(cali_t.CAL1_Id==2)
-                        cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+2;
-                   else if(cali_t.CAL1_Id==3)
-                        cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+4;
-                 
-                  
-                  printf("CaliSub_02_01_Item = %d\n",cali_t.CaliSub_02_01_Item);
-              }
-              cali_t.CAL1_sequence_flag ++;
+             printf("CAL----CAL1_Id = %d\n",cali_t.CAL1_Id);
+                if(currkey != cali_t.CAL1_Id){
+                       currkey= cali_t.CAL1_Id;
+                       if(cali_t.CAL1_Id==0)
+                         cali_t.CAL1_sequence_flag = cali_t.CAL1_Id;
+                       else if(cali_t.CAL1_Id==1)
+                            cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+1;
+                       else if(cali_t.CAL1_Id==2)
+                            cali_t.CAL1_sequence_flag = cali_t.CAL1_Id+2;
+                    else if(cali_t.CAL1_Id==3) 
+                        cali_t.CAL1_sequence_flag=cali_t.CAL1_Id+4;;
+                      
+                    printf("CaliSub_02_01_Item = %d\n",cali_t.CaliSub_02_01_Item);
+                 }
+             
+                 cali_t.CAL1_sequence_flag ++;
+              printf("CAL1---seq-flag = %d\n", cali_t.CAL1_sequence_flag);
 
              if( cali_t.CAL1_sequence_flag  >9){
                 cali_t.CAL1_sequence_flag=-1;
-                cali_t.keyEnter_flag=1;
+                cali_t.keyEnter_flag=0;
                 mainitem_t.task_MainMenu = caliTheFirst_Menu ; 
                 cali_t.runKeyMenu=mainitem_t.task_MainMenu;
                 caliMainTop=-1;
@@ -813,11 +815,14 @@ void CAL_KEY4_ENTER_Fun(void)
                 cali_t.CaliMenu_Item = Push_stackCaliMain(3);
               }
             printf("CAL1_sequence_flag = %d\n",cali_t.CAL1_sequence_flag);
+          
             break;
          //-----------------------------------------------------------/
          //CAL2 MENU 
         case CAL2:
-              if(currkey2 != cali_t.CaliSub_02_02_Item){
+
+              
+               if(currkey2 != cali_t.CaliSub_02_02_Item){
                    currkey2= cali_t.CaliSub_02_02_Item;
                    if(cali_t.CAL2_Id==0)
                      cali_t.CAL2_sequence_flag = cali_t.CAL2_Id;
@@ -837,7 +842,7 @@ void CAL_KEY4_ENTER_Fun(void)
 
              if( cali_t.CAL2_sequence_flag  >11){
                 cali_t.CAL2_sequence_flag=-1;
-                cali_t.keyEnter_flag=1;
+                cali_t.keyEnter_flag=0;
                 mainitem_t.task_MainMenu = caliTheFirst_Menu ; 
                 cali_t.runKeyMenu=mainitem_t.task_MainMenu;
                 caliMainTop=-1;
