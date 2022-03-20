@@ -28,25 +28,13 @@ int8_t ACAL2_03[5];
 int8_t ACAL2_031[5];
 int8_t ACAL2_04[5];
 int8_t ACAL2_041[5];
+int8_t ACAL3_02[5];
 
 
 
-int8_t ACAL301[3];
-int8_t ACAL302[5];
-int8_t ACAL303[3];
-int8_t ACAL304[4];
-int8_t ACAL305[5];
 
-int8_t ACAL30201[3];
-int8_t ACAL30202[4];
 
-int8_t ACAL30203[5];
-int8_t ACAL30204[5];
-int8_t ACAL30205[4];
 
-int8_t ACAL30301[2];
-int8_t ACAL30302[5];
-int8_t ACAL30303[3];
 
 static void Symbol_CAL1(void);
 static void Symbol_CAL2(void);
@@ -822,8 +810,8 @@ void CAL_KEY4_ENTER_Fun(void)
         case CAL2:
 
               
-               if(currkey2 != cali_t.CaliSub_02_02_Item){
-                   currkey2= cali_t.CaliSub_02_02_Item;
+               if(currkey2 != cali_t.CAL2_Id){
+                   currkey2= cali_t.CAL2_Id;
                    if(cali_t.CAL2_Id==0)
                      cali_t.CAL2_sequence_flag = cali_t.CAL2_Id;
                    else if(cali_t.CAL2_Id==1)
@@ -1684,11 +1672,45 @@ void Calibration_TheThirdRunDis_Cmd(void)
      
 
       }
+    break;
 
+   //CAL3 MENU
+    case CAL3:
+     switch(cali_t.CaliSub_02_03_Item){
 
+                  case 0: //dCu numbers display
+                    menu_t.DisplaySmgBit_Select_Numbers=0;
+                    cali_t.CAL3_Id = 0;
+                    Symbol_CLS();
+                    //Cali_CAL1_ducNumberDis(ACAL3_00[0]);  
+                    // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+                  break;
+                  
+                  case 1: //CAP number display
+                     cali_t.CAL3_Id =1;
+              
+                     menu_t.DisplaySmgBit_Select_Numbers=0;
+                     Symbol_qtY();
+                      //Number_5bit_DIS(ACAL3_01);
+                  break;
+
+                  case 2://2Ero number display 
+                     cali_t.CAL3_Id =2;
+                
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                      Number_5bit_Char_DIS(ACAL3_02);
+                  break;
+
+                 
+             
+    }
 
 
     break;
+
+
+
+   
 
 }
 }
@@ -1865,6 +1887,35 @@ void Calibration_TheFourthRunDis_Cmd(void)
      
 
         }
+
+        break;
+
+        case CAL3:
+
+            switch(cali_t.CAL3_sequence_flag){
+
+                  case 0:
+                     menu_t.DisplaySmgBit_Select_Numbers=0;
+                   Symbol_CLS(); ///--1
+                  break;
+
+
+                  case 1: //dCu numbers display
+                    Symbol_qtY();
+                   
+                    menu_t.DisplaySmgBit_Select_Numbers=0;
+                  
+                    
+                 // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
+                  break;
+
+                  case 2:
+                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                     Number_5bit_Char_DIS(ACAL3_02);
+
+                    break;;
+         }
+
 
         break;
 

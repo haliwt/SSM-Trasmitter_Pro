@@ -16,7 +16,7 @@ typedef struct _CALI{
     uint8_t CAL1_Sub_Id;
     uint8_t CAL1_Id;
     uint8_t CAL2_Id ;
-    
+    uint8_t CAL3_Id;
     
 
     uint8_t CaliMenu_01_Id;
@@ -97,23 +97,9 @@ extern int8_t ACAL2_03[5];
 extern int8_t ACAL2_031[5];
 extern int8_t ACAL2_04[5];
 extern int8_t ACAL2_041[5];
+extern int8_t ACAL3_02[5];
 
 
-extern int8_t ACAL301[3];
-extern int8_t ACAL302[5];
-extern int8_t ACAL303[3];
-extern int8_t ACAL304[4];
-extern int8_t ACAL305[5];
-
-extern int8_t ACAL30201[3];
-extern int8_t ACAL30202[4];
-extern int8_t ACAL30203[5];
-extern int8_t ACAL30204[5];
-extern int8_t ACAL30205[4];
-
-extern int8_t ACAL30301[2];
-extern int8_t ACAL30232[5];
-extern int8_t ACAL30303[3];
 
 
 
