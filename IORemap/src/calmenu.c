@@ -1222,8 +1222,7 @@ void CALI_KEY2_DOWN_Fun(void)
             break;
             //CAL2 MENU
             case CAL2:
-             switch(cali_t.CaliMenu_Item){
-            case CAL1:
+          
                 switch( cali_t.CaliSub_02_01_Item){
 
                   case 0:
@@ -1243,23 +1242,21 @@ void CALI_KEY2_DOWN_Fun(void)
                   case 3:
                        Number_Digital_5bit_DecSelect(ACAL1_03);
                   break;
-              }       
-
+                    
+             }
             break;
-
+            //CAL3 MENU -thThird_MENU Decrease Value
             case CAL3:
-                 switch( cali_t.CaliSub_02_03_Item){
-                case 0:
-                       
-                break;
-
-                case 1:
-                      
-                break;
+                 switch(cali_t.CaliSub_02_03_Item){
+           
 
                 case 2:
+                      Number_Digital_5bitPoint_DecSelect(ACAL3_02);
+                break;
+
+                case 3:
                     
-                    Number_Digital_5bitPoint_DecSelect(ACAL3_02);
+                    Number_Digital_5bitPoint_DecSelect(ACAL3_021);
                 break;
 
             }
@@ -1430,46 +1427,13 @@ void CALI_KEY2_DOWN_Fun(void)
 
             break;
 
-            case CAL3:
+          
 
-                switch(cali_t.CAL3_sequence_flag){
-                case 0:
-                       
-                break;
+          }
 
-                case 1:
-                        
-                break;
-
-                case 2:
-                 
-                break;
-
-                case 3:
-                      Number_Digital_5bit_DecSelect(ACAL3_02);
-                break;
-
-                case 4:
-                     Number_Digital_5bitPoint_DecSelect(ACAL3_021);
-                break;
-
-
-                case 5:
-                      
-                break;
-
-
-            }
-            break;
-
-        }
-
-    
-
-     
- }
+    }
 }
-}
+
 /**********************************************************************
  *
  * Return KEY
