@@ -18,7 +18,7 @@ typedef struct _CALI{
     uint8_t cali_CAL1_sequence;
     uint8_t cali_CAL2_sequence;
     uint8_t cali_CAL3_sequence;
-    uint8_t CAL1_sequence_flag;
+    
     
 
     uint8_t CaliMenu_01_Id;
@@ -48,7 +48,7 @@ typedef struct _CALI{
     uint8_t onethousand;
     uint8_t tenthousand; //CaliSubMenu_03_01_01_5bitPoint(ACAL302);
 
-
+     int8_t CAL1_sequence_flag;
 
     int8_t stackCali_03_01_Tp;
     int8_t stackCali_03_02_Tp;

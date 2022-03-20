@@ -566,11 +566,11 @@ int8_t CaliSub_02_stackTop(int8_t maxize)
 //CAL1
 int8_t Push_stackCaliMain_CAL1(int8_t maxize)
 {
-   
+     CAL1_Top  ++;
     if(CAL1_Top > (maxize-1) ){
             CAL1_Top =0;
     }
-    CAL1_Top  ++;
+  
 	    
 	return  CAL1_Top ;
 
@@ -600,10 +600,11 @@ int8_t CaliSub_CAL1_stackTop(int8_t maxize)
 int8_t Push_stackCaliMain_CAL2(int8_t maxize)
 {
    
+     CAL2_Top  ++;
     if(CAL2_Top > (maxize-1) ){
             CAL2_Top =0;
     }
-    CAL2_Top  ++;
+   
 	    
 	return  CAL2_Top ;
 
@@ -633,10 +634,11 @@ int8_t CaliSub_CAL2_stackTop(int8_t maxize)
 int8_t Push_stackCaliMain_CAL3(int8_t maxize)
 {
    
+     CAL3_Top  ++;
     if(CAL3_Top > (maxize-1) ){
             CAL3_Top =0;
     }
-    CAL3_Top  ++;
+   
 	    
 	return  CAL3_Top ;
 
@@ -789,21 +791,22 @@ void CAL_KEY4_ENTER_Fun(void)
                         cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+3;
                    else if(cali_t.CaliSub_02_01_Item==3)
                         cali_t.CAL1_sequence_flag = cali_t.CaliSub_02_01_Item+4;
-                  printf("cali_t.CaliSub_02_01_Item = %d\n",cali_t.CaliSub_02_01_Item);
+                 
+                  
+                  printf("CaliSub_02_01_Item = %d\n",cali_t.CaliSub_02_01_Item);
               }
               cali_t.CAL1_sequence_flag ++;
-              if( cali_t.CAL1_sequence_flag  >7){
-                cali_t.CAL1_sequence_flag=0;
-                cali_t.CaliSub_02_01_Item=0;
+
+             if( cali_t.CAL1_sequence_flag  >7){
+                cali_t.CAL1_sequence_flag=-1;
                 cali_t.keyEnter_flag=1;
                 mainitem_t.task_MainMenu = caliTheFirst_Menu ; 
                 cali_t.runKeyMenu=mainitem_t.task_MainMenu;
                 caliMainTop=-1;
+                cali_t.CAL1_sequence_flag =1;
                 cali_t.CaliMenu_Item = Push_stackCaliMain(3);
-
-
-             }
-            printf("cali_t.CAL1_sequence_flag = %d\n",cali_t.CAL1_sequence_flag);
+              }
+            printf("CAL1_sequence_flag = %d\n",cali_t.CAL1_sequence_flag);
             break;
 
             case CAL2:
