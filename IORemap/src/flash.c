@@ -21,7 +21,7 @@ uint8_t Buffercmp(const uint32_t* pBuffer1, uint32_t* pBuffer2, uint32_t BufferL
 
 #define FLASH_PROGRAM_TIMEOUT ((uint32_t)0x00002000)
 
-#define BUFFER_SIZE (uint32_t)32
+
 
 
 

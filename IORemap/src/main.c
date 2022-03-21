@@ -59,7 +59,7 @@ int main(void)
 	  TIM1_NVIC_Configuration();
 	  KeyValua_Init();
 	  Menu_Init();
-  
+  	cali_t.CaliMenu_01_Id =0xff;
 	run_t.keySetValue=0;
     while (1)
     {

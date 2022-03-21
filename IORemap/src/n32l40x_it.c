@@ -119,7 +119,7 @@ void DMA_IRQ_HANDLER(void)
  */
 void TIM1_UP_IRQHandler(void)
 {
-    static uint32_t i,j,z,n;
+    static uint32_t i,j,z;
     
     if (TIM_GetIntStatus(TIM1, TIM_INT_UPDATE) != RESET)
     {

@@ -22,7 +22,7 @@
 
 #define FLASH_PROGRAM_TIMEOUT ((uint32_t)0x00002000)
 
-#define BUFFER_SIZE 		(uint32_t)32
+#define BUFFER_SIZE 		(uint32_t)32//(uint32_t)32
 
 extern uint32_t SRAM_Data_Buffer[BUFFER_SIZE] ;
 

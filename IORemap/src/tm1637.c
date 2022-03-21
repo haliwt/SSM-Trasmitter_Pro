@@ -63,6 +63,8 @@ const unsigned char segChar[]={
 	seg_c+seg_e+seg_d                           //'u'  ->17 -0x11
 };
 
+
+
 //static void Delay_us(uint8_t i);
 static void I2CStart(void);
 static void I2Cask(void);

@@ -8,6 +8,19 @@
 #define DATA        GPIO_PIN_0//GPIO_PIN_9  //input Port
 #define CLK         GPIO_PIN_1 //GPIO_PIN_0 //Output  Port
 
+
+typedef struct _Operation{
+
+      uint8_t operat_dcu; 
+      uint8_t operat_del;
+      uint8_t operat_save;
+      uint8_t operat_maxRangValue;
+
+
+}operation;
+
+extern operation oper_t;
+
 extern int8_t  No_Load_Flag;
 extern uint32_t  Weight_No_Lode;
 extern uint32_t  Weight_Lode ;

@@ -33,6 +33,9 @@ int8_t ACAL3_021[5];
 
 static void Symbol_CAL1(void);
 static void Symbol_CAL2(void);
+static void Symbol_CAL3(void);
+static void Symbol_CAL5(void);
+
 static void Symbol_dC_u(void);
 static void Symbol_CAP(void);
 static void Symbol_2Ero(void);
@@ -80,6 +83,24 @@ static void Symbol_CAL2(void)
 {
     SmgDisplay(digital_5,0x0b); //null
    SmgDisplay(digital_4,0x02); //'2' 
+   SmgDisplay_Character(digital_3,0x06); //"L"
+   SmgDisplay_Character(digital_2,0x00); //"A"
+   SmgDisplay_Character(digital_1,0x01); //"C"
+}
+
+static void Symbol_CAL3(void)
+{
+    SmgDisplay(digital_5,0x0b); //null
+   SmgDisplay(digital_4,0x03); //'3' 
+   SmgDisplay_Character(digital_3,0x06); //"L"
+   SmgDisplay_Character(digital_2,0x00); //"A"
+   SmgDisplay_Character(digital_1,0x01); //"C"
+}
+
+static void Symbol_CAL5(void)
+{
+    SmgDisplay(digital_5,0x0b); //null
+   SmgDisplay(digital_4,0x05); //'5' 
    SmgDisplay_Character(digital_3,0x06); //"L"
    SmgDisplay_Character(digital_2,0x00); //"A"
    SmgDisplay_Character(digital_1,0x01); //"C"
@@ -212,7 +233,15 @@ void CALI_MENU_01_DIS(uint8_t mu)
            
        case CAL3: //CAL3
            cali_t.CaliMenu_01_Id =CAL3;
-          SmgDisplay(digital_4,0x03); //'3' 
+           Symbol_CAL3();
+        
+       break;
+
+       case CAL5: //CAL5
+           cali_t.CaliMenu_01_Id =CAL5;
+            Symbol_CAL5();
+         
+
        break;
 
     
@@ -690,7 +719,7 @@ void KEY4_InputCalibration_Mode(void)
  ***************************************************************/
 void CAL_KEY4_ENTER_Fun(void)
 {
-    static uint8_t currkey=0xff,currkey2=0xff,currkey3=0xff;
+    static uint8_t currkey=0xff,currkey2=0xff;
 
 	 if(cali_t.Thefirst_InputKeyValue==1){
           key_t.getEnterValue > 7 ;
@@ -734,6 +763,13 @@ void CAL_KEY4_ENTER_Fun(void)
                 cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(5);
              printf("CAL3_1enterKey = %d \n", cali_t.CaliSub_02_03_Item);
             break;
+
+            case CAL5:
+              cali_t.keyEnter_flag=0;
+              cali_t.CaliSub_02_05_Item  = 1;
+              printf("keyUp_CAL2_theSecond_Menu = %d\n", cali_t.CaliSub_02_03_Item );
+
+          break;
 
 
         }
@@ -787,7 +823,27 @@ void CAL_KEY4_ENTER_Fun(void)
                     printf("CaliSub_02_01_Item = %d\n",cali_t.CaliSub_02_01_Item);
                  }
              
-                 cali_t.CAL1_sequence_flag ++;
+              cali_t.CAL1_sequence_flag ++;
+              switch(cali_t.CAL1_Id){
+
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                  cali_t.CAL1_FlashSaveData =1;
+                break;
+
+                default:
+                     cali_t.CAL1_FlashSaveData=0;
+                break;
+              }
+              if(cali_t.CAL1_FlashSaveData==1){
+                    cali_t.CAL1_FlashSaveData=0;
+                     FlashSaveData();
+                    printf("flash_save_________OK\n");
+                          
+				      }
+             
               printf("CAL1---seq-flag = %d\n", cali_t.CAL1_sequence_flag);
 
              if( cali_t.CAL1_sequence_flag  >9){
@@ -856,7 +912,7 @@ void CAL_KEY4_ENTER_Fun(void)
    
     case caliTheFirst_Menu:
 
-        cali_t.CaliMenu_Item = Push_stackCaliMain(3);
+        cali_t.CaliMenu_Item = Push_stackCaliMain(4);
          printf("cali_t.CaliMenu_Item = %d\n", cali_t.CaliMenu_Item );
     break;
 
@@ -884,6 +940,7 @@ void CAL_KEY4_ENTER_Fun(void)
 
           break;
 
+
         }
       break;
 
@@ -896,22 +953,47 @@ void CAL_KEY4_ENTER_Fun(void)
                   case 0:
                         ACAL1_00[0] ++;
                         if(ACAL1_00[0]>15) ACAL1_00[0]=0;
-                      
+            
+                 // *(pfdata+50)= ((SpecDisplay_Number(ACAL1_00[0])) <<24) | cali_t.cal1_r01_reg;
+                  // cali_t.cal1_r00_reg  = ((SpecDisplay_Number(ACAL1_00[0])) <<24) | cali_t.cal1_r01_reg;
+                  *(pfdata+50) =0xa1020304;
                   break;
 
                   case 1:
                     
                       Number_Digital_5bit_AddSelect(ACAL1_01);
+                 
+                 cali_t.cal1_r01_reg =((SpecDisplay_Number(ACAL1_01[4]))<<0);
+                
+                *(pfdata +50) = cali_t.cal1_r00_reg | cali_t.cal1_r01_reg;
+          
+                // *(pfdata + 51) = (((SpecDisplay_Number(ACAL1_01[3]))<< 24)|((SpecDisplay_Number(ACAL1_01[2]))<< 16)  | ((SpecDisplay_Number(ACAL1_01[1]))<<8)
+                //          |((SpecDisplay_Number(ACAL1_01[0]))<<0)) ;
+                *(pfdata+51) =0x05060708;
+              
                   break;
 
                   case 2:
                   
                       Number_Digital_5bitPoint_AddSelect(ACAL1_02);
+
+                 *(pfdata +52) = (((SpecDisplay_Number(ACAL1_02[4]))<< 24)|((SpecDisplay_Number(ACAL1_02[3]))<< 16)  | ((SpecDisplay_Number(ACAL1_02[2]))<<8)
+                                |((SpecDisplay_Number(ACAL1_02[1]))<<0)) ;
+
+                   cali_t.cal1_r02_reg =((SpecDisplay_Number(ACAL1_02[0]))<<24) ; 
+                  *(pfdata +53) =  cali_t.cal1_r02_reg | cali_t.cal1_r03_reg;
                   break;
 
                   case 3:
                     
                        Number_Digital_5bit_AddSelect(ACAL1_03);
+
+                cali_t.cal1_r03_reg =((SpecDisplay_Number(ACAL1_03[4]))<<0);
+
+                *(pfdata +53) =  cali_t.cal1_r02_reg | cali_t.cal1_r03_reg;
+
+                *(pfdata +54)= (((SpecDisplay_Number(ACAL1_03[3]))<< 24)  | ((SpecDisplay_Number(ACAL1_03[2]))<<16)
+                         |((SpecDisplay_Number(ACAL1_03[1]))<<8) |((SpecDisplay_Number(ACAL1_03[0]))<<0))  ;
                   break;
               }       
 
@@ -984,7 +1066,8 @@ void CAL_KEY4_ENTER_Fun(void)
                   case 1:
                         ACAL1_00[0] ++;
                         if(ACAL1_00[0]>15) ACAL1_00[0]=0;
-                      
+                    *(pfdata+50)= (SpecDisplay_Number(ACAL1_00[0])) <<24 | cali_t.cal1_r01_reg;
+                   cali_t.cal1_r00_reg  = ((SpecDisplay_Number(ACAL1_00[0])) <<24) | cali_t.cal1_r01_reg;
                   break;
 
                   case 2:
@@ -997,9 +1080,15 @@ void CAL_KEY4_ENTER_Fun(void)
 
                   break;
 
-                  case 3:
+                  case 3: //set maximum weight value  
                       
                       Number_Digital_5bit_AddSelect(ACAL1_01);
+                    cali_t.cal1_r01_reg =((SpecDisplay_Number(ACAL1_01[4]))<<0);
+                
+                *(pfdata +50) = cali_t.cal1_r00_reg | cali_t.cal1_r01_reg;
+          
+                *(pfdata + 51) = (((SpecDisplay_Number(ACAL1_01[3]))<< 24)|((SpecDisplay_Number(ACAL1_01[2]))<< 16)  | ((SpecDisplay_Number(ACAL1_01[1]))<<8)
+                         |((SpecDisplay_Number(ACAL1_01[0]))<<0)) ;
                   break;
 
                   case 4:
@@ -1010,14 +1099,20 @@ void CAL_KEY4_ENTER_Fun(void)
 
                   break;
 
-                  case 5:
+                  case 5: //real weight load
                     
-                      Number_Digital_5bitPoint_AddSelect(ACAL1_02);
+                  // Get_Weight();
+			            // Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ;    //Number_Digital_5bitPoint_AddSelect(ACAL1_02); //display: weight value sample : 10g
                   break;
 
-                case 6:
+                case 6: //adjust weight value and be save flash
                     
-                      Number_Digital_5bitPoint_AddSelect(ACAL1_021);
+                  Number_Digital_5bitPoint_AddSelect(ACAL1_021);
+                  *(pfdata +52) = (((SpecDisplay_Number(ACAL1_021[4]))<< 24)|((SpecDisplay_Number(ACAL1_021[3]))<< 16)  | ((SpecDisplay_Number(ACAL1_021[2]))<<8)
+                                |((SpecDisplay_Number(ACAL1_021[1]))<<0)) ;
+
+                   cali_t.cal1_r02_reg =((SpecDisplay_Number(ACAL1_021[0]))<<24) ; 
+                  *(pfdata +53) =  cali_t.cal1_r02_reg | cali_t.cal1_r03_reg;
                   break;
 
                   case 7:
@@ -1030,12 +1125,18 @@ void CAL_KEY4_ENTER_Fun(void)
 
                   case 8:
                       
-                      Number_Digital_5bit_AddSelect(ACAL1_03);
+                     // Number_Digital_5bit_AddSelect(ACAL1_03); //display weight Value again load std ,sample 50g +10g ~=59.9g, 
                   break;
 
-                 case 9:
+                 case 9: //adjust 60g be save
                       
-                      Number_Digital_5bit_AddSelect(ACAL1_031);
+                    Number_Digital_5bit_AddSelect(ACAL1_031);
+                  cali_t.cal1_r03_reg =((SpecDisplay_Number(ACAL1_031[4]))<<0);
+
+                *(pfdata +53) =  cali_t.cal1_r02_reg | cali_t.cal1_r03_reg;
+
+                *(pfdata +54)= (((SpecDisplay_Number(ACAL1_031[3]))<< 24)  | ((SpecDisplay_Number(ACAL1_031[2]))<<16)
+                         |((SpecDisplay_Number(ACAL1_031[1]))<<8) |((SpecDisplay_Number(ACAL1_031[0]))<<0))  ;
                   break;
 
               }       
@@ -1058,6 +1159,8 @@ void CAL_KEY4_ENTER_Fun(void)
                   case 1:
                         ACAL2_00[0] ++;
                         if(ACAL2_00[0]>15) ACAL2_00[0]=0;
+                  *(pfdata+55)= ((SpecDisplay_Number(ACAL2_00[0])) <<24) | cali_t.cal2_r01_reg;
+                   cali_t.cal2_r00_reg  = ((SpecDisplay_Number(ACAL2_00[0])) <<24) | cali_t.cal2_r01_reg;
                       
                   break;
 
@@ -1074,6 +1177,10 @@ void CAL_KEY4_ENTER_Fun(void)
                   case 3:
                       
                       Number_Digital_5bit_AddSelect(ACAL2_01);
+                *(pfdata +55) = cali_t.cal2_r00_reg | cali_t.cal2_r01_reg;
+          
+                *(pfdata + 56) = (((SpecDisplay_Number(ACAL2_01[3]))<< 24)|((SpecDisplay_Number(ACAL2_01[2]))<< 16)  | ((SpecDisplay_Number(ACAL2_01[1]))<<8)
+                         |((SpecDisplay_Number(ACAL2_01[0]))<<0)) ;
                   break;
 
                   case 4:
@@ -1086,12 +1193,17 @@ void CAL_KEY4_ENTER_Fun(void)
 
                   case 5:
                     
-                      Number_Digital_5bitPoint_AddSelect(ACAL2_02);
+                     // Number_Digital_5bitPoint_AddSelect(ACAL2_02); //display weight Value real
                   break;
 
                 case 6:
-                    
-                      Number_Digital_5bitPoint_AddSelect(ACAL2_021);
+
+                    Number_Digital_5bitPoint_AddSelect(ACAL2_021);
+                    *(pfdata +56) = (((SpecDisplay_Number(ACAL2_021[4]))<< 24)|((SpecDisplay_Number(ACAL2_021[3]))<< 16)  | ((SpecDisplay_Number(ACAL2_021[2]))<<8)
+                                |((SpecDisplay_Number(ACAL2_021[1]))<<0)) ;
+
+                   cali_t.cal2_r02_reg =((SpecDisplay_Number(ACAL2_021[0]))<<24) ; 
+                  *(pfdata +57) =  cali_t.cal2_r02_reg | cali_t.cal2_r03_reg;
                   break;
 
                   case 7:
@@ -1105,6 +1217,14 @@ void CAL_KEY4_ENTER_Fun(void)
                   case 8:
                       
                       Number_Digital_5bit_AddSelect(ACAL2_03);
+
+                  cali_t.cal1_r03_reg =((SpecDisplay_Number(ACAL2_03[4]))<<0);
+
+                  *(pfdata +57) =  cali_t.cal2_r02_reg | cali_t.cal2_r03_reg;
+
+                  *(pfdata +58)= (((SpecDisplay_Number(ACAL2_03[3]))<< 24)  | ((SpecDisplay_Number(ACAL2_03[2]))<<16)
+                          |((SpecDisplay_Number(ACAL2_03[1]))<<8) |((SpecDisplay_Number(ACAL1_03[0]))<<0))  ;
+
                   break;
 
                  case 9:
@@ -1116,13 +1236,20 @@ void CAL_KEY4_ENTER_Fun(void)
                   break;
 
                   case 10:
-                     Number_Digital_5bit_AddSelect(ACAL2_04);
+                    // Number_Digital_5bit_AddSelect(ACAL2_04);
+
 
                   break;
 
                   case 11:
 
                        Number_Digital_5bit_AddSelect(ACAL2_041);
+                
+
+                  *(pfdata +59)= (((SpecDisplay_Number(ACAL2_041[4]))<< 24)  | ((SpecDisplay_Number(ACAL2_041[3]))<<16)
+                          |((SpecDisplay_Number(ACAL2_041[2]))<<8) |((SpecDisplay_Number(ACAL2_041[1]))<<0))  ;
+
+                  *(pfdata +60) = ((SpecDisplay_Number(ACAL2_041[0]))<<24) ;
                   break;
 
               }       
@@ -1203,6 +1330,7 @@ void CALI_KEY2_DOWN_Fun(void)
                   case 0:
                         ACAL1_00[0] --;
                         if(ACAL1_00[0]==-1) ACAL1_00[0]=15;
+                   *(pfdata+50)= ((SpecDisplay_Number(ACAL1_00[0])) <<24);
                         printf("key down - = %d\n", ACAL1_00[0]);
                   break;
 
@@ -1228,6 +1356,7 @@ void CALI_KEY2_DOWN_Fun(void)
                   case 0:
                         ACAL1_00[0] --;
                         if(ACAL1_00[0]==-1) ACAL1_00[0]=15;
+
                         printf("key down - = %d\n", ACAL1_00[0]);
                   break;
 
@@ -1287,6 +1416,9 @@ void CALI_KEY2_DOWN_Fun(void)
                   case 1:
                         ACAL1_00[0] --;
                         if(ACAL1_00[0]==-1) ACAL1_00[0]=15;
+                          if(ACAL1_00[0]>15) ACAL1_00[0]=0;
+                    *(pfdata+50)= ((SpecDisplay_Number(ACAL1_00[0])) <<24 )| cali_t.cal1_r01_reg;
+                       cali_t.cal1_r00_reg  = ((SpecDisplay_Number(ACAL1_00[0])) <<24) | cali_t.cal1_r01_reg;
                         printf("key down - = %d\n", ACAL1_00[0]);
                   break;
 
@@ -1302,6 +1434,10 @@ void CALI_KEY2_DOWN_Fun(void)
 
                   case 3:
                       Number_Digital_5bit_DecSelect(ACAL1_01);
+                *(pfdata +50) = cali_t.cal1_r00_reg | cali_t.cal1_r01_reg;
+          
+                *(pfdata + 51) = (((SpecDisplay_Number(ACAL1_01[3]))<< 24)|((SpecDisplay_Number(ACAL1_01[2]))<< 16)  | ((SpecDisplay_Number(ACAL1_01[1]))<<8)
+                         |((SpecDisplay_Number(ACAL1_01[0]))<<0)) ;
                   break;
 
                   case 4:
@@ -1314,12 +1450,17 @@ void CALI_KEY2_DOWN_Fun(void)
 
 
                   case 5:
-                      Number_Digital_5bitPoint_DecSelect(ACAL1_02);
+                      //Number_Digital_5bitPoint_DecSelect(ACAL1_02);
                   break;
 
                    case 6:
                     
                       Number_Digital_5bitPoint_DecSelect(ACAL1_021);
+                      *(pfdata +52) = (((SpecDisplay_Number(ACAL1_021[4]))<< 24)|((SpecDisplay_Number(ACAL1_021[3]))<< 16)  | ((SpecDisplay_Number(ACAL1_021[2]))<<8)
+                                |((SpecDisplay_Number(ACAL1_021[1]))<<0)) ;
+
+                   cali_t.cal1_r02_reg =((SpecDisplay_Number(ACAL1_021[0]))<<24) ; 
+                  *(pfdata +53) =  cali_t.cal1_r02_reg | cali_t.cal1_r03_reg;
                   break;
 
                   case 7:
@@ -1331,11 +1472,17 @@ void CALI_KEY2_DOWN_Fun(void)
                   break;
 
                     case 8:
-                       Number_Digital_5bit_DecSelect(ACAL1_03);
+                      // Number_Digital_5bit_DecSelect(ACAL1_03);
                   break;
 
                   case 9:
                        Number_Digital_5bit_DecSelect(ACAL1_031);
+                         cali_t.cal1_r03_reg =((SpecDisplay_Number(ACAL1_031[4]))<<0);
+
+                *(pfdata +53) =  cali_t.cal1_r02_reg | cali_t.cal1_r03_reg;
+
+                *(pfdata +54)= (((SpecDisplay_Number(ACAL1_031[3]))<< 24)  | ((SpecDisplay_Number(ACAL1_031[2]))<<16)
+                         |((SpecDisplay_Number(ACAL1_031[1]))<<8) |((SpecDisplay_Number(ACAL1_031[0]))<<0))  ;
                   break;
               }       
 
@@ -1602,9 +1749,34 @@ static void caliSubMenu_onePoint_5bit_Dis(int8_t unit,int8_t decade,int8_t hundr
 
  void Calibration_TheSecondRunDis_Cmd(void )
 {
- 
+     
+      switch(cali_t.CaliMenu_Item){
 
-    CALI_MENU_SUB_02_DIS();
+        case CAL1://dC-u,CAP,2Ero, SPAn
+              cali_t.CaliMenu_02_Id = CAL1;
+              CaliSubMenu_02_01_Dis(cali_t.CaliSub_02_01_Item);
+          
+
+        break;
+
+        case CAL2: //dC-u,CAP,2Ero,SEn,SPARn
+                cali_t.CaliMenu_02_Id = CAL2;
+                CaliSubMenu_02_02_Dis(cali_t.CaliSub_02_02_Item );
+                
+        break;
+
+        case CAL3://CLS ,QtY,C-nS
+             cali_t.CaliMenu_02_Id = CAL3;
+            CaliSubMenu_02_03_Dis(cali_t.CaliSub_02_03_Item );
+        break;
+
+        case CAL5://CLS ,QtY,C-nS
+             cali_t.CaliMenu_02_Id = CAL5;
+             Symbol_ContC();
+        
+        break;
+
+    }
       
 }  
   
@@ -1619,7 +1791,8 @@ void Calibration_TheThirdRunDis_Cmd(void)
         case 0: //dCu numbers display
         menu_t.DisplaySmgBit_Select_Numbers=0;
         cali_t.CAL1_Id = 0;
-        Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
+        Cali_CAL1_ducNumberDis(ACAL1_00[0]); 
+         
         // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
         break;
 
@@ -1747,6 +1920,7 @@ void Calibration_TheThirdRunDis_Cmd(void)
 ********************************************************************/
 void Calibration_TheFourthRunDis_Cmd(void)
 {
+     static uint8_t cal1r00,cal1r01,cal1r02,cal1r03;
      switch(cali_t.CaliMenu_Item){
 
       case CAL1:
@@ -1762,8 +1936,14 @@ void Calibration_TheFourthRunDis_Cmd(void)
          
                     menu_t.DisplaySmgBit_Select_Numbers=0;
                     cali_t.CAL1_Id = 0;
-                    
-                    Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
+                      if(cal1r00==0){
+                        cal1r00++;
+                         Flash_Read(); 
+                        ACAL1_00[0]=((flash_t.flashData[200] & 0xFF) >>24); //form flas read data 
+                         printf("cal1_ACAL1_00[0] = %d\n",ACAL1_00[0]);
+                       
+                        }
+                       Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
                     // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
                   break;
 
@@ -1775,7 +1955,25 @@ void Calibration_TheFourthRunDis_Cmd(void)
                   case 3: //CAP number display
                      cali_t.CAL1_Id =1;
                
-                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                      menu_t.DisplaySmgBit_Select_Numbers=5;
+                      if(cal1r01==0){
+                        cal1r01++;
+                         Flash_Read(); 
+                        ACAL1_01[4]=((flash_t.flashData[200] & 0xFF) >>0); //form flas read data 
+                        printf("cal1_ACAL1_01[4] = %d\n",ACAL1_01[4]);
+                         //next Words
+                         
+                        ACAL1_01[3]=((flash_t.flashData[204] & 0xFF000000) >> 24); //form flas read data 
+                        printf("f1sub_01_05_AF106[3] = %d\n",AF202[3]);
+                        ACAL1_01[2]=((flash_t.flashData[204] & 0x00ff0000) >> 16);
+                        printf("f1sub_01_05_AF106[2] = %d\n",AF202[2]);
+                        ACAL1_01[1]=((flash_t.flashData[204] & 0xff00) >> 8);
+                        printf("f1sub_01_05_AF106[1] = %d\n",AF202[1]);
+                        ACAL1_01[0]=((flash_t.flashData[204] & 0xff) >> 0);
+                        printf("f1sub_01_05_AF106[0] = %d\n",AF202[0]);
+
+                        
+                  }
                       Number_5bit_DIS(ACAL1_01);
                   break;
 
@@ -1784,18 +1982,35 @@ void Calibration_TheFourthRunDis_Cmd(void)
                       Symbol_2Ero();  ///---2
                   break;
 
-                  case 5://2Ero number display 
-                  cali_t.CAL1_Id =2;
-              
-                     menu_t.DisplaySmgBit_Select_Numbers=5;
-                    
-                      Number_5bit_Char_DIS(ACAL1_02);
+                  case 5://2Ero number display weight real load
+                    cali_t.CAL1_Id =2;
+                     Get_Weight();
+			               Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ; 
+            
                   break;
 
                   case 6://2Ero number display 
                     cali_t.CAL1_Id =2;
             
                      menu_t.DisplaySmgBit_Select_Numbers=5;
+                      if(cal1r02==0){
+                        cal1r02++;
+                         Flash_Read(); 
+                      
+                       ACAL1_021[4]=((flash_t.flashData[208] & 0xFF000000) >> 24); //form flas read data 
+                        printf("cal1_ACAL1_021[43] = %d\n",ACAL1_021[4]);
+                        ACAL1_021[3]=((flash_t.flashData[208] & 0x00ff0000) >> 16);
+                        printf("cal1_ACAL1_021[3]  = %d\n",ACAL1_021[3]);
+                        ACAL1_021[2]=((flash_t.flashData[208] & 0xff00) >> 8);
+                        printf("cal1_ACAL1_021[2]  = %d\n",ACAL1_021[2]);
+                        ACAL1_021[1]=((flash_t.flashData[208] & 0xff) >> 0);
+                        printf("cal1_ACAL1_021[1]  = %d\n",ACAL1_021[1]);
+                         //next
+                        ACAL1_021[0]=((flash_t.flashData[212] & 0xff000000) >> 24);
+                        printf("cal1_ACAL1_021[0]  = %d\n",ACAL1_021[0]);
+
+                        
+                  }
                     
                       Number_5bit_Char_DIS(ACAL1_021);
                   break;
@@ -1808,16 +2023,36 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 8: //SPARn
                       cali_t.CAL1_Id =3;
+                      Get_Weight();
+			               Weight_DisSmg(Weight_Real) ;
          
-                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                       // menu_t.DisplaySmgBit_Select_Numbers=5;
                         
-                        Number_5bit_DIS(ACAL1_03);
+                       // Number_5bit_DIS(ACAL1_03);
                   break;
 
                    case 9: //SPARn number display 
                       cali_t.CAL1_Id =3;
        
                         menu_t.DisplaySmgBit_Select_Numbers=5;
+                         if(cal1r03==0){
+                        cal1r03++;
+                         Flash_Read(); 
+                        ACAL1_031[4]=((flash_t.flashData[212] & 0xFF) >>0); //form flas read data 
+                         
+                         //next Words
+                         
+                        ACAL1_031[3]=((flash_t.flashData[216] & 0xFF000000) >> 24); //form flas read data 
+                        printf("cal1_ACAL1_031[3] = %d\n",ACAL1_031[3]);
+                        ACAL1_031[2]=((flash_t.flashData[216] & 0x00ff0000) >> 16);
+                        printf("cal1_ACAL1_031[2] = %d\n",ACAL1_031[2]);
+                        ACAL1_031[1]=((flash_t.flashData[216] & 0xff00) >> 8);
+                        printf("cal1_ACAL1_031[1] = %d\n",ACAL1_031[1]);
+                        ACAL1_031[0]=((flash_t.flashData[216] & 0xff) >> 0);
+                        printf("cal1_ACAL1_031[0] = %d\n",ACAL1_031[0]);
+
+                        
+                  }
                         
                         Number_5bit_DIS(ACAL1_031);
                   break;
@@ -1862,12 +2097,13 @@ void Calibration_TheFourthRunDis_Cmd(void)
                       Symbol_2Ero();  //---3
                   break;
 
-                  case 5://2Ero number display 
-                
+                  case 5://2Ero number display real weight 
+                     Get_Weight();
+			               Weight_DisSmg(Weight_Real) ;
               
-                     menu_t.DisplaySmgBit_Select_Numbers=5;
+                     //menu_t.DisplaySmgBit_Select_Numbers=5;
                     
-                      Number_5bit_Char_DIS(ACAL2_02);
+                     // Number_5bit_Char_DIS(ACAL2_02);
                   break;
 
                   case 6://2Ero number display 
@@ -1895,10 +2131,11 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 10: //SPARn
                     
-         
-                        menu_t.DisplaySmgBit_Select_Numbers=5;
+                     Get_Weight();
+			               Weight_DisSmg(Weight_Real) ;
+                       // menu_t.DisplaySmgBit_Select_Numbers=5;
                         
-                        Number_5bit_DIS(ACAL2_04);
+                       // Number_5bit_DIS(ACAL2_04);
                   break;
 
                    case 11: //SPARn number display 

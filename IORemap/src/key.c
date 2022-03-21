@@ -76,7 +76,7 @@ static void KEY2_TRAE_DOWN_Fun(void);
 static void KEY3_SWITCH_LEFT_Fun(void);
 //static void KEY4_SET_ENTER_Fun(void);
 static void KEY_SubMenuFun_Enter(void);
-static void F1_01_xx_SelectCmd(void);
+//static void F1_01_xx_SelectCmd(void);
 
 
 
@@ -143,16 +143,8 @@ uint8_t Scan_EnterKey(uint8_t keyvalue)
 	   
       return (cnt1|cnt2);
 
-
-
-
-
 }
 		
-
-	
-	
-
 /***********************************************************************
  **********************************************************************/
 void KEY_Function(uint8_t keydata)
@@ -454,12 +446,9 @@ static void KEY1_ZERIO_UP_Fun(void)
                     //F8 - 01 -> the thrid menu
       case 0xf80:
 
-                 
-                  F8_Add_TheThirdMenu_KeyFunction(menu_t.menu_F1Sub_03_xx_key);
+        F8_Add_TheThirdMenu_KeyFunction(menu_t.menu_F1Sub_03_xx_key);
 
-               
-
-      break;
+        break;
 
       case 0xf90:
 

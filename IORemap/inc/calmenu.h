@@ -6,7 +6,7 @@
 typedef struct _CALI{
    
    
-   uint8_t Thefirst_InputKeyValue;
+    uint8_t Thefirst_InputKeyValue;
     uint8_t CaliControl_key;
     uint8_t CaliMenu_Item;
     uint8_t CaliMenu_Sub_Item;
@@ -17,6 +17,9 @@ typedef struct _CALI{
     uint8_t CAL1_Id;
     uint8_t CAL2_Id ;
     uint8_t CAL3_Id;
+    uint8_t CAL1_FlashSaveData;
+    uint8_t CAL_Item_flag;
+    
     
 
     uint8_t CaliMenu_01_Id;
@@ -26,9 +29,11 @@ typedef struct _CALI{
     uint8_t CaliSub_02_01_Item;
     uint8_t CaliSub_02_02_Item;
     uint8_t CaliSub_02_03_Item;
+    uint8_t CaliSub_02_05_Item;
     uint8_t CaliSub_theSecond_02_Item;
     uint8_t CaliMenu_02_sub_Id;
     uint8_t runKeyMenu;
+ 
            
 
      uint8_t CaliSub_03_01_Itme;
@@ -53,6 +58,16 @@ typedef struct _CALI{
     int8_t stackCali_03_01_Tp;
     int8_t stackCali_03_02_Tp;
     int8_t stackCali_03_03_Tp;
+
+    uint32_t cal1_r00_reg;
+    uint32_t cal1_r01_reg;
+    uint32_t cal1_r02_reg;
+    uint32_t cal1_r03_reg;
+
+    uint32_t cal2_r00_reg;
+    uint32_t cal2_r01_reg;
+    uint32_t cal2_r02_reg;
+    uint32_t cal2_r03_reg;
 }cali;
 extern cali cali_t;
 enum calimenu{
@@ -70,7 +85,7 @@ enum cali{
    CAL1 ,
    CAL2 ,
    CAL3 ,
-   CAL5
+   CAL5 ,
 
 };
 
