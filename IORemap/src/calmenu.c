@@ -739,7 +739,7 @@ void CAL_KEY4_ENTER_Fun(void)
         cali_t.runKeyMenu=mainitem_t.task_MainMenu;
 
     }
-    else if(cali_t.keyEnter_flag ==1){
+    else if(cali_t.keyEnter_flag ==0XFF){
 
        //CAL1->dC-u,-??isplay "dC-u"
        
@@ -776,7 +776,7 @@ void CAL_KEY4_ENTER_Fun(void)
 
         }
     }
-    else if(cali_t.keyEnter_flag ==2){ //caliTheThird_Menu 
+    else if(cali_t.keyEnter_flag ==1){ //caliTheThird_Menu 
 
      //case 2:// the second step -> opertaion input number EnterKey
        mainitem_t.task_MainMenu = caliTheThird_Menu; 
