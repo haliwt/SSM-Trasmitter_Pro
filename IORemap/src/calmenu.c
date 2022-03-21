@@ -1927,13 +1927,14 @@ void Calibration_TheFourthRunDis_Cmd(void)
         switch(cali_t.CAL1_sequence_flag){
 
                   case 0:
+                     run_t.dispWeightValue=0;
                      menu_t.DisplaySmgBit_Select_Numbers=0;
                     Symbol_dC_u(); //---0
                   break;
 
 
                   case 1: //dCu numbers display
-         
+                       run_t.dispWeightValue=0;
                     menu_t.DisplaySmgBit_Select_Numbers=0;
                     cali_t.CAL1_Id = 0;
                       if(cal1r00==0){
@@ -1948,13 +1949,14 @@ void Calibration_TheFourthRunDis_Cmd(void)
                   break;
 
                   case 2:
+                     run_t.dispWeightValue=0;
                     menu_t.DisplaySmgBit_Select_Numbers=0;
                        Symbol_CAP();  ///---1
                   break;
                   
                   case 3: //CAP number display
                      cali_t.CAL1_Id =1;
-               
+                  run_t.dispWeightValue=0;
                       menu_t.DisplaySmgBit_Select_Numbers=5;
                       if(cal1r01==0){
                         cal1r01++;
@@ -1974,24 +1976,29 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                         
                   }
-                      Number_5bit_DIS(ACAL1_01);
+                     // Number_5bit_DIS(ACAL1_01);
+                      CALx_CAP_5bit_DispNumbers(ACAL1_00[0],ACAL1_01);
+                       run_t.dispWeightValue=0;
                   break;
 
                   case 4:
                      menu_t.DisplaySmgBit_Select_Numbers=0;
                       Symbol_2Ero();  ///---2
+                       run_t.dispWeightValue=0;
                   break;
 
                   case 5://2Ero number display weight real load
                     cali_t.CAL1_Id =2;
+                      menu_t.DisplaySmgBit_Select_Numbers=0;
                      Get_Weight();
 			               Weight_DisSmg(Weight_Real) ;//(HX720_Buffer);//(Weight_Real) ; 
-            
+                     SysTick_Delay_Ms(200);
+                    // run_t.dispWeightValue=1;
                   break;
 
                   case 6://2Ero number display 
                     cali_t.CAL1_Id =2;
-            
+                    run_t.dispWeightValue=0;
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                       if(cal1r02==0){
                         cal1r02++;
@@ -2012,26 +2019,31 @@ void Calibration_TheFourthRunDis_Cmd(void)
                         
                   }
                     
-                      Number_5bit_Char_DIS(ACAL1_021);
+                    //  Number_5bit_Char_DIS(ACAL1_021);
+                     CALx_CAP_5bit_DispNumbers(ACAL1_00[0],ACAL1_01);
+                       run_t.dispWeightValue=0;
                   break;
 
 
                   case 7://2Ero number 2 display
+                     run_t.dispWeightValue=0;
                         menu_t.DisplaySmgBit_Select_Numbers=0;
                         Symbol_SPAn(); ///----3
                   break;
 
                   case 8: //SPARn
                       cali_t.CAL1_Id =3;
+                           run_t.dispWeightValue=1;
                       Get_Weight();
-			               Weight_DisSmg(Weight_Real) ;
-         
-                       // menu_t.DisplaySmgBit_Select_Numbers=5;
+			                Weight_DisSmg(Weight_Real) ;//display weight
+                       SysTick_Delay_Ms(200);
+                       menu_t.DisplaySmgBit_Select_Numbers=5;
                         
                        // Number_5bit_DIS(ACAL1_03);
                   break;
 
                    case 9: //SPARn number display 
+                        run_t.dispWeightValue=0;
                       cali_t.CAL1_Id =3;
        
                         menu_t.DisplaySmgBit_Select_Numbers=5;
@@ -2053,8 +2065,8 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                         
                   }
-                        
-                        Number_5bit_DIS(ACAL1_031);
+                         CALx_CAP_5bit_DispNumbers(ACAL1_00[0],ACAL1_031);
+                       // Number_5bit_DIS(ACAL1_031);
                   break;
              
      
@@ -2066,6 +2078,7 @@ void Calibration_TheFourthRunDis_Cmd(void)
             switch(cali_t.CAL2_sequence_flag){
 
                   case 0:
+                  
                      menu_t.DisplaySmgBit_Select_Numbers=0;
                     Symbol_dC_u(); ///--1
                   break;
@@ -2319,6 +2332,163 @@ void Cali_CAL1_ducNumberDis(int8_t cal1)
 
  } 
 
+void CALx_CAP_5bit_DispNumbers(int8_t apa, int8_t *pA)
+{
+ 
+
+    switch(apa){
+
+        case 0: //0.0001
+              SmgDisplay_Point(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay(digital_3,*(pA+2)); // 
+              SmgDisplay(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+ 
+
+        break;
+
+        case 1://0.0002
+             SmgDisplay_Point(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay(digital_3,*(pA+2)); // 
+              SmgDisplay(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+
+        break;
+
+        case 2://0.005
+             SmgDisplay_Point(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay(digital_3,*(pA+2)); // 
+              SmgDisplay(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+        break;
+
+        case 3://0.01
+             SmgDisplay(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay_Point(digital_3,*(pA+2)); // 
+              SmgDisplay(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+        break;
+
+        case 4://0.02
+              SmgDisplay(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay_Point(digital_3,*(pA+2)); // 
+              SmgDisplay(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+        break;
+
+        case 5://0.05
+              SmgDisplay(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay_Point(digital_3,*(pA+2)); // 
+              SmgDisplay(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+
+        break;
+
+         case 6://0.1
+              SmgDisplay(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay(digital_3,*(pA+2)); // 
+              SmgDisplay_Point(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+        break;
+
+        case 7://0.2
+              SmgDisplay(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay(digital_3,*(pA+2)); // 
+              SmgDisplay_Point(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+
+
+        break;
+
+        case 8: //0.5
+              SmgDisplay(digital_1,*(pA+4)); // 
+              SmgDisplay(digital_2,*(pA+3)); //
+              SmgDisplay(digital_3,*(pA+2)); // 
+              SmgDisplay_Point(digital_4,*(pA+1)); //
+              SmgDisplay(digital_5,*pA); // 0~100
+
+
+        break;
+
+        case 9://1
+          SmgDisplay(digital_1,*(pA+4)); // 
+          SmgDisplay(digital_2,*(pA+3)); //
+          SmgDisplay(digital_3,*(pA+2)); // 
+          SmgDisplay(digital_4,*(pA+1)); //
+          SmgDisplay(digital_5,*pA); // 0~100
+        break;
+
+        case 10://2
+          SmgDisplay(digital_1,*(pA+4)); // 
+          SmgDisplay(digital_2,*(pA+3)); //
+          SmgDisplay(digital_3,*(pA+2)); // 
+          SmgDisplay(digital_4,*(pA+1)); //
+          SmgDisplay(digital_5,*pA); // 0~100
+        break;
+
+        case 11://5
+          SmgDisplay(digital_1,*(pA+4)); // 
+          SmgDisplay(digital_2,*(pA+3)); //
+          SmgDisplay(digital_3,*(pA+2)); // 
+          SmgDisplay(digital_4,*(pA+1)); //
+          SmgDisplay(digital_5,*pA); // 0~100
+
+        break;
+
+        case 12://10
+          SmgDisplay(digital_1,*(pA+4)); // 
+          SmgDisplay(digital_2,*(pA+3)); //
+          SmgDisplay(digital_3,*(pA+2)); // 
+          SmgDisplay(digital_4,*(pA+1)); //
+          SmgDisplay(digital_5,*pA); // 0~100
+        break;
+
+        case 13://20
+          SmgDisplay(digital_1,*(pA+4)); // 
+          SmgDisplay(digital_2,*(pA+3)); //
+          SmgDisplay(digital_3,*(pA+2)); // 
+          SmgDisplay(digital_4,*(pA+1)); //
+          SmgDisplay(digital_5,*pA); // 0~100
+
+        break;
+
+        case 14://20
+         SmgDisplay(digital_1,*(pA+4)); // 
+        SmgDisplay(digital_2,*(pA+3)); //
+        SmgDisplay(digital_3,*(pA+2)); // 
+        SmgDisplay(digital_4,*(pA+1)); //
+        SmgDisplay(digital_5,*pA); // 0~100
+
+        break;
+
+        case 15://50
+         SmgDisplay(digital_1,*(pA+4)); // 
+        SmgDisplay(digital_2,*(pA+3)); //
+        SmgDisplay(digital_3,*(pA+2)); // 
+        SmgDisplay(digital_4,*(pA+1)); //
+        SmgDisplay(digital_5,*pA); // 0~100
+
+        break;
+
+
+
+
+     }
+
+
+
+
+
+
+}
 
 
 

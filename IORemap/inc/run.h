@@ -11,6 +11,7 @@ typedef struct _RUN{
 	uint8_t timerOver_flag;
     uint8_t EnterKey_flag;
 	uint8_t SaveDataSelect_flag;
+    uint8_t dispWeightValue ;
 		
 }run;
 
@@ -59,5 +60,6 @@ void RunCommand(void);
 void RunBlinkbMenuCmd(void);
 
 void RunCalibration_Command(void);
+void RunCmd_DisWeightValue(void);
 
 #endif 

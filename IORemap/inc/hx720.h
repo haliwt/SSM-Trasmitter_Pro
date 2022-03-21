@@ -45,4 +45,5 @@ unsigned long HX711_Read(void)	;
 uint32_t GetHX720Data(void);
 void RunHX720Cmd(void);
 
+void  SmgDisp_PointWeightValue(uint8_t array,uint8_t d1,uint8_t d2,uint8_t d3,uint8_t d4,uint8_t d5);
 #endif 

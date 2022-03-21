@@ -141,5 +141,6 @@ void Calibration_TheSecondRunDis_Cmd(void );
 void Calibration_TheThirdRunDis_Cmd(void );
 
 void  Calibration_TheFourthRunDis_Cmd(void);
+void CALx_CAP_5bit_DispNumbers(int8_t apa, int8_t *pA);
 
 #endif 

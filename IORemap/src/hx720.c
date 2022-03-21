@@ -6,7 +6,7 @@
 
 uint8_t HX720_ReadDataFlag=0;
 
-static void SmgDisp_PointWeightValue(uint8_t array,uint8_t tenthousand,uint8_t thousand,uint8_t hundred,uint8_t decade,uint8_t unit);
+
 //static uint32_t getIndexOfStings(char ch);
 //static long hexToDec(char *source);
 //����ѹ���������ͺţ�	HX711
@@ -214,6 +214,7 @@ void Weight_DisSmg(float weightValue)
 	 unitPlace =(uint32_t) (weightValue/1)%10; 
 	
 	 SysTick_Delay_Ms(5);
+    #if 0
 	 if(hundredthousandPlace ==0){
 		 
 		 hundredthousandPlace=0x0b;
@@ -245,7 +246,7 @@ void Weight_DisSmg(float weightValue)
 		     tenPlace =0x0b;
 	 }
 	
-	 
+	#endif 
         switch(cali_t.CaliMenu_01_Id){
 
 			case CAL1:
@@ -262,7 +263,7 @@ void Weight_DisSmg(float weightValue)
 
 			break;
 
-			case 0xff:
+			case 0x0ff:
 				if(hundredthousandPlace==0x0b && tenthousandPlace ==0x0b ){
 				SmgDisplay(digital_1,onethousandPlace); //"10000"
 				SmgDisplay(digital_2,thousandPlace);//'1000'
@@ -474,63 +475,63 @@ void RunHX720Cmd(void)
 
 
 
-void  SmgDisp_PointWeightValue(uint8_t array,uint8_t tenthousand,uint8_t thousand,uint8_t hundred,uint8_t decade,uint8_t unit)
+void  SmgDisp_PointWeightValue(uint8_t array,uint8_t d1,uint8_t d2,uint8_t d3,uint8_t d4,uint8_t d5)
 {
      switch(array){
 		
 		case 0: //0.0001
 
-			SmgDisplay_Point(digital_1,tenthousand);
-			SmgDisplay(digital_2,thousand);
-			SmgDisplay(digital_3,hundred);//'NULL'
-			SmgDisplay(digital_4,decade);//'NULL'
-			SmgDisplay(digital_5,unit); //'0'
+			SmgDisplay_Point(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);//'NULL'
+			SmgDisplay(digital_4,d4);//'NULL'
+			SmgDisplay(digital_5,d5); //'0'
 
 		break;
 
 		case 1://0.0002
-			SmgDisplay_Point(digital_1,tenthousand);
-			SmgDisplay(digital_2,thousand);
-			SmgDisplay(digital_3,hundred);//'NULL'
-			SmgDisplay(digital_4,decade);//'NULL'
-			SmgDisplay(digital_5,unit); //'0'
+			SmgDisplay_Point(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);//'NULL'
+			SmgDisplay(digital_4,d4);//'NULL'
+			SmgDisplay(digital_5,d5); //'0'
 
 		break;
 
 
 		case 2://0.0005
-			SmgDisplay_Point(digital_1,tenthousand);
-			SmgDisplay(digital_2,thousand);
-			SmgDisplay(digital_3,hundred);//'NULL'
-			SmgDisplay(digital_4,decade);//'NULL'
-			SmgDisplay(digital_5,unit); //'0'
+			SmgDisplay_Point(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);//'NULL'
+			SmgDisplay(digital_4,d4);//'NULL'
+			SmgDisplay(digital_5,d5); //'0'
 
 		break;
 
 		case 3://0.01
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay_Point(digital_3,hundred);//
-			SmgDisplay(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay_Point(digital_3,d3);//
+			SmgDisplay(digital_4,d4);//
+			SmgDisplay(digital_5,d5); //
 
 		break;
 
 		case 4://0.02
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay_Point(digital_3,hundred);//
-			SmgDisplay(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay_Point(digital_3,d3);//
+			SmgDisplay(digital_4,d4);//
+			SmgDisplay(digital_5,d5); //
 
 		break;
 
 		case 5://0.05
 			SmgDisplay(digital_1,0x0b);
 			SmgDisplay(digital_2,0x0b);
-			SmgDisplay_Point(digital_3,hundred);//
-			SmgDisplay(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay_Point(digital_3,d3);//
+			SmgDisplay(digital_4,d4);//
+			SmgDisplay(digital_5,d5); //
 
 		break;
 
@@ -538,8 +539,8 @@ void  SmgDisp_PointWeightValue(uint8_t array,uint8_t tenthousand,uint8_t thousan
 			SmgDisplay(digital_1,0x0b);
 			SmgDisplay(digital_2,0x0b);
 			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay_Point(digital_4,d4);//
+			SmgDisplay(digital_5,d5); //
 
 		break;
 
@@ -547,8 +548,8 @@ void  SmgDisp_PointWeightValue(uint8_t array,uint8_t tenthousand,uint8_t thousan
 			SmgDisplay(digital_1,0x0b);
 			SmgDisplay(digital_2,0x0b);
 			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay_Point(digital_4,d4);//
+			SmgDisplay(digital_5,d5); //
 
 		break;
 
@@ -556,62 +557,60 @@ void  SmgDisp_PointWeightValue(uint8_t array,uint8_t tenthousand,uint8_t thousan
 			SmgDisplay(digital_1,0x0b);
 			SmgDisplay(digital_2,0x0b);
 			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay_Point(digital_4,d4);//
+			SmgDisplay(digital_5,d5); //
 
 		break;
 
 		case 9://1
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay(digital_4,0x0b);//
-			SmgDisplay(digital_5,0x01); //
+			SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);//
+			SmgDisplay(digital_4,d4);//
+			SmgDisplay(digital_5,d5); //
 
 		break;
 
 		case 10://2
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
-
+		    SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);
+			SmgDisplay(digital_4,d4);
+			SmgDisplay(digital_5,d5); 
 		break;
 
 		case 11://5
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
-
+			SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);
+			SmgDisplay(digital_4,d4);
+			SmgDisplay(digital_5,d5); 
 		break;
 
 		case 12://10
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);//
+			SmgDisplay(digital_4,d4);//
+			SmgDisplay(digital_5,d5); 
 
 		break;
 
 		case 13://20
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);//
+			SmgDisplay(digital_4,d4);//
+			SmgDisplay(digital_5,d5); 
 
 		break;
 
 		case 14://50
-			SmgDisplay(digital_1,0x0b);
-			SmgDisplay(digital_2,0x0b);
-			SmgDisplay(digital_3,0x0b);//
-			SmgDisplay_Point(digital_4,decade);//
-			SmgDisplay(digital_5,unit); //
+			SmgDisplay(digital_1,d1);
+			SmgDisplay(digital_2,d2);
+			SmgDisplay(digital_3,d3);//
+			SmgDisplay(digital_4,d4);//
+			SmgDisplay(digital_5,d5); 
 
 		break;
 

@@ -195,6 +195,8 @@ int main(void)
 
 				RunCommand();
 
+				RunCmd_DisWeightValue();
+
 			
 				
 					
