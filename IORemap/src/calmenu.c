@@ -731,7 +731,7 @@ void CAL_KEY4_ENTER_Fun(void)
     cali_t.keyEnter_flag++;
     printf("cali enterKey = %d \n", cali_t.keyEnter_flag);
     if(cali_t.keyEnter_flag ==0){
-
+          run_t.setBlank=0;
       
          mainitem_t.task_MainMenu = caliTheFirst_Menu ;
          caliMainTop=-1;
@@ -741,7 +741,7 @@ void CAL_KEY4_ENTER_Fun(void)
     }
     else if(cali_t.keyEnter_flag ==1){
 
-       //CAL1->dC-u,-》display "dC-u"
+       //CAL1->dC-u,-??isplay "dC-u"
        
         mainitem_t.task_MainMenu = caliTheSecond_Menu; 
         cali_t.runKeyMenu=mainitem_t.task_MainMenu;
@@ -749,17 +749,19 @@ void CAL_KEY4_ENTER_Fun(void)
 
             case CAL1:
               cali_t.CaliSub_02_01_Item=  CaliSub_CAL1_stackTop(4);
+		      run_t.setBlank=0;
               printf("CAL1_1enterKey = %d \n",  cali_t.CaliSub_02_01_Item);
             break;
 
             case CAL2:
+				 run_t.setBlank=0;
          
                 cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
               printf("CAL2_1enterKey = %d \n",  cali_t.CaliSub_02_02_Item);
             break;
 
             case CAL3:
-          
+          	 run_t.setBlank=0;
                 cali_t.CaliSub_02_03_Item =CaliSub_CAL3_stackTop(5);
              printf("CAL3_1enterKey = %d \n", cali_t.CaliSub_02_03_Item);
             break;
@@ -782,17 +784,18 @@ void CAL_KEY4_ENTER_Fun(void)
         switch( cali_t.CaliMenu_Item){
 
             case CAL1:
-            
+             run_t.setBlank=0;
               cali_t.CaliSub_02_01_Item=CaliSub_CAL1_stackTop(4);
               printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
             break;
 
             case CAL2:
-                  
+                   run_t.setBlank=0;
                   cali_t.CaliSub_02_02_Item =CaliSub_CAL2_stackTop(5);
             break;
 
             case CAL3:
+				 run_t.setBlank=0;
                cali_t.keyEnter_flag=1;
               cali_t.CaliSub_02_03_Item ++;
               if(cali_t.CaliSub_02_03_Item >4)cali_t.CaliSub_02_03_Item=0;
@@ -808,6 +811,7 @@ void CAL_KEY4_ENTER_Fun(void)
         switch(cali_t.CaliMenu_Item){
 
         case CAL1:
+			 run_t.setBlank=0;
              printf("CAL----CAL1_Id = %d\n",cali_t.CAL1_Id);
                 if(currkey != cali_t.CAL1_Id){
                        currkey= cali_t.CAL1_Id;
@@ -830,10 +834,12 @@ void CAL_KEY4_ENTER_Fun(void)
                 case 1:
                 case 2:
                 case 3:
+					 run_t.setBlank=0;
                   cali_t.CAL1_FlashSaveData =1;
                 break;
 
                 default:
+					 run_t.setBlank=0;
                      cali_t.CAL1_FlashSaveData=0;
                 break;
               }
@@ -862,7 +868,7 @@ void CAL_KEY4_ENTER_Fun(void)
          //CAL2 MENU 
         case CAL2:
 
-              
+               run_t.setBlank=0;
                if(currkey2 != cali_t.CAL2_Id){
                    currkey2= cali_t.CAL2_Id;
                    if(cali_t.CAL2_Id==0)
@@ -1643,7 +1649,7 @@ void CALI_KEY2_DOWN_Fun(void)
             if(menu_t.inputNumber_Select >1){
                   menu_t.inputNumber_Select =0;
             }
-            
+           
              return ; 
        }
       
@@ -1663,6 +1669,7 @@ void CALI_KEY2_DOWN_Fun(void)
         if(menu_t.inputNumber_Select >3){
                   menu_t.inputNumber_Select =0;
           }
+		
         return;
     }
     //5BIT
@@ -1671,7 +1678,8 @@ void CALI_KEY2_DOWN_Fun(void)
            if(menu_t.inputNumber_Select >4){
               menu_t.inputNumber_Select =0;
           }
-        printf("key3_right= %d\n",menu_t.inputNumber_Select);
+       
+		   
 		  return ;
       }
       
@@ -1934,7 +1942,8 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
 
                   case 1: //dCu numbers display
-                       run_t.dispWeightValue=0;
+                      
+					    run_t.setBlank=1;
                     menu_t.DisplaySmgBit_Select_Numbers=0;
                     cali_t.CAL1_Id = 0;
                       if(cal1r00==0){
@@ -1944,19 +1953,26 @@ void Calibration_TheFourthRunDis_Cmd(void)
                          printf("cal1_ACAL1_00[0] = %d\n",ACAL1_00[0]);
                        
                         }
-                       Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
+                       
+					 if(run_t.getBlankTimes==-0)
+					  	 SmgDisplay_ALLBitsOff();
+					  else
+					  	Cali_CAL1_ducNumberDis(ACAL1_00[0]);  
+					 
+					   
                     // printf("runCmd_theThird ACAL1_00 = %d\n",ACAL1_00[0]);
                   break;
 
                   case 2:
-                     run_t.dispWeightValue=0;
+                   
                     menu_t.DisplaySmgBit_Select_Numbers=0;
                        Symbol_CAP();  ///---1
                   break;
                   
                   case 3: //CAP number display
                      cali_t.CAL1_Id =1;
-                  run_t.dispWeightValue=0;
+					 run_t.setBlank=1;
+                
                       menu_t.DisplaySmgBit_Select_Numbers=5;
                       if(cal1r01==0){
                         cal1r01++;
@@ -1978,7 +1994,8 @@ void Calibration_TheFourthRunDis_Cmd(void)
                   }
                      // Number_5bit_DIS(ACAL1_01);
                       CALx_CAP_5bit_DispNumbers(ACAL1_00[0],ACAL1_01);
-                       run_t.dispWeightValue=0;
+					  
+                       
                   break;
 
                   case 4:
@@ -1998,7 +2015,7 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 6://2Ero number display 
                     cali_t.CAL1_Id =2;
-                    run_t.dispWeightValue=0;
+                  run_t.setBlank=1;
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                       if(cal1r02==0){
                         cal1r02++;
@@ -2026,14 +2043,14 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
 
                   case 7://2Ero number 2 display
-                     run_t.dispWeightValue=0;
+                        run_t.dispWeightValue=0;
                         menu_t.DisplaySmgBit_Select_Numbers=0;
                         Symbol_SPAn(); ///----3
                   break;
 
                   case 8: //SPARn
                       cali_t.CAL1_Id =3;
-                           run_t.dispWeightValue=1;
+                         
                       Get_Weight();
 			                Weight_DisSmg(Weight_Real) ;//display weight
                        SysTick_Delay_Ms(200);
@@ -2043,7 +2060,7 @@ void Calibration_TheFourthRunDis_Cmd(void)
                   break;
 
                    case 9: //SPARn number display 
-                        run_t.dispWeightValue=0;
+                        run_t.setBlank=1;
                       cali_t.CAL1_Id =3;
        
                         menu_t.DisplaySmgBit_Select_Numbers=5;
@@ -2102,7 +2119,8 @@ void Calibration_TheFourthRunDis_Cmd(void)
                     
                
                      menu_t.DisplaySmgBit_Select_Numbers=5;
-                      Number_5bit_DIS(ACAL2_01);
+                     // Number_5bit_DIS(ACAL2_01);
+                     CALx_CAP_5bit_DispNumbers(ACAL2_00[0],ACAL2_01);
                   break;
 
                   case 4:
@@ -2111,10 +2129,11 @@ void Calibration_TheFourthRunDis_Cmd(void)
                   break;
 
                   case 5://2Ero number display real weight 
+                     menu_t.DisplaySmgBit_Select_Numbers=0;
                      Get_Weight();
 			               Weight_DisSmg(Weight_Real) ;
-              
-                     //menu_t.DisplaySmgBit_Select_Numbers=5;
+                     SysTick_Delay_Ms(200);
+                   
                     
                      // Number_5bit_Char_DIS(ACAL2_02);
                   break;
@@ -2124,7 +2143,8 @@ void Calibration_TheFourthRunDis_Cmd(void)
             
                      menu_t.DisplaySmgBit_Select_Numbers=5;
                     
-                      Number_5bit_Char_DIS(ACAL2_021);
+                    //  Number_5bit_Char_DIS(ACAL2_021);
+                    CALx_CAP_5bit_DispNumbers(ACAL2_00[0],ACAL2_021);
                   break;
 
                   case 7:
@@ -2133,7 +2153,8 @@ void Calibration_TheFourthRunDis_Cmd(void)
 
                   case 8:
                         menu_t.DisplaySmgBit_Select_Numbers=5;
-                         Number_5bit_DIS(ACAL2_03);
+                    CALx_CAP_5bit_DispNumbers(ACAL2_00[0],ACAL2_03);
+                       //  Number_5bit_DIS(ACAL2_03);
                   break;
 
 
@@ -2143,20 +2164,18 @@ void Calibration_TheFourthRunDis_Cmd(void)
                   break;
 
                   case 10: //SPARn
-                    
+                       menu_t.DisplaySmgBit_Select_Numbers=0;
                      Get_Weight();
 			               Weight_DisSmg(Weight_Real) ;
-                       // menu_t.DisplaySmgBit_Select_Numbers=5;
-                        
-                       // Number_5bit_DIS(ACAL2_04);
+                     SysTick_Delay_Ms(200);
                   break;
 
                    case 11: //SPARn number display 
                      
        
                         menu_t.DisplaySmgBit_Select_Numbers=5;
-                        
-                        Number_5bit_DIS(ACAL2_041);
+                    CALx_CAP_5bit_DispNumbers(ACAL2_00[0],ACAL2_041);
+                        //Number_5bit_DIS(ACAL2_041);
                   break;
              
      
@@ -2334,19 +2353,104 @@ void Cali_CAL1_ducNumberDis(int8_t cal1)
 
 void CALx_CAP_5bit_DispNumbers(int8_t apa, int8_t *pA)
 {
- 
+    uint8_t  ptemp;
 
     switch(apa){
 
         case 0: //0.0001
-              SmgDisplay_Point(digital_1,*(pA+4)); // 
-              SmgDisplay(digital_2,*(pA+3)); //
-              SmgDisplay(digital_3,*(pA+2)); // 
-              SmgDisplay(digital_4,*(pA+1)); //
-              SmgDisplay(digital_5,*pA); // 0~100
- 
 
-        break;
+			 switch(menu_t.inputNumber_Select){
+
+			     case 0:
+
+	  
+				  if(run_t.getBlankTimes==0)
+				     SmgDisplay(digital_5,0x0b); //Null
+				  else
+				  	 SmgDisplay(digital_5,*pA); // 0~100
+
+				  SmgDisplay_Point(digital_1,*(pA+4)); // 
+	              SmgDisplay(digital_2,*(pA+3)); //
+	              SmgDisplay(digital_3,*(pA+2)); // 
+	              SmgDisplay(digital_4,*(pA+1)); //
+                  // SmgDisplay(digital_5,*pA); // 0~100
+				   printf("getBlankTimes = %d \n",run_t.getBlankTimes);  
+                 
+				 break;
+
+				 case 1:
+				 	  if(run_t.getBlankTimes==0)
+				 		SmgDisplay(digital_4,0x0b); //Null
+				 	else
+						SmgDisplay(digital_4,*(pA+1)); //
+
+
+					 SmgDisplay_Point(digital_1,*(pA+4)); // 
+		              SmgDisplay(digital_2,*(pA+3)); //
+		              SmgDisplay(digital_3,*(pA+2)); // 
+		           //   SmgDisplay(digital_4,*(pA+1)); //
+		              SmgDisplay(digital_5,*pA); // 0~100
+
+					printf("getBlankTimes = %d \n",run_t.getBlankTimes);
+                
+
+				break;
+
+				 case 2:
+				     if(run_t.getBlankTimes==0)
+				  		SmgDisplay(digital_3,0x0b); //Null
+				   else 
+				   	  SmgDisplay(digital_3,*(pA+2)); // 
+
+				      SmgDisplay_Point(digital_1,*(pA+4)); // 
+		              SmgDisplay(digital_2,*(pA+3)); //
+		            //  SmgDisplay(digital_3,*(pA+2)); // 
+		              SmgDisplay(digital_4,*(pA+1)); //
+		              SmgDisplay(digital_5,*pA); // 0~100
+				   	   
+                 
+
+				 break;
+
+				 case 3:
+				  if(run_t.getBlankTimes==0)
+				  	SmgDisplay(digital_2,0x0b); //Null
+				 else
+					 SmgDisplay(digital_2,*(pA+3)); //
+
+				 
+				      SmgDisplay_Point(digital_1,*(pA+4)); // 
+		            //  SmgDisplay(digital_2,*(pA+3)); //
+		              SmgDisplay(digital_3,*(pA+2)); // 
+		              SmgDisplay(digital_4,*(pA+1)); //
+		              SmgDisplay(digital_5,*pA); // 0~100
+				  
+                 
+
+				 break;
+
+				  case 4:
+				  if(run_t.getBlankTimes==0)
+				  		SmgDisplay(digital_1,0x0b); //Null
+				  else
+				  	SmgDisplay_Point(digital_1,*(pA+4)); // 
+
+				    //	SmgDisplay_Point(digital_1,*(pA+4)); // 
+		              SmgDisplay(digital_2,*(pA+3)); //
+		              SmgDisplay(digital_3,*(pA+2)); // 
+		              SmgDisplay(digital_4,*(pA+1)); //
+		              SmgDisplay(digital_5,*pA); // 0~100
+				  	
+                  
+
+				 break;
+
+				 
+	}
+            
+
+			
+		break;
 
         case 1://0.0002
              SmgDisplay_Point(digital_1,*(pA+4)); // 
@@ -2483,7 +2587,7 @@ void CALx_CAP_5bit_DispNumbers(int8_t apa, int8_t *pA)
 
      }
 
-
+	 
 
 
 

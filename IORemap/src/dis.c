@@ -80,6 +80,11 @@ void Number_Digital_3bit_NoRefAddSelect(void)
       }  
 }
 /*********************************************************************
+ * 
+ * Function Name: void Number_Digital_5bit_AddSelect(int8_t *ap)
+ * 
+ * 
+ * 
 **********************************************************************/
 void Number_Digital_5bit_AddSelect(int8_t *ap)
 {
@@ -430,3 +435,17 @@ void Number_Digital_5bit_SymDecSelect(int8_t *ap)
       }
 
 }
+
+void SmgDisplay_ALLBitsOff(void)
+{
+  	SmgDisplay(digital_1,0x0B); // 
+   SmgDisplay(digital_2,0x0B); // 
+   SmgDisplay(digital_3,0x0B); // 
+   SmgDisplay(digital_4,0x0B); // 
+   SmgDisplay(digital_5,0x0b); // 0~100
+
+
+
+
+}
+

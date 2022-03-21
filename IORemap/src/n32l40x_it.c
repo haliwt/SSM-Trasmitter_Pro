@@ -119,7 +119,7 @@ void DMA_IRQ_HANDLER(void)
  */
 void TIM1_UP_IRQHandler(void)
 {
-    static uint32_t i,j,z;
+    static uint32_t i,j,z,n,m,p;
     
     if (TIM_GetIntStatus(TIM1, TIM_INT_UPDATE) != RESET)
     {
@@ -127,8 +127,27 @@ void TIM1_UP_IRQHandler(void)
 
         /* Pin PC.06 toggling */
        // GPIO_WriteBit(GPIOB, GPIO_PIN_9, (Bit_OperateType)(1 - GPIO_ReadOutputDataBit(GPIOB, GPIO_PIN_9)));
-		j++;
+		
+        if(run_t.setBlank ==1){
+           n++;
+           if(n>499){ //1s
+            n=0;
+            m++;
+            p++;
+           
+            if(m==1){
+                run_t.getBlankTimes =1; //1S 
+            }
+            else if(m >=2){
+                m=0;
+                 run_t.getBlankTimes=0;
+             }
+
+           }
+
+        }
 		if(key_t.keyTimes_1s==1){
+           j++;
 		   if(j>100){
 				j=0;
 				z++;

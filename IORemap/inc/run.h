@@ -12,6 +12,9 @@ typedef struct _RUN{
     uint8_t EnterKey_flag;
 	uint8_t SaveDataSelect_flag;
     uint8_t dispWeightValue ;
+	uint8_t setBlank;
+	uint8_t getBlankTimes;
+	uint8_t secondBlankTimes;
 		
 }run;
 

@@ -23,6 +23,9 @@ void Number_Digital_3bit_DecSelect(int8_t *ap);
 void Number_Digital_5bit_SymAddSelect(int8_t *ap);
 void Number_Digital_5bit_SymDecSelect(int8_t *ap);
 
+void SmgDisplay_ALLBitsOff(void);
+
+
 
 
 #endif 

@@ -189,7 +189,7 @@ void RunCmd_DisWeightValue(void)
     if(run_t.dispWeightValue==1){
 
        Get_Weight();
-	Weight_DisSmg(Weight_Real) ;
+	  Weight_DisSmg(Weight_Real) ;
        SysTick_Delay_Ms(200);
 
 
